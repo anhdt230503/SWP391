@@ -1,0 +1,8 @@
+com\group1\isms\JakartaRestConfiguration.class
+service\InternService.class
+dao\MyDAO.class
+com\group1\isms\resources\JakartaEE10Resource.class
+dao\InternDAO.class
+model\Intern.class
+controller\InternImportServlet.class
+dao\DBContext.class
