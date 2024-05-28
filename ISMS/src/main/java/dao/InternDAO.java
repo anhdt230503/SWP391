@@ -27,7 +27,7 @@ public class InternDAO extends MyDAO {
             ps.setString(7, intern.getJobTitle());
             ps.setString(8, intern.getLinkCv());
             ps.executeUpdate();
-            con.commit(); // Thêm commit transaction
+//            con.commit(); // Thêm commit transaction
         } catch (SQLException e) {
             System.err.println("Lỗi khi chèn dữ liệu: " + e.getMessage()); // In thông báo lỗi chi tiết
             try {

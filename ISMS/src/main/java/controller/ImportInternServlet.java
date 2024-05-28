@@ -57,7 +57,6 @@ public class ImportInternServlet extends HttpServlet {
             Workbook workbook = WorkbookFactory.create(fis);
             Sheet sheet = workbook.getSheetAt(0);
             InternService internService = new InternService();
-//            InternDAO internDAO = new InternDAO();
 
             int numOfRows = sheet.getPhysicalNumberOfRows();
             response.getWriter().println("Number of rows: " + numOfRows);
@@ -68,19 +67,6 @@ public class ImportInternServlet extends HttpServlet {
                 if (row.getRowNum() == 0) {
                     continue;
                 }
-
-//                response.getWriter().println("Processing row: " + row.getRowNum());
-//
-//                // Check if the row is empty
-//                if (row.getCell(0) == null || row.getCell(0).getStringCellValue().isEmpty()) {
-//                    response.getWriter().println("Skipping empty row: " + row.getRowNum());
-//                    continue;
-//                }
-//
-//                response.getWriter().println("Row data: ");
-//                for (Cell cell : row) {
-//                    response.getWriter().println("Cell " + cell.getColumnIndex() + ": " + cell.toString());
-//                }
 
                 Intern intern = new Intern();
                 intern.setStudentId(row.getCell(0).getStringCellValue());
@@ -97,7 +83,6 @@ public class ImportInternServlet extends HttpServlet {
                 intern.setJobTitle(row.getCell(6).getStringCellValue());
                 intern.setLinkCv(row.getCell(7).getStringCellValue());
 
-//                internDAO.insertIntern(intern);
                 internService.importIntern(intern);
             }
 

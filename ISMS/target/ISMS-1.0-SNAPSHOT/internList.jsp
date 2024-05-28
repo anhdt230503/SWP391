@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        HELLO 
         <form action="importIntern" method="post" enctype="multipart/form-data">
             <input type="file" name="file" accept=".xlsx, .xls" />
             <input type="submit" value="Upload" />

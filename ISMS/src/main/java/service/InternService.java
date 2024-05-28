@@ -19,8 +19,4 @@ public class InternService {
     public void importIntern(Intern intern) throws SQLException {
         internDao.insertIntern(intern);
     }
-    
-    public static void main(String[] args) {
-        
-    }
 }
