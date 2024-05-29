@@ -18,8 +18,8 @@ public class DBContext {
     public DBContext() {
         try {
             String url = "jdbc:mysql://localhost:3306/InternMSDB";
-            String username = "root"; // Thay bằng username MySQL của bạn
-            String password = "password"; // Thay bằng password MySQL của bạn
+            String username = "root"; 
+            String password = "password"; 
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
 //            connection.createStatement().execute("SET NAMES utf8mb4");
