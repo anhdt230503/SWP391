@@ -10,10 +10,12 @@
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
