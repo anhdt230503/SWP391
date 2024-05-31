@@ -1,8 +1,18 @@
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\InternDAO.java
+<<<<<<< HEAD
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\ImportInternServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MyDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\InternService.java
+=======
+D:\SWP391 - PROJECT\ISMS\src\main\java\service\Constants.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\ImportInternServlet.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\LoginServlet.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MyDAO.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\service\InternService.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\model\GoogleProfile.java
+>>>>>>> login
 D:\SWP391 - PROJECT\ISMS\src\main\java\com\group1\isms\resources\JakartaEE10Resource.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\service\GoogleHandlerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\com\group1\isms\JakartaRestConfiguration.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Intern.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\DBContext.java
