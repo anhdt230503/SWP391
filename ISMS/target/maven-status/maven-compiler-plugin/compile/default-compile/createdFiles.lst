@@ -2,11 +2,14 @@ controller\LoginServlet.class
 service\GoogleHandlerService.class
 service\InternService.class
 model\GoogleProfile.class
+dao\AccountDAO.class
 dao\InternDAO.class
 model\Intern.class
 dao\DBContext.class
 com\group1\isms\JakartaRestConfiguration.class
+model\Intern$InternStatus.class
 service\Constants.class
 dao\MyDAO.class
 com\group1\isms\resources\JakartaEE10Resource.class
+model\Account.class
 controller\ImportInternServlet.class

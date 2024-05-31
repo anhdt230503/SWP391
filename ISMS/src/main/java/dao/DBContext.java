@@ -22,7 +22,7 @@ public class DBContext {
             String password = "password"; 
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
-            connection.createStatement().execute("SET NAMES utf8mb4");
+//            connection.createStatement().execute("SET NAMES utf8mb4");
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex);
         }

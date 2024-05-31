@@ -9,12 +9,12 @@ package model;
  * @author haidu
  */
 public class Intern {
-    
+
     public enum InternStatus {
-    INTERN,
-    ALUMNI
-}
-    
+        INTERN,
+        ALUMNI
+    }
+
     private int internId;
     private String studentId;
     private String email;
@@ -147,9 +147,4 @@ public class Intern {
         return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", jobTitle=" + jobTitle + ", linkCv=" + linkCv + ", staff_id=" + staff_id + ", status=" + status + ", semester_id=" + semester_id + '}';
     }
 
-    
- 
-    
 }
-
-
