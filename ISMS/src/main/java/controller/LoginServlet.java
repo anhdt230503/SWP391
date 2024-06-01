@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         System.out.println(ggProfile);
         
         String email = ggProfile.getEmail();
-        
+        System.out.println(email);
         
         
     }
