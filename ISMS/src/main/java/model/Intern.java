@@ -9,7 +9,12 @@ package model;
  * @author haidu
  */
 public class Intern {
-    
+
+    public enum InternStatus {
+        INTERN,
+        ALUMNI
+    }
+
     private int internId;
     private String studentId;
     private String email;
@@ -19,11 +24,14 @@ public class Intern {
     private String company;
     private String jobTitle;
     private String linkCv;
+    private String staff_id;
+    private InternStatus status;
+    private int semester_id;
 
     public Intern() {
     }
 
-    public Intern(int internId, String studentId, String email, String fullName, String phoneNumber, String major, String company, String jobTitle, String linkCv) {
+    public Intern(int internId, String studentId, String email, String fullName, String phoneNumber, String major, String company, String jobTitle, String linkCv, String staff_id, InternStatus status, int semester_id) {
         this.internId = internId;
         this.studentId = studentId;
         this.email = email;
@@ -33,6 +41,9 @@ public class Intern {
         this.company = company;
         this.jobTitle = jobTitle;
         this.linkCv = linkCv;
+        this.staff_id = staff_id;
+        this.status = status;
+        this.semester_id = semester_id;
     }
 
     public int getInternId() {
@@ -107,10 +118,33 @@ public class Intern {
         this.linkCv = linkCv;
     }
 
+    public String getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
+    }
+
+    public InternStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InternStatus status) {
+        this.status = status;
+    }
+
+    public int getSemester_id() {
+        return semester_id;
+    }
+
+    public void setSemester_id(int semester_id) {
+        this.semester_id = semester_id;
+    }
+
     @Override
     public String toString() {
-        return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", job_title=" + jobTitle + ", linkCv=" + linkCv + '}';
+        return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", jobTitle=" + jobTitle + ", linkCv=" + linkCv + ", staff_id=" + staff_id + ", status=" + status + ", semester_id=" + semester_id + '}';
     }
- 
-    
+
 }
