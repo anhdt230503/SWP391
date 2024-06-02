@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author haidu
@@ -24,14 +26,15 @@ public class Intern {
     private String company;
     private String jobTitle;
     private String linkCv;
-    private String staff_id;
+    private String staffId;
     private InternStatus status;
     private int semester_id;
+    private Timestamp uploadDate;
 
     public Intern() {
     }
 
-    public Intern(int internId, String studentId, String email, String fullName, String phoneNumber, String major, String company, String jobTitle, String linkCv, String staff_id, InternStatus status, int semester_id) {
+    public Intern(int internId, String studentId, String email, String fullName, String phoneNumber, String major, String company, String jobTitle, String linkCv, String staffId, InternStatus status, int semester_id, Timestamp uploadDate) {
         this.internId = internId;
         this.studentId = studentId;
         this.email = email;
@@ -41,9 +44,10 @@ public class Intern {
         this.company = company;
         this.jobTitle = jobTitle;
         this.linkCv = linkCv;
-        this.staff_id = staff_id;
+        this.staffId = staffId;
         this.status = status;
         this.semester_id = semester_id;
+        this.uploadDate = uploadDate;
     }
 
     public int getInternId() {
@@ -118,12 +122,12 @@ public class Intern {
         this.linkCv = linkCv;
     }
 
-    public String getStaff_id() {
-        return staff_id;
+    public String getStaffId() {
+        return staffId;
     }
 
-    public void setStaff_id(String staff_id) {
-        this.staff_id = staff_id;
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
     }
 
     public InternStatus getStatus() {
@@ -142,9 +146,20 @@ public class Intern {
         this.semester_id = semester_id;
     }
 
+    public Timestamp getUploadDate() {
+        return uploadDate;
+    }
+
+    public void setUploadDate(Timestamp uploadDate) {
+        this.uploadDate = uploadDate;
+    }
+
     @Override
     public String toString() {
-        return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", jobTitle=" + jobTitle + ", linkCv=" + linkCv + ", staff_id=" + staff_id + ", status=" + status + ", semester_id=" + semester_id + '}';
+        return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", jobTitle=" + jobTitle + ", linkCv=" + linkCv + ", staffId=" + staffId + ", status=" + status + ", semester_id=" + semester_id + ", uploadDate=" + uploadDate + '}';
     }
+
+    
+    
 
 }

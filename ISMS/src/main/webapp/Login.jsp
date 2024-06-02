@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Login
-    Created on : May 28, 2024, 12:33:27 PM
-    Author     : haidu
---%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,7 +7,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <!--        <link href="css/login.css" rel="stylesheet" type="text/css"/>-->
     </head>
     <body>
         <!-- Login 8 - Bootstrap Brain Component -->
@@ -22,7 +17,7 @@
                         <div class="card border-light-subtle shadow-sm">
                             <div class="row g-0">
                                 <div class="col-12 col-md-6">
-                                    <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy" src="./assets/img/logo-img-1.webp" alt="Welcome back you've been missed!">
+                                    <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy" src="images/internship.png" alt="Welcome back you've been missed!">
                                 </div>
                                 <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
                                     <div class="col-12 col-lg-11 col-xl-10">
@@ -32,7 +27,7 @@
                                                     <div class="mb-5">
                                                         <div class="text-center mb-4">
                                                             <a href="#!">
-                                                                <img src="./assets/img/bsb-logo.svg" alt="BootstrapBrain Logo" width="175" height="57">
+                                                                <img src="images/logo.png" alt="Logo" width="180" height="150">
                                                             </a>
                                                         </div>
                                                         <h4 class="text-center">Welcome back you've been missed!</h4>
@@ -49,6 +44,9 @@
                                                             <span class="ms-2 fs-6">Log in with Google</span>
                                                         </a>
                                                     </div>
+                                                    <div>
+                                                        <p class="text-danger text-center">${message}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,6 +62,4 @@
         <script src="js/login.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
-
-
 </html>
