@@ -1,5 +1,6 @@
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\MentorReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Schedule.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\LogoutServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\LabRoomDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MissionService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\DBContext.java
@@ -32,7 +33,6 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\dao\RoleDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\SemesterService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\ManagerDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Role.java
-D:\SWP391 - PROJECT\ISMS\src\main\java\filter\LoginFilter.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\LabRoomService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\SemesterDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Attendance.java

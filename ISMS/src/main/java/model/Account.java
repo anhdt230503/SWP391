@@ -12,6 +12,7 @@ public class Account {
     
     private int accountId;
     private String email;
+    private int status;
     private int managerId;
     private int mentorId;
     private int internId;
@@ -20,9 +21,10 @@ public class Account {
     public Account() {
     }
 
-    public Account(int accountId, String email, int managerId, int mentorId, int internId, int roleId) {
+    public Account(int accountId, String email, int status, int managerId, int mentorId, int internId, int roleId) {
         this.accountId = accountId;
         this.email = email;
+        this.status = status;
         this.managerId = managerId;
         this.mentorId = mentorId;
         this.internId = internId;
@@ -43,6 +45,14 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getManagerId() {
@@ -79,7 +89,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "accountId=" + accountId + ", email=" + email + ", managerId=" + managerId + ", mentorId=" + mentorId + ", internId=" + internId + ", roleId=" + roleId + '}';
+        return "Account{" + "accountId=" + accountId + ", email=" + email + ", status=" + status + ", managerId=" + managerId + ", mentorId=" + mentorId + ", internId=" + internId + ", roleId=" + roleId + '}';
     }
+
+    
 
 }

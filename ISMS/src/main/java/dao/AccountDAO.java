@@ -25,7 +25,8 @@ public class AccountDAO extends MyDAO {
                         rs.getInt(3),
                         rs.getInt(4),
                         rs.getInt(5),
-                        rs.getInt(6));
+                        rs.getInt(6),
+                        rs.getInt(7));
             }
         } catch (Exception e) {
         }

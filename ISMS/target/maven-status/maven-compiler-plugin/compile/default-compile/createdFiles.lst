@@ -18,6 +18,7 @@ service\GoogleHandlerService.class
 model\MentorReport.class
 dao\RoleDAO.class
 model\Manager.class
+controller\LogoutServlet.class
 service\LabRoomService.class
 service\ScheduleService.class
 model\InternAssign.class
