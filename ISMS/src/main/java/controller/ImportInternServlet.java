@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import model.Intern;
 import org.apache.poi.ss.usermodel.Cell;
@@ -57,11 +58,7 @@ public class ImportInternServlet extends HttpServlet {
             Sheet sheet = workbook.getSheetAt(0);
             InternService internService = new InternService();
 
-            int numOfRows = sheet.getPhysicalNumberOfRows();
-            response.getWriter().println("Number of rows: " + numOfRows);
-
             for (Row row : sheet) {
-
                 // Skip header row
                 if (row.getRowNum() == 0) {
                     continue;
@@ -82,6 +79,10 @@ public class ImportInternServlet extends HttpServlet {
                 intern.setJobTitle(row.getCell(6).getStringCellValue());
                 intern.setLinkCv(row.getCell(7).getStringCellValue());
 
+                String staffId = internService.genarateStaffId();
+                intern.setStaffId(staffId);
+                intern.setStatus(Intern.InternStatus.INTERN);
+
                 internService.importIntern(intern);
             }
 
@@ -90,12 +91,19 @@ public class ImportInternServlet extends HttpServlet {
             e.printStackTrace();
         } finally {
             // Xóa file tạm thời sau khi xử lý xong
-            new File(filePath).delete();
+            File tempFile = new File(filePath);
+            System.out.println(tempFile.exists());
+            if (tempFile.exists()) {
+                if (tempFile.delete()) {
+                    System.out.println("Temporary file deleted successfully.");
+                } else {
+                    System.out.println("Failed to delete temporary file.");
+                }
+            }
         }
 
-        // Trả về thông báo thành công cho client
-        response.getWriter().println("File uploaded and data imported successfully.");
-
+        request.setAttribute("successMessage", "Import Successfully");
+        request.getRequestDispatcher("InternList.jsp").forward(request, response);
     }
 
 }

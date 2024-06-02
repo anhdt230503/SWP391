@@ -10,12 +10,26 @@
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config>
     </servlet>
-
+    <servlet>
+        <servlet-name>InternListServlet</servlet-name>
+        <servlet-class>controller.InternListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>InternListServlet</servlet-name>
+        <url-pattern>/internList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -10,19 +10,20 @@ package model;
  */
 public class GoogleProfile {
 
-    private String id, email, name, first_name, given_name, family_name;
+    private String id, email, name, first_name, given_name, family_name, picture;
     private boolean verified_email;
 
     public GoogleProfile() {
     }
 
-    public GoogleProfile(String id, String email, String name, String first_name, String given_name, String family_name, boolean verified_email) {
+    public GoogleProfile(String id, String email, String name, String first_name, String given_name, String family_name, String picture, boolean verified_email) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.first_name = first_name;
         this.given_name = given_name;
         this.family_name = family_name;
+        this.picture = picture;
         this.verified_email = verified_email;
     }
 
@@ -74,6 +75,14 @@ public class GoogleProfile {
         this.family_name = family_name;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     public boolean isVerified_email() {
         return verified_email;
     }
@@ -84,8 +93,10 @@ public class GoogleProfile {
 
     @Override
     public String toString() {
-        return "GoogleProfile{" + "id=" + id + ", email=" + email + ", name=" + name + ", first_name=" + first_name + ", given_name=" + given_name + ", family_name=" + family_name + ", verified_email=" + verified_email + '}';
+        return "GoogleProfile{" + "id=" + id + ", email=" + email + ", name=" + name + ", first_name=" + first_name + ", given_name=" + given_name + ", family_name=" + family_name + ", picture=" + picture + ", verified_email=" + verified_email + '}';
     }
+
+  
     
     
 }
