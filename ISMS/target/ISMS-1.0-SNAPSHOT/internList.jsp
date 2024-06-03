@@ -40,8 +40,8 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Student ID</th>
-                                <th scope="col">Email</th>
                                 <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Staff ID</th>
                                 <th scope="col">Upload Date</th>
                                 <th scope="col">Select</th>
@@ -51,16 +51,16 @@
                             <c:forEach items="${listOfIntern}" var="o">
                                 <tr>
                                     <td>${o.internId}</td>
+                                    <td>${o.fullName}</td>
                                     <td>${o.studentId}</td>
                                     <td>${o.email}</td>
-                                    <td>${o.fullName}</td>
                                     <td>${o.staffId}</td>
                                     <td>${o.uploadDate}</td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${selectedInternId.contains(o.internId)}">
                                                 <div class="form-check">
-                                                    <input class="form-check-input selected" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" disabled>
+                                                    <span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">Selected</span>
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
