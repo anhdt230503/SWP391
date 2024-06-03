@@ -16,9 +16,24 @@ import model.Intern;
 public class InternService {
     
     private InternDAO internDao = new InternDAO();
+    private int internIdKey = 0;
+    
+    
+    public synchronized int generateInternIdKey() {
+        internIdKey++;
+        return internIdKey;
+    }
     
     public void importIntern(Intern intern) throws SQLException {
         internDao.insertIntern(intern);
+    }
+    
+    public Intern getInternByStudentId(String studentId) throws SQLException {
+        return internDao.getInternByStudentId(studentId);
+    }
+    
+    public void updateIntern(Intern intern) throws SQLException {
+        internDao.updateIntern(intern);
     }
     
     public String genarateStaffId() {
