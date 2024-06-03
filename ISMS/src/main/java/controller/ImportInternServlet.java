@@ -125,9 +125,7 @@ public class ImportInternServlet extends HttpServlet {
                     // insert Account for Intern
                     account.setEmail(email);
                     account.setInternId(internId);
-                    account.setRoleId(4);
                     accountDao.insertInternAccount(account);
-                    
                 }
             }
 

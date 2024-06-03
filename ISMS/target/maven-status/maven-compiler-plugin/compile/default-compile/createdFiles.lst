@@ -2,6 +2,7 @@ model\Mentor.class
 model\Schedule.class
 service\MissionReportService.class
 dao\ScheduleDAO.class
+controller\SelectInternServlet.class
 dao\AttendanceDAO.class
 model\MissionReport.class
 model\Intern.class

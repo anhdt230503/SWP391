@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             
             HttpSession session = request.getSession();
+            session.setAttribute("email", email);
             session.setAttribute("name", username);
             session.setAttribute("avatar", avatarUrl);
             session.setAttribute("acc", account);

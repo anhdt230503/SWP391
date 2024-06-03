@@ -33,40 +33,54 @@
 <!--                        <p>${errorMessage}</p>
                     <p>${successMessage}</p>-->
                 </div> 
-                <table class="table caption-top table-bordered">
+                <form action="selectIntern" method="post" onsubmit="return limitSelection();">
+                    <table class="table caption-top table-bordered">
 
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Student ID</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Staff ID</th>
-                            <th scope="col">Upload Date</th>
-                            <th scope="col">Select</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${listOfIntern}" var="o">
+                        <thead class="table-light">
                             <tr>
-                                <td>${o.internId}</td>
-                                <td>${o.studentId}</td>
-                                <td>${o.email}</td>
-                                <td>${o.fullName}</td>
-                                <td>${o.staffId}</td>
-                                <td>${o.uploadDate}</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    </div>
-                                </td>
+                                <th scope="col">ID</th>
+                                <th scope="col">Student ID</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Staff ID</th>
+                                <th scope="col">Upload Date</th>
+                                <th scope="col">Select</th>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${listOfIntern}" var="o">
+                                <tr>
+                                    <td>${o.internId}</td>
+                                    <td>${o.studentId}</td>
+                                    <td>${o.email}</td>
+                                    <td>${o.fullName}</td>
+                                    <td>${o.staffId}</td>
+                                    <td>${o.uploadDate}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${selectedInternId.contains(o.internId)}">
+                                                <div class="form-check">
+                                                    <input class="form-check-input selected" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" disabled>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" onclick="checkSelectionCount();">
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Select Interns">
+                </form>
             </div>
         </div>
         <script src="js/sidebar.js"></script>
+        <script src="js/selectIntern.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     </body>

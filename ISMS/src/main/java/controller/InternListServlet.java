@@ -5,15 +5,17 @@
 
 package controller;
 
+import dao.InternAssignDAO;
 import dao.InternDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Intern;
+import model.InternAssign;
 
 /**
  *
@@ -32,9 +34,17 @@ public class InternListServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         InternDAO internDAO = new InternDAO();
-        List<Intern> list = internDAO.getAllIntern();
+        List<Intern> internList = internDAO.getAllIntern();
         
-        request.setAttribute("listOfIntern", list);
+        InternAssignDAO internAssignDAO = new InternAssignDAO();        
+        List<InternAssign> list = internAssignDAO.getAllInternAssign();
+        List<Integer> selectedInternId = new ArrayList<>();
+        for (InternAssign ia : list) {
+            selectedInternId.add(ia.getInternId());
+        }
+        
+        request.setAttribute("selectedInternId", selectedInternId);
+        request.setAttribute("listOfIntern", internList);
         request.getRequestDispatcher("InternList.jsp").forward(request, response);
     } 
 

@@ -18,6 +18,10 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SelectInternServlet</servlet-name>
+        <servlet-class>controller.SelectInternServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -29,6 +33,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectInternServlet</servlet-name>
+        <url-pattern>/selectIntern</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
