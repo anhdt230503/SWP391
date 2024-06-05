@@ -18,6 +18,14 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListLabRoomsServlet</servlet-name>
+        <servlet-class>controller.ListLabRoomsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMentorsServlet</servlet-name>
+        <servlet-class>controller.GetMentorsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -29,6 +37,14 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListLabRoomsServlet</servlet-name>
+        <url-pattern>/ListLabRoomsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMentorsServlet</servlet-name>
+        <url-pattern>/GetMentorsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
