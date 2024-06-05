@@ -36,9 +36,16 @@
         </li>
 
         <li>
-            <a href="#" class="nav-link mb-2">
+            <a href="MentorManageController" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-file-person me-2"></i> Manage User
+                <i class="bi bi-file-person me-2"></i> Manage Mentor
+            </a>
+        </li>
+
+        <li>
+            <a href="ManagerManageController" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-file-person me-2"></i> Manage Manager
             </a>
         </li>
         <li>

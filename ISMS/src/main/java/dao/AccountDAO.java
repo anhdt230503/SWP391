@@ -4,7 +4,11 @@
  */
 package dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import model.Account;
+import model.Manager;
+import model.Mentor;
 
 /**
  *
@@ -41,4 +45,39 @@ public class AccountDAO extends MyDAO {
 //        System.out.println(acc);
 //    }
     
+    public void insertMentorAccount(Account account) {
+        xSql = "INSERT INTO Account (email, mentor_id, role_id)\n"
+                + "VALUES (?, ?, 3)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, account.getEmail());
+            ps.setInt(2, account.getMentorId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
+        public void insertManagerAccount(Account account) {
+        xSql = "INSERT INTO Account (email, manager_id, role_id)\n"
+                + "VALUES (?, ?, 2)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, account.getEmail());
+            ps.setInt(2, account.getManagerId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+
+//       public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO();
+//        Account account = new Account();
+//        account.setRoleId(3);
+//        account.setEmail("aaa@gmail.com");
+//        account.setMentorId(1);
+//        accountDAO.insertMentorAccount(account);
+//    }
 }

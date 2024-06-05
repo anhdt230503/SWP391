@@ -18,6 +18,22 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Addmentor</servlet-name>
+        <servlet-class>controller.Addmentor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MentorManageController</servlet-name>
+        <servlet-class>controller.MentorManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerManageController</servlet-name>
+        <servlet-class>controller.ManagerManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddManager</servlet-name>
+        <servlet-class>controller.AddManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -29,6 +45,22 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Addmentor</servlet-name>
+        <url-pattern>/Addmentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MentorManageController</servlet-name>
+        <url-pattern>/MentorManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerManageController</servlet-name>
+        <url-pattern>/ManagerManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddManager</servlet-name>
+        <url-pattern>/AddManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
