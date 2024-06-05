@@ -15,10 +15,10 @@ import model.Mentor;
  * @author haidu
  */
 public class AccountDAO extends MyDAO {
-    
+
     public Account login(String email) {
-        String xSql = "select * from Account\n" +
-                "where email = ?";
+        String xSql = "select * from Account\n"
+                + "where email = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, email);
@@ -36,7 +36,7 @@ public class AccountDAO extends MyDAO {
         }
         return null;
     }
-    
+
 //    public static void main(String[] args) {
 //        
 //        AccountDAO accDAO = new AccountDAO();
@@ -44,7 +44,6 @@ public class AccountDAO extends MyDAO {
 //        Account acc = accDAO.login("daoa9596@gmail.com");
 //        System.out.println(acc);
 //    }
-    
     public void insertMentorAccount(Account account) {
         xSql = "INSERT INTO Account (email, mentor_id, role_id)\n"
                 + "VALUES (?, ?, 3)";
@@ -56,10 +55,8 @@ public class AccountDAO extends MyDAO {
         } catch (Exception e) {
         }
     }
-    
-    
-    
-        public void insertManagerAccount(Account account) {
+
+    public void insertManagerAccount(Account account) {
         xSql = "INSERT INTO Account (email, manager_id, role_id)\n"
                 + "VALUES (?, ?, 2)";
         try {
@@ -70,7 +67,40 @@ public class AccountDAO extends MyDAO {
         } catch (Exception e) {
         }
     }
-    
+
+    public boolean isEmailExists(String email) {
+        boolean exists = false;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String query = "SELECT COUNT(*) FROM Account WHERE email=?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                exists = count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Xử lý exception tại đây (ném ngoại lệ hoặc ghi log)
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return exists;
+    }
 
 //       public static void main(String[] args) {
 //        AccountDAO accountDAO = new AccountDAO();

@@ -82,10 +82,15 @@ public class Addmentor extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
         MentorService mentorservice = new MentorService();
 
-        int mentorId = mentorservice.generateMentorIdKey() + 1;
+       
         String fullName = request.getParameter("fullname");
         String email = request.getParameter("email");
 
+    if(accountDAO.isEmailExists(email)){
+          request.setAttribute("errorMessage", "Email đã tồn tại.");
+    }
+    else{    
+         int mentorId = mentorservice.generateMentorIdKey() + 1;
         Mentor newMentor = new Mentor();
         newMentor.setMentorId(mentorId);
         newMentor.setFullname(fullName);
@@ -100,8 +105,9 @@ public class Addmentor extends HttpServlet {
         accountDAO.insertMentorAccount(newAccount);
 
 //            response.sendRedirect("MentorManageController");
-        request.getRequestDispatcher("MentorManageController").forward(request, response);
 
+    }
+            request.getRequestDispatcher("MentorManageController").forward(request, response);
     }
 
     /**

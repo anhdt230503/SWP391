@@ -82,10 +82,14 @@ public class AddManager extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
         ManagerService managerservice = new ManagerService();
 
-        int managerId = managerservice.generateManagerIdKey() + 1;
         String fullName = request.getParameter("fullname");
         String email = request.getParameter("email");
 
+    if (accountDAO.isEmailExists(email)) {
+            request.setAttribute("errorMessage", "Email đã tồn tại.");
+        }
+    else{
+        int managerId = managerservice.generateManagerIdKey() + 1;
         Manager newManager = new Manager();
         newManager.setManagerId(managerId);
         newManager.setFullName(fullName);
@@ -99,7 +103,9 @@ public class AddManager extends HttpServlet {
         accountDAO.insertManagerAccount(newAccount);
 
 //            response.sendRedirect("MentorManageController");
-        request.getRequestDispatcher("ManagerManageController").forward(request, response);
+
+    }
+            request.getRequestDispatcher("ManagerManageController").forward(request, response);
     }
 
     /**
