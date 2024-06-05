@@ -48,7 +48,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link mb-2">
+            <a href="mission" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
                 <i class="bi bi-bullseye me-2"></i> Mission
             </a>

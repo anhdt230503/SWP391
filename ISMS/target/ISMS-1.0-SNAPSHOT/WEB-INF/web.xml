@@ -18,6 +18,14 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MissionServlet</servlet-name>
+        <servlet-class>controller.MissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMissionServlet</servlet-name>
+        <servlet-class>controller.AddMissionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -29,6 +37,14 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MissionServlet</servlet-name>
+        <url-pattern>/mission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMissionServlet</servlet-name>
+        <url-pattern>/AddMissionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
