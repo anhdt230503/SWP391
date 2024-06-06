@@ -39,6 +39,7 @@ model\Role.class
 service\MentorService.class
 com\group1\isms\resources\JakartaEE10Resource.class
 model\Account.class
+.netbeans_automatic_build
 model\WorkOverTime.class
 dao\InternAssignDAO.class
 controller\LoginServlet.class
