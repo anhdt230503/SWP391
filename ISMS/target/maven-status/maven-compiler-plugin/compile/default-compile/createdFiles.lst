@@ -23,12 +23,14 @@ controller\ManagerManageController.class
 dao\RoleDAO.class
 controller\DownloadFile.class
 model\Manager.class
+controller\AddMissionServlet.class
 controller\LogoutServlet.class
 service\LabRoomService.class
 service\ScheduleService.class
 model\InternAssign.class
 model\Mission.class
 service\MissionService.class
+controller\MissionServlet.class
 service\RoleService.class
 service\MentorReportService.class
 model\Attendance.class

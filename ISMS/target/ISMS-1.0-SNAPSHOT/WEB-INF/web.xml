@@ -58,6 +58,14 @@
         <servlet-name>DownloadFile</servlet-name>
         <servlet-class>controller.DownloadFile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MissionServlet</servlet-name>
+        <servlet-class>controller.MissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMissionServlet</servlet-name>
+        <servlet-class>controller.AddMissionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -109,6 +117,15 @@
     <servlet-mapping>
         <servlet-name>DownloadFile</servlet-name>
         <url-pattern>/downloadFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MissionServlet</servlet-name>
+        <url-pattern>/mission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMissionServlet</servlet-name>
+        <url-pattern>/AddMissionServlet</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
