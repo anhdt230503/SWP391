@@ -28,35 +28,35 @@ public class MentorReportServlet extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
 
         if (filePart != null) {
-
             String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            InputStream fileContent = filePart.getInputStream();
 
-
-           Path uploadDirectory = Paths.get("C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\file_upload");
-
+            // Update the path to reflect a valid upload directory in your system
+            Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
 
             if (!Files.exists(uploadDirectory)) {
                 Files.createDirectories(uploadDirectory);
             }
 
-            // Đặt tên tệp cụ thể trong thư mục đích
+            // Create the path for the new file
             Path filePath = uploadDirectory.resolve(originalFileName);
 
-            // Lưu tệp vào thư mục đích
-            Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
+            // Try-with-resources to ensure InputStream is closed properly
+            try (InputStream fileContent = filePart.getInputStream()) {
+                // Save the file
+                Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
+            }
 
             MentorReportDAO reportDAO = new MentorReportDAO();
             HttpSession session = request.getSession();
             String email = (String) session.getAttribute("email");
-            System.out.println(email);
 
             Account account = accountDAO.getAccountByEmail(email);
             int mentorId = account.getMentorId();
-            System.out.println(mentorId);
-            reportDAO.UploadReport(reportTitle, mentorId, fileContent); 
 
-            request.setAttribute("message", "File uploaded successfully to the 'fileupload' directory.");
+            // Save report details to the database
+            reportDAO.UploadReport(reportTitle, mentorId, originalFileName);
+
+            request.setAttribute("message", "File uploaded successfully to the 'file_upload' directory.");
             request.getRequestDispatcher("MentorReport.jsp").forward(request, response);
 
         } else {

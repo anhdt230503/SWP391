@@ -71,7 +71,7 @@ public class DowloadFile extends HttpServlet {
         String fileName = request.getParameter("reportFile");
         System.out.println("File Name: " + fileName);
 
-        Path uploadDirectory = Paths.get("C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\file_upload");
+        Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
 
         System.out.println("Upload Directory: " + uploadDirectory);
 

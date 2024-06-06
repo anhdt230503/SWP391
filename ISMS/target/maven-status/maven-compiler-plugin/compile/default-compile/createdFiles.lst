@@ -32,6 +32,7 @@ dao\MentorReportDAO.class
 model\LabRoom.class
 dao\AccountDAO.class
 service\InternAssignService.class
+EndpointTester.class
 model\Mission$MissionStatus.class
 com\group1\isms\JakartaRestConfiguration.class
 model\Semester.class

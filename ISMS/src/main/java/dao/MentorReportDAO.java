@@ -4,7 +4,6 @@
  */
 package dao;
 
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,13 +16,13 @@ import model.MentorReport;
  */
 public class MentorReportDAO extends MyDAO {
 
-    public void UploadReport(String title, int mentorId, InputStream content) {
+    public void UploadReport(String title, int mentorId, String filename) {
         String INSERT_REPORT_SQL = "INSERT INTO MentorReport (report_name, report_file, mentor_id) VALUES (?, ?, ?)";
 
         try (
                 PreparedStatement ps = con.prepareStatement(INSERT_REPORT_SQL)) {
             ps.setString(1, title);
-            ps.setBlob(2, content);
+            ps.setString(2, filename);
             ps.setInt(3, mentorId);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -42,7 +41,7 @@ public class MentorReportDAO extends MyDAO {
                 report.add(new MentorReport(rs.getInt(1),
                         rs.getString(2),
                         rs.getTimestamp(3),
-                        rs.getBinaryStream(4),
+                        rs.getString(4),
                         rs.getInt(5)));
             }
         } catch (Exception e) {

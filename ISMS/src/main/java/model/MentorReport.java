@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.io.InputStream;
 import java.sql.Timestamp;
 
 /**
@@ -16,13 +15,13 @@ public class MentorReport {
     private int reportId;
     private String reportName;
     private Timestamp reportDate;
-    private InputStream  filedata;
+    private String  filedata;
     private int mentorId;
 
     public MentorReport() {
     }
 
-    public MentorReport(int reportId, String reportName, Timestamp reportDate, InputStream filedata, int mentorId) {
+    public MentorReport(int reportId, String reportName, Timestamp reportDate, String filedata, int mentorId) {
         this.reportId = reportId;
         this.reportName = reportName;
         this.reportDate = reportDate;
@@ -54,11 +53,11 @@ public class MentorReport {
         this.reportDate = reportDate;
     }
 
-    public InputStream getFiledata() {
+    public String getFiledata() {
         return filedata;
     }
 
-    public void setFiledata(InputStream filedata) {
+    public void setFiledata(String filedata) {
         this.filedata = filedata;
     }
 
