@@ -11,6 +11,7 @@ service\AttendanceService.class
 dao\MissionDAO.class
 model\Intern$InternStatus.class
 dao\MyDAO.class
+controller\MentorReportServlet.class
 dao\SemesterDAO.class
 dao\MissionReportDAO.class
 controller\ImportInternServlet.class
@@ -20,6 +21,7 @@ service\GoogleHandlerService.class
 model\MentorReport.class
 controller\ManagerManageController.class
 dao\RoleDAO.class
+controller\DownloadFile.class
 model\Manager.class
 controller\LogoutServlet.class
 service\LabRoomService.class
@@ -51,6 +53,7 @@ controller\LoginServlet.class
 dao\ManagerDAO.class
 service\AccountService.class
 service\InternService.class
+controller\MentorReportList.class
 controller\InternListServlet.class
 model\GoogleProfile.class
 dao\MentorDAO.class

@@ -66,6 +66,13 @@
                 <i class="bi bi-door-open-fill me-2"></i> Lab Room
             </a>
         </li>
+        <li>
+            <a href="mentorreportlist" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-door-open-fill me-2"></i> Mentor Report
+            </a>
+        </li>
+
     </ul>
 </div>
 
