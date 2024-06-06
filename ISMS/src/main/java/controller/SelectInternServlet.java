@@ -32,6 +32,8 @@ public class SelectInternServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final int MENTOR_LIMIT = 3;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,14 +52,25 @@ public class SelectInternServlet extends HttpServlet {
         System.out.println(mentorId);
 
         if (selectedInterns != null && mentorId != 0) {
-            for (String internId : selectedInterns) {
-                System.out.println(internId);
-                internAssign.setInternId(Integer.parseInt(internId));
-                internAssign.setMentorId(mentorId);
-                internAssignDAO.insertInternAssign(internAssign);
+            int currentInternCount = internAssignDAO.getInternCountByMentor(mentorId);
+            if (currentInternCount + selectedInterns.length > MENTOR_LIMIT) {
+                request.setAttribute("errorMessage", "You can only select up to " + MENTOR_LIMIT + " interns.");
+            } else {
+                for (String internId : selectedInterns) {
+                    System.out.println(internId);
+                    internAssign.setInternId(Integer.parseInt(internId));
+                    internAssign.setMentorId(mentorId);
+                    internAssignDAO.insertInternAssign(internAssign);
+                }
+                request.setAttribute("successMessage", "Interns selected successfully.");
             }
+        } else {
+            request.setAttribute("errorMessage", "No interns selected or invalid mentor.");
         }
-        
+
+        int finalInternCount = internAssignDAO.getInternCountByMentor(mentorId);
+        request.setAttribute("currentInternCount", finalInternCount);
+        request.setAttribute("mentorLimit", MENTOR_LIMIT);
         request.getRequestDispatcher("internList").forward(request, response);
     }
 

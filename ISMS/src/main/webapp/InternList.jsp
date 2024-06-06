@@ -22,6 +22,7 @@
                 <div class="table-container">
                     <div class="row">
                         <div class="col-8 h3">List of Intern Candidate</div>
+                    <c:if test="${sessionScope.acc.roleId == 1}"> 
                         <div class="col-4">
                             <form action="importIntern" method="post" enctype="multipart/form-data">
                                 <div class="input-group">
@@ -30,12 +31,22 @@
                                 </div>
                             </form>
                         </div>
+                    </c:if>
 <!--                        <p>${errorMessage}</p>
-                    <p>${successMessage}</p>-->
+                <p>${successMessage}</p>-->
                 </div> 
                 <form action="selectIntern" method="post" onsubmit="return limitSelection();">
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger" role="alert">
+                            ${errorMessage}
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty successMessage}">
+                        <div class="alert alert-success" role="alert">
+                            ${successMessage}
+                        </div>
+                    </c:if>
                     <table class="table caption-top table-bordered">
-
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">ID</th>
@@ -44,38 +55,46 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Staff ID</th>
                                 <th scope="col">Upload Date</th>
-                                <th scope="col">Select</th>
+                                    <c:if test="${sessionScope.acc.roleId == 3}"> 
+                                    <th scope="col">Select</th>
+                                    </c:if>
                             </tr>
                         </thead>
                         <tbody>
+
                             <c:forEach items="${listOfIntern}" var="o">
                                 <tr>
                                     <td>${o.internId}</td>
-                                    <td>${o.fullName}</td>
                                     <td>${o.studentId}</td>
+                                    <td>${o.fullName}</td>
                                     <td>${o.email}</td>
                                     <td>${o.staffId}</td>
                                     <td>${o.uploadDate}</td>
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${selectedInternId.contains(o.internId)}">
-                                                <div class="form-check">
-                                                    <span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">Selected</span>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" onclick="checkSelectionCount();">
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        
-                                    </td>
+                                    <c:if test="${sessionScope.acc.roleId == 3}"> 
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${selectedInternId.contains(o.internId)}">
+                                                    <div class="form-check">
+                                                        <span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">Selected</span>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" onclick="checkSelectionCount();"
+                                                               <c:if test="${currentInternCount > mentorLimit}">disabled</c:if>>
+                                                        </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
+
                         </tbody>
                     </table>
-                    <input type="submit" value="Select Interns">
+                    <c:if test="${sessionScope.acc.roleId == 3}"> 
+                        <input type="submit" value="Select Interns" <c:if test="${currentInternCount > mentorLimit}">disabled</c:if>>
+                    </c:if>
                 </form>
             </div>
         </div>

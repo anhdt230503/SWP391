@@ -72,6 +72,19 @@ public class InternDAO extends MyDAO {
         }
         return list;
     }
+    
+    public int getLastInternId () {
+        xSql = "SELECT MAX(intern_id) FROM Intern";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 
     public Intern getInternByStudentId(String studentId) {
         xSql = "select * from Intern \n"
@@ -133,6 +146,7 @@ public class InternDAO extends MyDAO {
 
         InternDAO internDAO = new InternDAO();
         System.out.println(internDAO.getInternByStudentId("HE170364"));
+        System.out.println(internDAO.getLastInternId());
 
         
     }

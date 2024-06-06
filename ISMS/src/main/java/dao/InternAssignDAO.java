@@ -4,8 +4,11 @@
  */
 package dao;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.InternAssign;
 
 /**
@@ -43,6 +46,22 @@ public class InternAssignDAO extends MyDAO {
         }
         return list;
     }
+    
+    public int getInternCountByMentor(int mentorId) {
+        int count = 0;
+        xSql = "SELECT COUNT(*) FROM InternAssign WHERE mentor_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public static void main(String[] args) {
         InternAssignDAO internAssignDAO = new InternAssignDAO();
@@ -51,7 +70,7 @@ public class InternAssignDAO extends MyDAO {
 //        internAssign.setInternId(1);
 //        internAssign.setMentorId(1);
 //        internAssignDAO.insertInternAssign(internAssign);
-        System.out.println(internAssignDAO.getAllInternAssign());
+        System.out.println(internAssignDAO.getInternCountByMentor(1));
         
     }
 }

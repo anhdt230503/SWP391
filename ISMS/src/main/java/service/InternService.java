@@ -16,12 +16,9 @@ import model.Intern;
 public class InternService {
     
     private InternDAO internDao = new InternDAO();
-    private int internIdKey = 0;
-    
     
     public synchronized int generateInternIdKey() {
-        internIdKey++;
-        return internIdKey;
+        return internDao.getLastInternId();
     }
     
     public void importIntern(Intern intern) throws SQLException {
@@ -52,9 +49,9 @@ public class InternService {
         
     }
     
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        InternService internService = new InternService();
 //        String code = internService.genarateStaffId();
 //        System.out.println(code);
-//    }
+    }
 }

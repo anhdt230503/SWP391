@@ -69,7 +69,8 @@ public class ImportInternServlet extends HttpServlet {
                     continue;
                 }
                 
-                int internId = internService.generateInternIdKey();
+                int internId = internService.generateInternIdKey() + 1;
+                System.out.println(internId);
                 String studentId = row.getCell(0).getStringCellValue();
                 String email = row.getCell(1).getStringCellValue();
                 String fullName = row.getCell(2).getStringCellValue();
