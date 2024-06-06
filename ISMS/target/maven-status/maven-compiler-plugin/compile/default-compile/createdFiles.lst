@@ -42,8 +42,10 @@ model\Role.class
 controller\AddManager.class
 service\MentorService.class
 com\group1\isms\resources\JakartaEE10Resource.class
+controller\GetMentorsServlet.class
 model\Account.class
 model\WorkOverTime.class
+controller\ListLabRoomsServlet.class
 dao\InternAssignDAO.class
 controller\LoginServlet.class
 dao\ManagerDAO.class

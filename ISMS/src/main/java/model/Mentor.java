@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.util.Date;
 
-/**
- *
- * @author haidu
- */
 public class Mentor {
  
     private int mentorId;
@@ -79,6 +71,4 @@ public class Mentor {
     public String toString() {
         return "Mentor{" + "mentorId=" + mentorId + ", fullname=" + fullname + ", email=" + email + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + '}';
     }
-    
-    
 }

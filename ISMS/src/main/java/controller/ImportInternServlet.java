@@ -61,14 +61,13 @@ public class ImportInternServlet extends HttpServlet {
             DataFormatter formatter = new DataFormatter();
             AccountDAO accountDao = new AccountDAO();
             InternService internService = new InternService();
-            
 
             for (Row row : sheet) {
                 // Skip header row
                 if (row.getRowNum() == 0) {
                     continue;
                 }
-                
+
                 int internId = internService.generateInternIdKey() + 1;
                 System.out.println(internId);
                 String studentId = row.getCell(0).getStringCellValue();
@@ -108,7 +107,7 @@ public class ImportInternServlet extends HttpServlet {
                 } else {
                     Intern intern = new Intern();
                     Account account = new Account();
-                    
+
                     intern.setInternId(internId);
                     intern.setStudentId(studentId);
                     intern.setEmail(email);
@@ -122,7 +121,7 @@ public class ImportInternServlet extends HttpServlet {
                     intern.setStatus(Intern.InternStatus.INTERN);
                     internService.updateIntern(existingIntern);
                     internService.importIntern(intern);
-                    
+
                     // insert Account for Intern
                     account.setEmail(email);
                     account.setInternId(internId);
