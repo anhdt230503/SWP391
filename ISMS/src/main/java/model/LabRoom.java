@@ -10,17 +10,19 @@ public class LabRoom {
     private String roomName;
     private boolean isAssigned;
     private int mentorId;
+    private String mentorFullName; // New field for mentor's full name
 
     // Default constructor
     public LabRoom() {
     }
 
     // Parameterized constructor
-    public LabRoom(int roomId, String roomName, boolean isAssigned, int mentorId) {
+    public LabRoom(int roomId, String roomName, boolean isAssigned, int mentorId, String mentorFullName) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.isAssigned = isAssigned;
         this.mentorId = mentorId;
+        this.mentorFullName = mentorFullName;
     }
 
     // Getter and Setter methods
@@ -56,9 +58,17 @@ public class LabRoom {
         this.mentorId = mentorId;
     }
 
+    public String getMentorFullName() {
+        return mentorFullName;
+    }
+
+    public void setMentorFullName(String mentorFullName) {
+        this.mentorFullName = mentorFullName;
+    }
+
     // Override toString method for debugging purposes
     @Override
     public String toString() {
-        return "LabRoom{" + "roomId=" + roomId + ", roomName=" + roomName + ", isAssigned=" + isAssigned + ", mentorId=" + mentorId + '}';
+        return "LabRoom{" + "roomId=" + roomId + ", roomName=" + roomName + ", isAssigned=" + isAssigned + ", mentorId=" + mentorId + ", mentorFullName=" + mentorFullName + '}';
     }
 }

@@ -30,9 +30,10 @@ public class LabRoomDAO extends MyDAO {
         }
     }
 
-    public List<LabRoom> getAllLabRooms() {
+      public List<LabRoom> getAllLabRooms() {
         List<LabRoom> list = new ArrayList<>();
-        String sql = "SELECT room_id, room_name, is_assigned, mentor_id FROM LabRoom";
+        String sql = "SELECT lr.room_id, lr.room_name, lr.is_assigned, lr.mentor_id, m.full_name " +
+                     "FROM LabRoom lr LEFT JOIN Mentor m ON lr.mentor_id = m.mentor_id";
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -42,6 +43,7 @@ public class LabRoomDAO extends MyDAO {
                 labRoom.setRoomName(rs.getString("room_name"));
                 labRoom.setAssigned(rs.getBoolean("is_assigned"));
                 labRoom.setMentorId(rs.getInt("mentor_id"));
+                labRoom.setMentorFullName(rs.getString("full_name"));
                 list.add(labRoom);
             }
         } catch (SQLException e) {

@@ -106,7 +106,7 @@ button[type="submit"]:hover {
                             <th scope="col">Room ID</th>
                             <th scope="col">Room Name</th>
                             <th scope="col">is Assigned</th>
-                            <th scope="col">Mentor</th>
+                            <th scope="col">Mentor Name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,7 +115,7 @@ button[type="submit"]:hover {
                                 <td>${o.roomId}</td>
                                 <td>${o.roomName}</td>
                                 <td>${o.assigned}</td>
-                                <td>${o.mentorId}</td>
+                                 <td>${o.mentorFullName}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

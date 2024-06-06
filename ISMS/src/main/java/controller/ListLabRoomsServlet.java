@@ -80,35 +80,31 @@ public class ListLabRoomsServlet extends HttpServlet {
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     
-   String roomName = request.getParameter("roomName");
+  String roomName = request.getParameter("roomName");
 
-    boolean isAssigned = false;
+        boolean isAssigned = false;
 
-    String mentorIdStr = request.getParameter("mentorId");
+        String mentorIdStr = request.getParameter("mentorId");
 
-    if (mentorIdStr != null && !mentorIdStr.isEmpty()) {
-        isAssigned = true;
+        if (mentorIdStr != null && !mentorIdStr.isEmpty()) {
+            isAssigned = true;
+        }
+
+        LabRoom labRoom = new LabRoom();
+        labRoom.setRoomName(roomName);
+        labRoom.setAssigned(isAssigned);
+        if (!isAssigned) {
+            labRoom.setMentorId(0); 
+        } else {
+            labRoom.setMentorId(Integer.parseInt(mentorIdStr));
+        }
+
+        LabRoomDAO labRoomDAO = new LabRoomDAO();
+        labRoomDAO.insertLabRoom(labRoom);
+
+        response.sendRedirect(request.getContextPath() + "/ListLabRoomsServlet");
     }
 
-    LabRoom labRoom = new LabRoom();
-    labRoom.setRoomName(roomName);
-    labRoom.setAssigned(isAssigned);
-    if (!isAssigned) {
-        labRoom.setMentorId(0); 
-    } else {
-        labRoom.setMentorId(Integer.parseInt(mentorIdStr));
-    }
-
-    LabRoomDAO labRoomDAO = new LabRoomDAO();
-    labRoomDAO.insertLabRoom(labRoom);
-
-    response.sendRedirect(request.getContextPath() + "/ListLabRoomsServlet");
-}
-
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Servlet to list and create lab rooms";
