@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import model.Mission;
 
 public class AddMissionServlet extends HttpServlet {
@@ -21,13 +22,29 @@ public class AddMissionServlet extends HttpServlet {
             String name = request.getParameter("name");
             String description = request.getParameter("description");
             String link = request.getParameter("link");
-            Timestamp startDate = Timestamp.valueOf(request.getParameter("startDate") + " 00:00:00");
-            Timestamp deadline = Timestamp.valueOf(request.getParameter("deadline") + " 00:00:00");
 
-            // Get the current timestamp
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            Date parsedStartDate = dateFormat.parse(request.getParameter("startDate"));
+            Date parsedDeadline = dateFormat.parse(request.getParameter("deadline"));
+
+            Timestamp startDate = new Timestamp(parsedStartDate.getTime());
+            Timestamp deadline = new Timestamp(parsedDeadline.getTime());
+
+            if (deadline.before(startDate)) {
+                request.setAttribute("errorMessage", "Deadline phải sau Start Date");
+
+                request.setAttribute("name", name);
+                request.setAttribute("description", description);
+                request.setAttribute("link", link);
+                request.setAttribute("startDate", request.getParameter("startDate"));
+                request.setAttribute("deadline", request.getParameter("deadline"));
+
+                request.getRequestDispatcher("AddMission.jsp").forward(request, response);
+                return;
+            }
+
             Timestamp currentTimestamp = new Timestamp(new Date().getTime());
 
-            // Determine the status based on current time
             Mission.MissionStatus status;
             if (currentTimestamp.before(startDate)) {
                 status = Mission.MissionStatus.NOT_START;
@@ -37,7 +54,6 @@ public class AddMissionServlet extends HttpServlet {
                 status = Mission.MissionStatus.ON_GOING;
             }
 
-            // Create Mission object
             Mission mission = new Mission();
             mission.setMisName(name);
             mission.setMisStatus(status);
@@ -46,15 +62,18 @@ public class AddMissionServlet extends HttpServlet {
             mission.setStartDate(startDate);
             mission.setDeadline(deadline);
 
-            // Add mission to the database
+            
             missionDAO.addMission(mission);
 
-            // Retrieve the list of missions after adding
+            if (currentTimestamp.after(deadline)) {
+                missionDAO.updateMissionStatus(mission.getMisId(), Mission.MissionStatus.FINISHED);
+            }
+
             List<Mission> missions = missionDAO.getAllMissions();
             request.setAttribute("missions", missions);
 
-            // Forward to Mission.jsp
             request.getRequestDispatcher("Mission.jsp").forward(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Lỗi khi thêm nhiệm vụ: " + e.getMessage());

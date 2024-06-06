@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Add Mission</title>
-        <!-- Add any CSS or JS files here -->
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Mission</title>
+    <!-- Add any CSS or JS files here -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +23,6 @@
             margin-top: 10px;
         }
         input[type="text"],
-        input[type="date"],
         textarea,
         select {
             width: 100%;
@@ -47,34 +45,51 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
-    <body>
-        <h2>Add Mission</h2>
-        <form action="AddMissionServlet" method="post">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
+</head>
+<body>
+<h2>Add Mission</h2>
+<%-- Display error message if there is any --%>
+<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+<% if (errorMessage != null && !errorMessage.isEmpty()) { %>
+    <div class="error"><%= errorMessage %></div>
+<% } %>
+<form action="AddMissionServlet" method="post" onsubmit="return validateForm()">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value=""><br>
 
-            <label for="status">Status:</label><br>
-            <select id="status" name="status">
-                <option value="NOT_START">Not Start</option>
-                <option value="ON_GOING">On Going</option>
-                <option value="FINISHED">Finished</option>
-            </select><br>
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
 
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+    <label for="link">Link:</label><br>
+    <input type="text" id="link" name="link" value=""><br>
 
-            <label for="link">Link:</label><br>
-            <input type="text" id="link" name="link"><br>
+    <label for="startDate">Start Date:</label><br>
+    <input type="datetime-local" id="startDate" name="startDate" value=""><br>
 
-            <label for="startDate">Start Date:</label><br>
-            <input type="date" id="startDate" name="startDate"><br>
+    <label for="deadline">Deadline:</label><br>
+    <input type="datetime-local" id="deadline" name="deadline" value=""><br>
 
-            <label for="deadline">Deadline:</label><br>
-            <input type="date" id="deadline" name="deadline"><br>
+    <input type="submit" value="Submit">
+</form>
 
-            <input type="submit" value="Submit">
-        </form>
+<script>
+    function validateForm() {
+        var startDate = new Date(document.getElementById("startDate").value);
+        var deadline = new Date(document.getElementById("deadline").value);
 
-    </body>
+        if (deadline < startDate) {
+            alert("Deadline phải sau Start Date");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
 </html>

@@ -70,6 +70,23 @@ public class MissionDAO extends MyDAO {
             }
         }
     }
+public void updateMissionStatus(int missionId, MissionStatus status) {
+    String sql = "UPDATE Mission SET mis_status = ? WHERE mis_id = ?";
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, status.name());
+        ps.setInt(2, missionId);
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        System.err.println("Lỗi khi cập nhật trạng thái của nhiệm vụ: " + e.getMessage());
+        e.printStackTrace();
+        try {
+            con.rollback();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
 
 
 }
