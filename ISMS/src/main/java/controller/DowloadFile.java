@@ -65,50 +65,41 @@ public class DowloadFile extends HttpServlet {
 
     @Override
 
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    System.out.println("doGet");
-    String fileName = request.getParameter("reportFile");
-    System.out.println("File Name: " + fileName);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("doGet");
+        String fileName = request.getParameter("reportFile");
+        System.out.println("File Name: " + fileName);
 
-    Path uploadDirectory = Paths.get("C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\file_upload");
-    System.out.println("Upload Directory: " + uploadDirectory);
+        Path uploadDirectory = Paths.get("C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\file_upload");
 
-    Path filePath = uploadDirectory.resolve(fileName);
-    System.out.println("File Path: " + filePath);
+        System.out.println("Upload Directory: " + uploadDirectory);
 
-    File downloadFile = filePath.toFile();
-    System.out.println("Download File: " + downloadFile);
-    if (!downloadFile.exists()) {
-        response.getWriter().write("File not found");
-        response.getWriter().flush();
-        return;
-    }
+        Path filePath = uploadDirectory.resolve(fileName);
+        System.out.println("File Path: " + filePath);
 
-    // Thiết lập Content-Type dựa trên phần mở rộng của tệp
-    String fileExtension = com.google.common.io.Files.getFileExtension(fileName).toLowerCase();
-    switch (fileExtension) {
-        case "xls":
-            response.setContentType("application/vnd.ms-excel");
-            break;
-        case "xlsx":
-            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            break;
-    }
-
-    response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-
-    try (FileInputStream fileInputStream = new FileInputStream(downloadFile); OutputStream out = response.getOutputStream()) {
-        byte[] buffer = new byte[4096];
-        int bytesRead;
-        while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-            out.write(buffer, 0, bytesRead);
+        File downloadFile = filePath.toFile();
+        System.out.println("Download File: " + downloadFile);
+        if (!downloadFile.exists()) {
+            response.getWriter().write("File not found");
+            response.getWriter().flush();
+            return;
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
 
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+        try (FileInputStream fileInputStream = new FileInputStream(downloadFile); OutputStream out = response.getOutputStream()) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
