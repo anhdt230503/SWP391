@@ -29,6 +29,12 @@ public class Mentor {
         this.phoneNumber = phoneNumber;
     }
 
+    public Mentor(int mentorId, String fullname, String email) {
+        this.mentorId = mentorId;
+        this.fullname = fullname;
+        this.email = email;
+    }
+
     public int getMentorId() {
         return mentorId;
     }

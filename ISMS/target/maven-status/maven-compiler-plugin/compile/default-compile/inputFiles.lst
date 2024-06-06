@@ -7,6 +7,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\dao\DBContext.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MentorReportService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\AccountDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\MissionReport.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\MentorManageController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MyDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MissionReportDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\GoogleProfile.java
@@ -21,6 +22,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MentorReportDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\GoogleHandlerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\ManagerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MissionReportService.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\Addmentor.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\WorkOverTimeDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\ScheduleService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\ScheduleDAO.java
@@ -34,6 +36,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\service\SemesterService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\ManagerDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Role.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\LabRoomService.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\AddManager.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\SemesterDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Attendance.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Manager.java
@@ -43,6 +46,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\model\Semester.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\LoginServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mission.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MentorDAO.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\ManagerManageController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\AttendanceService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\com\group1\isms\resources\JakartaEE10Resource.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\InternAssignDAO.java

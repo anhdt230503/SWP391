@@ -4,10 +4,17 @@
  */
 package service;
 
+import dao.ManagerDAO;
+
 /**
  *
  * @author haidu
  */
 public class ManagerService {
-    
+
+    private ManagerDAO managerDao = new ManagerDAO();
+
+    public synchronized int generateManagerIdKey() {
+        return managerDao.getLastManagerId();
+    }
 }
