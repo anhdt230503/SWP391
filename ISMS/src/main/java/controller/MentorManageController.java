@@ -36,31 +36,31 @@ public class MentorManageController extends HttpServlet {
         HttpSession session = request.getSession();
 //        Mentor mentor = (Mentor) session.getAttribute("mentor");
         
-        int page = 1;
-        int pageSize = 6;
-        
-        String pageParam = request.getParameter("page");
-        String pageSizeParam = request.getParameter("pageSize");
-        
-        if(pageParam != null && !pageParam.isEmpty()){
-            page = Integer.parseInt(pageParam);
-        }
-        if(pageSizeParam != null && !pageSizeParam.isEmpty()){
-            pageSize = Integer.parseInt(pageSizeParam);
-        }
+//        int page = 1;
+//        int pageSize = 6;
+//        
+//        String pageParam = request.getParameter("page");
+//        String pageSizeParam = request.getParameter("pageSize");
+//        
+//        if(pageParam != null && !pageParam.isEmpty()){
+//            page = Integer.parseInt(pageParam);
+//        }
+//        if(pageSizeParam != null && !pageSizeParam.isEmpty()){
+//            pageSize = Integer.parseInt(pageSizeParam);
+//        }
         
         MentorDAO mentorDAO = new MentorDAO();
-        int totalCount = mentorDAO.getTotalMentorCount();
-        int totalPages = (int) Math.ceil((double) totalCount/pageSize);
+//        int totalCount = mentorDAO.getTotalMentorCount();
+//        int totalPages = (int) Math.ceil((double) totalCount/pageSize);
         
-        List<Mentor> mentors = mentorDAO.getMentorsToManage(page, pageSize);
-        for(Mentor mentor: mentors){
-            System.out.println(mentor);
-        }
+        List<Mentor> mentors = mentorDAO.getMentorsToManage();
+//        for(Mentor mentor: mentors){
+//            System.out.println(mentor);
+//        }
         
         request.setAttribute("mentors", mentors);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
+//        request.setAttribute("currentPage", page);
+//        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("mentor-management.jsp").forward(request, response);
     } 
 

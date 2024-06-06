@@ -31,28 +31,25 @@ public class MentorDAO extends MyDAO {
       
     }
         
-    public int getTotalMentorCount(){
-        int count = 0;
-        try(
-                PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Mentor"); ResultSet rs = stmt.executeQuery()) {
-            if(rs.next()){
-                count = rs.getInt("count");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
+//    public int getTotalMentorCount(){
+//        int count = 0;
+//        try(
+//                PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Mentor"); ResultSet rs = stmt.executeQuery()) {
+//            if(rs.next()){
+//                count = rs.getInt("count");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
     
-    public List<Mentor> getMentorsToManage(int page, int pageSize){
+    public List<Mentor> getMentorsToManage(){
         List<Mentor> mentors = new ArrayList<>();
-        int offset = (page-1) * pageSize;
+//        int offset = (page-1) * pageSize;
         
         try(
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Mentor\n"
-                    +"LIMIT ? OFFSET ?")){
-            stmt.setInt(1,pageSize);
-            stmt.setInt(2, offset);
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Mentor\n")){
             try(ResultSet rs = stmt.executeQuery()){
                 while (rs.next()) {                    
                     Mentor mentor = new Mentor();
