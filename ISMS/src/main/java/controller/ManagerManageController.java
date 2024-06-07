@@ -33,33 +33,12 @@ public class ManagerManageController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-//        Mentor mentor = (Mentor) session.getAttribute("mentor");
-        
-        int page = 1;
-        int pageSize = 6;
-        
-        String pageParam = request.getParameter("page");
-        String pageSizeParam = request.getParameter("pageSize");
-        
-        if(pageParam != null && !pageParam.isEmpty()){
-            page = Integer.parseInt(pageParam);
-        }
-        if(pageSizeParam != null && !pageSizeParam.isEmpty()){
-            pageSize = Integer.parseInt(pageSizeParam);
-        }
         
         ManagerDAO managerDAO = new ManagerDAO();
-        int totalCount = managerDAO.getTotalManagerCount();
-        int totalPages = (int) Math.ceil((double) totalCount/pageSize);
         
-        List<Manager> managers = managerDAO.getManagersToManage(page, pageSize);
-        for(Manager manager: managers){
-            System.out.println(manager);
-        }
-        
+        List<Manager> managers = managerDAO.getManagersToManage();
+    
         request.setAttribute("managers", managers);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("manager-management.jsp").forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

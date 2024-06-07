@@ -32,28 +32,11 @@ public class ManagerDAO extends MyDAO {
       
     }
 
-    public int getTotalManagerCount() {
-        int count = 0;
-        try (
-                PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Manager"); ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                count = rs.getInt("count");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
-
-    public List<Manager> getManagersToManage(int page, int pageSize) {
+    public List<Manager> getManagersToManage() {
         List<Manager> managers = new ArrayList<>();
-        int offset = (page - 1) * pageSize;
 
         try (
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Manager\n"
-                        + "LIMIT ? OFFSET ?")) {
-            stmt.setInt(1, pageSize);
-            stmt.setInt(2, offset);
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Manager\n")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Manager manager = new Manager();

@@ -36,16 +36,7 @@ public class Addmentor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Addmentor</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Addmentor at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -105,9 +96,9 @@ public class Addmentor extends HttpServlet {
         accountDAO.insertMentorAccount(newAccount);
 
 //            response.sendRedirect("MentorManageController");
-
+     request.getRequestDispatcher("MentorManageController").forward(request, response);
     }
-            request.getRequestDispatcher("MentorManageController").forward(request, response);
+           
     }
 
     /**

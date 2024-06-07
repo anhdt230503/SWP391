@@ -68,7 +68,7 @@
 
     <label for="link">Link:</label><br>
     <input type="text" id="link" name="link" value="" autocomplete="off"><br>
-
+ 
     <label for="startDate">Start Date:</label><br>
     <input type="datetime-local" id="startDate" name="startDate" value="" autocomplete="off"><br>
 

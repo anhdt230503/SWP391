@@ -40,18 +40,15 @@ public class MentorDAO extends MyDAO {
         }
         return count;
     }
-
-    public List<Mentor> getMentorsToManage(int page, int pageSize) {
+    
+    public List<Mentor> getMentorsToManage(){
         List<Mentor> mentors = new ArrayList<>();
-        int offset = (page - 1) * pageSize;
+        
+        try(
+                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Mentor\n")){
+            try(ResultSet rs = stmt.executeQuery()){
+                while (rs.next()) {                    
 
-        try (
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Mentor\n"
-                        + "LIMIT ? OFFSET ?")) {
-            stmt.setInt(1, pageSize);
-            stmt.setInt(2, offset);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
                     Mentor mentor = new Mentor();
                     mentor.setMentorId(rs.getInt("mentor_id"));
                     mentor.setFullname(rs.getString("full_name"));
