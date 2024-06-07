@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,10 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.math.BigDecimal;
+import model.Account;
 import model.Intern;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -54,36 +55,79 @@ public class ImportInternServlet extends HttpServlet {
 
         // Đọc và xử lý file Excel (được thực hiện trong khối try-catch ở dưới)
         try (FileInputStream fis = new FileInputStream(new File(filePath))) {
+
             Workbook workbook = WorkbookFactory.create(fis);
             Sheet sheet = workbook.getSheetAt(0);
+            DataFormatter formatter = new DataFormatter();
+            AccountDAO accountDao = new AccountDAO();
             InternService internService = new InternService();
+            
 
             for (Row row : sheet) {
                 // Skip header row
                 if (row.getRowNum() == 0) {
                     continue;
                 }
-
-                Intern intern = new Intern();
-                intern.setStudentId(row.getCell(0).getStringCellValue());
-                intern.setEmail(row.getCell(1).getStringCellValue());
-                intern.setFullName(row.getCell(2).getStringCellValue());
+                
+                int internId = internService.generateInternIdKey() + 1;
+                System.out.println(internId);
+                String studentId = row.getCell(0).getStringCellValue();
+                String email = row.getCell(1).getStringCellValue();
+                String fullName = row.getCell(2).getStringCellValue();
                 // Đọc phone number dưới dạng BigDecimal để tránh mất dữ liệu
                 Cell phoneNumberCell = row.getCell(3);
+                String phoneNumber = null;
                 if (phoneNumberCell != null) {
-                    BigDecimal phoneNumber = new BigDecimal(phoneNumberCell.toString());
-                    intern.setPhoneNumber(phoneNumber.toPlainString());
+//                    BigDecimal phoneNum = new BigDecimal(phoneNumberCell.toString());
+                    phoneNumber = formatter.formatCellValue(phoneNumberCell);
                 }
-                intern.setMajor(row.getCell(4).getStringCellValue());
-                intern.setCompany(row.getCell(5).getStringCellValue());
-                intern.setJobTitle(row.getCell(6).getStringCellValue());
-                intern.setLinkCv(row.getCell(7).getStringCellValue());
+                String major = row.getCell(4).getStringCellValue();
+                String company = row.getCell(5).getStringCellValue();
+                String jobTitle = row.getCell(6).getStringCellValue();
+                String linkCv = row.getCell(7).getStringCellValue();
 
                 String staffId = internService.genarateStaffId();
-                intern.setStaffId(staffId);
-                intern.setStatus(Intern.InternStatus.INTERN);
+//                intern.setStaffId(staffId);
+//                intern.setStatus(Intern.InternStatus.INTERN);
 
-                internService.importIntern(intern);
+                Intern existingIntern = internService.getInternByStudentId(studentId);
+                if (existingIntern != null) {
+
+                    existingIntern.setInternId(internId);
+                    existingIntern.setStudentId(studentId);
+                    existingIntern.setEmail(email);
+                    existingIntern.setFullName(fullName);
+                    existingIntern.setPhoneNumber(phoneNumber);
+                    existingIntern.setMajor(major);
+                    existingIntern.setCompany(company);
+                    existingIntern.setJobTitle(jobTitle);
+                    existingIntern.setLinkCv(linkCv);
+                    existingIntern.setStaffId(staffId);
+                    existingIntern.setStatus(Intern.InternStatus.INTERN);
+                    internService.updateIntern(existingIntern);
+                } else {
+                    Intern intern = new Intern();
+                    Account account = new Account();
+                    
+                    intern.setInternId(internId);
+                    intern.setStudentId(studentId);
+                    intern.setEmail(email);
+                    intern.setFullName(fullName);
+                    intern.setPhoneNumber(phoneNumber);
+                    intern.setMajor(major);
+                    intern.setCompany(company);
+                    intern.setJobTitle(jobTitle);
+                    intern.setLinkCv(linkCv);
+                    intern.setStaffId(staffId);
+                    intern.setStatus(Intern.InternStatus.INTERN);
+                    internService.updateIntern(existingIntern);
+                    internService.importIntern(intern);
+                    
+                    // insert Account for Intern
+                    account.setEmail(email);
+                    account.setInternId(internId);
+                    accountDao.insertInternAccount(account);
+                }
             }
 
             workbook.close();
@@ -103,7 +147,7 @@ public class ImportInternServlet extends HttpServlet {
         }
 
         request.setAttribute("successMessage", "Import Successfully");
-        request.getRequestDispatcher("InternList.jsp").forward(request, response);
+        request.getRequestDispatcher("internList").forward(request, response);
     }
 
 }
