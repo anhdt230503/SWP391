@@ -37,13 +37,6 @@ public class AccountDAO extends MyDAO {
         return null;
     }
 
-//    public static void main(String[] args) {
-//        
-//        AccountDAO accDAO = new AccountDAO();
-//        
-//        Account acc = accDAO.login("daoa9596@gmail.com");
-//        System.out.println(acc);
-//    }
     public void insertMentorAccount(Account account) {
         xSql = "INSERT INTO Account (email, mentor_id, role_id)\n"
                 + "VALUES (?, ?, 3)";
@@ -85,7 +78,6 @@ public class AccountDAO extends MyDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Xử lý exception tại đây (ném ngoại lệ hoặc ghi log)
         } finally {
             try {
                 if (resultSet != null) {
@@ -102,12 +94,4 @@ public class AccountDAO extends MyDAO {
         return exists;
     }
 
-//       public static void main(String[] args) {
-//        AccountDAO accountDAO = new AccountDAO();
-//        Account account = new Account();
-//        account.setRoleId(3);
-//        account.setEmail("aaa@gmail.com");
-//        account.setMentorId(1);
-//        accountDAO.insertMentorAccount(account);
-//    }
 }

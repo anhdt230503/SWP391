@@ -6,6 +6,7 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Mentor;
@@ -29,27 +30,13 @@ public class MentorDAO extends MyDAO {
             e.printStackTrace();
         }
       
-    }
-        
-//    public int getTotalMentorCount(){
-//        int count = 0;
-//        try(
-//                PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Mentor"); ResultSet rs = stmt.executeQuery()) {
-//            if(rs.next()){
-//                count = rs.getInt("count");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return count;
-//    }
+    }        
     
-    public List<Mentor> getMentorsToManage(){
+    public List<Mentor> getMentorsToManage() throws SQLException{
         List<Mentor> mentors = new ArrayList<>();
-//        int offset = (page-1) * pageSize;
         
-        try(
-                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Mentor\n")){
+        
+             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Mentor\n");
             try(ResultSet rs = stmt.executeQuery()){
                 while (rs.next()) {                    
                     Mentor mentor = new Mentor();
@@ -61,7 +48,7 @@ public class MentorDAO extends MyDAO {
                     mentors.add(mentor);
                 }
             }
-        } catch (Exception e) {
+         catch (Exception e) {
             e.printStackTrace();
         }
         return mentors;
@@ -79,12 +66,4 @@ public class MentorDAO extends MyDAO {
         }
         return 0;
     }
-//    public static void main(String[] args) {
-//        MentorDAO mentorDAO = new MentorDAO();
-//        Mentor mentor = new Mentor();
-//        mentor.setMentorId(3);
-//        mentor.setFullname("Nguyen Thanh Vinh");
-//        mentor.setEmail("aaa@gmail.com");
-//        mentorDAO.addMentor(mentor);
-//    }
 }

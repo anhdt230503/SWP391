@@ -32,35 +32,11 @@ public class MentorManageController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-//        Mentor mentor = (Mentor) session.getAttribute("mentor");
-        
-//        int page = 1;
-//        int pageSize = 6;
-//        
-//        String pageParam = request.getParameter("page");
-//        String pageSizeParam = request.getParameter("pageSize");
-//        
-//        if(pageParam != null && !pageParam.isEmpty()){
-//            page = Integer.parseInt(pageParam);
-//        }
-//        if(pageSizeParam != null && !pageSizeParam.isEmpty()){
-//            pageSize = Integer.parseInt(pageSizeParam);
-//        }
-        
+        response.setContentType("text/html;charset=UTF-8");        
         MentorDAO mentorDAO = new MentorDAO();
-//        int totalCount = mentorDAO.getTotalMentorCount();
-//        int totalPages = (int) Math.ceil((double) totalCount/pageSize);
-        
         List<Mentor> mentors = mentorDAO.getMentorsToManage();
-//        for(Mentor mentor: mentors){
-//            System.out.println(mentor);
-//        }
         
         request.setAttribute("mentors", mentors);
-//        request.setAttribute("currentPage", page);
-//        request.setAttribute("totalPages", totalPages);
         request.getRequestDispatcher("mentor-management.jsp").forward(request, response);
     } 
 

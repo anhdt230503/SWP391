@@ -11,6 +11,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/addMentorAndManager.css"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
         <title>Manager Management</title>
@@ -21,20 +22,33 @@
             <div class="main-content">
             <jsp:include page="Topbar.jsp"></jsp:include>
                 <div class="table-container">
-                    <div class="row">
-                        <div class="col-8 h3">List of Manager</div>
-                        <div class="col-4">
-                            <form action="AddManager" method="post" class="mt-4">
-                                <div class="mb-3">
-                                    <label for="fullname" class="form-label">Tên:</label>
-                                    <input type="text" class="form-control" id="fullname" name="fullname" required>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-8 h3">List of Managers</div>
+                            <div class="col-4 text-right">
+                                <button class="btn btn-primary" onclick="openModal()">Add Manager</button>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="uploadModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeModal()">&times;</span>
+                                <div class="container">
+                                    <h2>Add Manager</h2>
+                                    <form action="AddManager" method="post" class="mt-4">
+                                        <div class="mb-3">
+                                            <label for="fullname" class="form-label">Tên:</label>
+                                            <input type="text" class="form-control" id="fullname" name="fullname" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email:</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Add Manager</button>
+                                    </form>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add Manager</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <p>${errorMessage}</p><!--
@@ -66,13 +80,10 @@
         </div>
     </div>
     <script src="js/sidebar.js"></script>
+    <script src="js/AddMentorAndManager.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-<script>
-    document.getElementById('showAddMentorFormBtn').addEventListener('click', function () {
-        document.getElementById('addMentorFormContainer').style.display = 'block';
-    });
 </script>
 </html>

@@ -66,8 +66,6 @@ public class AddManager extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Manager manager = (Manager) session.getAttribute("manager");
 
         ManagerDAO managerDAO = new ManagerDAO();
         AccountDAO accountDAO = new AccountDAO();
@@ -92,10 +90,9 @@ public class AddManager extends HttpServlet {
         newAccount.setManagerId(managerId);
 
         accountDAO.insertManagerAccount(newAccount);
-
-//            response.sendRedirect("MentorManageController");
-        request.getRequestDispatcher("ManagerManageController").forward(request, response);
+        
     }
+        request.getRequestDispatcher("ManagerManageController").forward(request, response);
            
     }
 
