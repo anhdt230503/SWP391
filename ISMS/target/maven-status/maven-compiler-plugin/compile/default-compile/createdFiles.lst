@@ -50,6 +50,7 @@ controller\InternListServlet.class
 model\GoogleProfile.class
 dao\MentorDAO.class
 dao\InternDAO.class
+controller\DownloadFileServlet.class
 dao\DBContext.class
 service\SemesterService.class
 service\Constants.class
