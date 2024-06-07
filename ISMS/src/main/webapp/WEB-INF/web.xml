@@ -125,7 +125,6 @@
     <servlet-mapping>
         <servlet-name>AddMissionServlet</servlet-name>
         <url-pattern>/AddMissionServlet</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -46,10 +46,11 @@ public class ImportInternServlet extends HttpServlet {
 
         // Lấy tên file gốc
         String fileName = filePart.getSubmittedFileName();
+        System.out.println(fileName);
 
         // Xác định đường dẫn để lưu file tạm thời trên server
         String filePath = getServletContext().getRealPath("/") + fileName;
-
+        System.out.println(filePath);
         // Lưu file tạm thời trên server
         filePart.write(filePath);
 
@@ -69,7 +70,6 @@ public class ImportInternServlet extends HttpServlet {
                 }
 
                 int internId = internService.generateInternIdKey() + 1;
-                System.out.println(internId);
                 String studentId = row.getCell(0).getStringCellValue();
                 String email = row.getCell(1).getStringCellValue();
                 String fullName = row.getCell(2).getStringCellValue();
@@ -77,7 +77,6 @@ public class ImportInternServlet extends HttpServlet {
                 Cell phoneNumberCell = row.getCell(3);
                 String phoneNumber = null;
                 if (phoneNumberCell != null) {
-//                    BigDecimal phoneNum = new BigDecimal(phoneNumberCell.toString());
                     phoneNumber = formatter.formatCellValue(phoneNumberCell);
                 }
                 String major = row.getCell(4).getStringCellValue();
@@ -86,8 +85,6 @@ public class ImportInternServlet extends HttpServlet {
                 String linkCv = row.getCell(7).getStringCellValue();
 
                 String staffId = internService.genarateStaffId();
-//                intern.setStaffId(staffId);
-//                intern.setStatus(Intern.InternStatus.INTERN);
 
                 Intern existingIntern = internService.getInternByStudentId(studentId);
                 if (existingIntern != null) {
@@ -135,7 +132,6 @@ public class ImportInternServlet extends HttpServlet {
         } finally {
             // Xóa file tạm thời sau khi xử lý xong
             File tempFile = new File(filePath);
-            System.out.println(tempFile.exists());
             if (tempFile.exists()) {
                 if (tempFile.delete()) {
                     System.out.println("Temporary file deleted successfully.");
