@@ -2,7 +2,7 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>ImportInternServlet</servlet-name>
-        <servlet-class>controller.ImportInternServlet</servlet-class>
+        <servlet-class>controller.intern.ImportInternServlet</servlet-class>
         <multipart-config>
             <location>C:/temp</location>
             <max-file-size>20848820</max-file-size>
@@ -12,59 +12,59 @@
     </servlet>
     <servlet>
         <servlet-name>InternListServlet</servlet-name>
-        <servlet-class>controller.InternListServlet</servlet-class>
+        <servlet-class>controller.intern.InternListServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>controller.LogoutServlet</servlet-class>
+        <servlet-class>controller.loginandlogout.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SelectInternServlet</servlet-name>
-        <servlet-class>controller.SelectInternServlet</servlet-class>
+        <servlet-class>controller.intern.SelectInternServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Addmentor</servlet-name>
-        <servlet-class>controller.Addmentor</servlet-class>
+        <servlet-class>controller.account.Addmentor</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MentorManageController</servlet-name>
-        <servlet-class>controller.MentorManageController</servlet-class>
+        <servlet-class>controller.account.MentorManageController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManagerManageController</servlet-name>
-        <servlet-class>controller.ManagerManageController</servlet-class>
+        <servlet-class>controller.account.ManagerManageController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddManager</servlet-name>
-        <servlet-class>controller.AddManager</servlet-class>
+        <servlet-class>controller.account.AddManager</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListLabRoomsServlet</servlet-name>
-        <servlet-class>controller.ListLabRoomsServlet</servlet-class>
+        <servlet-class>controller.labroom.ListLabRoomsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetMentorsServlet</servlet-name>
-        <servlet-class>controller.GetMentorsServlet</servlet-class>
+        <servlet-class>controller.labroom.GetMentorsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MentorReportList</servlet-name>
-        <servlet-class>controller.MentorReportList</servlet-class>
+        <servlet-class>controller.report.MentorReportList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MentorReportServlet</servlet-name>
-        <servlet-class>controller.MentorReportServlet</servlet-class>
+        <servlet-class>controller.report.MentorReportServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DownloadFile</servlet-name>
-        <servlet-class>controller.DownloadFile</servlet-class>
+        <servlet-class>controller.report.DownloadFile</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MissionServlet</servlet-name>
-        <servlet-class>controller.MissionServlet</servlet-class>
+        <servlet-class>controller.mission.MissionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddMissionServlet</servlet-name>
-        <servlet-class>controller.AddMissionServlet</servlet-class>
+        <servlet-class>controller.mission.AddMissionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
