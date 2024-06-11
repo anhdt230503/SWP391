@@ -39,6 +39,15 @@
             <a href="#" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
                 <i class="bi bi-file-person me-2"></i> Manage User
+            <a href="MentorManageController" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-file-person me-2"></i> Manage Mentor
+            </a>
+        </li>
+        <li>
+            <a href="ManagerManageController" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-file-person me-2"></i> Manage Manager
             </a>
         </li>
         <li>
@@ -49,12 +58,14 @@
         </li>
         <li>
             <a href="#" class="nav-link mb-2">
+            <a href="mission" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
                 <i class="bi bi-bullseye me-2"></i> Mission
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link mb-2">
+            <a href="#" class="nav-link mb-2"></a>
+            <a href="ListLabRoomsServlet" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
                 <i class="bi bi-door-open-fill me-2"></i> Lab Room
             </a>

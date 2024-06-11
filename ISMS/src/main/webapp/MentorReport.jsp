@@ -1,3 +1,6 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +16,7 @@
     <jsp:include page="Sidebar.jsp"></jsp:include>
     <div class="main-content">
         <jsp:include page="Topbar.jsp"></jsp:include>
+
 
         <!-- Dropdown select -->
         <div class="container mb-3">
@@ -32,15 +36,29 @@
                     <h2>Create Report</h2>
                     <form action="mentorreport" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
+
                             <label for="description">Description:</label>
                             <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter description..."></textarea>
                         </div>
                         <td><a href="downloadFile?reportFile=${rp.filedata}">File Example</a></td>      
+
+                            <label for="reportTitle">Report Title:</label>
+                            <select id="reportTitle" name="reportTitle" required>
+                                <option value="Weekly Report">Weekly Report</option>
+                                <option value="Midtern Report">Midterm Report</option>
+                                <option value="Final Report">Final Report</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="reportFile">Upload Report File:</label>
                             <input type="file" id="reportFile" name="reportFile" accept=".xlsx, .xls" required>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Upload File</button>
+
+                        <button type="submit">Upload File</button>
+
                     </form>
                 </div>
             </div>
@@ -49,8 +67,11 @@
         <button onclick="openModal()">Create Report</button>
 
         <% 
+
         String message = (String) request.getAttribute("message");
         if (message != null) {
+           String message = (String) request.getAttribute("message");
+           if (message != null) {
         %>
         <div class="alert alert-success" role="alert">
             <%= message %>
