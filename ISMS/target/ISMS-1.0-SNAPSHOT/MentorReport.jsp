@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +14,16 @@
     <div class="main-content">
         <jsp:include page="Topbar.jsp"></jsp:include>
 
+        <!-- Dropdown select -->
+        <div class="container mb-3">
+            <label for="reportTitle" class="form-label">Select Report Title:</label>
+            <select id="reportTitle" name="reportTitle" class="form-select" onchange="filterReportList()" required>
+                <option value="Weekly Report">Weekly Report</option>
+                <option value="Midterm Report">Midterm Report</option>
+                <option value="Final Report">Final Report</option>
+            </select>
+        </div>
+
         <!-- Modal -->
         <div id="uploadModal" class="modal">
             <div class="modal-content">
@@ -24,18 +32,15 @@
                     <h2>Create Report</h2>
                     <form action="mentorreport" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="reportTitle">Report Title:</label>
-                            <select id="reportTitle" name="reportTitle" required>
-                                <option value="Weekly Report">Weekly Report</option>
-                                <option value="Midtern Report">Midterm Report</option>
-                                <option value="Final Report">Final Report</option>
-                            </select>
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter description..."></textarea>
                         </div>
+                        <td><a href="downloadFile?reportFile=${rp.filedata}">File Example</a></td>      
                         <div class="form-group">
                             <label for="reportFile">Upload Report File:</label>
                             <input type="file" id="reportFile" name="reportFile" accept=".xlsx, .xls" required>
                         </div>
-                        <button type="submit">Upload File</button>
+                        <button type="submit" class="btn btn-primary">Upload File</button>
                     </form>
                 </div>
             </div>
@@ -44,8 +49,8 @@
         <button onclick="openModal()">Create Report</button>
 
         <% 
-           String message = (String) request.getAttribute("message");
-           if (message != null) {
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
         %>
         <div class="alert alert-success" role="alert">
             <%= message %>
@@ -57,12 +62,10 @@
             <table id="reportTable" class="table caption-top table-bordered">
                 <thead class="table-light">
                     <tr>
-                      
                         <th scope="col">Title</th>
                         <th scope="col">Date</th>
                         <th scope="col">File</th>                       
                         <th scope="col">Mentor</th>
-                       
                     </tr>
                 </thead>
                 <tbody>
@@ -72,7 +75,6 @@
                             <td>${rp.reportDate}</td> 
                             <td><a href="downloadFile?reportFile=${rp.filedata}">Download</a></td>                        
                             <td>${rp.mentorId}</td>
-                            
                         </tr>
                     </c:forEach>
                 </tbody>

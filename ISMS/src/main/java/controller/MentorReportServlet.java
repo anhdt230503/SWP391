@@ -56,10 +56,11 @@ public class MentorReportServlet extends HttpServlet {
             // Save report details to the database
             reportDAO.UploadReport(reportTitle, mentorId, originalFileName);
 
-            request.setAttribute("message", "File uploaded successfully to the 'file_upload' directory.");
-            request.getRequestDispatcher("MentorReport.jsp").forward(request, response);
-
+            request.setAttribute("message", "File uploaded successfully to the 'file_upload' directory.");        
+             response.sendRedirect(request.getContextPath() + "/mentorreportlist");
+            
         } else {
+            
             request.setAttribute("message", "File upload failed. Please try again.");
             request.getRequestDispatcher("MentorReport.jsp").forward(request, response);
         }

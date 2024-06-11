@@ -66,18 +66,12 @@ public class DowloadFile extends HttpServlet {
     @Override
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("doGet");
+            throws ServletException, IOException {    
         String fileName = request.getParameter("reportFile");
-        System.out.println("File Name: " + fileName);
-
         Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
-
         System.out.println("Upload Directory: " + uploadDirectory);
-
         Path filePath = uploadDirectory.resolve(fileName);
         System.out.println("File Path: " + filePath);
-
         File downloadFile = filePath.toFile();
         System.out.println("Download File: " + downloadFile);
         if (!downloadFile.exists()) {
@@ -85,10 +79,8 @@ public class DowloadFile extends HttpServlet {
             response.getWriter().flush();
             return;
         }
-
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-
         try (FileInputStream fileInputStream = new FileInputStream(downloadFile); OutputStream out = response.getOutputStream()) {
             byte[] buffer = new byte[4096];
             int bytesRead;
