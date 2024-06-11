@@ -71,7 +71,6 @@ public class AddMissionServlet extends HttpServlet {
 
             List<Mission> missions = missionDAO.getAllMissions();
             request.setAttribute("missions", missions);
-
             request.getRequestDispatcher("Mission.jsp").forward(request, response);
 
         } catch (Exception e) {

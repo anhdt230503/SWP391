@@ -19,17 +19,16 @@
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>MissionServlet</servlet-name>
         <servlet-class>controller.MissionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddMissionServlet</servlet-name>
         <servlet-class>controller.AddMissionServlet</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>SelectInternServlet</servlet-name>
         <servlet-class>controller.SelectInternServlet</servlet-class>
->>>>>>> 4aec971024cf5c78eefe3bfcd9655c5cddd16649
     </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
@@ -44,21 +43,18 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>MissionServlet</servlet-name>
         <url-pattern>/mission</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddMissionServlet</servlet-name>
         <url-pattern>/AddMissionServlet</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SelectInternServlet</servlet-name>
         <url-pattern>/selectIntern</url-pattern>
->>>>>>> 4aec971024cf5c78eefe3bfcd9655c5cddd16649
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>
