@@ -4,10 +4,19 @@
  */
 package service;
 
+import dao.MentorDAO;
+
+
+
 /**
  *
  * @author haidu
  */
 public class MentorService {
     
+    private MentorDAO mentorDao = new MentorDAO();
+
+    public synchronized int generateMentorIdKey() {
+        return mentorDao.getLastMentorId();
+    }
 }
