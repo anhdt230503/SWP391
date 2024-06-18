@@ -116,7 +116,7 @@ public class ImportInternServlet extends HttpServlet {
                     intern.setLinkCv(linkCv);
                     intern.setStaffId(staffId);
                     intern.setStatus(Intern.InternStatus.INTERN);
-                    internService.updateIntern(existingIntern);
+//                    internService.updateIntern(existingIntern);
                     internService.importIntern(intern);
 
                     // insert Account for Intern

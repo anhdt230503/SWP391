@@ -72,6 +72,12 @@
                 <i class="bi bi-door-open-fill me-2"></i> Mentor Report
             </a>
         </li>
+        <li>
+            <a href="attendanceHistory" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-alarm-fill me-2"></i> Attendance
+            </a>
+        </li>
 
     </ul>
 </div>

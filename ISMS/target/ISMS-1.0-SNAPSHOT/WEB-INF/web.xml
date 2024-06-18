@@ -66,6 +66,26 @@
         <servlet-name>AddMissionServlet</servlet-name>
         <servlet-class>controller.mission.AddMissionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckInTime</servlet-name>
+        <servlet-class>controller.attendance.CheckInTime</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceHistoryServlet</servlet-name>
+        <servlet-class>controller.attendance.AttendanceHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAttendanceStatusSerlvet</servlet-name>
+        <servlet-class>controller.attendance.EditAttendanceStatusSerlvet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadAttendanceServlet</servlet-name>
+        <servlet-class>controller.attendance.LoadAttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InternAttendanceHistoryServlet</servlet-name>
+        <servlet-class>controller.attendance.InternAttendanceHistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -126,9 +146,40 @@
         <servlet-name>AddMissionServlet</servlet-name>
         <url-pattern>/AddMissionServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckInTime</servlet-name>
+        <url-pattern>/checkInTime</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceHistoryServlet</servlet-name>
+        <url-pattern>/attendanceHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAttendanceStatusSerlvet</servlet-name>
+        <url-pattern>/editAttendanceStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAttendanceServlet</servlet-name>
+        <url-pattern>/loadAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InternAttendanceHistoryServlet</servlet-name>
+        <url-pattern>/internAttendanceHistory</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <filter>
+        <filter-name>SessionCheckFilter</filter-name>
+        <filter-class>filter.SessionCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionCheckFilter</filter-name>
+        <url-pattern>/Home.jsp</url-pattern>
+    </filter-mapping>
+    <listener>
+        <listener-class>service.SessionTimeoutListener</listener-class>
+    </listener>
 </web-app>

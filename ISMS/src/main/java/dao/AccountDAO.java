@@ -1,4 +1,4 @@
-                /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -42,10 +42,10 @@ public class AccountDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, account.getEmail());
             ps.setInt(2, account.getInternId());
-            } catch (Exception e) {
+            ps.executeUpdate();
+        } catch (Exception e) {
         }
     }
-
 
     public void insertMentorAccount(Account account) {
         xSql = "INSERT INTO Account (email, mentor_id, role_id)\n"
@@ -60,7 +60,6 @@ public class AccountDAO extends MyDAO {
         }
     }
 
-    
     public Account getAccountByEmail(String email) {
         xSql = "SELECT * FROM Account where email =?";
         try {
@@ -83,12 +82,14 @@ public class AccountDAO extends MyDAO {
 
     public static void main(String[] args) {
         
-        AccountDAO accDAO = new AccountDAO();
-        
-        Account acc = accDAO.getAccountByEmail("daoa230503@gmail.com");
-        System.out.println(acc);
-    }
+        Account account = new Account();
 
+        AccountDAO accDAO = new AccountDAO();
+
+        account.setEmail("anhdthe176337@fpt.edu.vn");
+        account.setInternId(1);
+        accDAO.insertInternAccount(account);
+    }
 
     public void insertManagerAccount(Account account) {
         xSql = "INSERT INTO Account (email, manager_id, role_id)\n"
