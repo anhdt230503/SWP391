@@ -64,9 +64,8 @@ public class CheckInTime extends HttpServlet {
                     attendance1.setCheckInTime(currentTimestamp);
                     attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
                     attendanceDAO.insertAttendance(attendance1);
-                    request.setAttribute("message", "Attendance Successfull!");
                 } else {
-                    request.setAttribute("message", "You have attandance already for today !!!");
+                    request.setAttribute("message", "You have attandance already for today !");
                 }
             }
         }

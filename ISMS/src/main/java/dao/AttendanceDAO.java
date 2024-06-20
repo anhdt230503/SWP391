@@ -75,7 +75,8 @@ public class AttendanceDAO extends MyDAO {
     public List<Attendance> getAllAttendance(int internId) {
         List<Attendance> list = new ArrayList<>();
         xSql = "SELECT * FROM Attendance\n"
-                + "WHERE intern_id = ?";
+                + "WHERE intern_id = ?\n"
+                + "ORDER BY check_in_time DESC";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, internId);

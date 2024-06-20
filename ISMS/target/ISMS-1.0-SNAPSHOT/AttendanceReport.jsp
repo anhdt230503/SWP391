@@ -26,9 +26,8 @@
                             </form>
                         </div>
                     </div>
-
                     <div>
-                        <p class="text-danger text-center">${message}</p>
+                        <p>${message}</p>  
                     </div>
                 </c:if>
 
@@ -43,7 +42,6 @@
                                 <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 1}">
                                 <th scope="col">Action</th>
                                 </c:if>
-
                         </tr>
                     </thead>
                     <tbody>
