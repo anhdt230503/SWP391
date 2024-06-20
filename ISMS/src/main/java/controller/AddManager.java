@@ -81,7 +81,7 @@ public class AddManager extends HttpServlet {
         int managerId = managerservice.generateManagerIdKey() + 1;
         Manager newManager = new Manager();
         newManager.setManagerId(managerId);
-        newManager.setFullName(fullName);
+        newManager.setFullname(fullName);
         newManager.setEmail(email);
         managerDAO.addManager(newManager);
 

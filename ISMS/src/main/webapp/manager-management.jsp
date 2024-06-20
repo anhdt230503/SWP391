@@ -63,17 +63,31 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">BirthDate</th>
                         <th scope="col">Phone Number</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${managers}" var="managers">
+                    <c:forEach items="${managers}" var="manager">
                         <tr>
-                            <td>${managers.managerId}</td>
-                            <td>${managers.email}</td>
-                            <td>${managers.fullName}</td>
-                            <td>${managers.birthDate}</td>
-                            <td>${managers.phoneNumber}</td>
+                            <td>${manager.managerId}</td>
+                            <td>${manager.email}</td>
+                            <td>${manager.fullname}</td>
+                            <td>${manager.birthDate}</td>
+                            <td>${manager.phoneNumber}</td>
+                            <td>
+                                <form action="DeleteManagerController" method="post" style="display: inline-block">
+                                    <input type="hidden" name="managerId" value="${manager.managerId}">
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                                <a class="btn btn-sm btn-primary" href="EditManagerProfileByHR?managerId=${manager.managerId}" >
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            
                         </tr>
+
                     </c:forEach>
                 </tbody>
             </table>
@@ -83,7 +97,27 @@
     <script src="js/AddMentorAndManager.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+                                        function confirmDelete(button) {
+                                            Swal.fire({
+                                                title: 'Confirmation',
+                                                text: 'Are you sure you want to delete this product?',
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#3085d6',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'Yes',
+                                                cancelButtonText: 'Cancel'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    const form = button.closest('form');
+                                                    form.submit();
+                                                }
+                                            });
+                                        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-</script>
 </html>

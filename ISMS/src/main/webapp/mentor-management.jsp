@@ -11,11 +11,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="stylesheet" href="css/addMentorAndManager.css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
         <title>Mentor Management</title>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
     </head>
     <body>
         <jsp:include page="Sidebar.jsp"></jsp:include>
@@ -51,8 +57,8 @@
                             </div>
                         </div>
                     </div>
-                    <p>${errorMessage}</p><!--
-                <p>${successMessage}</p>-->
+                    <p>${errorMessage}</p>
+                <p>${SussMessage}</p>
             </div> 
             <table class="table caption-top table-bordered">
 
@@ -63,16 +69,29 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">BirthDate</th>
                         <th scope="col">Phone Number</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${mentors}" var="mentors">
+                    <c:forEach items="${mentors}" var="mentor">
                         <tr>
-                            <td>${mentors.mentorId}</td>
-                            <td>${mentors.email}</td>
-                            <td>${mentors.fullname}</td>
-                            <td>${mentors.birthDate}</td>
-                            <td>${mentors.phoneNumber}</td>
+                            <td>${mentor.mentorId}</td>
+                            <td>${mentor.email}</td>
+                            <td>${mentor.fullname}</td>
+                            <td>${mentor.birthDate}</td>
+                            <td>${mentor.phoneNumber}</td>
+                            <td>
+                                    <form action="DeleteMentorController" method="post" style="display: inline-block;">
+                                        <input type="hidden" name="mentorId" value="${mentor.mentorId}">
+                                        <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                <a class="btn btn-sm btn-primary" href="EditMentorProfileByHR?mentorId=${mentor.mentorId}" >
+                                     <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -86,6 +105,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+                                            function confirmDelete(button) {
+                                                Swal.fire({
+                                                    title: 'Confirmation',
+                                                    text: 'Are you sure you want to delete this product?',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'Yes',
+                                                    cancelButtonText: 'Cancel'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        const form = button.closest('form');
+                                                        form.submit();
+                                                    }
+                                                });
+                                            }
+
+                                            function confirmBlockUnblock(button, isBlock) {
+                                                Swal.fire({
+                                                    title: 'Confirmation',
+                                                    text: `Are you sure you want to ${isBlock ? 'block' : 'unblock'} this mentor?`,
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'Yes',
+                                                    cancelButtonText: 'Cancel'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        const form = button.closest('form');
+                                                        form.submit();
+                                                    }
+                                                });
+                                            }
+    </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </html>
