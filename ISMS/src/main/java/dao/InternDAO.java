@@ -141,6 +141,7 @@ public class InternDAO extends MyDAO {
         } catch (Exception e) {
         }
     }
+    
 
     // hàm dành cho chức năng xem lịch sử điểm danh cho Mentor
     public List<Intern> getAllInternForMentor(int mentorId) {

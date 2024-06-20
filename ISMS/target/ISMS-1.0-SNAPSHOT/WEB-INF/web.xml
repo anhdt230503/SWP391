@@ -86,6 +86,18 @@
         <servlet-name>InternAttendanceHistoryServlet</servlet-name>
         <servlet-class>controller.attendance.InternAttendanceHistoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteLabRoomServlet</servlet-name>
+        <servlet-class>controller.labroom.DeleteLabRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateLabRoomServlet</servlet-name>
+        <servlet-class>controller.labroom.UpdateLabRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewInternListServlet</servlet-name>
+        <servlet-class>controller.labroom.ViewInternListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -165,6 +177,18 @@
     <servlet-mapping>
         <servlet-name>InternAttendanceHistoryServlet</servlet-name>
         <url-pattern>/internAttendanceHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteLabRoomServlet</servlet-name>
+        <url-pattern>/DeleteLabRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateLabRoomServlet</servlet-name>
+        <url-pattern>/UpdateLabRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewInternListServlet</servlet-name>
+        <url-pattern>/ViewInternListServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
