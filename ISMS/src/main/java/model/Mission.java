@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.sql.Timestamp;
 
-/**
- *
- * @author haidu
- */
 public class Mission {
 
     public enum MissionStatus {
@@ -26,11 +18,13 @@ public class Mission {
     private Timestamp deadline;
     private int mentorId;
     private int internId;
+    private String mentorFullName;
+    private String internFullName;
 
     public Mission() {
     }
 
-    public Mission(int misId, String misName, MissionStatus misStatus, String misDescription, String link, Timestamp startDate, Timestamp deadline, int mentorId, int internId) {
+    public Mission(int misId, String misName, MissionStatus misStatus, String misDescription, String link, Timestamp startDate, Timestamp deadline, int mentorId, int internId, String mentorFullName, String internFullName) {
         this.misId = misId;
         this.misName = misName;
         this.misStatus = misStatus;
@@ -40,6 +34,8 @@ public class Mission {
         this.deadline = deadline;
         this.mentorId = mentorId;
         this.internId = internId;
+        this.mentorFullName = mentorFullName;
+        this.internFullName = internFullName;
     }
 
     public int getMisId() {
@@ -114,10 +110,20 @@ public class Mission {
         this.internId = internId;
     }
 
-    @Override
-    public String toString() {
-        return "Mission{" + "misId=" + misId + ", misName=" + misName + ", misStatus=" + misStatus + ", misDescription=" + misDescription + ", link=" + link + ", startDate=" + startDate + ", deadline=" + deadline + ", mentorId=" + mentorId + ", internId=" + internId + '}';
+    public String getMentorFullName() {
+        return mentorFullName;
     }
 
+    public void setMentorFullName(String mentorFullName) {
+        this.mentorFullName = mentorFullName;
+    }
+
+    public String getInternFullName() {
+        return internFullName;
+    }
+
+    public void setInternFullName(String internFullName) {
+        this.internFullName = internFullName;
+    }
     
 }

@@ -15,17 +15,17 @@ public class MentorReport {
     private int reportId;
     private String reportName;
     private Timestamp reportDate;
-    private String link;
+    private String  filedata;
     private int mentorId;
 
     public MentorReport() {
     }
 
-    public MentorReport(int reportId, String reportName, Timestamp reportDate, String link, int mentorId) {
+    public MentorReport(int reportId, String reportName, Timestamp reportDate, String filedata, int mentorId) {
         this.reportId = reportId;
         this.reportName = reportName;
         this.reportDate = reportDate;
-        this.link = link;
+        this.filedata = filedata;
         this.mentorId = mentorId;
     }
 
@@ -53,12 +53,12 @@ public class MentorReport {
         this.reportDate = reportDate;
     }
 
-    public String getLink() {
-        return link;
+    public String getFiledata() {
+        return filedata;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setFiledata(String filedata) {
+        this.filedata = filedata;
     }
 
     public int getMentorId() {
@@ -71,7 +71,8 @@ public class MentorReport {
 
     @Override
     public String toString() {
-        return "MentorReport{" + "reportId=" + reportId + ", reportName=" + reportName + ", reportDate=" + reportDate + ", link=" + link + ", mentorId=" + mentorId + '}';
+        return "MentorReport{" + "reportId=" + reportId + ", reportName=" + reportName + ", reportDate=" + reportDate + ", filedata=" + filedata + ", mentorId=" + mentorId + '}';
     }
+
     
 }
