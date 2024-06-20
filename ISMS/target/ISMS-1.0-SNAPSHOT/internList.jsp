@@ -80,8 +80,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" onclick="checkSelectionCount();"
-                                                               <c:if test="${currentInternCount > mentorLimit}">disabled</c:if>>
+                                                        <input class="form-check-input" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" onclick="checkSelectionCount();">
                                                         </div>
                                                 </c:otherwise>
                                             </c:choose>
@@ -93,7 +92,7 @@
                         </tbody>
                     </table>
                     <c:if test="${sessionScope.acc.roleId == 3}"> 
-                        <input type="submit" value="Select Interns" <c:if test="${currentInternCount > mentorLimit}">disabled</c:if>>
+                        <input type="submit" value="Select Interns">
                     </c:if>
                 </form>
             </div>

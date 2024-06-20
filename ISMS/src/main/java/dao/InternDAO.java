@@ -72,8 +72,8 @@ public class InternDAO extends MyDAO {
         }
         return list;
     }
-    
-    public int getLastInternId () {
+
+    public int getLastInternId() {
         xSql = "SELECT MAX(intern_id) FROM Intern";
         try {
             ps = con.prepareStatement(xSql);
@@ -137,9 +137,44 @@ public class InternDAO extends MyDAO {
             ps.setString(7, intern.getLinkCv());
             ps.setString(8, intern.getStudentId());
             ps.executeUpdate();
-                
+
         } catch (Exception e) {
         }
+    }
+
+    // hàm dành cho chức năng xem lịch sử điểm danh cho Mentor
+    public List<Intern> getAllInternForMentor(int mentorId) {
+        List<Intern> list = new ArrayList<>();
+
+        xSql = "select * FROM Intern i\n"
+                + "join InternAssign ia\n"
+                + "on i.intern_id = ia.intern_id \n"
+                + "where ia.mentor_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString(11);
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                list.add(new Intern(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13)));
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
     public static void main(String[] args) {
@@ -148,7 +183,6 @@ public class InternDAO extends MyDAO {
         System.out.println(internDAO.getInternByStudentId("HE170364"));
         System.out.println(internDAO.getLastInternId());
 
-        
     }
 
 }

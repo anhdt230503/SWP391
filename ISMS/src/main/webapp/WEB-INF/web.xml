@@ -2,7 +2,7 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>ImportInternServlet</servlet-name>
-        <servlet-class>controller.ImportInternServlet</servlet-class>
+        <servlet-class>controller.intern.ImportInternServlet</servlet-class>
         <multipart-config>
             <location>C:/temp</location>
             <max-file-size>20848820</max-file-size>
@@ -12,15 +12,79 @@
     </servlet>
     <servlet>
         <servlet-name>InternListServlet</servlet-name>
-        <servlet-class>controller.InternListServlet</servlet-class>
+        <servlet-class>controller.intern.InternListServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>controller.LogoutServlet</servlet-class>
+        <servlet-class>controller.loginandlogout.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SelectInternServlet</servlet-name>
-        <servlet-class>controller.SelectInternServlet</servlet-class>
+        <servlet-class>controller.intern.SelectInternServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Addmentor</servlet-name>
+        <servlet-class>controller.account.Addmentor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MentorManageController</servlet-name>
+        <servlet-class>controller.account.MentorManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerManageController</servlet-name>
+        <servlet-class>controller.account.ManagerManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddManager</servlet-name>
+        <servlet-class>controller.account.AddManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListLabRoomsServlet</servlet-name>
+        <servlet-class>controller.labroom.ListLabRoomsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMentorsServlet</servlet-name>
+        <servlet-class>controller.labroom.GetMentorsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MentorReportList</servlet-name>
+        <servlet-class>controller.report.MentorReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MentorReportServlet</servlet-name>
+        <servlet-class>controller.report.MentorReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadFile</servlet-name>
+        <servlet-class>controller.report.DownloadFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MissionServlet</servlet-name>
+        <servlet-class>controller.mission.MissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMissionServlet</servlet-name>
+        <servlet-class>controller.mission.AddMissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckInTime</servlet-name>
+        <servlet-class>controller.attendance.CheckInTime</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceHistoryServlet</servlet-name>
+        <servlet-class>controller.attendance.AttendanceHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAttendanceStatusSerlvet</servlet-name>
+        <servlet-class>controller.attendance.EditAttendanceStatusSerlvet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadAttendanceServlet</servlet-name>
+        <servlet-class>controller.attendance.LoadAttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InternAttendanceHistoryServlet</servlet-name>
+        <servlet-class>controller.attendance.InternAttendanceHistoryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
@@ -38,9 +102,84 @@
         <servlet-name>SelectInternServlet</servlet-name>
         <url-pattern>/selectIntern</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Addmentor</servlet-name>
+        <url-pattern>/Addmentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MentorManageController</servlet-name>
+        <url-pattern>/MentorManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerManageController</servlet-name>
+        <url-pattern>/ManagerManageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddManager</servlet-name>
+        <url-pattern>/AddManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListLabRoomsServlet</servlet-name>
+        <url-pattern>/ListLabRoomsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMentorsServlet</servlet-name>
+        <url-pattern>/GetMentorsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MentorReportList</servlet-name>
+        <url-pattern>/mentorreportlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MentorReportServlet</servlet-name>
+        <url-pattern>/mentorreport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadFile</servlet-name>
+        <url-pattern>/downloadFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MissionServlet</servlet-name>
+        <url-pattern>/mission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMissionServlet</servlet-name>
+        <url-pattern>/AddMissionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckInTime</servlet-name>
+        <url-pattern>/checkInTime</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceHistoryServlet</servlet-name>
+        <url-pattern>/attendanceHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAttendanceStatusSerlvet</servlet-name>
+        <url-pattern>/editAttendanceStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAttendanceServlet</servlet-name>
+        <url-pattern>/loadAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InternAttendanceHistoryServlet</servlet-name>
+        <url-pattern>/internAttendanceHistory</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <filter>
+        <filter-name>SessionCheckFilter</filter-name>
+        <filter-class>filter.SessionCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionCheckFilter</filter-name>
+        <url-pattern>/Home.jsp</url-pattern>
+    </filter-mapping>
+    <listener>
+        <listener-class>service.SessionTimeoutListener</listener-class>
+    </listener>
 </web-app>
