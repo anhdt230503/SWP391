@@ -107,6 +107,7 @@
                             <th scope="col">Room Name</th>
                             <th scope="col">is Assigned</th>
                             <th scope="col">Mentor Name</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,6 +117,17 @@
                                 <td>${o.roomName}</td>
                                 <td>${o.assigned}</td>
                                 <td>${o.mentorFullName}</td>
+                                <td>
+                                    <a href="UpdateLabRoomServlet?roomId=${o.roomId}" class="btn btn-sm text-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="DeleteLabRoomServlet?roomId=${o.roomId}" class="btn btn-sm text-primary">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                    <a href="ViewInternListServlet?mentorId=${o.mentorId}" class="btn btn-sm btn-info">
+                                        <i class="bi bi-person-lines-fill"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
