@@ -1,16 +1,20 @@
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\account\ManagerManageController.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\DeleteManagerController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\labroom\GetMentorsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\MentorReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Schedule.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\LabRoomDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MissionService.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\BlockUserController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\DBContext.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MentorReportService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\AccountDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\MissionReport.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\EditProfileController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\loginandlogout\LogoutServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\labroom\UpdateLabRoomServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\MentorReportList.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\UserProfileController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MyDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MissionReportDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\GoogleProfile.java
@@ -24,6 +28,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mentor.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\intern\ImportInternServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\WorkOverTime.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MentorReportDAO.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\EditManagerProfileByHR.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\GoogleHandlerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\ManagerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MissionReportService.java
@@ -58,6 +63,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\filter\SessionCheckFilter.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\labroom\ListLabRoomsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Intern.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\account\Addmentor.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\EditMentorProfileByHR.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Semester.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\InternAttendanceHistoryServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mission.java
@@ -65,6 +71,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MentorDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\AttendanceService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\com\group1\isms\resources\JakartaEE10Resource.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\account\AddManager.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\DeleteMentorController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\InternAssignDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Account.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\AttendanceHistoryServlet.java

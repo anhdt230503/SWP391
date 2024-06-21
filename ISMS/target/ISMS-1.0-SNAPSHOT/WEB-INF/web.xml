@@ -98,6 +98,34 @@
         <servlet-name>ViewInternListServlet</servlet-name>
         <servlet-class>controller.labroom.ViewInternListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>controller.EditProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteMentorController</servlet-name>
+        <servlet-class>controller.DeleteMentorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteManagerController</servlet-name>
+        <servlet-class>controller.DeleteManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlockUserController</servlet-name>
+        <servlet-class>controller.BlockUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditMentorProfileByHR</servlet-name>
+        <servlet-class>controller.EditMentorProfileByHR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditManagerProfileByHR</servlet-name>
+        <servlet-class>controller.EditManagerProfileByHR</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -189,6 +217,34 @@
     <servlet-mapping>
         <servlet-name>ViewInternListServlet</servlet-name>
         <url-pattern>/ViewInternListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/UserProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/EditProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteMentorController</servlet-name>
+        <url-pattern>/DeleteMentorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteManagerController</servlet-name>
+        <url-pattern>/DeleteManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlockUserController</servlet-name>
+        <url-pattern>/BlockUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditMentorProfileByHR</servlet-name>
+        <url-pattern>/EditMentorProfileByHR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditManagerProfileByHR</servlet-name>
+        <url-pattern>/EditManagerProfileByHR</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
