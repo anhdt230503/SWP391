@@ -1,45 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.report;
 
-import dao.MentorReportDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import dao.AccountDAO;
+import dao.FinalReportDAO;
+import dao.MidtermReportDAO;
+import dao.WeeklyReportDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
-import model.MentorReport;
+import model.Account;
+import model.FinalReport;
+import model.MidtermReport;
+import model.WeeklyReport;
 
 /**
- *
- * @author duong
+ * Servlet implementation class MentorReportList
  */
 public class MentorReportList extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        MentorReportDAO internDAO = new MentorReportDAO();
-        List<MentorReport> list = internDAO.getAllReports();
+    private static final long serialVersionUID = 1L;
 
-        request.setAttribute("listOfReport", list);
-        request.getRequestDispatcher("MentorReport.jsp").forward(request, response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -51,7 +34,8 @@ public class MentorReportList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // Forward to JSP for report selection
+        request.getRequestDispatcher("MentorReport.jsp").forward(request, response);
     }
 
     /**
@@ -65,7 +49,62 @@ public class MentorReportList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String reportTitle = request.getParameter("reportTitle");
+        List<WeeklyReport> listOfWeeklyReport;
+        List<MidtermReport> listOfMidtermReport;
+        List<FinalReport> listOfFinalReport;
+        WeeklyReportDAO weeklyReportDAO = new WeeklyReportDAO();
+        MidtermReportDAO midtermReportDAO = new MidtermReportDAO();
+        FinalReportDAO finalReportDAO = new FinalReportDAO();
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        AccountDAO accountDAO = new AccountDAO();
+        Account account = accountDAO.getAccountByEmail(email);
+        int role = account.getRoleId();
+        if (role == 3) {
+            int mentorId = account.getMentorId();
+            switch (reportTitle) {
+                case "Weekly Report":
+                    listOfWeeklyReport = weeklyReportDAO.getReportsByMentorId(mentorId);
+                    request.setAttribute("listOfWeeklyReport", listOfWeeklyReport);
+                    break;
+                case "Midterm Report":
+                    listOfMidtermReport = midtermReportDAO.getAllMidtermReportbyID(mentorId);
+                    request.setAttribute("listOfMidtermReport", listOfMidtermReport);
+                    break;
+                case "Final Report":
+                    listOfFinalReport = finalReportDAO.getAllFinalReportbyID(mentorId);
+                    request.setAttribute("listOfFinalReport", listOfFinalReport);
+                    break;
+                default:
+                    request.setAttribute("error", "Invalid report title.");
+                    break;
+            }
+        } else if (role == 2) {
+            switch (reportTitle) {
+                case "Weekly Report":
+                    listOfWeeklyReport = weeklyReportDAO.getallweeklyreport();
+                    request.setAttribute("listOfWeeklyReport", listOfWeeklyReport);
+                    break;
+                case "Midterm Report":
+                    listOfMidtermReport = midtermReportDAO.getAllMidtermReport();
+                    request.setAttribute("listOfMidtermReport", listOfMidtermReport);
+                    break;
+                case "Final Report":
+                    listOfFinalReport = finalReportDAO.getAllFinalReport();
+                    request.setAttribute("listOfFinalReport", listOfFinalReport);
+                    break;
+                default:
+                    request.setAttribute("error", "Invalid report title.");
+                    break;
+            }
+        } else {            
+            request.setAttribute("error", "Invalid role.");
+        }
+        
+        
+        request.getRequestDispatcher("/MentorReport.jsp").forward(request, response);
+        
     }
 
     /**
@@ -75,7 +114,6 @@ public class MentorReportList extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "MentorReportList Servlet";
+    }
 }

@@ -142,6 +142,38 @@
         <servlet-name>GetInternServlet</servlet-name>
         <servlet-class>controller.mission.GetInternServlet</servlet-class>
     </servlet>
+    <servlet>    
+        <servlet-name>ActionReport</servlet-name>
+        <servlet-class>controller.report.ActionReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteReport</servlet-name>
+        <servlet-class>controller.report.DeleteReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditReport</servlet-name>
+        <servlet-class>controller.report.EditReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WLReportDelete</servlet-name>
+        <servlet-class>controller.report.DeleteWLReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditWLReport</servlet-name>
+        <servlet-class>controller.report.EditWLReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditMTReport</servlet-name>
+        <servlet-class>controller.report.EditMTReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFNReport</servlet-name>
+        <servlet-class>controller.report.EditFNReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFNReport</servlet-name>
+        <servlet-class>controller.report.DeleteFNReport</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -277,6 +309,38 @@
     <servlet-mapping>
         <servlet-name>GetInternServlet</servlet-name>
         <url-pattern>/GetInternServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>  
+        <servlet-name>ActionReport</servlet-name>
+        <url-pattern>/actionreport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteReport</servlet-name>
+        <url-pattern>/deletereport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditReport</servlet-name>
+        <url-pattern>/editreport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WLReportDelete</servlet-name>
+        <url-pattern>/wlreportdelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditWLReport</servlet-name>
+        <url-pattern>/editwlreport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditMTReport</servlet-name>
+        <url-pattern>/editmtreport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFNReport</servlet-name>
+        <url-pattern>/editfnreport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFNReport</servlet-name>
+        <url-pattern>/deletefnreport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

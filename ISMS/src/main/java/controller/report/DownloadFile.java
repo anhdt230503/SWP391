@@ -4,7 +4,7 @@
  */
 package controller.report;
 
-import dao.MentorReportDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -67,14 +67,8 @@ public class DownloadFile extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("doGet");
         String fileName = request.getParameter("reportFile");
-        System.out.println("File Name: " + fileName);
-
         Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
-
-        System.out.println("Upload Directory: " + uploadDirectory);
-
         Path filePath = uploadDirectory.resolve(fileName);
         System.out.println("File Path: " + filePath);
 
