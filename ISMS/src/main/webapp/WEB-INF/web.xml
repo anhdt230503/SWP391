@@ -126,6 +126,22 @@
         <servlet-name>EditManagerProfileByHR</servlet-name>
         <servlet-class>controller.EditManagerProfileByHR</servlet-class>
     </servlet>
+    <servlet>   
+        <servlet-name>DeleteMissionServlet</servlet-name>
+        <servlet-class>controller.mission.DeleteMissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateMissionServlet</servlet-name>
+        <servlet-class>controller.mission.UpdateMissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownFileMisson</servlet-name>
+        <servlet-class>controller.mission.DownFileMisson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetInternServlet</servlet-name>
+        <servlet-class>controller.mission.GetInternServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -245,11 +261,25 @@
     <servlet-mapping>
         <servlet-name>EditManagerProfileByHR</servlet-name>
         <url-pattern>/EditManagerProfileByHR</url-pattern>
+    </servlet-mapping>   
+    <servlet-mapping>   
+        <servlet-name>DeleteMissionServlet</servlet-name>
+        <url-pattern>/DeleteMissionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateMissionServlet</servlet-name>
+        <url-pattern>/UpdateMissionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownFileMisson</servlet-name>
+        <url-pattern>/DownFileMisson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetInternServlet</servlet-name>
+        <url-pattern>/GetInternServlet</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <filter>
         <filter-name>SessionCheckFilter</filter-name>

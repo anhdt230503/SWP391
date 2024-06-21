@@ -65,7 +65,7 @@ public class SelectInternServlet extends HttpServlet {
             request.setAttribute("errorMessage", "No interns selected or invalid mentor.");
         }
 
-        int finalInternCount = internAssignDAO.getInternCountByMentor(mentorId);
+            int finalInternCount = internAssignDAO.getInternCountByMentor(mentorId);
         request.setAttribute("currentInternCount", finalInternCount);
         request.setAttribute("mentorLimit", MENTOR_LIMIT);
         request.getRequestDispatcher("internList").forward(request, response);

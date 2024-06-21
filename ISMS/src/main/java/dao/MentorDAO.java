@@ -33,7 +33,8 @@ public class MentorDAO extends MyDAO {
     public int getTotalMentorCount() {
         int count = 0;
         try (
-                PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Mentor"); ResultSet rs = stmt.executeQuery()) {
+                PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Mentor");
+                ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
                 count = rs.getInt("count");
             }

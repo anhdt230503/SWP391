@@ -1,5 +1,8 @@
 package controller.mission;
 
+import dao.AccountDAO;
+import dao.InternDAO;
+import dao.MentorDAO;
 import dao.MissionDAO;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -9,15 +12,48 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import model.Account;
+import model.Intern;
+import model.Mentor;
 import model.Mission;
 
 public class AddMissionServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AccountDAO accountDAO = new AccountDAO();
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        System.out.println(email);
+
+        // get mentorId from Account
+        Account account = accountDAO.getAccountByEmail(email);
+        int mentorId = account.getMentorId();
+        MissionDAO mission = new MissionDAO();
+        List<Intern> internList = mission.getInternsByMentorId(mentorId);
+     
+        request.setAttribute("internList", internList);
+        request.getRequestDispatcher("addMission.jsp").forward(request, response);
+
+
+        
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            AccountDAO accountDAO = new AccountDAO();
+            HttpSession session = request.getSession();
+            String email = (String) session.getAttribute("email");
+            System.out.println(email);
+            int internId = Integer.parseInt(request.getParameter("internId")); 
+ 
+            // get mentorId from Account
+            Account account = accountDAO.getAccountByEmail(email);
+            int mentorId = account.getMentorId();
             MissionDAO missionDAO = new MissionDAO();
             String name = request.getParameter("name");
             String description = request.getParameter("description");
@@ -29,10 +65,9 @@ public class AddMissionServlet extends HttpServlet {
 
             Timestamp startDate = new Timestamp(parsedStartDate.getTime());
             Timestamp deadline = new Timestamp(parsedDeadline.getTime());
-
+            
             if (deadline.before(startDate)) {
                 request.setAttribute("errorMessage", "Deadline phải sau Start Date");
-
                 request.setAttribute("name", name);
                 request.setAttribute("description", description);
                 request.setAttribute("link", link);
@@ -42,9 +77,7 @@ public class AddMissionServlet extends HttpServlet {
                 request.getRequestDispatcher("AddMission.jsp").forward(request, response);
                 return;
             }
-
             Timestamp currentTimestamp = new Timestamp(new Date().getTime());
-
             Mission.MissionStatus status;
             if (currentTimestamp.before(startDate)) {
                 status = Mission.MissionStatus.NOT_START;
@@ -53,7 +86,6 @@ public class AddMissionServlet extends HttpServlet {
             } else {
                 status = Mission.MissionStatus.ON_GOING;
             }
-
             Mission mission = new Mission();
             mission.setMisName(name);
             mission.setMisStatus(status);
@@ -61,19 +93,16 @@ public class AddMissionServlet extends HttpServlet {
             mission.setLink(link);
             mission.setStartDate(startDate);
             mission.setDeadline(deadline);
-
-            
+            mission.setMentorId(mentorId);
+            mission.setInternId(internId);
             missionDAO.addMission(mission);
-
+            
             if (currentTimestamp.after(deadline)) {
                 missionDAO.updateMissionStatus(mission.getMisId(), Mission.MissionStatus.FINISHED);
             }
-
             List<Mission> missions = missionDAO.getAllMissions();
             request.setAttribute("missions", missions);
-
-            request.getRequestDispatcher("Mission.jsp").forward(request, response);
-
+            response.sendRedirect("mission");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Lỗi khi thêm nhiệm vụ: " + e.getMessage());

@@ -3,6 +3,7 @@ controller\labroom\UpdateLabRoomServlet.class
 model\Mentor.class
 model\Schedule.class
 service\MissionReportService.class
+controller\mission\DownFileMisson.class
 controller\report\MentorReportServlet.class
 dao\ScheduleDAO.class
 dao\AttendanceDAO.class
@@ -23,16 +24,19 @@ dao\SemesterDAO.class
 controller\labroom\ViewInternListServlet.class
 dao\MissionReportDAO.class
 controller\EditMentorProfileByHR.class
+controller\mission\UpdateMissionServlet.class
 controller\report\DownloadFile.class
 filter\SessionCheckFilter.class
 dao\WorkOverTimeDAO.class
 service\GoogleHandlerService.class
 controller\loginandlogout\LoginServlet.class
 model\MentorReport.class
+controller\mission\GetInternServlet.class
 dao\RoleDAO.class
 model\Manager.class
 controller\attendance\LoadAttendanceServlet.class
 controller\attendance\AttendanceHistoryServlet.class
+controller\mission\GetID.class
 service\LabRoomService.class
 service\ScheduleService.class
 model\Attendance$AttendanceStatus.class
@@ -73,6 +77,7 @@ service\InternService.class
 model\GoogleProfile.class
 dao\MentorDAO.class
 dao\InternDAO.class
+controller\mission\DeleteMissionServlet.class
 dao\DBContext.class
 controller\intern\ImportInternServlet.class
 controller\labroom\DeleteLabRoomServlet.class
