@@ -1,80 +1,105 @@
 package controller.mission;
 
 import dao.AccountDAO;
-import dao.InternDAO;
-import dao.MentorDAO;
 import dao.MissionDAO;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
+import model.Account;
+import model.Intern;
+import model.Mission;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import model.Account;
-import model.Intern;
-import model.Mentor;
-import model.Mission;
+import jakarta.servlet.http.Part;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+@MultipartConfig
 public class AddMissionServlet extends HttpServlet {
 
-    @Override
+    private static final long serialVersionUID = 1L;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
-        System.out.println(email);
 
-        // get mentorId from Account
-        Account account = accountDAO.getAccountByEmail(email);
-        int mentorId = account.getMentorId();
-        MissionDAO mission = new MissionDAO();
-        List<Intern> internList = mission.getInternsByMentorId(mentorId);
-     
-        request.setAttribute("internList", internList);
-        request.getRequestDispatcher("addMission.jsp").forward(request, response);
+        try {
+            // get mentorId from Account
+            Account account = accountDAO.getAccountByEmail(email);
+            int mentorId = account.getMentorId();
+            MissionDAO missionDAO = new MissionDAO();
+            List<Intern> internList = missionDAO.getInternsByMentorId(mentorId);
 
-
-        
+            request.setAttribute("internList", internList);
+            request.getRequestDispatcher("addMission.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error retrieving intern list: " + e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             AccountDAO accountDAO = new AccountDAO();
             HttpSession session = request.getSession();
             String email = (String) session.getAttribute("email");
-            System.out.println(email);
-            int internId = Integer.parseInt(request.getParameter("internId")); 
- 
+            int internId = Integer.parseInt(request.getParameter("internId"));
             // get mentorId from Account
             Account account = accountDAO.getAccountByEmail(email);
             int mentorId = account.getMentorId();
             MissionDAO missionDAO = new MissionDAO();
             String name = request.getParameter("name");
             String description = request.getParameter("description");
-            String link = request.getParameter("link");
-
+            String link = null;
+            Part filePart = request.getPart("link");
+            // Check if filePart exists and its size is greater than 0
+            if (filePart != null && filePart.getSize() > 0) {
+                String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();   
+                // Check if the file extension is allowed (.doc or .pdf)
+                if (!fileExtension.equals(".doc") && !fileExtension.equals(".pdf")) {
+                    request.setAttribute("errorMessage", "Only .doc or .pdf files are allowed.");
+                    request.getRequestDispatcher("addMission.jsp").forward(request, response);
+                    return;
+                }
+                Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
+                if (!Files.exists(uploadDirectory)) {
+                    Files.createDirectories(uploadDirectory);
+                }
+                Path filePath = uploadDirectory.resolve(originalFileName);
+                try (InputStream fileContent = filePart.getInputStream()) {
+                    Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
+                }
+                link = originalFileName; // Set link to the uploaded file name
+            }
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date parsedStartDate = dateFormat.parse(request.getParameter("startDate"));
             Date parsedDeadline = dateFormat.parse(request.getParameter("deadline"));
 
             Timestamp startDate = new Timestamp(parsedStartDate.getTime());
             Timestamp deadline = new Timestamp(parsedDeadline.getTime());
-            
             if (deadline.before(startDate)) {
-                request.setAttribute("errorMessage", "Deadline phải sau Start Date");
+                request.setAttribute("errorMessage", "Deadline must be after Start Date");
                 request.setAttribute("name", name);
                 request.setAttribute("description", description);
                 request.setAttribute("link", link);
                 request.setAttribute("startDate", request.getParameter("startDate"));
                 request.setAttribute("deadline", request.getParameter("deadline"));
 
-                request.getRequestDispatcher("AddMission.jsp").forward(request, response);
+                request.getRequestDispatcher("addMission.jsp").forward(request, response);
                 return;
             }
             Timestamp currentTimestamp = new Timestamp(new Date().getTime());
@@ -96,7 +121,7 @@ public class AddMissionServlet extends HttpServlet {
             mission.setMentorId(mentorId);
             mission.setInternId(internId);
             missionDAO.addMission(mission);
-            
+
             if (currentTimestamp.after(deadline)) {
                 missionDAO.updateMissionStatus(mission.getMisId(), Mission.MissionStatus.FINISHED);
             }
@@ -105,7 +130,7 @@ public class AddMissionServlet extends HttpServlet {
             response.sendRedirect("mission");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Lỗi khi thêm nhiệm vụ: " + e.getMessage());
+            request.setAttribute("errorMessage", "Error adding mission: " + e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }

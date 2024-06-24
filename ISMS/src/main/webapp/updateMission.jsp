@@ -9,56 +9,56 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-            }
-            h2 {
-                padding-top: 50px;
-                text-align: center;
-            }
-            form {
-                width: 50%;
-                margin: 0 auto;
-            }
-            label {
-                display: block;
-                margin-top: 10px;
-            }
-            input[type="text"],
-            textarea,
-            select {
-                width: 100%;
-                padding: 8px;
-                margin-top: 5px;
-                margin-bottom: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
-            input[type="submit"] {
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                float: right;
-            }
-            input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-            .error {
-                color: red;
-                text-align: center;
-                margin-top: 10px;
-            }
-        </style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            padding-top: 50px;
+            text-align: center;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
     <body>
         <div class="container">
             <h2>Update Mission</h2>
-            <form action="UpdateMissionServlet" method="post">
+            <form action="UpdateMissionServlet" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <input type="hidden" name="misId" value="${requestScope.misId}">
                 <div>
                     <label for="misName" class="form-label">Mission Name</label>
@@ -70,7 +70,7 @@
                 </div>
                 <div>
                     <label for="link" class="form-label">Link</label>
-                    <input type="url" class="form-control" id="link" name="link" value="${mission.link}">
+                    <input type="file" id="link" name="link" accept=".doc, .pdf" value="${mission.link}">
                 </div>
                 <div class="form-group">
                     <label for="internId">Intern:</label>
