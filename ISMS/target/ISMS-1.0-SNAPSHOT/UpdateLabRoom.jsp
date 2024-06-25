@@ -24,7 +24,6 @@
             margin-top: 50px;
         }
 
-        /* Style form elements */
         .form-group {
             width: 100%;
             margin-bottom: 15px;
@@ -47,7 +46,6 @@
             transition: border-color 0.3s;
         }
 
-        /* Add focus effect to input fields */
         input[type="text"]:focus,
         select:focus {
             border-color: #007bff;
@@ -70,9 +68,12 @@
             background-color: #0056b3;
         }
 
-        /* Add some spacing between the header and the form */
         h2 {
             margin-bottom: 20px;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
         }
     </style>
     <body>
@@ -80,6 +81,7 @@
             <h2>Update Lab Room</h2>
             <form action="UpdateLabRoomServlet" method="POST">
                 <input type="hidden" name="roomId" value="${labRoom.roomId}">
+
                 <div class="form-group">
                     <label for="roomName">Room Name:</label>
                     <input type="text" class="form-control" id="roomName" name="roomName" value="${labRoom.roomName}" required>
@@ -98,7 +100,10 @@
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
+                <c:if test="${not empty errorMessage}">
+                    <div class="error-message">${errorMessage}</div>
+                </c:if>
             </form>
-        </div>     
+        </div>
     </body>
 </html>
