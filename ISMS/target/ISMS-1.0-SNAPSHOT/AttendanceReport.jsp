@@ -26,7 +26,7 @@
                             </form>
                         </div>
                     </div>
-                    <div>
+                    <div class="mt-3 text-danger">
                         <p>${message}</p>  
                     </div>
                 </c:if>
@@ -35,6 +35,7 @@
                     <thead class="table-light">
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Check In Time</th>
                             <th scope="col">Check Out Time</th>
                             <th scope="col">Total Work Time</th>
@@ -45,19 +46,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <c:set var="count" value="1" />
                         <c:forEach items="${listOfAttendance}" var="o">
                             <tr>
-                                <td>${o.attendanceId}</td>
+                                <!--<td>${o.attendanceId}</td>-->
+                                <td>${count}</td>
+                                <c:set var="count" value="${count + 1}" />
+                                <td>${o.attendDate}</td>
                                 <td><span class="badge fs-6 bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">${o.checkInTime}</span></td>
                                 <td><span class="badge fs-6 bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">${o.checkOutTime}</span></td>
                                 <td>${o.totalWorkTime}</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${o.status == 'PRESENT'}">
-                                            <span class="badge text-bg-success rounded-pill">Present</span>
+                                            <span class="badge fs-6 text-bg-success rounded-pill">Present</span>
                                         </c:when>
                                         <c:when test="${o.status == 'ABSENT'}">
-                                            <span class="badge text-bg-danger rounded-pill">Absent</span>
+                                            <span class="badge fs-6 text-bg-danger rounded-pill">Absent</span>
                                         </c:when>
                                         <c:otherwise>
                                             <span class="badge fs-6 text-bg-secondary rounded-pill">Not yet</span>
@@ -65,9 +70,8 @@
                                     </c:choose>
                                 </td>
                                 <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 1}">
-
                                     <td>
-                                        <a href="loadAttendance?attendanceId=${o.attendanceId}" class="btn btn-sm text-primary">
+                                        <a href="loadAttendance?attendanceId=${o.attendanceId}" class="btn btn-sm text-warning">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                     </td>

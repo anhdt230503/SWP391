@@ -6,6 +6,8 @@ package service;
 
 import dao.InternDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import model.Intern;
 
@@ -33,6 +35,12 @@ public class InternService {
         internDao.updateIntern(intern);
     }
     
+    public List<Intern> getAllIntern() {
+        List<Intern> list = new ArrayList<>();
+        list = internDao.getAllIntern();
+        return list;
+    }
+    
     public String genarateStaffId() {
         String PREFIX = "LAB";
         int ID_LENGTH = 4;
@@ -50,8 +58,14 @@ public class InternService {
     }
     
     public static void main(String[] args) {
-//        InternService internService = new InternService();
+        InternService internService = new InternService();
 //        String code = internService.genarateStaffId();
 //        System.out.println(code);
+//        List<Intern> list = new ArrayList<>();
+//        list = internService.getAllIntern();
+//        
+//        for (Intern i : list) {
+//            System.out.println(i);
+//        }
     }
 }

@@ -32,12 +32,12 @@ public class SessionTimeoutListener implements HttpSessionListener {
         int internId = account.getInternId();
 
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(currentTimestamp);
+//        System.out.println(currentTimestamp);
 
         Date date = new Date(currentTimestamp.getTime());
         Attendance attendance = attendanceDAO.getAttendanceByDate(date, internId);
         Timestamp checkInTime = attendance.getCheckInTime();
-        System.out.println(checkInTime);
+//        System.out.println(checkInTime);
 
         // Lấy thời gian tồn tại của session
         long startTime = (long) session.getAttribute("startTime");
@@ -48,8 +48,10 @@ public class SessionTimeoutListener implements HttpSessionListener {
         long duration = attendance.getDuration();
         long newDuration = duration + (endTime - startTime) / 1000;
         long hours = TimeUnit.SECONDS.toHours(newDuration);
-        long minutes = TimeUnit.SECONDS.toMinutes(newDuration);
+        long minutes = TimeUnit.SECONDS.toMinutes(newDuration) - TimeUnit.HOURS.toMinutes(hours);
         long seconds = newDuration % 60;
+        long min1 = TimeUnit.HOURS.toMinutes(hours);
+        System.out.println(min1);
 
         String totalWorkTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 //        System.out.println(totalWorkTime);

@@ -17,7 +17,7 @@ public class InternDAO extends MyDAO {
 
     public void insertIntern(Intern intern) {
 
-        String xSql = "INSERT INTO Intern (intern_id, student_id, email, full_name, phone_number, major, company, job_title, link_cv, staff_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String xSql = "INSERT INTO Intern (intern_id, student_id, email, full_name, phone_number, major, company, job_title, link_cv, staff_id, status, upload_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, intern.getInternId());
@@ -31,6 +31,7 @@ public class InternDAO extends MyDAO {
             ps.setString(9, intern.getLinkCv());
             ps.setString(10, intern.getStaffId());
             ps.setString(11, intern.getStatus().toString());
+            ps.setTimestamp(12, intern.getUploadDate());
             ps.executeUpdate();
 //            con.commit(); // Thêm commit transaction
         } catch (SQLException e) {
@@ -125,6 +126,7 @@ public class InternDAO extends MyDAO {
                 + "    company = ?,\n"
                 + "    job_title = ?,\n"
                 + "    link_cv = ?\n"
+                + "    upload_date = ?\n"
                 + "WHERE student_id = ?;";
         try {
             ps = con.prepareStatement(xSql);
@@ -135,7 +137,8 @@ public class InternDAO extends MyDAO {
             ps.setString(5, intern.getCompany());
             ps.setString(6, intern.getJobTitle());
             ps.setString(7, intern.getLinkCv());
-            ps.setString(8, intern.getStudentId());
+            ps.setTimestamp(8, intern.getUploadDate());
+            ps.setString(9, intern.getStudentId());
             ps.executeUpdate();
 
         } catch (Exception e) {

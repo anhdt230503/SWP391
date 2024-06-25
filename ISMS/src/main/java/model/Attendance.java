@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -21,6 +22,7 @@ public class Attendance {
     private int attendanceId;
     private int internId;
     private int scheduleId;
+    private Date attendDate;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
     private String totalWorkTime;
@@ -30,17 +32,17 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(int attendanceId, int internId, int scheduleId, Timestamp checkInTime, Timestamp checkOutTime, String totalWorkTime, AttendanceStatus status, long duration) {
+    public Attendance(int attendanceId, int internId, int scheduleId, Date attendDate, Timestamp checkInTime, Timestamp checkOutTime, String totalWorkTime, AttendanceStatus status, long duration) {
         this.attendanceId = attendanceId;
         this.internId = internId;
         this.scheduleId = scheduleId;
+        this.attendDate = attendDate;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
         this.totalWorkTime = totalWorkTime;
         this.status = status;
         this.duration = duration;
     }
-
 
     public int getAttendanceId() {
         return attendanceId;
@@ -64,6 +66,14 @@ public class Attendance {
 
     public void setScheduleId(int scheduleId) {
         this.scheduleId = scheduleId;
+    }
+
+    public Date getAttendDate() {
+        return attendDate;
+    }
+
+    public void setAttendDate(Date attendDate) {
+        this.attendDate = attendDate;
     }
 
     public Timestamp getCheckInTime() {
@@ -108,7 +118,8 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return "Attendance{" + "attendanceId=" + attendanceId + ", internId=" + internId + ", scheduleId=" + scheduleId + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", totalWorkTime=" + totalWorkTime + ", status=" + status + ", duration=" + duration + '}';
+        return "Attendance{" + "attendanceId=" + attendanceId + ", internId=" + internId + ", scheduleId=" + scheduleId + ", attendDate=" + attendDate + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", totalWorkTime=" + totalWorkTime + ", status=" + status + ", duration=" + duration + '}';
     }
 
+    
 }
