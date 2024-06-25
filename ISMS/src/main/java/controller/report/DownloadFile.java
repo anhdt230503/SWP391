@@ -71,7 +71,6 @@ public class DownloadFile extends HttpServlet {
         Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
         Path filePath = uploadDirectory.resolve(fileName);
         System.out.println("File Path: " + filePath);
-
         File downloadFile = filePath.toFile();
         System.out.println("Download File: " + downloadFile);
         if (!downloadFile.exists()) {
@@ -79,7 +78,6 @@ public class DownloadFile extends HttpServlet {
             response.getWriter().flush();
             return;
         }
-
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 

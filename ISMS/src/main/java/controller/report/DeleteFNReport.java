@@ -59,7 +59,7 @@ public class DeleteFNReport extends HttpServlet {
         int id = Integer.parseInt(reportId);
         FinalReportDAO WLD = new FinalReportDAO();
         WLD.deleteFinalReport(id);
-        response.sendRedirect(request.getContextPath() + "/MentorReport.jsp");
+        response.sendRedirect(request.getContextPath() + "/FinalReportList");
     } 
 
     /** 

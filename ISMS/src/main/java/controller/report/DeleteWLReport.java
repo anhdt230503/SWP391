@@ -59,7 +59,7 @@ public class DeleteWLReport extends HttpServlet {
         int id = Integer.parseInt(reportId);
         WeeklyReportDAO WLD = new WeeklyReportDAO();
         WLD.deleteWeeklyReport(id);
-        response.sendRedirect(request.getContextPath() + "/MentorReport.jsp");
+        response.sendRedirect(request.getContextPath() + "/WeeklyReportList");
     } 
 
     /** 

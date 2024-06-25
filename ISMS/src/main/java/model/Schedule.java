@@ -4,8 +4,7 @@
  */
 package model;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 
 /**
@@ -14,127 +13,98 @@ import java.sql.Time;
  */
 public class Schedule {
     
-    private int scheduleId;
-    private String name;
-    private String dayOfWeek;
-    private String location;
-    private Date startDate;
-    private Date endDate;
-    private Time startTime;
-    private Time endTime;
-    private String attendanceStatus;
-    private int internId;
-    private int roomId;
+    private int misid;
+    private String misName;
+    private int internid;
+    private float rate;
+    private Timestamp startdate;
+    private Timestamp enddate;
+    private int hours;
+    private String status;
 
     public Schedule() {
     }
 
-    public Schedule(int scheduleId, String name, String dayOfWeek, String location, Date startDate, Date endDate, Time startTime, Time endTime, String attendanceStatus, int internId, int roomId) {
-        this.scheduleId = scheduleId;
-        this.name = name;
-        this.dayOfWeek = dayOfWeek;
-        this.location = location;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.attendanceStatus = attendanceStatus;
-        this.internId = internId;
-        this.roomId = roomId;
+    public Schedule(int misid, String misName, int internid, float rate, Timestamp startdate, Timestamp enddate, int hours, String status) {
+        this.misid = misid;
+        this.misName = misName;
+        this.internid = internid;
+        this.rate = rate;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.hours = hours;
+        this.status = status;
     }
 
-    public int getScheduleId() {
-        return scheduleId;
+    public int getMisid() {
+        return misid;
     }
 
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setMisid(int misid) {
+        this.misid = misid;
     }
 
-    public String getName() {
-        return name;
+    public String getMisName() {
+        return misName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMisName(String misName) {
+        this.misName = misName;
     }
 
-    public String getDayOfWeek() {
-        return dayOfWeek;
+    public int getInternid() {
+        return internid;
     }
 
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
+    public void setInternid(int internid) {
+        this.internid = internid;
     }
 
-    public String getLocation() {
-        return location;
+    public float getRate() {
+        return rate;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setRate(float rate) {
+        this.rate = rate;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Timestamp getStartdate() {
+        return startdate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartdate(Timestamp startdate) {
+        this.startdate = startdate;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Timestamp getEnddate() {
+        return enddate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEnddate(Timestamp enddate) {
+        this.enddate = enddate;
     }
 
-    public Time getStartTime() {
-        return startTime;
+    public int getHours() {
+        return hours;
     }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
-    public Time getEndTime() {
-        return endTime;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEndTime(Time endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getAttendanceStatus() {
-        return attendanceStatus;
-    }
-
-    public void setAttendanceStatus(String attendanceStatus) {
-        this.attendanceStatus = attendanceStatus;
-    }
-
-    public int getInternId() {
-        return internId;
-    }
-
-    public void setInternId(int internId) {
-        this.internId = internId;
-    }
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Schedule{" + "scheduleId=" + scheduleId + ", name=" + name + ", dayOfWeek=" + dayOfWeek + ", location=" + location + ", startDate=" + startDate + ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", attendanceStatus=" + attendanceStatus + ", internId=" + internId + ", roomId=" + roomId + '}';
+        return "Schedule{" + "misid=" + misid + ", misName=" + misName + ", internid=" + internid + ", rate=" + rate + ", startdate=" + startdate + ", enddate=" + enddate + ", hours=" + hours + ", status=" + status + '}';
     }
+
     
     
 }
