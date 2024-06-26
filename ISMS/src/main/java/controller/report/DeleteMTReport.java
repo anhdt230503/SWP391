@@ -63,7 +63,8 @@ public class DeleteMTReport extends HttpServlet {
         int id = Integer.parseInt(reportId);
         MidtermReportDAO MTD = new MidtermReportDAO();
         MTD.deleteMidtermReport(id);
-        response.sendRedirect(request.getContextPath() + "/MentorReport.jsp");
+       response.sendRedirect(request.getContextPath() + "/MidtermReportList");
+        
     }
 
     /**

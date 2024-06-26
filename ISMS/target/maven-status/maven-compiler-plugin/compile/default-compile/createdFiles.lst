@@ -1,21 +1,43 @@
 controller\attendance\InternAttendanceHistoryServlet.class
 service\MissionReportService.class
+<<<<<<< HEAD
 controller\mission\DownFileMisson.class
 controller\report\MentorReportServlet.class
+=======
+dao\ScheduleDAO.class
+controller\report\WeeklyReportList.class
+dao\AttendanceDAO.class
+model\MissionReport.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 model\Intern.class
 controller\DeleteManagerController.class
 service\ManagerService.class
+<<<<<<< HEAD
+=======
+controller\schedule\AddSchedule.class
+controller\schedule\ScheduleList.class
+service\AttendanceService.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 controller\account\AddManager.class
 controller\DeleteMentorController.class
 controller\intern\SelectInternServlet.class
+<<<<<<< HEAD
 controller\report\EditWLReport.class
+=======
+dao\MissionDAO.class
+controller\report\EditWLReport.class
+model\Intern$InternStatus.class
+controller\report\UploadFinal.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 dao\MyDAO.class
 dao\SemesterDAO.class
+controller\report\FinalReportList.class
 dao\MissionReportDAO.class
 controller\EditMentorProfileByHR.class
 controller\report\DownloadFile.class
 filter\SessionCheckFilter.class
 service\GoogleHandlerService.class
+<<<<<<< HEAD
 controller\mission\GetInternServlet.class
 controller\report\EditFNReport.class
 dao\RoleDAO.class
@@ -24,9 +46,33 @@ service\LabRoomService.class
 controller\report\DeleteFNReport.class
 service\MissionService.class
 controller\report\DeleteMTReport.class
+=======
+controller\loginandlogout\LoginServlet.class
+model\Schedule_Exten.class
+controller\report\UploadMidterm.class
+controller\report\EditFNReport.class
+dao\RoleDAO.class
+model\Manager.class
+controller\report\MidtermReportList.class
+dao\MidtermReportDAO.class
+service\LabRoomService.class
+service\ScheduleService.class
+controller\report\DeleteFNReport.class
+model\InternAssign.class
+model\Mission.class
+service\MissionService.class
+controller\report\DeleteMTReport.class
+service\RoleService.class
+service\MentorReportService.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 controller\mission\AddMissionServlet.class
 controller\mission\MissionServlet.class
 model\Attendance.class
+<<<<<<< HEAD
+=======
+model\LabRoom.class
+controller\report\UploadWeekly.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 dao\AccountDAO.class
 service\InternAssignService.class
 controller\labroom\GetMentorsServlet.class
@@ -34,9 +80,19 @@ model\FinalReport.class
 com\group1\isms\JakartaRestConfiguration.class
 model\Semester.class
 model\Role.class
+<<<<<<< HEAD
 service\SessionTimeoutListener.class
 com\group1\isms\resources\JakartaEE10Resource.class
 model\WeeklyReport.class
+=======
+controller\report\EditMTReport.class
+controller\labroom\ListLabRoomsServlet.class
+service\MentorService.class
+com\group1\isms\resources\JakartaEE10Resource.class
+model\WeeklyReport.class
+model\MidtermReport.class
+controller\report\DownloadExampleFN.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 model\Account.class
 controller\account\ManagerManageController.class
 service\InternService.class
@@ -92,9 +148,27 @@ dao\InternAssignDAO.class
 controller\account\MentorManageController.class
 dao\ManagerDAO.class
 service\AccountService.class
+<<<<<<< HEAD
+=======
+service\InternService.class
+model\GoogleProfile.class
+controller\report\DownloadExampleFile.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 dao\WeeklyReportDAO.class
 dao\InternDAO.class
+<<<<<<< HEAD
 controller\labroom\DeleteLabRoomServlet.class
 controller\EditProfileController.class
 service\SemesterService.class
+=======
+dao\DBContext.class
+controller\intern\ImportInternServlet.class
+controller\report\DeleteWLReport.class
+controller\report\DownloadExampleMT.class
+service\SemesterService.class
+service\Constants.class
+service\WorkOverTimeService.class
+controller\schedule\GetName.class
+dao\LabRoomDAO.class
+>>>>>>> b88b2b731ed8d9e4c77c12d5d1fa019bf02b7710
 controller\intern\InternListServlet.class

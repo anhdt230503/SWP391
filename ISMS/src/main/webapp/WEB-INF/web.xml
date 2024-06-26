@@ -174,6 +174,54 @@
         <servlet-name>DeleteFNReport</servlet-name>
         <servlet-class>controller.report.DeleteFNReport</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DownloadExampleFile</servlet-name>
+        <servlet-class>controller.report.DownloadExampleFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WeeklyReportList</servlet-name>
+        <servlet-class>controller.report.WeeklyReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MidtermReportList</servlet-name>
+        <servlet-class>controller.report.MidtermReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FinalReportList</servlet-name>
+        <servlet-class>controller.report.FinalReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadMidterm</servlet-name>
+        <servlet-class>controller.report.UploadMidterm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadWeekly</servlet-name>
+        <servlet-class>controller.report.UploadWeekly</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadFinal</servlet-name>
+        <servlet-class>controller.report.UploadFinal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadExampleFN</servlet-name>
+        <servlet-class>controller.report.DownloadExampleFN</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadExampleMT</servlet-name>
+        <servlet-class>controller.report.DownloadExampleMT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ScheduleList</servlet-name>
+        <servlet-class>controller.schedule.ScheduleList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSchedule</servlet-name>
+        <servlet-class>controller.schedule.AddSchedule</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetName</servlet-name>
+        <servlet-class>controller.schedule.GetName</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -342,8 +390,56 @@
         <servlet-name>DeleteFNReport</servlet-name>
         <url-pattern>/deletefnreport</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadExampleFile</servlet-name>
+        <url-pattern>/downloadexamplefile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WeeklyReportList</servlet-name>
+        <url-pattern>/WeeklyReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MidtermReportList</servlet-name>
+        <url-pattern>/MidtermReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinalReportList</servlet-name>
+        <url-pattern>/FinalReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadMidterm</servlet-name>
+        <url-pattern>/UploadMidterm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadWeekly</servlet-name>
+        <url-pattern>/UploadWeekly</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadFinal</servlet-name>
+        <url-pattern>/UploadFinal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadExampleFN</servlet-name>
+        <url-pattern>/DownloadExampleFN</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadExampleMT</servlet-name>
+        <url-pattern>/DownloadExampleMT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScheduleList</servlet-name>
+        <url-pattern>/ScheduleList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSchedule</servlet-name>
+        <url-pattern>/AddSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetName</servlet-name>
+        <url-pattern>/GetName</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>300</session-timeout>
     </session-config>
     <filter>
         <filter-name>SessionCheckFilter</filter-name>

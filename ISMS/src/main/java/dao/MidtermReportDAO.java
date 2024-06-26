@@ -17,7 +17,7 @@ import model.MidtermReport;
 public class MidtermReportDAO extends MyDAO {
 
     public void UploadMTReport(String title, String description, int mentorId, String filename) {
-        String INSERT_REPORT_SQL = "INSERT INTO MentorReport (report_name,report_description,report_file, mentor_id) VALUES (?,?,?, ?)";
+        String INSERT_REPORT_SQL = "INSERT INTO MidTermReport (report_name,report_description,report_file, mentor_id) VALUES (?,?,?, ?)";
 
         try (
                 PreparedStatement ps = con.prepareStatement(INSERT_REPORT_SQL)) {
@@ -33,7 +33,7 @@ public class MidtermReportDAO extends MyDAO {
 
    public List<MidtermReport> getAllMidtermReportbyID(int mentorId) {
 
-        String GET_ALL_REPORTS_SQL = "SELECT * FROM MidtermReport where mentor_id=?";
+        String GET_ALL_REPORTS_SQL = "SELECT * FROM MidtermReport where mentor_id=? ";
         List<MidtermReport> report = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(GET_ALL_REPORTS_SQL);
@@ -54,7 +54,10 @@ public class MidtermReportDAO extends MyDAO {
    
       public List<MidtermReport> getAllMidtermReport() {
 
-        String GET_ALL_REPORTS_SQL = "SELECT * FROM MidtermReport";
+        String GET_ALL_REPORTS_SQL = "SELECT MidtermReport.*, Mentor.full_name "
+                   + "FROM MidtermReport "
+                   + "JOIN Mentor ON MidtermReport.mentor_id = Mentor.mentor_id "
+                   + "WHERE MidtermReport.mentor_id = ?";
         List<MidtermReport> report = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(GET_ALL_REPORTS_SQL);
