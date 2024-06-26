@@ -36,7 +36,6 @@ public class MissionDAO extends MyDAO {
                 String mentorFullName = rs.getString("mentorFullName"); // Corrected column name
                 String internFullName = rs.getString("internFullName");
 
-                // Create Mission object and add to missions list
                 Mission mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, mentorFullName,internFullName);
                 missions.add(mission);
 
@@ -151,7 +150,7 @@ public class MissionDAO extends MyDAO {
                 Timestamp deadline = rs.getTimestamp("deadline");
                 int mentorId = rs.getInt("mentor_id");
                 int internId = rs.getInt("intern_id");
-                String full_name = rs.getString("fullname"); // Lấy thông tin mentorName
+                String full_name = rs.getString("fullname"); 
                 String fullName = rs.getString("fullName");
                 mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, full_name,fullName);
             }
@@ -165,15 +164,14 @@ public class MissionDAO extends MyDAO {
 
     public void updateMissionStatusContinuously() {
         String sql = "SELECT mis_id, start_date, deadline FROM Mission";
-        try (Connection con = connection; PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-
+        try (Connection con = connection; 
+                PreparedStatement ps = con.prepareStatement(sql); 
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 int misId = rs.getInt("mis_id");
                 Timestamp startDate = rs.getTimestamp("start_date");
                 Timestamp deadline = rs.getTimestamp("deadline");
                 MissionStatus newStatus = calculateMissionStatus(startDate, deadline);
-
-                // Cập nhật trạng thái nếu khác với trạng thái hiện tại trong CSDL
                 updateMissionStatus(misId, newStatus);
             }
         } catch (SQLException e) {
