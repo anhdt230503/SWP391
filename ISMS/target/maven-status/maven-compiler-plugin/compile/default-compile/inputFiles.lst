@@ -1,3 +1,4 @@
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\UpdateAttendanceStatus.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\DeleteManagerController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Schedule.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\LabRoomDAO.java
@@ -36,6 +37,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\controller\EditMentorProfileByHR.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\InternAttendanceHistoryServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\WeeklyReportDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mission.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\service\AttendanceScheduler.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\account\AddManager.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\DeleteMentorController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\mission\GetID.java

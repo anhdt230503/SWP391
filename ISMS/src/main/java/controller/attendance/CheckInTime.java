@@ -44,6 +44,8 @@ public class CheckInTime extends HttpServlet {
 
         if (roleId == 4) {
 //            String ipAddress = request.getRemoteAddr();
+//            
+//            System.out.println(ipAddress);
             String ipAddress = "10.33.37.211";
             // Sử dụng dải IP của trường
             String ipRange = "10.33.0.0/17"; // Dải IP từ 10.33.0.0 đến 10.33.127.255
