@@ -77,7 +77,7 @@
                 <li><a class="dropdown-item" style="color: black" href="FinalReportList">Final Report</a></li>
             </ul>
         </li>
-<li>
+        <li>
             <a href="ScheduleList" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
                 <i class="bi bi-door-open-fill me-2"></i> Schedule

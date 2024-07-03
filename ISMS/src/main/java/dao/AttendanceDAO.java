@@ -59,12 +59,10 @@ public class AttendanceDAO extends MyDAO {
 
     public void updateCheckInTime(Attendance attendance) {
         xSql = "UPDATE Attendance\n "
-//                + "SET status = ?,\n"
                 + "SET check_in_time = ?"
                 + "WHERE attend_date = ? AND intern_id =  ?;";
         try {
             ps = con.prepareStatement(xSql);
-//            ps.setString(1, attendance.getStatus().toString());
             ps.setTimestamp(1, attendance.getCheckInTime());
             ps.setDate(2, attendance.getAttendDate());
             ps.setInt(3, attendance.getInternId());

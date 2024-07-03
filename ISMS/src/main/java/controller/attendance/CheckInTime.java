@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpSessionEvent;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,14 +43,12 @@ public class CheckInTime extends HttpServlet {
 
         if (roleId == 4) {
 //            String ipAddress = request.getRemoteAddr();
-//            
-//            System.out.println(ipAddress);
             String ipAddress = "10.33.37.211";
             // Sử dụng dải IP của trường
             String ipRange = "10.33.0.0/17"; // Dải IP từ 10.33.0.0 đến 10.33.127.255
             SubnetUtils utils = new SubnetUtils(ipRange);
             boolean isAllowed = utils.getInfo().isInRange(ipAddress);
-
+            System.out.println(isAllowed);
             if (isAllowed) {
                 // lấy ngày giờ hiện tại
                 Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
@@ -59,42 +56,39 @@ public class CheckInTime extends HttpServlet {
                 LocalDate importDate = uploadDate.toLocalDateTime().toLocalDate();
 //                LocalDate attendDate = importDate.plusDays(2);
                 LocalDate attendDate = importDate;
-//                System.out.println(java.sql.Date.valueOf(attendDate));
+                System.out.println(attendDate);
                 // dùng date của ngày hôm đó và internId để kiểm tra xem hôm đó đã có bản ghi nào trong DB hay chưa
                 Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(attendDate), 1);
-
                 // cần đổi sang localdatetime cho thuộc tính "checkInTime" để xử lý cộng thêm 2 ngày giống với attendDate
                 LocalDateTime checkInTime = uploadDate.toLocalDateTime();
 //                LocalDateTime checkInTimeAfter = checkInTime.plusDays(2);
                 LocalDateTime checkInTimeAfter = checkInTime;
                 LocalTime checkInLocalTime = checkInTimeAfter.toLocalTime();
+                System.out.println(checkInLocalTime);
 
                 LocalTime startTime = LocalTime.of(7, 30);
                 LocalTime endTime = LocalTime.of(8, 30);
 
-//                System.out.println(java.sql.Timestamp.valueOf(checkInTimeAfter));
                 if (attendance != null && attendance.getCheckInTime() == null) {
                     // bắt đầu thời gian tồn tại của session
                     attendanceService.sessionCreated(new HttpSessionEvent(session));
                     // và insert vào DB 1 bản ghi mới
                     Attendance attendance1 = new Attendance();
-//                    attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
                     attendance1.setCheckInTime(java.sql.Timestamp.valueOf(checkInTimeAfter));
                     attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
                     attendance1.setInternId(internId);
                     attendanceDAO.updateCheckInTime(attendance1);
+                    System.out.println(attendance1);
                     if (checkInLocalTime.isAfter(startTime) && checkInLocalTime.isBefore(endTime)) {
                         attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
                         attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
-                        attendance1.setInternId(internId);
-                        attendanceDAO.updateStatus(attendance);
+                        attendanceDAO.updateStatus(attendance1);
                     } else {
                         attendance1.setStatus(Attendance.AttendanceStatus.ABSENT);
                         attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
                         attendance1.setInternId(internId);
-                        attendanceDAO.updateStatus(attendance);
+                        attendanceDAO.updateStatus(attendance1);
                     }
-
                 } else {
                     request.setAttribute("message", "You have attandance already for today !");
                 }

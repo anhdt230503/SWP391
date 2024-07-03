@@ -15,12 +15,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Date;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import model.Account;
 import model.Attendance;
@@ -145,14 +143,14 @@ public class ImportInternServlet extends HttpServlet {
             interns = internService.getAllIntern();
             // xử lý tăng ngày upload của import intern lên 2 ngày để thêm vào bảng attendance
             importDate = uploadDate.toLocalDateTime().toLocalDate();
-            LocalDate attendDate = importDate.plusDays(2);
-            
+//            LocalDate attendDate = importDate.plusDays(2);
+            LocalDate attendDate = importDate;
             int workingDays = 0;
             
             // insert 14 tuần = 98 ngày làm việc trừ thứ 7 và chủ nhật
-            while (workingDays < 98) {
+            while (workingDays < 70) {
                 DayOfWeek dayOfWeek = attendDate.getDayOfWeek();
-//                if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY) {
+                if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY) {
                     for (Intern intern : interns) {
                         Attendance attendance = new Attendance();
                         attendance.setInternId(intern.getInternId());
@@ -160,10 +158,10 @@ public class ImportInternServlet extends HttpServlet {
                         attendanceDAO.insertAttendance(attendance);
                     }
                     workingDays++;
-                    System.out.println(workingDays);
-//                }
+//                    System.out.println(workingDays);
+                }
                 attendDate = attendDate.plusDays(1);
-                System.out.println("Attend +1: " + attendDate);
+//                System.out.println("Attend +1: " + attendDate);
             }
             
         } catch (Exception e) {
@@ -179,9 +177,7 @@ public class ImportInternServlet extends HttpServlet {
                 }
             }
         }
-
         request.setAttribute("successMessage", "Import Successfully");
         request.getRequestDispatcher("internList").forward(request, response);
     }
-
 }
