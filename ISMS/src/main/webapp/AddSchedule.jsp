@@ -45,10 +45,10 @@
     </head>
     <body>
         <div class="container">
-            <form action="AddSchedule">
+            <form action="AddSchedule" method="POST">
                 <h2>Schedule</h2>
                 <div class="form-group">
-                    <label for="mission-name" name="missionName">Mission Name:</label>
+                    <label for="mission-name">Mission Name:</label>
                     <select id="mission-name" name="missionName" class="form-control">
                         <c:forEach items="${schedulelist}" var="scl">
                             <option>${scl.misName}</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <label for="date-schedule" name="date">Date Schedule:</label>
-                    <input type="date" id="date-schedule">
+                    <input type="datetime-local" id="date-schedule">
                 </div>
                 <div class="form-group">
                     <label for="hours-schedule" name="hours">Hours Schedule:</label>

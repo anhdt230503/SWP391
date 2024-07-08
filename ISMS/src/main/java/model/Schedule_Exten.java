@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 /**
@@ -15,9 +14,10 @@ public class Schedule_Exten {
 
     private int taskid;
     private int internid;
+    private int misid;
+    private String misName;
     private float rate;
     private Timestamp date;
-    private int misid;
     private int hours;
     private String description;
     private boolean isdone;
@@ -25,12 +25,13 @@ public class Schedule_Exten {
     public Schedule_Exten() {
     }
 
-    public Schedule_Exten(int taskid, int internid, float rate, Timestamp date, int misid, int hours, String description, boolean isdone) {
+    public Schedule_Exten(int taskid, int internid, int misid, String misName, float rate, Timestamp date, int hours, String description, boolean isdone) {
         this.taskid = taskid;
         this.internid = internid;
+        this.misid = misid;
+        this.misName = misName;
         this.rate = rate;
         this.date = date;
-        this.misid = misid;
         this.hours = hours;
         this.description = description;
         this.isdone = isdone;
@@ -52,6 +53,22 @@ public class Schedule_Exten {
         this.internid = internid;
     }
 
+    public int getMisid() {
+        return misid;
+    }
+
+    public void setMisid(int misid) {
+        this.misid = misid;
+    }
+
+    public String getMisName() {
+        return misName;
+    }
+
+    public void setMisName(String misName) {
+        this.misName = misName;
+    }
+
     public float getRate() {
         return rate;
     }
@@ -66,14 +83,6 @@ public class Schedule_Exten {
 
     public void setDate(Timestamp date) {
         this.date = date;
-    }
-
-    public int getMisid() {
-        return misid;
-    }
-
-    public void setMisid(int misid) {
-        this.misid = misid;
     }
 
     public int getHours() {
@@ -102,7 +111,8 @@ public class Schedule_Exten {
 
     @Override
     public String toString() {
-        return "Schedule_Exten{" + "taskid=" + taskid + ", internid=" + internid + ", rate=" + rate + ", date=" + date + ", misid=" + misid + ", hours=" + hours + ", description=" + description + ", isdone=" + isdone + '}';
+        return "Schedule_Exten{" + "taskid=" + taskid + ", internid=" + internid + ", misid=" + misid + ", misName=" + misName + ", rate=" + rate + ", date=" + date + ", hours=" + hours + ", description=" + description + ", isdone=" + isdone + '}';
     }
 
+    
 }

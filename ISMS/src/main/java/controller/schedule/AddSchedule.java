@@ -14,10 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import model.Account;
+import model.Schedule;
 
 /**
  *
@@ -39,15 +40,7 @@ public class AddSchedule extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddSchedule</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddSchedule at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -63,33 +56,12 @@ public class AddSchedule extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("missionName");
-        String dateString = request.getParameter("date");
-        String hours = request.getParameter("hours");
-        String des = request.getParameter("description");
-        int misid = Integer.parseInt(name);
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date parsedStartDate = dateFormat.parse(dateString);
-            Timestamp date_time =new Timestamp(parsedStartDate.getTime());
-            int hours_int = Integer.parseInt(hours);
 
-            HttpSession session = request.getSession();
-            String email = (String) session.getAttribute("email");
-            AccountDAO accountDAO = new AccountDAO();
-            Account account = accountDAO.getAccountByEmail(email);
-            int internId = account.getInternId();
-
-            ScheduleDAO scl = new ScheduleDAO();
-            scl.Addschedule(internId, 30, date_time, misid, hours_int, des);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-
-        response.sendRedirect(request.getContextPath() + "/ScheduleList");
+        List<Schedule> schedulelist;
+        ScheduleDAO sclDao = new ScheduleDAO();
+        schedulelist = sclDao.getlistSchedule();
+        request.setAttribute("schedulelist", schedulelist);
+        request.getRequestDispatcher("AddSchedule.jsp").forward(request, response);
     }
 
     /**
@@ -103,7 +75,31 @@ public class AddSchedule extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String missionName = request.getParameter("missionName");
+        String dateSchedule = request.getParameter("date-schedule");
+        int hoursSchedule = Integer.parseInt(request.getParameter("hours-schedule"));
+        String description = request.getParameter("description");
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedStartDate = dateFormat.parse(dateSchedule);
+            Timestamp date_time = new Timestamp(parsedStartDate.getTime());
+
+            HttpSession session = request.getSession();
+            String email = (String) session.getAttribute("email");
+            AccountDAO accountDAO = new AccountDAO();
+            Account account = accountDAO.getAccountByEmail(email);
+            int internId = account.getInternId();
+
+            ScheduleDAO scl = new ScheduleDAO();
+            scl.Addschedule(internId, missionName, 0, date_time, hoursSchedule, description);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        response.sendRedirect(request.getContextPath() + "/ScheduleList");
     }
 
     /**

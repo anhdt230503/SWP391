@@ -20,6 +20,7 @@ dao\MyDAO.class
 dao\SemesterDAO.class
 controller\report\FinalReportList.class
 dao\MissionReportDAO.class
+controller\schedule\GetIDMission.class
 controller\report\DownloadFile.class
 dao\WorkOverTimeDAO.class
 service\GoogleHandlerService.class
@@ -82,7 +83,6 @@ controller\report\DownloadExampleMT.class
 service\SemesterService.class
 service\Constants.class
 service\WorkOverTimeService.class
-controller\schedule\GetName.class
 dao\LabRoomDAO.class
 controller\intern\InternListServlet.class
 controller\loginandlogout\LogoutServlet.class

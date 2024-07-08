@@ -100,6 +100,28 @@ public class WeeklyReportDAO extends MyDAO {
         return report;
 
     }
+    
+     public List<WeeklyReport> getallweeklyreportbyIId(int reportId) {
+        String GET_ALL_REPORTS_SQL = "SELECT * from WeeklyReport where report_id=?";
+        List<WeeklyReport> report = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(GET_ALL_REPORTS_SQL);
+            ps.setInt(1, reportId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                report.add(new WeeklyReport(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getTimestamp(5),
+                        rs.getString(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return report;
+
+    }
 
     public void updateWeeklyReport( String name,String week,String description,String file,int reportid) {
         String UPDATE_WEEKLY_REPORT_SQL = "UPDATE WeeklyReport SET report_name=?,week_report = ?, report_description = ?,report_date = now(), report_file = ? WHERE report_id = ?";

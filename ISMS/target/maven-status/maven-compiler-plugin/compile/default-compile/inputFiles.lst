@@ -54,6 +54,7 @@ C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\dao\MentorRepor
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\dao\ManagerDAO.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\service\MentorReportService.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\model\Mission.java
+C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\controller\schedule\GetIDMission.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\controller\report\DeleteWLReport.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\model\LabRoom.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\dao\FinalReportDAO.java
@@ -84,5 +85,4 @@ C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\controller\repo
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\controller\report\WeeklyReportList.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\dao\MissionDAO.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\controller\schedule\AddSchedule.java
-C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\controller\schedule\GetName.java
 C:\Users\duong\OneDrive\Desktop\SWP391\swp391\ISMS\src\main\java\service\RoleService.java

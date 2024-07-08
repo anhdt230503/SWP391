@@ -41,14 +41,14 @@ public class ScheduleDAO extends MyDAO {
         return sc;
     }
 
-    public void Addschedule(int internId,float rate,Timestamp date,int misId,int hours,String description) {
-        String SQL = "INSERT INTO Schedule_Mis_Exten value (?,?,?,(select mis_id from mission where mis_name =?),?,?)";
+    public void Addschedule(int internId, String name, float rate, Timestamp date, int hours, String description) {
+        String SQL = "INSERT INTO Schedule_Mis_Exten value (?,?,?,?,?,?)";
         try (
                 PreparedStatement ps = con.prepareStatement(SQL)) {
             ps.setInt(1, internId);
-            ps.setFloat(2, rate);
-            ps.setTimestamp(3, date);
-            ps.setInt(4, misId);
+            ps.setString(2, name);
+            ps.setFloat(3, rate);
+            ps.setTimestamp(4, date);
             ps.setInt(5, hours);
             ps.setString(6, description);
             ps.executeUpdate();
@@ -57,7 +57,6 @@ public class ScheduleDAO extends MyDAO {
         }
     }
 
-   
 //    public static void main(String[] args) {
 //        ScheduleDAO sc = new ScheduleDAO();
 //        sc.getnamemission();

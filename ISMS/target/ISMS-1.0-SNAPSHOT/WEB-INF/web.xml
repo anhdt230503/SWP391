@@ -146,6 +146,10 @@
         <servlet-name>GetName</servlet-name>
         <servlet-class>controller.schedule.GetName</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetIDMission</servlet-name>
+        <servlet-class>controller.schedule.GetIDMission</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -285,6 +289,10 @@
     <servlet-mapping>
         <servlet-name>GetName</servlet-name>
         <url-pattern>/GetName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetIDMission</servlet-name>
+        <url-pattern>/GetIDMission</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

@@ -73,6 +73,7 @@
                         <label for="reportDescription">Description:</label>
                         <textarea id="reportDescription" name="reportDescription" placeholder="Enter description..." cols="50" rows="5" required></textarea>
                     </div>
+                    <a href="downloadexamplefile">Example File</a>
                     <div class="form-group">
                         <label for="reportFile">Upload Report File:</label>
                         <input type="file" id="reportFile" name="reportFile" accept=".xlsx, .xls" required>
@@ -90,7 +91,6 @@
             <div class="container">
                 <h2>Edit Report</h2>
                 <form action="editwlreport" method="post" enctype="multipart/form-data">
-                    <input type="hidden" id="editReportId" name="reportId" value="">
                     <div class="form-group">
                         <label>Report Title:</label>
                         <select id="editReportTitle" name="reportTitle" class="form-control" required>
@@ -171,25 +171,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButtons = document.querySelectorAll('.edit-btn');
-        editButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const reportId = btn.getAttribute('data-id');
-                const reportTitle = btn.getAttribute('data-title');
-                const reportWeek = btn.getAttribute('data-week');
-                const reportDescription = btn.getAttribute('data-description');
-
-                document.getElementById('editReportId').value = reportId;
-                document.getElementById('editReportTitle').value = reportTitle;
-                document.getElementById('editReportWeek').value = reportWeek;
-                document.getElementById('editReportDescription').value = reportDescription;
-
-                openModal('editModal');
-            });
-        });
-    });
+    
 
     function openModal(modalId) {
         const modal = document.getElementById(modalId);

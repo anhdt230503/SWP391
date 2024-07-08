@@ -108,7 +108,7 @@
                     </tbody>
                 </table>
                 <div class="btn-container">
-                    <button class="btn btn-primary" onclick="window.location.href = 'GetName'">Schedule</button>
+                    <button class="btn btn-primary" onclick="window.location.href = 'AddSchedule'">Schedule</button>
                     <button class="btn btn-primary" onclick="showPopup()">View Schedule</button>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                 </div>
                 <div>
                     <button class="btn btn-primary" onclick="window.location.href = 'Schedule.jsp'">Cancel</button>
-                    <button class="btn btn-primary"onclick="window.location.href = 'Schedule.jsp'">Ok</button>
+                    <button class="btn btn-primary" onclick="window.location.href = 'Schedule.jsp'">Ok</button>
                 </div>
             </div>
         </div>

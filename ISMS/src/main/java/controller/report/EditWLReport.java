@@ -11,17 +11,51 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import model.Account;
+import model.WeeklyReport;
 
 /**
  * Servlet to handle editing of weekly reports.
  */
 @MultipartConfig
 public class EditWLReport extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet WeeklyReportList</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet WeeklyReportList at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int reportId = Integer.parseInt(request.getParameter("reportId"));
+
+        List<WeeklyReport> listOfWeeklyReport;
+        WeeklyReportDAO weeklyReportDAO = new WeeklyReportDAO();
+        listOfWeeklyReport = weeklyReportDAO.getallweeklyreportbyIId(reportId);
+
+        request.setAttribute("listOfWeeklyReport", listOfWeeklyReport);
+        request.getRequestDispatcher("WeeklyReport.jsp").forward(request, response);
+
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
