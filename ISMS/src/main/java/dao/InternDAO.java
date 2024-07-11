@@ -66,7 +66,9 @@ public class InternDAO extends MyDAO {
                         rs.getString(10),
                         status,
                         rs.getInt(12),
-                        rs.getTimestamp(13)));
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
 
             }
         } catch (Exception e) {
@@ -110,7 +112,9 @@ public class InternDAO extends MyDAO {
                         rs.getString(10),
                         status,
                         rs.getInt(12),
-                        rs.getTimestamp(13));
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15));
             }
         } catch (Exception e) {
         }
@@ -144,7 +148,6 @@ public class InternDAO extends MyDAO {
         } catch (Exception e) {
         }
     }
-    
 
     // hàm dành cho chức năng xem lịch sử điểm danh cho Mentor
     public List<Intern> getAllInternForMentor(int mentorId) {
@@ -173,12 +176,74 @@ public class InternDAO extends MyDAO {
                         rs.getString(10),
                         status,
                         rs.getInt(12),
-                        rs.getTimestamp(13)));
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
 
             }
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public void updateMidtermWorkTime(Intern intern) {
+        xSql = "UPDATE Intern\n"
+                + "SET midterm_work_time = ?\n"
+                + "WHERE intern_id = ?;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setDouble(1, intern.getMidtermWorkTime());
+            ps.setInt(2, intern.getInternId());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+    
+    public void updateFinalWorkTime(Intern intern) {
+        xSql = "UPDATE Intern\n"
+                + "SET final_work_time = ?\n"
+                + "WHERE intern_id = ?;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setDouble(1, intern.getFinalWorkTime());
+            ps.setInt(2, intern.getInternId());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+    
+    public Intern getInternByInternId(int internId) {
+        xSql = "select * from Intern \n"
+                + "where intern_id = ?";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, internId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString(11);
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                return new Intern(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15));
+            }
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     public static void main(String[] args) {

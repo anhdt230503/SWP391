@@ -21,7 +21,6 @@ public class Attendance {
 
     private int attendanceId;
     private int internId;
-    private int scheduleId;
     private Date attendDate;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
@@ -32,10 +31,9 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(int attendanceId, int internId, int scheduleId, Date attendDate, Timestamp checkInTime, Timestamp checkOutTime, String totalWorkTime, AttendanceStatus status, long duration) {
+    public Attendance(int attendanceId, int internId, Date attendDate, Timestamp checkInTime, Timestamp checkOutTime, String totalWorkTime, AttendanceStatus status, long duration) {
         this.attendanceId = attendanceId;
         this.internId = internId;
-        this.scheduleId = scheduleId;
         this.attendDate = attendDate;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
@@ -58,14 +56,6 @@ public class Attendance {
 
     public void setInternId(int internId) {
         this.internId = internId;
-    }
-
-    public int getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
     }
 
     public Date getAttendDate() {
@@ -118,8 +108,7 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return "Attendance{" + "attendanceId=" + attendanceId + ", internId=" + internId + ", scheduleId=" + scheduleId + ", attendDate=" + attendDate + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", totalWorkTime=" + totalWorkTime + ", status=" + status + ", duration=" + duration + '}';
+        return "Attendance{" + "attendanceId=" + attendanceId + ", internId=" + internId + ", attendDate=" + attendDate + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", totalWorkTime=" + totalWorkTime + ", status=" + status + ", duration=" + duration + '}';
     }
 
-    
 }

@@ -28,17 +28,16 @@ public class AttendanceDAO extends MyDAO {
             ps.setInt(2, internId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String statusString = rs.getString(8);
+                String statusString = rs.getString(7);
                 Attendance.AttendanceStatus status = Attendance.AttendanceStatus.valueOf(statusString.toUpperCase());
                 return new Attendance(rs.getInt(1),
                         rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getDate(4),
+                        rs.getDate(3),
+                        rs.getTimestamp(4),
                         rs.getTimestamp(5),
-                        rs.getTimestamp(6),
-                        rs.getString(7),
+                        rs.getString(6),
                         status,
-                        rs.getLong(9));
+                        rs.getLong(8));
             }
         } catch (Exception ex) {
         }
@@ -59,23 +58,25 @@ public class AttendanceDAO extends MyDAO {
 
     public void updateCheckInTime(Attendance attendance) {
         xSql = "UPDATE Attendance\n "
-                + "SET check_in_time = ?"
+                + "SET check_in_time = ?,\n"
+                + "status = ?\n"
                 + "WHERE attend_date = ? AND intern_id =  ?;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setTimestamp(1, attendance.getCheckInTime());
-            ps.setDate(2, attendance.getAttendDate());
-            ps.setInt(3, attendance.getInternId());
+            ps.setString(2, attendance.getStatus().toString());
+            ps.setDate(3, attendance.getAttendDate());
+            ps.setInt(4, attendance.getInternId());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Lỗi");
         }
     }
-    
-    public void updateStatus(Attendance attendance) {
+
+    public void updateEndOfDay(Attendance attendance) {
         xSql = "UPDATE Attendance\n "
                 + "SET status = ?\n"
-                + "WHERE attend_date = ? AND intern_id =  ?;";
+                + "WHERE attend_date <= ? AND intern_id =  ? AND status = 'NOT_YET';";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, attendance.getStatus().toString());
@@ -86,46 +87,46 @@ public class AttendanceDAO extends MyDAO {
             System.out.println("Lỗi");
         }
     }
-    
-     public List<Attendance> getNotYetAttendance(Date attendDate) {
+
+    public List<Attendance> getNotYetAttendance(Date attendDate) {
         List<Attendance> list = new ArrayList<>();
         xSql = "SELECT * FROM Attendance\n"
-                + "WHERE status = 'NOT_YET' AND attend_date = ?;";
+                + "WHERE status = 'NOT_YET' AND attend_date <= ?;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setDate(1, attendDate);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String statusString = rs.getString(8);
+                String statusString = rs.getString(7);
                 Attendance.AttendanceStatus status = Attendance.AttendanceStatus.valueOf(statusString.toUpperCase());
                 list.add(new Attendance(rs.getInt(1),
                         rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getDate(4),
+                        rs.getDate(3),
+                        rs.getTimestamp(4),
                         rs.getTimestamp(5),
-                        rs.getTimestamp(6),
-                        rs.getString(7),
+                        rs.getString(6),
                         status,
-                        rs.getLong(9)));
+                        rs.getLong(8)));
             }
         } catch (Exception e) {
         }
         return list;
     }
 
-    public void updateAllAttendance(Attendance attendance) {
+    public void updateCheckOutTime(Attendance attendance) {
         xSql = "UPDATE Attendance\n"
                 + "SET check_out_time = ?,\n"
                 + "    total_work_time = ?,\n"
                 + "    duration = ?\n"
-                + "WHERE check_in_time = ? AND intern_id = ?;";
+                + "WHERE attend_date = ? AND intern_id = ? AND status = ?;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setTimestamp(1, attendance.getCheckOutTime());
             ps.setString(2, attendance.getTotalWorkTime());
             ps.setLong(3, attendance.getDuration());
-            ps.setTimestamp(4, attendance.getCheckInTime());
+            ps.setDate(4, attendance.getAttendDate());
             ps.setInt(5, attendance.getInternId());
+            ps.setString(6, attendance.getStatus().toString());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -140,17 +141,16 @@ public class AttendanceDAO extends MyDAO {
             ps.setInt(1, internId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String statusString = rs.getString(8);
+                String statusString = rs.getString(7);
                 Attendance.AttendanceStatus status = Attendance.AttendanceStatus.valueOf(statusString.toUpperCase());
                 list.add(new Attendance(rs.getInt(1),
                         rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getDate(4),
+                        rs.getDate(3),
+                        rs.getTimestamp(4),
                         rs.getTimestamp(5),
-                        rs.getTimestamp(6),
-                        rs.getString(7),
+                        rs.getString(6),
                         status,
-                        rs.getLong(9)));
+                        rs.getLong(8)));
             }
         } catch (Exception e) {
         }
@@ -178,30 +178,65 @@ public class AttendanceDAO extends MyDAO {
             ps.setString(1, attendanceId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String statusString = rs.getString(8);
+                String statusString = rs.getString(7);
                 Attendance.AttendanceStatus status = Attendance.AttendanceStatus.valueOf(statusString.toUpperCase());
                 return new Attendance(rs.getInt(1),
                         rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getDate(4),
+                        rs.getDate(3),
+                        rs.getTimestamp(4),
                         rs.getTimestamp(5),
-                        rs.getTimestamp(6),
-                        rs.getString(7),
+                        rs.getString(6),
                         status,
-                        rs.getLong(9));
+                        rs.getLong(8));
             }
         } catch (Exception e) {
         }
         return null;
     }
 
+    public Attendance getAttendanceToTest(String attendanceId, int internId) {
+        xSql = "SELECT * FROM Attendance\n"
+                + "WHERE attendance_id = ? AND intern_id = ?;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, attendanceId);
+            ps.setInt(2, internId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString(7);
+                Attendance.AttendanceStatus status = Attendance.AttendanceStatus.valueOf(statusString.toUpperCase());
+                return new Attendance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDate(3),
+                        rs.getTimestamp(4),
+                        rs.getTimestamp(5),
+                        rs.getString(6),
+                        status,
+                        rs.getLong(8));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void resetAttendanceData() {
+        xSql = "UPDATE Attendance\n"
+                + "SET check_in_time = null,\n"
+                + "    check_out_time = null,\n"
+                + "    total_work_time = null,\n"
+                + "    status = 'NOT_YET',\n"
+                + "    duration = 0;\n";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
     public static void main(String[] args) {
         AttendanceDAO attendanceDAO = new AttendanceDAO();
         List<Attendance> list = new ArrayList<>();
 
-//        Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-//        Date date = new Date(timeStamp.getTime());
-//        System.out.println(date);
         Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
         LocalDate importDate = uploadDate.toLocalDateTime().toLocalDate();
 //        LocalDate attendDate = importDate.plusDays(2);
@@ -211,14 +246,9 @@ public class AttendanceDAO extends MyDAO {
 
         Attendance attendance = new Attendance();
         attendance.setStatus(Attendance.AttendanceStatus.PRESENT);
-//        attendance.setCheckInTime(java.sql.Timestamp.valueOf(dateTime1));
         attendance.setAttendDate(java.sql.Date.valueOf(attendDate));
         attendance.setInternId(1);
-//        attendanceDAO.testUpdate(attendance);
 
-        attendanceDAO.updateStatus(attendance);
-        System.out.println(attendance);
-        
         list = attendanceDAO.getNotYetAttendance(java.sql.Date.valueOf(attendDate));
         System.out.println(list);
         for (Attendance a : list) {

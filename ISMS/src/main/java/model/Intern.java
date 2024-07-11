@@ -30,11 +30,13 @@ public class Intern {
     private InternStatus status;
     private int semester_id;
     private Timestamp uploadDate;
+    private double midtermWorkTime;
+    private double finalWorkTime;
 
     public Intern() {
     }
 
-    public Intern(int internId, String studentId, String email, String fullName, String phoneNumber, String major, String company, String jobTitle, String linkCv, String staffId, InternStatus status, int semester_id, Timestamp uploadDate) {
+    public Intern(int internId, String studentId, String email, String fullName, String phoneNumber, String major, String company, String jobTitle, String linkCv, String staffId, InternStatus status, int semester_id, Timestamp uploadDate, double midtermWorkTime, double finalWorkTime) {
         this.internId = internId;
         this.studentId = studentId;
         this.email = email;
@@ -48,7 +50,10 @@ public class Intern {
         this.status = status;
         this.semester_id = semester_id;
         this.uploadDate = uploadDate;
+        this.midtermWorkTime = midtermWorkTime;
+        this.finalWorkTime = finalWorkTime;
     }
+
 
     public int getInternId() {
         return internId;
@@ -154,12 +159,26 @@ public class Intern {
         this.uploadDate = uploadDate;
     }
 
-    @Override
-    public String toString() {
-        return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", jobTitle=" + jobTitle + ", linkCv=" + linkCv + ", staffId=" + staffId + ", status=" + status + ", semester_id=" + semester_id + ", uploadDate=" + uploadDate + '}';
+    public double getMidtermWorkTime() {
+        return midtermWorkTime;
     }
 
-    
-    
+    public void setMidtermWorkTime(double midtermWorkTime) {
+        this.midtermWorkTime = midtermWorkTime;
+    }
 
+    public double getFinalWorkTime() {
+        return finalWorkTime;
+    }
+
+    public void setFinalWorkTime(double finalWorkTime) {
+        this.finalWorkTime = finalWorkTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Intern{" + "internId=" + internId + ", studentId=" + studentId + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", major=" + major + ", company=" + company + ", jobTitle=" + jobTitle + ", linkCv=" + linkCv + ", staffId=" + staffId + ", status=" + status + ", semester_id=" + semester_id + ", uploadDate=" + uploadDate + ", midtermWorkTime=" + midtermWorkTime + ", finalWorkTime=" + finalWorkTime + '}';
+    }
+    
+    
 }

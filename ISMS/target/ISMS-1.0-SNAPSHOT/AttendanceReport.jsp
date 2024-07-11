@@ -25,9 +25,48 @@
                                 <button type="submit" class="btn btn-primary">Check Attendance</button>
                             </form>
                         </div>
+                        <div class="col-4 p-3">
+                            <span class="badge fs-6 bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">Midterm Total Work Time: ${midtermWorkTime}h / 280h</span>
+                        </div>
+                        <div class="col-4 p-3">
+                            <span class="badge fs-6 bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">Final Total Work Time: ${finalWorkTime}h / 560h</span>
+                        </div>
                     </div>
                     <div class="mt-3 text-danger">
                         <p>${message}</p>  
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <form action="testMode" method="POST">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="testMode" value="on"> 
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Test Mode</label>
+                                </div>
+                                <input type="hidden" name="testMode" value="off">
+                                <button type="submit" class="btn btn-primary">Submit</button> 
+                            </form>
+                        </div>
+                        <c:choose>
+                            <c:when test="${testMode == 'on'}">
+                                <div class="col-6">
+                                    <form action="testModeInfo" method="POST">
+                                        <div class="mb-2">
+                                            <select name="date" class="form-select form-select-sm" aria-label="Small select example">
+                                                <option selected>Select date to check attendance</option>
+                                                <c:forEach items="${listOfAttendance}" var="a">
+                                                    <option value="${a.attendanceId}">${a.attendDate}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="checkoutTime">Check Out Time:</label>
+                                            <input type="time" id="checkoutTime" name="checkoutTime">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button> 
+                                    </form>
+                                </div>
+                            </c:when>
+                        </c:choose>
                     </div>
                 </c:if>
 

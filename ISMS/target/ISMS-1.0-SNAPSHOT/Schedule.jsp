@@ -89,12 +89,11 @@
             <div class="main-content">
             <jsp:include page="Topbar.jsp"></jsp:include>
                 <div class="container">
-                    <table class="table table-bordered table-responsive">
+                    <table class="table table-secondary table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col">Mission</th>
                                 <th scope="col">Progress</th>
-                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,7 +101,6 @@
                             <tr>
                                 <td>${scl.misName}</td>
                                 <td>${scl.rate}%</td>
-                                <td>${scl.status}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

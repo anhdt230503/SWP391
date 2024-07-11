@@ -2,6 +2,7 @@ controller\attendance\InternAttendanceHistoryServlet.class
 service\MissionReportService.class
 controller\mission\DownFileMisson.class
 controller\report\WeeklyReportList.class
+controller\attendance\TestModeInfo.class
 model\Intern.class
 controller\DeleteManagerController.class
 service\ManagerService.class
@@ -29,6 +30,7 @@ controller\report\DeleteMTReport.class
 controller\mission\AddMissionServlet.class
 controller\mission\MissionServlet.class
 model\Attendance.class
+controller\attendance\TestMode.class
 controller\report\UploadWeekly.class
 dao\AccountDAO.class
 service\InternAssignService.class
@@ -49,6 +51,7 @@ controller\mission\DeleteMissionServlet.class
 dao\DBContext.class
 controller\intern\ImportInternServlet.class
 controller\report\DeleteWLReport.class
+controller\attendance\AttendanceEndOfDay.class
 service\Constants.class
 service\WorkOverTimeService.class
 dao\LabRoomDAO.class
@@ -109,3 +112,4 @@ controller\report\DownloadExampleMT.class
 service\SemesterService.class
 controller\schedule\GetName.class
 controller\intern\InternListServlet.class
+controller\attendance\ResetData.class

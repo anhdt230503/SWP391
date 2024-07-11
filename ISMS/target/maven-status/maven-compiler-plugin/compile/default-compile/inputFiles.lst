@@ -1,4 +1,3 @@
-D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\UpdateAttendanceStatus.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\DeleteManagerController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\FinalReportList.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Schedule.java
@@ -17,6 +16,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mentor.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\WorkOverTime.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MentorReportDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\mission\DownFileMisson.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\ResetData.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\MissionReportService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\labroom\DeleteLabRoomServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\ScheduleService.java
@@ -42,10 +42,11 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\InternAttendanceHis
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\WeeklyReportDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mission.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\UploadWeekly.java
-D:\SWP391 - PROJECT\ISMS\src\main\java\service\AttendanceScheduler.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\AttendanceEndOfDay.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\account\AddManager.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\DeleteMentorController.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\mission\GetID.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\TestMode.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Schedule_Exten.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\com\group1\isms\JakartaRestConfiguration.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\WeeklyReportList.java
@@ -64,6 +65,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MissionDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\FinalReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\SessionTimeoutListener.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\schedule\AddSchedule.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\TestModeInfo.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\DeleteMTReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\InternAssign.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\mission\UpdateMissionServlet.java

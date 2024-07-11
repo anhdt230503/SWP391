@@ -126,7 +126,7 @@
         <servlet-name>EditManagerProfileByHR</servlet-name>
         <servlet-class>controller.EditManagerProfileByHR</servlet-class>
     </servlet>
-    <servlet>   
+    <servlet>
         <servlet-name>DeleteMissionServlet</servlet-name>
         <servlet-class>controller.mission.DeleteMissionServlet</servlet-class>
     </servlet>
@@ -142,7 +142,7 @@
         <servlet-name>GetInternServlet</servlet-name>
         <servlet-class>controller.mission.GetInternServlet</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>ActionReport</servlet-name>
         <servlet-class>controller.report.ActionReport</servlet-class>
     </servlet>
@@ -211,16 +211,20 @@
         <servlet-class>controller.report.DownloadExampleMT</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ScheduleList</servlet-name>
-        <servlet-class>controller.schedule.ScheduleList</servlet-class>
+        <servlet-name>AttendanceEndOfDay</servlet-name>
+        <servlet-class>controller.attendance.AttendanceEndOfDay</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddSchedule</servlet-name>
-        <servlet-class>controller.schedule.AddSchedule</servlet-class>
+        <servlet-name>TestMode</servlet-name>
+        <servlet-class>controller.attendance.TestMode</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetName</servlet-name>
-        <servlet-class>controller.schedule.GetName</servlet-class>
+        <servlet-name>TestModeInfo</servlet-name>
+        <servlet-class>controller.attendance.TestModeInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetData</servlet-name>
+        <servlet-class>controller.attendance.ResetData</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
@@ -341,8 +345,8 @@
     <servlet-mapping>
         <servlet-name>EditManagerProfileByHR</servlet-name>
         <url-pattern>/EditManagerProfileByHR</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>   
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DeleteMissionServlet</servlet-name>
         <url-pattern>/DeleteMissionServlet</url-pattern>
     </servlet-mapping>
@@ -358,7 +362,7 @@
         <servlet-name>GetInternServlet</servlet-name>
         <url-pattern>/GetInternServlet</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>  
+    <servlet-mapping>
         <servlet-name>ActionReport</servlet-name>
         <url-pattern>/actionreport</url-pattern>
     </servlet-mapping>
@@ -427,16 +431,20 @@
         <url-pattern>/DownloadExampleMT</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ScheduleList</servlet-name>
-        <url-pattern>/ScheduleList</url-pattern>
+        <servlet-name>AttendanceEndOfDay</servlet-name>
+        <url-pattern>/attendanceEndOfDay</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddSchedule</servlet-name>
-        <url-pattern>/AddSchedule</url-pattern>
+        <servlet-name>TestMode</servlet-name>
+        <url-pattern>/testMode</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetName</servlet-name>
-        <url-pattern>/GetName</url-pattern>
+        <servlet-name>TestModeInfo</servlet-name>
+        <url-pattern>/testModeInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetData</servlet-name>
+        <url-pattern>/resetData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
