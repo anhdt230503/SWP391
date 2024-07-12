@@ -4,7 +4,6 @@
  */
 package controller.news;
 
-import dao.AccountDAO;
 import dao.NewsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,16 +11,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Account;
+import java.time.LocalDateTime;
 import model.News;
 
 /**
  *
  * @author haidu
  */
-public class NewsListServlet extends HttpServlet {
+public class PublishNewsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class NewsListServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewsListServlet</title>");
+            out.println("<title>Servlet PublishNewsServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewsListServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PublishNewsServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,25 +58,7 @@ public class NewsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccountDAO accountDAO = new AccountDAO();
-        NewsDAO newsDAO = new NewsDAO();
-
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        Account account = accountDAO.getAccountByEmail(email);
-
-        int managerId = account.getManagerId();
-        int roleId = account.getRoleId();
-
-        if (roleId == 2) {
-            List<News> newsList = newsDAO.getAllNewsByManager(managerId);
-            request.setAttribute("newsList", newsList);
-        } else {
-            List<News> newsList = newsDAO.getAllNews();
-            request.setAttribute("newsList", newsList);
-        }
-
-        request.getRequestDispatcher("NewList.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -93,6 +72,17 @@ public class NewsListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        NewsDAO newsDAO = new NewsDAO();
+
+        int newsId = Integer.parseInt(request.getParameter("newsId"));
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        News news = new News();
+        news.setPublishedDate(java.sql.Timestamp.valueOf(currentDateTime));
+        news.setNewsId(newsId);
+        newsDAO.publishNews(news);
+        
+        response.sendRedirect("newsList");
 
     }
 

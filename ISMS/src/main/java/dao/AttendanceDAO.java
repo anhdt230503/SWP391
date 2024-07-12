@@ -233,28 +233,28 @@ public class AttendanceDAO extends MyDAO {
         }
     }
 
-    public static void main(String[] args) {
-        AttendanceDAO attendanceDAO = new AttendanceDAO();
-        List<Attendance> list = new ArrayList<>();
-
-        Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
-        LocalDate importDate = uploadDate.toLocalDateTime().toLocalDate();
-//        LocalDate attendDate = importDate.plusDays(2);
-        LocalDate attendDate = importDate;
-        LocalDateTime dateTime = uploadDate.toLocalDateTime();
-        LocalDateTime dateTime1 = dateTime;
-
-        Attendance attendance = new Attendance();
-        attendance.setStatus(Attendance.AttendanceStatus.PRESENT);
-        attendance.setAttendDate(java.sql.Date.valueOf(attendDate));
-        attendance.setInternId(1);
-
-        list = attendanceDAO.getNotYetAttendance(java.sql.Date.valueOf(attendDate));
-        System.out.println(list);
-        for (Attendance a : list) {
-            System.out.println(a);
-
-        }
-    }
+//    public static void main(String[] args) {
+//        AttendanceDAO attendanceDAO = new AttendanceDAO();
+//        List<Attendance> list = new ArrayList<>();
+//
+//        Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
+//        LocalDate importDate = uploadDate.toLocalDateTime().toLocalDate();
+////        LocalDate attendDate = importDate.plusDays(2);
+//        LocalDate attendDate = importDate;
+//        LocalDateTime dateTime = uploadDate.toLocalDateTime();
+//        LocalDateTime dateTime1 = dateTime;
+//
+//        Attendance attendance = new Attendance();
+//        attendance.setStatus(Attendance.AttendanceStatus.PRESENT);
+//        attendance.setAttendDate(java.sql.Date.valueOf(attendDate));
+//        attendance.setInternId(1);
+//
+//        list = attendanceDAO.getNotYetAttendance(java.sql.Date.valueOf(attendDate));
+//        System.out.println(list);
+//        for (Attendance a : list) {
+//            System.out.println(a);
+//
+//        }
+//    }
 
 }
