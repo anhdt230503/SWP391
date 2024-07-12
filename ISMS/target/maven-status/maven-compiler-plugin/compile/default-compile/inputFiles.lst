@@ -10,6 +10,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\UploadFinal.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\GoogleProfile.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\LabRoom.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\mission\GetInternServlet.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\NewsDetailServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\Constants.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\News.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Mentor.java
@@ -27,6 +28,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\EditFNReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\ManagerDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\intern\SelectInternServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\MidtermReportList.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\EditNewsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\AddNewsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\LabRoomService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\schedule\LoadTaskServlet.java
@@ -35,6 +37,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\model\Attendance.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Manager.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\EditWLReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\intern\InternListServlet.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\PublishNewsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\labroom\ListLabRoomsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\Intern.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\EditMentorProfileByHR.java
@@ -67,6 +70,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\model\FinalReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\SessionTimeoutListener.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\attendance\TestModeInfo.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\NewsDAO.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\LoadNewsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\schedule\AddTaskServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\DeleteMTReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\model\InternAssign.java
@@ -75,6 +79,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\controller\intern\ImportInternServlet.jav
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\DeleteFNReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\ScheduleMissionDAO.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\EditManagerProfileByHR.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\UnpublishNews.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\GoogleHandlerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\ManagerService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\WorkOverTimeDAO.java
@@ -104,6 +109,7 @@ D:\SWP391 - PROJECT\ISMS\src\main\java\controller\schedule\LoadScheduleServlet.j
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\DeleteWLReport.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\report\DownloadExampleFile.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\dao\MentorDAO.java
+D:\SWP391 - PROJECT\ISMS\src\main\java\controller\news\DeleteNewsServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\controller\mission\DeleteMissionServlet.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\service\AttendanceService.java
 D:\SWP391 - PROJECT\ISMS\src\main\java\com\group1\isms\resources\JakartaEE10Resource.java

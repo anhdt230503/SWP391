@@ -83,7 +83,7 @@ public class CheckInTime extends HttpServlet {
                     System.out.println("Check in time 'OFF': " + checkInTime);
                     checkInTimeAfter = checkInTime;
                 }
-                Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(attendDate), 1);
+                Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(attendDate), internId);
 
                 if (attendance != null && attendance.getCheckInTime() == null && attendance.getStatus() == Attendance.AttendanceStatus.NOT_YET) {
                     // bắt đầu thời gian tồn tại của session

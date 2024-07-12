@@ -82,13 +82,13 @@ public class AddNewsServlet extends HttpServlet {
         Account account = accountDAO.getAccountByEmail(email);
 
         String title = request.getParameter("title");
-        System.out.println(title);
+//        System.out.println(title);
         String content = request.getParameter("content");
-        System.out.println(content);
+//        System.out.println(content);
         int managerId = account.getManagerId();
-        System.out.println(managerId);
+//        System.out.println(managerId);
         String imgLink = request.getParameter("imgLink");
-        System.out.println(imgLink);
+//        System.out.println(imgLink);
         
         News news = new News();
         news.setTitle(title);

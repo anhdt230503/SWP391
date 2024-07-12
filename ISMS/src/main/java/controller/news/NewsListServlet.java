@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.news;
 
 import dao.AccountDAO;
@@ -23,34 +22,37 @@ import model.News;
  * @author haidu
  */
 public class NewsListServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewsListServlet</title>");  
+            out.println("<title>Servlet NewsListServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewsListServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet NewsListServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -58,23 +60,31 @@ public class NewsListServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
         NewsDAO newsDAO = new NewsDAO();
-        
+
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         Account account = accountDAO.getAccountByEmail(email);
 
         int managerId = account.getManagerId();
-        List<News> newsList = newsDAO.getAllNews(managerId);
-        
-        request.setAttribute("newsList", newsList);
-        request.getRequestDispatcher("NewList.jsp").forward(request, response);
-    } 
+        int roleId = account.getRoleId();
 
-    /** 
+        if (roleId == 2) {
+            List<News> newsList = newsDAO.getAllNewsByManager(managerId);
+            request.setAttribute("newsList", newsList);
+        } else {
+            List<News> newsList = newsDAO.getAllNews();
+            request.setAttribute("newsList", newsList);
+        }
+
+        request.getRequestDispatcher("NewList.jsp").forward(request, response);
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -82,12 +92,13 @@ public class NewsListServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
+
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

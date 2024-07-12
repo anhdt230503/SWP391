@@ -37,6 +37,7 @@ dao\AccountDAO.class
 service\InternAssignService.class
 controller\labroom\GetMentorsServlet.class
 model\FinalReport.class
+controller\news\PublishNewsServlet.class
 com\group1\isms\JakartaRestConfiguration.class
 model\Semester.class
 controller\schedule\LoadScheduleServlet.class
@@ -61,9 +62,11 @@ dao\LabRoomDAO.class
 controller\loginandlogout\LogoutServlet.class
 controller\labroom\UpdateLabRoomServlet.class
 model\Mentor.class
+controller\news\EditNewsServlet.class
 dao\AttendanceDAO.class
 model\MissionReport.class
 controller\BlockUserController.class
+controller\news\LoadNewsServlet.class
 controller\schedule\GetMissionNameServlet.class
 dao\TaskDAO.class
 service\AttendanceService.class
@@ -86,6 +89,7 @@ dao\MidtermReportDAO.class
 service\ScheduleService.class
 model\Attendance$AttendanceStatus.class
 model\InternAssign.class
+controller\news\DeleteNewsServlet.class
 model\Mission.class
 service\RoleService.class
 controller\schedule\AddTaskServlet.class
@@ -106,6 +110,7 @@ controller\EditManagerProfileByHR.class
 service\MentorService.class
 model\MidtermReport.class
 controller\report\DownloadExampleFN.class
+controller\news\NewsDetailServlet.class
 model\WorkOverTime.class
 dao\InternAssignDAO.class
 controller\account\MentorManageController.class
@@ -120,3 +125,4 @@ controller\report\DownloadExampleMT.class
 service\SemesterService.class
 controller\intern\InternListServlet.class
 controller\attendance\ResetData.class
+controller\news\UnpublishNews.class

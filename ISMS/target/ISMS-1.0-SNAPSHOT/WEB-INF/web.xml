@@ -262,6 +262,30 @@
         <servlet-name>NewsListServlet</servlet-name>
         <servlet-class>controller.news.NewsListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PublishNewsServlet</servlet-name>
+        <servlet-class>controller.news.PublishNewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnpublishNews</servlet-name>
+        <servlet-class>controller.news.UnpublishNews</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteNewsServlet</servlet-name>
+        <servlet-class>controller.news.DeleteNewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewsDetailServlet</servlet-name>
+        <servlet-class>controller.news.NewsDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditNewsServlet</servlet-name>
+        <servlet-class>controller.news.EditNewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadNewsServlet</servlet-name>
+        <servlet-class>controller.news.LoadNewsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -517,6 +541,30 @@
     <servlet-mapping>
         <servlet-name>NewsListServlet</servlet-name>
         <url-pattern>/newsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublishNewsServlet</servlet-name>
+        <url-pattern>/publishNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnpublishNews</servlet-name>
+        <url-pattern>/unpublishNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteNewsServlet</servlet-name>
+        <url-pattern>/deleteNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewsDetailServlet</servlet-name>
+        <url-pattern>/newsDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditNewsServlet</servlet-name>
+        <url-pattern>/editNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadNewsServlet</servlet-name>
+        <url-pattern>/loadNews</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
