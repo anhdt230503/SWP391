@@ -254,6 +254,14 @@
         <servlet-name>UpdateTaskServlet</servlet-name>
         <servlet-class>controller.schedule.UpdateTaskServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewsServlet</servlet-name>
+        <servlet-class>controller.news.AddNewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewsListServlet</servlet-name>
+        <servlet-class>controller.news.NewsListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -501,6 +509,14 @@
     <servlet-mapping>
         <servlet-name>UpdateTaskServlet</servlet-name>
         <url-pattern>/updateTask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewsServlet</servlet-name>
+        <url-pattern>/addNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewsListServlet</servlet-name>
+        <url-pattern>/newsList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

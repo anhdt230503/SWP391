@@ -34,7 +34,12 @@
                 <i class="bi bi-house me-2"></i> Home
             </a>
         </li>
-
+        <li>
+            <a href="newsList" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-alarm-fill me-2"></i> News
+            </a>
+        </li>
         <li>
             <a href="MentorManageController" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>

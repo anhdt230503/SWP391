@@ -1,4 +1,5 @@
 controller\attendance\InternAttendanceHistoryServlet.class
+model\News.class
 service\MissionReportService.class
 controller\mission\DownFileMisson.class
 controller\report\WeeklyReportList.class
@@ -92,10 +93,13 @@ service\MentorReportService.class
 model\Task.class
 dao\FinalReportDAO.class
 controller\attendance\CheckInTime.class
+controller\news\NewsListServlet.class
 model\LabRoom.class
+dao\NewsDAO.class
 controller\attendance\EditAttendanceStatusSerlvet.class
 model\Mission$MissionStatus.class
 controller\account\Addmentor.class
+controller\news\AddNewsServlet.class
 controller\report\EditMTReport.class
 controller\labroom\ListLabRoomsServlet.class
 controller\EditManagerProfileByHR.class

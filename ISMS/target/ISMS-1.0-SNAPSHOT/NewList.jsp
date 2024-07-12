@@ -42,29 +42,37 @@
         <jsp:include page="Sidebar.jsp"></jsp:include>
             <div class="main-content">
             <jsp:include page="Topbar.jsp"></jsp:include>
-
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <div class="card-text">
-                                    <h3 class="card-title">Featured post</h3>
-                                    <div class="mb-1 text-body-secondary">Nov 12</div>
-                                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content. </p>
-                                    <a href="#" class="icon-link stretched-link mt-auto">
-                                        Continue reading
-                                        <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-                                    </a>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Publish</button>
+                <div class="mt-2">
+                    <a href="addNews"><button type="button" class="btn btn-sm btn-outline-primary">Create News</button></a>
+                </div>
+                <div class="container mt-4">
+                    <div class="row">
+                    <c:forEach items="${newsList}" var="o">
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <h3 class="card-title">${o.title}</h3>
+                                        <div class="mb-1 text-body-secondary">Nov 12</div>
+                                        <p class="card-text mb-auto">${o.content}</p>
+                                        <a href="#" class="icon-link stretched-link mt-auto">
+                                            Continue reading
+                                            <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                                        </a>
+                                        <div class="btn-group">
+                                            <form action="editNews" method="POST">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </form>
+                                            <form action="publishNews" method="POST">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">Publish</button>
+                                            </form>
+                                        </div>
                                     </div>
+                                    <img src="${o.featuredImage}" class="card-img-right" alt="Featured Post Thumbnail">
                                 </div>
-                                <img src="./images/internship.png" class="card-img-right" alt="Featured Post Thumbnail">
                             </div>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

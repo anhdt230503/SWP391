@@ -17,6 +17,7 @@ public class News {
     private String content;
     private int managerId;
     private String managerName;
+    private Timestamp createdDate;
     private Timestamp publishedDate;
     private boolean isPublished;
     private String featuredImage;
@@ -24,12 +25,13 @@ public class News {
     public News() {
     }
 
-    public News(int newsId, String title, String content, int managerId, String managerName, Timestamp publishedDate, boolean isPublished, String featuredImage) {
+    public News(int newsId, String title, String content, int managerId, String managerName, Timestamp createdDate, Timestamp publishedDate, boolean isPublished, String featuredImage) {
         this.newsId = newsId;
         this.title = title;
         this.content = content;
         this.managerId = managerId;
         this.managerName = managerName;
+        this.createdDate = createdDate;
         this.publishedDate = publishedDate;
         this.isPublished = isPublished;
         this.featuredImage = featuredImage;
@@ -75,6 +77,14 @@ public class News {
         this.managerName = managerName;
     }
 
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public Timestamp getPublishedDate() {
         return publishedDate;
     }
@@ -101,7 +111,8 @@ public class News {
 
     @Override
     public String toString() {
-        return "News{" + "newsId=" + newsId + ", title=" + title + ", content=" + content + ", managerId=" + managerId + ", managerName=" + managerName + ", publishedDate=" + publishedDate + ", isPublished=" + isPublished + ", featuredImage=" + featuredImage + '}';
+        return "News{" + "newsId=" + newsId + ", title=" + title + ", content=" + content + ", managerId=" + managerId + ", managerName=" + managerName + ", createdDate=" + createdDate + ", publishedDate=" + publishedDate + ", isPublished=" + isPublished + ", featuredImage=" + featuredImage + '}';
     }
+
     
 }
