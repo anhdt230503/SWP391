@@ -226,6 +226,34 @@
         <servlet-name>ResetData</servlet-name>
         <servlet-class>controller.attendance.ResetData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ScheduleListServlet</servlet-name>
+        <servlet-class>controller.schedule.ScheduleListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddScheduleServlet</servlet-name>
+        <servlet-class>controller.schedule.AddScheduleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadScheduleServlet</servlet-name>
+        <servlet-class>controller.schedule.LoadScheduleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <servlet-class>controller.schedule.AddTaskServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadTaskServlet</servlet-name>
+        <servlet-class>controller.schedule.LoadTaskServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMissionNameServlet</servlet-name>
+        <servlet-class>controller.schedule.GetMissionNameServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateTaskServlet</servlet-name>
+        <servlet-class>controller.schedule.UpdateTaskServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -445,6 +473,34 @@
     <servlet-mapping>
         <servlet-name>ResetData</servlet-name>
         <url-pattern>/resetData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScheduleListServlet</servlet-name>
+        <url-pattern>/scheduleList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddScheduleServlet</servlet-name>
+        <url-pattern>/addSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadScheduleServlet</servlet-name>
+        <url-pattern>/loadSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <url-pattern>/addTask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadTaskServlet</servlet-name>
+        <url-pattern>/loadTask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMissionNameServlet</servlet-name>
+        <url-pattern>/getMissionName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTaskServlet</servlet-name>
+        <url-pattern>/updateTask</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

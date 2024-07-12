@@ -16,8 +16,8 @@ public class MissionDAO extends MyDAO {
 
     public List<Mission> getAllMissions() {
         List<Mission> missions = new ArrayList<>();
-        String xSql = "select m.mis_id,m.mis_name,m.mis_status,m.mis_description,m.link,m.start_date,m.deadline,m.mentor_id,m.intern_id,mt.full_name as mentorFullName,i.full_name as internFullName from mission m left join mentor mt on m.mentor_id = mt.mentor_id\n" +
-"                left join intern i on m.intern_id = i.intern_id";
+        String xSql = "select m.mis_id,m.mis_name,m.mis_status,m.mis_description,m.link,m.start_date,m.deadline,m.mentor_id,m.intern_id,mt.full_name as mentorFullName,i.full_name as internFullName from mission m left join mentor mt on m.mentor_id = mt.mentor_id\n"
+                + "                left join intern i on m.intern_id = i.intern_id";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -36,7 +36,7 @@ public class MissionDAO extends MyDAO {
                 String mentorFullName = rs.getString("mentorFullName"); // Corrected column name
                 String internFullName = rs.getString("internFullName");
 
-                Mission mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, mentorFullName,internFullName);
+                Mission mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, mentorFullName, internFullName);
                 missions.add(mission);
 
             }
@@ -150,9 +150,9 @@ public class MissionDAO extends MyDAO {
                 Timestamp deadline = rs.getTimestamp("deadline");
                 int mentorId = rs.getInt("mentor_id");
                 int internId = rs.getInt("intern_id");
-                String full_name = rs.getString("fullname"); 
+                String full_name = rs.getString("fullname");
                 String fullName = rs.getString("fullName");
-                mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, full_name,fullName);
+                mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, full_name, fullName);
             }
         } catch (SQLException e) {
             System.err.println("Lỗi khi lấy thông tin nhiệm vụ: " + e.getMessage());
@@ -164,9 +164,7 @@ public class MissionDAO extends MyDAO {
 
     public void updateMissionStatusContinuously() {
         String sql = "SELECT mis_id, start_date, deadline FROM Mission";
-        try (Connection con = connection; 
-                PreparedStatement ps = con.prepareStatement(sql); 
-                ResultSet rs = ps.executeQuery()) {
+        try (Connection con = connection; PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 int misId = rs.getInt("mis_id");
                 Timestamp startDate = rs.getTimestamp("start_date");
@@ -194,14 +192,20 @@ public class MissionDAO extends MyDAO {
     public static void main(String[] args) {
         MissionDAO cc = new MissionDAO();
         System.out.println(cc.getAllMissions());
+        List<Mission> mission = cc.getMissionByInternId(6);
+        for (Mission a : mission) {
+            System.out.println(a.getMisId());
+
+        }
     }
+
     public List<Intern> getInternsByMentorId(int mentorId) {
         List<Intern> internList = new ArrayList<>();
-        String sql = "SELECT i.intern_id, i.student_id, i.email, i.full_name, i.phone_number, i.major, " +
-                     "i.company, i.job_title, i.link_cv, i.staff_id, i.status, i.semester_id " +
-                     "FROM Intern i " +
-                     "INNER JOIN InternAssign ia ON i.intern_id = ia.intern_id " +
-                     "WHERE ia.mentor_id = ? AND ia.is_selected = 1";
+        String sql = "SELECT i.intern_id, i.student_id, i.email, i.full_name, i.phone_number, i.major, "
+                + "i.company, i.job_title, i.link_cv, i.staff_id, i.status, i.semester_id "
+                + "FROM Intern i "
+                + "INNER JOIN InternAssign ia ON i.intern_id = ia.intern_id "
+                + "WHERE ia.mentor_id = ? AND ia.is_selected = 1";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, mentorId);
@@ -220,12 +224,35 @@ public class MissionDAO extends MyDAO {
             System.err.println("Error retrieving interns: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
             } catch (SQLException ex) {
                 System.err.println("Error closing resources: " + ex.getMessage());
             }
         }
         return internList;
+    }
+
+    public List<Mission> getMissionByInternId(int internId) {
+        List<Mission> list = new ArrayList<>();
+        xSql = "SELECT mis_id, mis_name FROM Mission \n"
+                + "WHERE intern_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, internId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Mission mission1 = new Mission();
+                mission1.setMisId(rs.getInt(1));
+                mission1.setMisName(rs.getString(2));
+                list.add(mission1);
+            }
+        } catch (Exception ex) {
+        }
+        return list;
     }
 }
