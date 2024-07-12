@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -17,20 +18,24 @@ public class ScheduleMission {
     private int misId;
     private String misName;
     private double rate;
-    private Timestamp date;
+    private Timestamp createdDate;
+    private Date startDate;
     private int hour;
+    private String note;
 
     public ScheduleMission() {
     }
 
-    public ScheduleMission(int scheduleId, int internId, int misId, String misName, double rate, Timestamp date, int hour) {
+    public ScheduleMission(int scheduleId, int internId, int misId, String misName, double rate, Timestamp createdDate, Date startDate, int hour, String note) {
         this.scheduleId = scheduleId;
         this.internId = internId;
         this.misId = misId;
         this.misName = misName;
         this.rate = rate;
-        this.date = date;
+        this.createdDate = createdDate;
+        this.startDate = startDate;
         this.hour = hour;
+        this.note = note;
     }
 
     public int getScheduleId() {
@@ -53,12 +58,20 @@ public class ScheduleMission {
         return rate;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
     }
 
     public int getHour() {
         return hour;
+    }
+
+    public String getNote() {
+        return note;
     }
 
     public void setScheduleId(int scheduleId) {
@@ -81,19 +94,26 @@ public class ScheduleMission {
         this.rate = rate;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public void setHour(int hour) {
         this.hour = hour;
     }
 
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     @Override
     public String toString() {
-        return "ScheduleMission{" + "scheduleId=" + scheduleId + ", internId=" + internId + ", misId=" + misId + ", misName=" + misName + ", rate=" + rate + ", date=" + date + ", hour=" + hour + '}';
+        return "ScheduleMission{" + "scheduleId=" + scheduleId + ", internId=" + internId + ", misId=" + misId + ", misName=" + misName + ", rate=" + rate + ", createdDate=" + createdDate + ", startDate=" + startDate + ", hour=" + hour + ", note=" + note + '}';
     }
-    
-    
+
     
 }

@@ -15,18 +15,19 @@ public class Task {
     private int taskId;
     private int scheduleId;
     private String taskName;
-    private Timestamp date;
     private int hours;
-    private String description;
+    private String note;
     private boolean isDone;
 
-    public Task(int taskId, int scheduleId, String taskName, Timestamp date, int hours, String description, boolean isDone) {
+    public Task() {
+    }
+    
+    public Task(int taskId, int scheduleId, String taskName, int hours, String note, boolean isDone) {
         this.taskId = taskId;
         this.scheduleId = scheduleId;
         this.taskName = taskName;
-        this.date = date;
         this.hours = hours;
-        this.description = description;
+        this.note = note;
         this.isDone = isDone;
     }
 
@@ -42,16 +43,12 @@ public class Task {
         return taskName;
     }
 
-    public Timestamp getDate() {
-        return date;
-    }
-
     public int getHours() {
         return hours;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
     public boolean isIsDone() {
@@ -70,16 +67,12 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
     public void setHours(int hours) {
         this.hours = hours;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public void setIsDone(boolean isDone) {
@@ -88,7 +81,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "taskId=" + taskId + ", scheduleId=" + scheduleId + ", taskName=" + taskName + ", date=" + date + ", hours=" + hours + ", description=" + description + ", isDone=" + isDone + '}';
+        return "Task{" + "taskId=" + taskId + ", scheduleId=" + scheduleId + ", taskName=" + taskName + ", hours=" + hours + ", note=" + note + ", isDone=" + isDone + '}';
     }
-    
 }
