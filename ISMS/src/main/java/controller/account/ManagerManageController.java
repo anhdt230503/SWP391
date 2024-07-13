@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller.account;
 
+
+import dao.AccountDAO;
 import dao.ManagerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Manager;
+import model.ManagerWithStatus;
 
 /**
  *
@@ -35,12 +39,28 @@ public class ManagerManageController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
+            AccountDAO accountDAO = new AccountDAO();
             ManagerDAO managerDAO = new ManagerDAO();
+
+            List<Manager> managers = managerDAO.getManagersToManage();
+            List<ManagerWithStatus> managersWithStatus = accountDAO.getAllManagersWithStatus();
+
+            request.setAttribute("managers", managers);
+            request.setAttribute("managersWithStatus", managersWithStatus);
+
+            request.getRequestDispatcher("manager-management.jsp").forward(request, response);
+        }
+        try(PrintWriter out = response.getWriter()){
+                     ManagerDAO managerDAO = new ManagerDAO();
             List<Manager> managers = managerDAO.getManagersToManage();
             request.setAttribute("managers", managers);
             request.getRequestDispatcher("manager-management.jsp").forward(request, response);
-        }
+        } 
     }
+        
+   
+ 
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -80,5 +100,4 @@ public class ManagerManageController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

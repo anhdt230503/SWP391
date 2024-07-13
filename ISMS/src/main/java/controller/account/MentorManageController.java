@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Mentor;
+import model.MentorWithStatus;
 
 /**
  *
@@ -34,6 +35,19 @@ public class MentorManageController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            
+        AccountDAO accountDAO = new AccountDAO();
+        MentorDAO mentorDAO = new MentorDAO();
+        
+        List<Mentor> mentors = mentorDAO.getMentorsToManage();
+        List<MentorWithStatus> mentorsWithStatus = accountDAO.getAllMentorsWithStatus();
+        
+        request.setAttribute("mentors", mentors);
+        request.setAttribute("mentorsWithStatus", mentorsWithStatus);
+        request.getRequestDispatcher("mentor-management.jsp").forward(request, response);
+    }
+
         try (PrintWriter out = response.getWriter()) {
             MentorDAO mentorDAO = new MentorDAO();
             List<Mentor> mentors = mentorDAO.getMentorsToManage();
@@ -41,6 +55,7 @@ public class MentorManageController extends HttpServlet {
             request.setAttribute("mentors", mentors);
             request.getRequestDispatcher("mentor-management.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

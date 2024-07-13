@@ -7,7 +7,13 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Account;
+import model.Manager;
+import model.ManagerWithStatus;
+import model.Mentor;
+import model.MentorWithStatus;
 
 /**
  *
@@ -60,7 +66,74 @@ public class AccountDAO extends MyDAO {
         } catch (Exception e) {
         }
     }
+    public void updateAccountMentorStatus(int mentorId, int status) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET status = ? WHERE mentor_id = ?")) {
+            stmt.setInt(1, status);
+            stmt.setInt(2, mentorId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void updateAccountManagerStatus(int managerId, int status){
+        try(PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET status = ? WHERE manager_id = ?")){
+            stmt.setInt(1, status);
+            stmt.setInt(2, managerId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+        public List<MentorWithStatus> getAllMentorsWithStatus() {
+        List<MentorWithStatus> mentorsWithStatus = new ArrayList<>();
+        String sql = "SELECT m.mentor_id, m.full_name, m.email, m.birth_date, m.phone_number, a.status "
+                + "FROM Mentor m JOIN Account a ON m.mentor_id = a.mentor_id";
+        try ( PreparedStatement ps = connection.prepareStatement(sql); 
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Mentor mentor = new Mentor();
+                mentor.setMentorId(rs.getInt("mentor_id"));
+                mentor.setFullname(rs.getString("full_name"));
+                mentor.setEmail(rs.getString("email"));
+                mentor.setBirthDate(rs.getDate("birth_date"));
+                mentor.setPhoneNumber(rs.getString("phone_number"));
+                int status = rs.getInt("status");
+
+                MentorWithStatus mentorWithStatus = new MentorWithStatus(mentor, status);
+                mentorsWithStatus.add(mentorWithStatus);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mentorsWithStatus;
+    }
+    
+                public List<ManagerWithStatus> getAllManagersWithStatus() {
+        List<ManagerWithStatus> managersWithStatus = new ArrayList<>();
+        String sql = "SELECT m.manager_id, m.full_name, m.email, m.birth_date, m.phone_number, a.status "
+                + "FROM Manager m JOIN Account a ON m.manager_id = a.manager_id";
+        try ( PreparedStatement ps = connection.prepareStatement(sql); 
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Manager manager = new Manager();
+                manager.setManagerId(rs.getInt("manager_id"));
+                manager.setFullname(rs.getString("full_name"));
+                manager.setEmail(rs.getString("email"));
+                manager.setBirthDate(rs.getDate("birth_date"));
+                manager.setPhoneNumber(rs.getString("phone_number"));
+                int status = rs.getInt("status");
+
+                ManagerWithStatus managerWithStatus = new ManagerWithStatus(manager, status);
+                managersWithStatus.add(managerWithStatus);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return managersWithStatus;
+    }
+        
     public Account getAccountByEmail(String email) {
         xSql = "SELECT * FROM Account where email =?";
         try {

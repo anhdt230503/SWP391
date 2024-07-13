@@ -61,11 +61,14 @@ public class LoginServlet extends HttpServlet {
         String avatarUrl = ggProfile.getPicture();
         AccountDAO accDAO = new AccountDAO();
         Account account = accDAO.login(email);
-
+        Account acc = new Account();
+        
         if (account == null) {
             request.setAttribute("message", "Your account is not allowed to log into the system");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
+
+            if(account.getStatus() == 1){
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
             session.setAttribute("name", username);
@@ -102,6 +105,10 @@ public class LoginServlet extends HttpServlet {
             int timeoutInSeconds = 30 * 60; // 30 phút (30 * 60 giây)
             session.setMaxInactiveInterval(timeoutInSeconds);
             response.sendRedirect("Home.jsp");
+        }else{
+                request.setAttribute("message2", "Account is blocked.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
         }
     }
 
