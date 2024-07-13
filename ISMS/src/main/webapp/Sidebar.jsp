@@ -94,6 +94,15 @@
                 <i class="bi bi-alarm-fill me-2"></i> Attendance
             </a>
         </li>
+        <li>
+            <a href="" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-door-open-fill me-2"></i> Other
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="otherDropdown">
+                <li><a class="dropdown-item" style="color: black" href="AddCertificate.jsp">Create Certificate</a></li>
+                <li><a class="dropdown-item" style="color: black" href="">Certificate</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
-

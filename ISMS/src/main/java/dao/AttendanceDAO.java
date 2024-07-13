@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Attendance;
+import model.Intern;
 
 /**
  *
@@ -233,28 +234,57 @@ public class AttendanceDAO extends MyDAO {
         }
     }
 
-//    public static void main(String[] args) {
-//        AttendanceDAO attendanceDAO = new AttendanceDAO();
-//        List<Attendance> list = new ArrayList<>();
-//
-//        Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
-//        LocalDate importDate = uploadDate.toLocalDateTime().toLocalDate();
-////        LocalDate attendDate = importDate.plusDays(2);
-//        LocalDate attendDate = importDate;
-//        LocalDateTime dateTime = uploadDate.toLocalDateTime();
-//        LocalDateTime dateTime1 = dateTime;
-//
-//        Attendance attendance = new Attendance();
-//        attendance.setStatus(Attendance.AttendanceStatus.PRESENT);
-//        attendance.setAttendDate(java.sql.Date.valueOf(attendDate));
-//        attendance.setInternId(1);
-//
-//        list = attendanceDAO.getNotYetAttendance(java.sql.Date.valueOf(attendDate));
-//        System.out.println(list);
-//        for (Attendance a : list) {
-//            System.out.println(a);
-//
-//        }
-//    }
+    public void deleteAttendance(int internId) {
+        xSql = "DELETE FROM Attendance\n"
+                + "WHERE intern_id = ?;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, internId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public List<Attendance> getAllStatus() {
+        List<Attendance> list = new ArrayList<>();
+        xSql = "SELECT DISTINCT status \n"
+                + "FROM Attendance;";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString(1);
+                Attendance.AttendanceStatus status = Attendance.AttendanceStatus.valueOf(statusString.toUpperCase());
+                Attendance attendance = new Attendance();
+                attendance.setStatus(status);
+                list.add(attendance);
+            }
+        } catch (Exception ex) {
+        }
+        return list;
+    }
+
+    public int getNotYetCountForIntern(int internId) {
+        int notYetCount = 0;
+        xSql = "SELECT COUNT(*) AS not_yet_count\n"
+                + "FROM Attendance\n"
+                + "WHERE intern_id = ?\n"
+                + "AND status = 'NOT_YET';";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, internId);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
+        return notYetCount;
+    }
+
+    public static void main(String[] args) {
+        AttendanceDAO attendanceDAO = new AttendanceDAO();
+        List<Attendance> list = attendanceDAO.getAllStatus();
+        System.out.println(list);
+        
+        System.out.println(attendanceDAO.getNotYetCountForIntern(1));
+    }
 }

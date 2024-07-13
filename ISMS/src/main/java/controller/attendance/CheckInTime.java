@@ -41,6 +41,7 @@ public class CheckInTime extends HttpServlet {
         Account account = accountDAO.getAccountByEmail(email);
 
         int internId = account.getInternId();
+        System.out.println(internId);
         int roleId = account.getRoleId();
 
         if (roleId == 4) {

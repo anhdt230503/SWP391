@@ -286,6 +286,26 @@
         <servlet-name>LoadNewsServlet</servlet-name>
         <servlet-class>controller.news.LoadNewsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImportInternAttendanceServlet</servlet-name>
+        <servlet-class>controller.intern.ImportInternAttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateInternAttendDate</servlet-name>
+        <servlet-class>controller.intern.UpdateInternAttendDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadInternServlet</servlet-name>
+        <servlet-class>controller.intern.LoadInternServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditInternDetailServlet</servlet-name>
+        <servlet-class>controller.intern.EditInternDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditInternServlet</servlet-name>
+        <servlet-class>controller.intern.EditInternServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -565,6 +585,26 @@
     <servlet-mapping>
         <servlet-name>LoadNewsServlet</servlet-name>
         <url-pattern>/loadNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportInternAttendanceServlet</servlet-name>
+        <url-pattern>/importInternAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInternAttendDate</servlet-name>
+        <url-pattern>/updateInternAttendDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadInternServlet</servlet-name>
+        <url-pattern>/loadIntern</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditInternDetailServlet</servlet-name>
+        <url-pattern>/editInternDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditInternServlet</servlet-name>
+        <url-pattern>/editIntern</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

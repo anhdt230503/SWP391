@@ -26,18 +26,18 @@
                 position: absolute;
                 bottom: 1rem;
                 left: 1rem;
-                z-index: 1; /* Đảm bảo nút nằm trên các phần tử khác */
+                z-index: 1;
             }
 
             /* Adjust card layout */
             .card-body {
-                display: flex; /* Enable flexbox for card content */
-                align-items: stretch; /* Stretch items to fill container */
+                display: flex;
+                align-items: stretch;
             }
 
             .card-text {
-                flex: 1; /* Allow text to take up available space */
-                margin-right: 1rem; /* Add some spacing between text and image */
+                flex: 1;
+                margin-right: 1rem;
             }
             .card-img-right {
                 width: auto;
@@ -45,8 +45,6 @@
                 height: 100%;
                 object-fit: cover;
             }
-
-
         </style>
     </head>
     <body>
