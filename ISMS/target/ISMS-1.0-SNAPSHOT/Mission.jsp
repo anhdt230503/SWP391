@@ -15,6 +15,23 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        .small-round-button {
+            background-color: #4CAF50; /* Màu nền của nút */
+            color: white; /* Màu chữ */
+            border: none; /* Loại bỏ viền mặc định */
+            padding: 10px; /* Giảm khoảng cách bên trong nút để làm nút nhỏ hơn */
+            text-align: center; /* Căn giữa chữ */
+            text-decoration: none; /* Loại bỏ gạch chân */
+            display: inline-block; /* Hiển thị theo kiểu khối nội dòng */
+            font-size: 12px; /* Giảm kích thước chữ */
+            border-radius: 50%; /* Làm tròn góc để tạo hình tròn */
+            cursor: pointer; /* Thay đổi con trỏ chuột khi di chuyển qua nút */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+        }
+
+        .small-round-button:hover {
+            background-color: #45a049; /* Màu nền khi hover */
+        }
     </style>
     <body>
         <jsp:include page="Sidebar.jsp"></jsp:include>
@@ -22,17 +39,35 @@
             <jsp:include page="Topbar.jsp"></jsp:include>
                 <div class="table-container">
                     <div class="row">
-                        <div class="col-8 h3">List of Missions</div>
+                        <h1 style="text-align: center;">List of Missions</h1>
+
                         <div class="center-button">
                             <a href="AddMissionServlet"><button class="btn btn-primary">Add Mission</button></a>
                         </div>
-                    <c:if test="${not empty errorMessage}">
-                        <div class="alert alert-danger">${errorMessage}</div>
-                    </c:if>
-                    <c:if test="${not empty successMessage}">
-                        <div class="alert alert-success">${successMessage}</div>
-                    </c:if>
-                </div> 
+                    </div>
+                    <div class="col-md-4">
+                        <form method="get" action="mission">
+                            <div class="input-group">
+                                <select class="form-select" name="status" onchange="this.form.submit()">
+                                    <option value="">All Statuses</option>                                <option value="NOT_START" <c:if test="${param.status == 'NOT_START'}">selected</c:if>>NOT_START</option>
+                                <option value="ON_GOING" <c:if test="${param.status == 'ON_GOING'}">selected</c:if>>ON_GOING</option>
+                                <option value="MISSING" <c:if test="${param.status == 'MISSING'}">selected</c:if>>MISSING</option>
+                                <option value="FINISHED" <c:if test="${param.status == 'FINISHED'}">selected</c:if>>FINISHED</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                <c:if test="${not empty errorMessage}">
+                    <div class="alert alert-danger" id="errorAlert">${errorMessage}</div>
+                    <script>
+                        setTimeout(function () {
+                            document.getElementById("errorAlert").style.display = 'none';
+                        }, 5000); // 5000 milliseconds = 5 seconds
+                    </script>
+                </c:if>
+                <c:if test="${not empty successMessage}">
+                    <div class="alert alert-success">${successMessage}</div>
+                </c:if>
                 <table class="table caption-top table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -45,27 +80,29 @@
                             <th>Deadline</th>
                             <th>Mentor Name</th>
                             <th>Intern Name</th>
+                            <th>Submit Task</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="mission" items="${missions}">
                             <tr>
-                                <td>${mission.misId}</td>
+                                <td><a href="DetailMission?misId=${mission.misId}">${mission.misId}</a></td>
                                 <td>${mission.misName}</td>
                                 <td>${mission.misStatus}</td>
                                 <td>${mission.misDescription}</td>
-                                <td><a href="DownFileMisson?link=${mission.link}">${mission.link}</a></td>                        
+                                <td><a href="DownFileMission?link=${mission.link}">${mission.link}</a></td>
                                 <td>${mission.startDate}</td>
                                 <td>${mission.deadline}</td>
-                                <td>${mission.mentorFullName}</td> 
+                                <td>${mission.mentorFullName}</td>
                                 <td>${mission.internFullName}</td>
+                                <td><a href="DownFileMission1?file_path=${mission.file_path}">${mission.file_path}</a></td>
                                 <td>
-                                    <a href="UpdateMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary ">
-                                        <i class="bi bi-pencil"></i> <!-- Icon Pencil -->
+                                    <a href="UpdateMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary">
+                                        <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="DeleteMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary " onclick="return confirm('Are you sure you want to delete this mission?');">
-                                        <i class="bi bi-trash"></i> <!-- Icon Trash -->
+                                    <a href="DeleteMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary" onclick="return confirm('Are you sure you want to delete this mission?');">
+                                        <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
                             </tr>

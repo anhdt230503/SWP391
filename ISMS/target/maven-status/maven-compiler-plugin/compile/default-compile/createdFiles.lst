@@ -8,6 +8,7 @@ dao\AttendanceDAO.class
 model\MissionReport.class
 model\Intern.class
 service\ManagerService.class
+controller\mission\SubmitMission.class
 service\AttendanceService.class
 controller\account\AddManager.class
 controller\intern\SelectInternServlet.class
@@ -16,6 +17,7 @@ model\Intern$InternStatus.class
 dao\MyDAO.class
 dao\SemesterDAO.class
 dao\MissionReportDAO.class
+controller\mission\UpdateMissionServlet.class
 controller\report\DownloadFile.class
 dao\WorkOverTimeDAO.class
 service\GoogleHandlerService.class
@@ -24,7 +26,6 @@ model\MentorReport.class
 controller\mission\GetInternServlet.class
 dao\RoleDAO.class
 model\Manager.class
-controller\mission\GetID.class
 service\LabRoomService.class
 service\ScheduleService.class
 model\InternAssign.class
@@ -37,6 +38,7 @@ controller\mission\MissionServlet.class
 model\Attendance.class
 dao\MentorReportDAO.class
 model\LabRoom.class
+controller\mission\DetailMission.class
 dao\AccountDAO.class
 service\InternAssignService.class
 controller\labroom\GetMentorsServlet.class
@@ -49,6 +51,7 @@ controller\report\MentorReportList.class
 controller\labroom\ListLabRoomsServlet.class
 service\MentorService.class
 com\group1\isms\resources\JakartaEE10Resource.class
+controller\mission\DownFileMisson1.class
 model\Account.class
 model\WorkOverTime.class
 controller\account\ManagerManageController.class
