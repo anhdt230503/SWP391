@@ -8,17 +8,20 @@ package controller.mission;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="GetID", urlPatterns={"/GetID"})
-public class GetID extends HttpServlet {
+public class DownFileMisson1 extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +38,10 @@ public class GetID extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet huymom</title>");  
+            out.println("<title>Servlet DownFileMisson</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet huymom at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DownFileMisson at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,9 +58,39 @@ public class GetID extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("misId");
-        request.setAttribute("misId", id);
-        request.getRequestDispatcher("updateMission.jsp").forward(request, response);
+        System.out.println("doGet");
+        String file_path = request.getParameter("file_path");
+        
+        System.out.println("File Name: " + file_path);
+
+        Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
+
+        System.out.println("Upload Directory: " + uploadDirectory);
+
+        Path filePath = uploadDirectory.resolve(file_path);
+        
+        System.out.println("File Path: " + filePath);
+
+        File downloadFile = filePath.toFile();
+        System.out.println("Download File: " + downloadFile);
+        if (!downloadFile.exists()) {
+            response.getWriter().write("File not found");
+            response.getWriter().flush();
+            return;
+        }
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=" + file_path);
+
+        try (FileInputStream fileInputStream = new FileInputStream(downloadFile); OutputStream out = response.getOutputStream()) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     } 
 
     /** 

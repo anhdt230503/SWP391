@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import model.Account;
 import model.Intern;
+
 @MultipartConfig
 
 public class UpdateMissionServlet extends HttpServlet {
@@ -64,6 +65,13 @@ public class UpdateMissionServlet extends HttpServlet {
                 }
                 link = originalFileName; // Set link to the uploaded file name
             }
+            System.out.println("missionIdStr: " + missionIdStr);
+            System.out.println("misName: " + misName);
+            System.out.println("misDescription: " + misDescription);
+            System.out.println("startDateStr: " + startDateStr);
+            System.out.println("deadlineStr: " + deadlineStr);
+            System.out.println("internIdStr: " + internIdStr);
+
             if (missionIdStr == null || missionIdStr.isEmpty()
                     || misName == null || misName.isEmpty()
                     || misDescription == null || misDescription.isEmpty()
@@ -80,7 +88,7 @@ public class UpdateMissionServlet extends HttpServlet {
 
             Timestamp startDate = new Timestamp(parsedStartDate.getTime());
             Timestamp deadline = new Timestamp(parsedDeadline.getTime());
-
+            
             if (deadline.before(startDate)) {
                 request.setAttribute("errorMessage", "Deadline must be after Start Date");
                 request.setAttribute("name", misName);
@@ -110,6 +118,7 @@ public class UpdateMissionServlet extends HttpServlet {
             mission.setDeadline(deadline);
             mission.setMentorId(mentorId);
             mission.setInternId(internId);
+            mission.setUpdateTime(currentTimestamp);
             MissionDAO missionDAO = new MissionDAO();
             missionDAO.updateMission(mission);
             response.sendRedirect(request.getContextPath() + "/mission");
@@ -119,18 +128,33 @@ public class UpdateMissionServlet extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
+        MissionDAO missionDAO = new MissionDAO();
+
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
+
+        // Lấy thông tin tài khoản của người dùng từ email
         Account account = accountDAO.getAccountByEmail(email);
         int mentorId = account.getMentorId();
-        MissionDAO missionDAO = new MissionDAO();
+
+        // Lấy danh sách thực tập sinh dựa trên mentorId
         List<Intern> internList = missionDAO.getInternsByMentorId(mentorId);
         request.setAttribute("internList", internList);
+
+        // Lấy misId từ parameter
         String id = request.getParameter("misId");
-        request.setAttribute("misId", id);
+        int misId = Integer.parseInt(id);
+
+        // Lấy thông tin chi tiết của nhiệm vụ dựa trên misId
+        Mission mission = missionDAO.getMissionById(misId);
+        request.setAttribute("mission", mission);
+
+        // Chuyển hướng request đến updateMission.jsp
         request.getRequestDispatcher("updateMission.jsp").forward(request, response);
     }
+
 }

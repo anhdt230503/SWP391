@@ -310,6 +310,14 @@
         <servlet-name>AddCertificateServlet</servlet-name>
         <servlet-class>controller.certificate.AddCertificateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubmitMission</servlet-name>
+        <servlet-class>controller.mission.SubmitMission</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownFileMisson1</servlet-name>
+        <servlet-class>controller.mission.DownFileMisson1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -613,6 +621,14 @@
     <servlet-mapping>
         <servlet-name>AddCertificateServlet</servlet-name>
         <url-pattern>/addCertificate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>    
+        <servlet-name>SubmitMission</servlet-name>
+        <url-pattern>/SubmitMission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownFileMisson1</servlet-name>
+        <url-pattern>/DownFileMisson1</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

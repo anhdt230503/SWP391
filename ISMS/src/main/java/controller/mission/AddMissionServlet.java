@@ -5,7 +5,6 @@ import dao.MissionDAO;
 import model.Account;
 import model.Intern;
 import model.Mission;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -68,7 +67,7 @@ public class AddMissionServlet extends HttpServlet {
             // Check if filePart exists and its size is greater than 0
             if (filePart != null && filePart.getSize() > 0) {
                 String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();   
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();
                 // Check if the file extension is allowed (.doc or .pdf)
                 if (!fileExtension.equals(".doc") && !fileExtension.equals(".pdf")) {
                     request.setAttribute("errorMessage", "Only .doc or .pdf files are allowed.");
@@ -120,8 +119,11 @@ public class AddMissionServlet extends HttpServlet {
             mission.setDeadline(deadline);
             mission.setMentorId(mentorId);
             mission.setInternId(internId);
+            mission.setCreated_at(currentTimestamp);
+
             missionDAO.addMission(mission);
 
+            // Save creation time into session
             if (currentTimestamp.after(deadline)) {
                 missionDAO.updateMissionStatus(mission.getMisId(), Mission.MissionStatus.FINISHED);
             }

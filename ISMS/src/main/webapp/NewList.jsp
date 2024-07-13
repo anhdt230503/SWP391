@@ -51,11 +51,13 @@
         <jsp:include page="Sidebar.jsp"></jsp:include>
             <div class="main-content">
             <jsp:include page="Topbar.jsp"></jsp:include>
+            <c:if test="${sessionScope.acc.roleId == 2}">
                 <div class="mt-2">
                     <a href="addNews"><button type="button" class="btn btn-sm btn-outline-primary">Create News</button></a>
                 </div>
-                <div class="container mt-4">
-                    <div class="row">
+            </c:if>
+            <div class="container mt-4">
+                <div class="row">
                     <c:forEach items="${newsList}" var="o">
                         <div class="col-md-6 mb-4">
                             <div class="card shadow-sm">
