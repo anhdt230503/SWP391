@@ -100,7 +100,7 @@
                 <i class="bi bi-door-open-fill me-2"></i> Other
             </a>
             <ul class="dropdown-menu" aria-labelledby="otherDropdown">
-                <li><a class="dropdown-item" style="color: black" href="AddCertificate.jsp">Create Certificate</a></li>
+                <li><a class="dropdown-item" style="color: black" href="addCertificate">Create Certificate</a></li>
                 <li><a class="dropdown-item" style="color: black" href="">Certificate</a></li>
             </ul>
         </li>
