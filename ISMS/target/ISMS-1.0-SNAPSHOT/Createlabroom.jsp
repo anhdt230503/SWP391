@@ -83,17 +83,21 @@
                 <div class="table-container">
                     <div class="container mt-5">
                         <h2>Lab Room Management</h2>
-                        <button class="btn btn-primary mb-3" id="toggleFormButton">Create Lab Room</button>
-                        <form id="createForm" action="ListLabRoomsServlet" method="POST" style="display: none;">
+                    <c:if test="${sessionScope.acc.roleId == 2}">
 
-                            <div class="form-group">
-                                <label for="roomName">Room Name:</label>
-                                <input type="text" class="form-control" id="roomName" name="roomName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="mentorId">Mentor:</label>
-                                <select class="form-control" id="mentorId" name="mentorId" required>
-                                    <option value="">Select Mentor</option>
+                        <button class="btn btn-primary mb-3" id="toggleFormButton">Create Lab Room</button>
+                    </c:if>
+
+                    <form id="createForm" action="ListLabRoomsServlet" method="POST" style="display: none;">
+
+                        <div class="form-group">
+                            <label for="roomName">Room Name:</label>
+                            <input type="text" class="form-control" id="roomName" name="roomName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mentorId">Mentor:</label>
+                            <select class="form-control" id="mentorId" name="mentorId" required>
+                                <option value="">Select Mentor</option>
                                 <c:forEach items="${listOfMentors}" var="mentor">
                                     <option value="${mentor.mentorId}">${mentor.fullname}</option>
                                 </c:forEach>

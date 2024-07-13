@@ -54,12 +54,40 @@
             text-align: center;
             margin-top: 10px;
         }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+        .btn-container1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn1 {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+        .btn1:hover {
+            background-color: #0056b3;
+        }
     </style>
     <body>
         <div class="container">
             <h2>Update Mission</h2>
             <form action="UpdateMissionServlet" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-                <input type="hidden" name="misId" value="${requestScope.misId}">
+                <input type="hidden" name="misId" value="${mission.misId}">
                 <div>
                     <label for="misName" class="form-label">Mission Name</label>
                     <input type="text" class="form-control" id="misName" name="misName" value="${mission.misName}" required>
@@ -92,6 +120,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Update Mission</button>
             </form>
+            <div class="btn-container1">
+                <button class="btn1" onclick="window.history.back();">Back</button>
+            </div>
         </div>
     </body>
 </html>

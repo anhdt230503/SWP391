@@ -3,22 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.mission;
+package controller.certificate;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author admin
+ * @author haidu
  */
-@WebServlet(name="GetID", urlPatterns={"/GetID"})
-public class GetID extends HttpServlet {
+public class AddCertificateServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +33,10 @@ public class GetID extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet huymom</title>");  
+            out.println("<title>Servlet AddCertificateServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet huymom at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddCertificateServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,9 +53,8 @@ public class GetID extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("misId");
-        request.setAttribute("misId", id);
-        request.getRequestDispatcher("updateMission.jsp").forward(request, response);
+        
+        response.sendRedirect("AddCertificate.jsp");
     } 
 
     /** 
