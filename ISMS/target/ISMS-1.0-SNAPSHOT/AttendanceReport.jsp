@@ -25,12 +25,14 @@
                                 <button type="submit" class="btn btn-primary">Check Attendance</button>
                             </form>
                         </div>
-                        <div class="col-4 p-3">
-                            <span class="badge fs-6 bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">Midterm Total Work Time: ${midtermWorkTime}h / 280h</span>
-                        </div>
-                        <div class="col-4 p-3">
-                            <span class="badge fs-6 bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">Final Total Work Time: ${finalWorkTime}h / 560h</span>
-                        </div>
+                        <c:if test="${sessionScope.acc.roleId == 4 || sessionScope.acc.roleId == 3}">
+                            <div class="col-4 p-3">
+                                <span class="badge fs-6 bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">Midterm Total Work Time: ${midtermWorkTime}h / 280h</span>
+                            </div>
+                            <div class="col-4 p-3">
+                                <span class="badge fs-6 bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">Final Total Work Time: ${finalWorkTime}h / 560h</span>
+                            </div>
+                        </c:if>
                     </div>
                     <div class="mt-3 text-danger">
                         <p>${message}</p>  

@@ -32,9 +32,27 @@
                             </form>
                         </div>
                     </c:if>
-<!--                        <p>${errorMessage}</p>
-                <p>${successMessage}</p>-->
-                </div> 
+                </div>
+                <div class="col-6">
+                    <form action="importInternAttendance" method="POST">
+                        <div class="mb-2">
+                            <label for="dateToCheck">Choose a start date for the intern</label>
+                            <input type="date" id="dateToCheck" name="dateToImport">
+                            <div class="mt-2">
+                                <label for="date">Choose phase</label>
+                                <select name="date" class="form-select form-select-sm" aria-label="Small select example">
+                                    <c:forEach items="${uploadDateList}" var="o">
+                                        <option value="${o.uploadDate}">${o.uploadDate}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="mt-2 btn-group">
+                                <button type="submit" class="btn btn-outline-dark">Import Attend Date</button>
+                            </div>
+                            <p class="text-danger-emphasis">${message1}</p>
+                        </div>
+                    </form>
+                </div>
                 <form action="selectIntern" method="post" onsubmit="return limitSelection();">
                     <c:if test="${not empty errorMessage}">
                         <div class="alert alert-danger" role="alert">
@@ -57,6 +75,9 @@
                                 <th scope="col">Upload Date</th>
                                     <c:if test="${sessionScope.acc.roleId == 3}"> 
                                     <th scope="col">Select</th>
+                                    </c:if>
+                                    <c:if test="${sessionScope.acc.roleId == 1}"> 
+                                    <th scope="col">Action</th>
                                     </c:if>
                             </tr>
                         </thead>
@@ -81,14 +102,20 @@
                                                 <c:otherwise>
                                                     <div class="form-check">
                                                         <input class="form-check-input" name="selectedInterns" type="checkbox" value="${o.internId}" id="flexCheckChecked" onclick="checkSelectionCount();">
-                                                        </div>
+                                                    </div>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
                                     </c:if>
+                                    <c:if test="${sessionScope.acc.roleId == 1}">
+                                        <td>
+                                            <a href="loadIntern?internId=${o.internId}" class="btn btn-sm text-primary">
+                                                <i class="bi bi-person-lines-fill"></i>
+                                            </a>
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
-
                         </tbody>
                     </table>
                     <c:if test="${sessionScope.acc.roleId == 3}"> 

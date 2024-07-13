@@ -95,6 +95,7 @@ service\RoleService.class
 controller\schedule\AddTaskServlet.class
 service\MentorReportService.class
 model\Task.class
+controller\intern\ImportInternAttendanceServlet.class
 dao\FinalReportDAO.class
 controller\attendance\CheckInTime.class
 controller\news\NewsListServlet.class

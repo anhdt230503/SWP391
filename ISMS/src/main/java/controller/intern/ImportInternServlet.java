@@ -138,32 +138,6 @@ public class ImportInternServlet extends HttpServlet {
                 }
             }
 
-            // insert ngày bắt đầu điểm danh cho 1 Intern
-            List<Intern> interns = new ArrayList<>();
-            interns = internService.getAllIntern();
-            // xử lý tăng ngày upload của import intern lên 2 ngày để thêm vào bảng attendance
-            importDate = uploadDate.toLocalDateTime().toLocalDate();
-//            LocalDate attendDate = importDate.plusDays(2);
-            LocalDate attendDate = importDate;
-            int workingDays = 0;
-            
-            // insert 14 tuần = 98 ngày làm việc trừ thứ 7 và chủ nhật
-            while (workingDays < 70) {
-                DayOfWeek dayOfWeek = attendDate.getDayOfWeek();
-                if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY) {
-                    for (Intern intern : interns) {
-                        Attendance attendance = new Attendance();
-                        attendance.setInternId(intern.getInternId());
-                        attendance.setAttendDate(java.sql.Date.valueOf(attendDate));
-                        attendanceDAO.insertAttendance(attendance);
-                    }
-                    workingDays++;
-//                    System.out.println(workingDays);
-                }
-                attendDate = attendDate.plusDays(1);
-//                System.out.println("Attend +1: " + attendDate);
-            }
-            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
