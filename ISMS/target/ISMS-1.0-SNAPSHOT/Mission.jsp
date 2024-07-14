@@ -100,7 +100,7 @@
                                 <td>${mission.deadline}</td>
                                 <td>${mission.mentorFullName}</td>
                                 <td>${mission.internFullName}</td>
-                                <td><a href="DownFileMission1?file_path=${mission.file_path}">${mission.file_path}</a></td>
+                                <td><a href="DownFileMisson1?file_path=${mission.file_path}">${mission.file_path}</a></td>
                                     <c:if test="${sessionScope.acc.roleId == 3}">
 
                                     <td>
