@@ -47,15 +47,6 @@ public class MentorManageController extends HttpServlet {
         request.setAttribute("mentorsWithStatus", mentorsWithStatus);
         request.getRequestDispatcher("mentor-management.jsp").forward(request, response);
     }
-
-        try (PrintWriter out = response.getWriter()) {
-            MentorDAO mentorDAO = new MentorDAO();
-            List<Mentor> mentors = mentorDAO.getMentorsToManage();
-
-            request.setAttribute("mentors", mentors);
-            request.getRequestDispatcher("mentor-management.jsp").forward(request, response);
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

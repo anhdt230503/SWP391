@@ -27,6 +27,7 @@ controller\schedule\ScheduleListServlet.class
 controller\report\DeleteFNReport.class
 service\MissionService.class
 controller\report\DeleteMTReport.class
+controller\intern\LoadInternServlet.class
 controller\mission\AddMissionServlet.class
 controller\schedule\UpdateTaskServlet.class
 controller\mission\MissionServlet.class
@@ -38,18 +39,22 @@ service\InternAssignService.class
 controller\labroom\GetMentorsServlet.class
 model\FinalReport.class
 controller\news\PublishNewsServlet.class
+controller\intern\EditInternDetailServlet.class
 com\group1\isms\JakartaRestConfiguration.class
 model\Semester.class
 controller\schedule\LoadScheduleServlet.class
 model\Role.class
 service\SessionTimeoutListener.class
+controller\intern\EditInternServlet.class
 com\group1\isms\resources\JakartaEE10Resource.class
+dao\CertificateDAO.class
 model\WeeklyReport.class
 model\Account.class
 controller\account\ManagerManageController.class
 service\InternService.class
 model\GoogleProfile.class
 dao\MentorDAO.class
+model\ManagerWithStatus.class
 controller\mission\DeleteMissionServlet.class
 dao\DBContext.class
 controller\intern\ImportInternServlet.class
@@ -82,6 +87,7 @@ dao\WorkOverTimeDAO.class
 controller\loginandlogout\LoginServlet.class
 controller\report\UploadMidterm.class
 model\ScheduleMission.class
+model\Certificate.class
 model\Manager.class
 controller\attendance\LoadAttendanceServlet.class
 controller\attendance\AttendanceHistoryServlet.class
@@ -107,6 +113,7 @@ controller\account\Addmentor.class
 controller\news\AddNewsServlet.class
 controller\report\EditMTReport.class
 controller\labroom\ListLabRoomsServlet.class
+model\MentorWithStatus.class
 controller\EditManagerProfileByHR.class
 service\MentorService.class
 model\MidtermReport.class

@@ -50,12 +50,6 @@ public class ManagerManageController extends HttpServlet {
 
             request.getRequestDispatcher("manager-management.jsp").forward(request, response);
         }
-        try(PrintWriter out = response.getWriter()){
-                     ManagerDAO managerDAO = new ManagerDAO();
-            List<Manager> managers = managerDAO.getManagersToManage();
-            request.setAttribute("managers", managers);
-            request.getRequestDispatcher("manager-management.jsp").forward(request, response);
-        } 
     }
         
    
