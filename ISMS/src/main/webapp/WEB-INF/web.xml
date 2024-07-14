@@ -90,6 +90,22 @@
         <servlet-name>DownFileMisson1</servlet-name>
         <servlet-class>controller.mission.DownFileMisson1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <servlet-class>controller.feedback.FeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitFeedback</servlet-name>
+        <servlet-class>controller.feedback.SubmitFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFeedbackServlet</servlet-name>
+        <servlet-class>controller.feedback.EditFeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewFeedbackServlet</servlet-name>
+        <servlet-class>controller.feedback.ViewFeedbackServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -173,6 +189,22 @@
     <servlet-mapping>
         <servlet-name>DownFileMisson1</servlet-name>
         <url-pattern>/DownFileMisson1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <url-pattern>/Feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitFeedback</servlet-name>
+        <url-pattern>/SubmitFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFeedbackServlet</servlet-name>
+        <url-pattern>/EditFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFeedbackServlet</servlet-name>
+        <url-pattern>/ViewFeedbackServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

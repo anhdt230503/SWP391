@@ -91,12 +91,12 @@
                                 <td>${mission.misName}</td>
                                 <td>${mission.misStatus}</td>
                                 <td>${mission.misDescription}</td>
-                                <td><a href="DownFileMission?link=${mission.link}">${mission.link}</a></td>
+                                <td><a href="DownFileMisson?link=${mission.link}">${mission.link}</a></td>
                                 <td>${mission.startDate}</td>
                                 <td>${mission.deadline}</td>
                                 <td>${mission.mentorFullName}</td>
                                 <td>${mission.internFullName}</td>
-                                <td><a href="DownFileMission1?file_path=${mission.file_path}">${mission.file_path}</a></td>
+                                <td><a href="DownFileMisson1?file_path=${mission.file_path}">${mission.file_path}</a></td>
                                 <td>
                                     <a href="UpdateMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary">
                                         <i class="bi bi-pencil"></i>

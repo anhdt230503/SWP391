@@ -14,6 +14,7 @@
             margin: 0;
             padding: 0;
         }
+        
         h2 {
             padding-top: 50px;
             text-align: center;
@@ -98,12 +99,12 @@
                 </div>
                 <div>
                     <label for="link" class="form-label">Link</label>
-                    <input type="file" id="link" name="link" accept=".doc, .pdf" value="${mission.link}">
+                    <input type="file" id="link" name="link"value="${mission.link}">
                 </div>
                 <div class="form-group">
                     <label for="internId">Intern:</label>
                     <select class="form-control" id="internId" name="internId" required>
-                        <option value="">Select Intern</option>
+                        <option value="">${mission.internFullName}</option>
                         <c:forEach items="${internList}" var="intern">
                             <option value="${intern.internId}">${intern.fullName}</option>
                         </c:forEach>

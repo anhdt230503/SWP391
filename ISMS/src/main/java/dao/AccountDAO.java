@@ -85,7 +85,7 @@ public class AccountDAO extends MyDAO {
         
         AccountDAO accDAO = new AccountDAO();
         
-        Account acc = accDAO.getAccountByEmail("daoa230503@gmail.com");
+        Account acc = accDAO.getAccountByEmail("hoangnguyenhuu11122003@gmail.com");
         System.out.println(acc);
     }
 

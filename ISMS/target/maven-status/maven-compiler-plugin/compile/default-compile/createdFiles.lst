@@ -9,8 +9,10 @@ model\MissionReport.class
 model\Intern.class
 service\ManagerService.class
 controller\mission\SubmitMission.class
+dao\FeedbackDAO.class
 service\AttendanceService.class
 controller\account\AddManager.class
+controller\feedback\FeedbackServlet.class
 controller\intern\SelectInternServlet.class
 dao\MissionDAO.class
 model\Intern$InternStatus.class
@@ -64,10 +66,12 @@ model\GoogleProfile.class
 dao\MentorDAO.class
 dao\InternDAO.class
 controller\mission\DeleteMissionServlet.class
+model\Feedback.class
 dao\DBContext.class
 controller\intern\ImportInternServlet.class
 service\SemesterService.class
 service\Constants.class
+controller\feedback\SubmitFeedback.class
 service\WorkOverTimeService.class
 dao\LabRoomDAO.class
 controller\intern\InternListServlet.class

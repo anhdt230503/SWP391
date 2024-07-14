@@ -64,17 +64,9 @@ public class AddMissionServlet extends HttpServlet {
             String description = request.getParameter("description");
             String link = null;
             Part filePart = request.getPart("link");
-            // Check if filePart exists and its size is greater than 0
             if (filePart != null && filePart.getSize() > 0) {
                 String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();
-                // Check if the file extension is allowed (.doc or .pdf)
-                if (!fileExtension.equals(".doc") && !fileExtension.equals(".pdf")) {
-                    request.setAttribute("errorMessage", "Only .doc or .pdf files are allowed.");
-                    request.getRequestDispatcher("addMission.jsp").forward(request, response);
-                    return;
-                }
-                Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
+                Path uploadDirectory = Paths.get("C:\\swp391\\ISMS\\src\\file_upload");
                 if (!Files.exists(uploadDirectory)) {
                     Files.createDirectories(uploadDirectory);
                 }
@@ -82,7 +74,7 @@ public class AddMissionServlet extends HttpServlet {
                 try (InputStream fileContent = filePart.getInputStream()) {
                     Files.copy(fileContent, filePath, StandardCopyOption.REPLACE_EXISTING);
                 }
-                link = originalFileName; // Set link to the uploaded file name
+                link = originalFileName;
             }
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date parsedStartDate = dateFormat.parse(request.getParameter("startDate"));
