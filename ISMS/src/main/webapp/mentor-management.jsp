@@ -64,27 +64,37 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">BirthDate</th>
                         <th scope="col">Phone Number</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${mentors}" var="mentor">
+                    <c:forEach items="${mentorsWithStatus}" var="mentorWithStatus">
                         <tr>
-                            <td>${mentor.mentorId}</td>
-                            <td>${mentor.email}</td>
-                            <td>${mentor.fullname}</td>
-                            <td>${mentor.birthDate}</td>
-                            <td>${mentor.phoneNumber}</td>
+                            <td>${mentorWithStatus.mentor.mentorId}</td>
+                            <td>${mentorWithStatus.mentor.email}</td>
+                            <td>${mentorWithStatus.mentor.fullname}</td>
+                            <td>${mentorWithStatus.mentor.birthDate}</td>
+                            <td>${mentorWithStatus.mentor.phoneNumber}</td>
+                            <td>${mentorWithStatus.status == 1 ? 'Active' : 'Blocked'}</td>
                             <td>
-                                    <form action="DeleteMentorController" method="post" style="display: inline-block;">
-                                        <input type="hidden" name="mentorId" value="${mentor.mentorId}">
-                                        <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                <a class="btn btn-sm btn-primary" href="EditMentorProfileByHR?mentorId=${mentor.mentorId}" >
-                                     <i class="bi bi-pencil"></i>
+                                <form action="DeleteMentorController" method="post" style="display: inline-block;">
+                                    <input type="hidden" name="mentorId" value="${mentorWithStatus.mentor.mentorId}">
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete(this)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                                <a class="btn btn-sm btn-primary" href="EditMentorProfileByHR?mentorId=${mentorWithStatus.mentor.mentorId}" >
+                                    <i class="bi bi-pencil"></i>
                                 </a>
+
+                                <form action="BlockUserController" method="get" style="display: inline-block;">
+                                    <input type="hidden" name="mentorId" value="${mentorWithStatus.mentor.mentorId}">
+                                    <input type="hidden" name="status" value="${mentorWithStatus.status}">
+                                    <button type="submit" class="btn ${mentorWithStatus.status == 1 ? 'btn-warning' : 'btn-success'}">
+                                        ${mentorWithStatus.status == 1 ? 'Block' : 'Unblock'}
+                                    </button>
+                                </form>
                             </td>
 
                         </tr>
@@ -103,41 +113,41 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script>
-                                            function confirmDelete(button) {
-                                                Swal.fire({
-                                                    title: 'Confirmation',
-                                                    text: 'Are you sure you want to delete this product?',
-                                                    icon: 'warning',
-                                                    showCancelButton: true,
-                                                    confirmButtonColor: '#3085d6',
-                                                    cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'Yes',
-                                                    cancelButtonText: 'Cancel'
-                                                }).then((result) => {
-                                                    if (result.isConfirmed) {
-                                                        const form = button.closest('form');
-                                                        form.submit();
-                                                    }
-                                                });
-                                            }
+                                        function confirmDelete(button) {
+                                            Swal.fire({
+                                                title: 'Confirmation',
+                                                text: 'Are you sure you want to delete this product?',
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#3085d6',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'Yes',
+                                                cancelButtonText: 'Cancel'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    const form = button.closest('form');
+                                                    form.submit();
+                                                }
+                                            });
+                                        }
 
-                                            function confirmBlockUnblock(button, isBlock) {
-                                                Swal.fire({
-                                                    title: 'Confirmation',
-                                                    text: `Are you sure you want to ${isBlock ? 'block' : 'unblock'} this mentor?`,
-                                                    icon: 'warning',
-                                                    showCancelButton: true,
-                                                    confirmButtonColor: '#3085d6',
-                                                    cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'Yes',
-                                                    cancelButtonText: 'Cancel'
-                                                }).then((result) => {
-                                                    if (result.isConfirmed) {
-                                                        const form = button.closest('form');
-                                                        form.submit();
-                                                    }
-                                                });
-                                            }
+                                        function confirmBlockUnblock(button, isBlock) {
+                                            Swal.fire({
+                                                title: 'Confirmation',
+                                                text: `Are you sure you want to ${isBlock ? 'block' : 'unblock'} this mentor?`,
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#3085d6',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'Yes',
+                                                cancelButtonText: 'Cancel'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    const form = button.closest('form');
+                                                    form.submit();
+                                                }
+                                            });
+                                        }
     </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>

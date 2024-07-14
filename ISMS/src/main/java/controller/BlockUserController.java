@@ -60,38 +60,34 @@ public class BlockUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-//        String accountIdParam = request.getParameter("accountId");
         String mentorIdParam = request.getParameter("mentorId");
+        String managerIdParam = request.getParameter("managerId");
+        String statusParam = request.getParameter("status");
 
-//        String managerIdParam = request.getParameter("managerId");
-//        int accountId = Integer.parseInt(accountIdParam);
         AccountDAO accountDAO = new AccountDAO();
-//        Account account = accountDAO.getAccountByID(accountId);
 
-        int mentorId = Integer.parseInt(mentorIdParam);
-//        int managerId = Integer.parseInt(managerIdParam);
+        if (mentorIdParam != null && !mentorIdParam.isEmpty()) {
+            Integer mentorId = Integer.parseInt(mentorIdParam);
+            int status = Integer.parseInt(statusParam);
 
-        Account accountMentor = (Account) accountDAO.getAccountMentor(mentorId);
+            if (status == 1) {
+                accountDAO.updateAccountMentorStatus(mentorId, 0);
+            } else {
+                accountDAO.updateAccountMentorStatus(mentorId, 1);
+            }
+            request.getRequestDispatcher("MentorManageController").forward(request, response);
+        } else if (managerIdParam != null && !managerIdParam.isEmpty()) {
+            Integer managerId = Integer.parseInt(managerIdParam);
+            int status = Integer.parseInt(statusParam);
 
-        if (accountMentor.getStatus() == 1) {
-            accountMentor.setStatus(0);
-
-            request.setAttribute("SussMessage", "Account blocked successfully.");
-        } else if (accountMentor.getStatus() == 0) {
-
-            accountMentor.setStatus(1);
-            request.setAttribute("SussMessage", "Account unblocked successfully.");
-        }
-
-        accountDAO.updateAccountMentorStatus(mentorId);
-        request.setAttribute("acc", accountMentor);
-//        if(mentorId != null){
-        request.getRequestDispatcher("MentorManageController").forward(request, response);
-//        }
-//        if(managerId != null){
-//            request.getRequestDispatcher("ManagerManageController").forward(request, response);
-//        }
+            if (status == 1) {
+                accountDAO.updateAccountManagerStatus(managerId, 0);
+            } else {
+                accountDAO.updateAccountManagerStatus(managerId, 1);
+            }
+            request.getRequestDispatcher("ManagerManageController").forward(request, response);
+        } 
+   
     }
 
     /**
