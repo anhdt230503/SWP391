@@ -50,7 +50,6 @@ public class MissionServlet extends HttpServlet {
         } else {
             missions = missionDAO.getAllMissions();
         }
-        
         MentorDAO mentorDAO = new MentorDAO();
         List<Mentor> listOfMentor = mentorDAO.getAllMentors();
         missionDAO.updateMissionStatusContinuously();

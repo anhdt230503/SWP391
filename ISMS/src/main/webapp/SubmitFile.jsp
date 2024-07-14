@@ -18,7 +18,7 @@
             <input type="hidden" name="misId" value="${mission.misId}">
             <div class="mb-3">
                 <label for="file_path" class="form-label">File:</label>
-                <input type="file" class="form-control" id="file_path" name="file_path" accept=".doc, .pdf" required>
+                <input type="file" class="form-control" id="file_path" name="file_path" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

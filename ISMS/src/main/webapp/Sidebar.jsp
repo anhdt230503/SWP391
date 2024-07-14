@@ -54,7 +54,7 @@
                 </a>
             </li>
         </c:if>
-        <c:if test="${sessionScope.acc.roleId == 1 || sessionScope.acc.roleId == 4}">
+        <c:if test="${sessionScope.acc.roleId == 1 || sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 3}">
 
             <li>
                 <a href="internList" class="nav-link mb-2">
@@ -80,7 +80,7 @@
         <li>
             <a href="mentorreportlist" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-door-open-fill me-2"></i> Report
+                <i class="bi bi-flag-fill me-2"></i> Report
             </a>
             <ul class="dropdown-menu" aria-labelledby="reportDropdown">
                 <li><a class="dropdown-item" style="color: black" href="WeeklyReportList">Weekly Report</a></li>
@@ -93,7 +93,7 @@
             <li>
                 <a href="scheduleList" class="nav-link mb-2">
                     <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                    <i class="bi bi-door-open-fill me-2"></i> Schedule
+                    <i class="bi bi-calendar-check-fill me-2"></i> Schedule
                 </a>
             </li>
         </c:if>
@@ -108,7 +108,7 @@
         <li>
             <a href="" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-door-open-fill me-2"></i> Other
+                <i class="bi bi-motherboard me-2"></i> Other
             </a>
             <ul class="dropdown-menu" aria-labelledby="otherDropdown">
                 <c:if test="${sessionScope.acc.roleId == 2}">
@@ -123,5 +123,13 @@
                     </c:if>
             </ul>
         </li>
+        <c:if test="${sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 4}">
+            <li>
+                <a href="Feedback" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-chat-left-dots-fill me-2"></i> FeedBack
+                </a>
+            </li>
+        </c:if>
     </ul>
 </div>

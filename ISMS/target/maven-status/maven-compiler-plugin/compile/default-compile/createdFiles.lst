@@ -21,10 +21,6 @@ service\LabRoomService.class
 controller\schedule\ScheduleListServlet.class
 controller\certificate\DownloadCertificateServlet.class
 service\MissionService.class
-<<<<<<< HEAD
-=======
-controller\report\DeleteMTReport.class
->>>>>>> 588f7b962e3a6a7c1a9ccff421e666c569f59739
 controller\intern\LoadInternServlet.class
 controller\mission\AddMissionServlet.class
 controller\schedule\UpdateTaskServlet.class
@@ -34,6 +30,7 @@ controller\attendance\TestMode.class
 dao\AccountDAO.class
 service\InternAssignService.class
 controller\labroom\GetMentorsServlet.class
+controller\certificate\DeleteCertificateServlet.class
 model\FinalReport.class
 controller\news\PublishNewsServlet.class
 controller\intern\EditInternDetailServlet.class
@@ -51,12 +48,10 @@ controller\account\ManagerManageController.class
 service\InternService.class
 model\GoogleProfile.class
 dao\MentorDAO.class
-<<<<<<< HEAD
-controller\certificate\AddCertificateServlet.class
-=======
 model\ManagerWithStatus.class
->>>>>>> 588f7b962e3a6a7c1a9ccff421e666c569f59739
+controller\certificate\AddCertificateServlet.class
 controller\mission\DeleteMissionServlet.class
+model\Feedback.class
 dao\DBContext.class
 controller\intern\ImportInternServlet.class
 controller\schedule\AddScheduleServlet.class
@@ -69,13 +64,16 @@ controller\loginandlogout\LogoutServlet.class
 controller\labroom\UpdateLabRoomServlet.class
 model\Mentor.class
 controller\news\EditNewsServlet.class
+controller\feedback\EditFeedbackServlet.class
 dao\AttendanceDAO.class
 model\MissionReport.class
 controller\BlockUserController.class
 controller\news\LoadNewsServlet.class
 controller\schedule\GetMissionNameServlet.class
 dao\TaskDAO.class
+dao\FeedbackDAO.class
 service\AttendanceService.class
+controller\feedback\FeedbackServlet.class
 dao\MissionDAO.class
 model\Intern$InternStatus.class
 controller\UserProfileController.class
@@ -104,6 +102,7 @@ dao\FinalReportDAO.class
 controller\attendance\CheckInTime.class
 controller\news\NewsListServlet.class
 model\LabRoom.class
+controller\feedback\ViewFeedbackServlet.class
 controller\mission\DetailMission.class
 dao\NewsDAO.class
 controller\attendance\EditAttendanceStatusSerlvet.class
@@ -127,6 +126,7 @@ dao\InternDAO.class
 controller\labroom\DeleteLabRoomServlet.class
 controller\EditProfileController.class
 service\SemesterService.class
+controller\feedback\SubmitFeedback.class
 controller\intern\InternListServlet.class
 controller\attendance\ResetData.class
 controller\news\UnpublishNews.class

@@ -334,6 +334,22 @@
         <servlet-name>DeleteCertificateServlet</servlet-name>
         <servlet-class>controller.certificate.DeleteCertificateServlet</servlet-class>
     </servlet>
+    <servlet>    
+        <servlet-name>FeedbackServlet</servlet-name>
+        <servlet-class>controller.feedback.FeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitFeedback</servlet-name>
+        <servlet-class>controller.feedback.SubmitFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFeedbackServlet</servlet-name>
+        <servlet-class>controller.feedback.EditFeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewFeedbackServlet</servlet-name>
+        <servlet-class>controller.feedback.ViewFeedbackServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -661,6 +677,22 @@
     <servlet-mapping>
         <servlet-name>DeleteCertificateServlet</servlet-name>
         <url-pattern>/deleteCertificate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>    
+        <servlet-name>FeedbackServlet</servlet-name>
+        <url-pattern>/Feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitFeedback</servlet-name>
+        <url-pattern>/SubmitFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFeedbackServlet</servlet-name>
+        <url-pattern>/EditFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFeedbackServlet</servlet-name>
+        <url-pattern>/ViewFeedbackServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

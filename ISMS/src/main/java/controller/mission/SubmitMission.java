@@ -83,12 +83,6 @@ public class SubmitMission extends HttpServlet {
         Part filePart = request.getPart("file_path");
         if (filePart != null && filePart.getSize() > 0) {
             String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();
-            if (!fileExtension.equals(".doc") && !fileExtension.equals(".pdf")) {
-                request.setAttribute("errorMessage", "Chỉ cho phép các file .doc hoặc .pdf.");
-                request.getRequestDispatcher("SubmitFile.jsp").forward(request, response);
-                return;
-            }
             Path uploadDirectory = Paths.get("C:\\swp391\\ISMS\\src\\file_upload");
             if (!Files.exists(uploadDirectory)) {
                 Files.createDirectories(uploadDirectory);

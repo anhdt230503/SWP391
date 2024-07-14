@@ -66,6 +66,7 @@ public class AccountDAO extends MyDAO {
         } catch (Exception e) {
         }
     }
+
     public void updateAccountMentorStatus(int mentorId, int status) {
         try (PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET status = ? WHERE mentor_id = ?")) {
             stmt.setInt(1, status);
@@ -76,8 +77,8 @@ public class AccountDAO extends MyDAO {
         }
     }
 
-    public void updateAccountManagerStatus(int managerId, int status){
-        try(PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET status = ? WHERE manager_id = ?")){
+    public void updateAccountManagerStatus(int managerId, int status) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET status = ? WHERE manager_id = ?")) {
             stmt.setInt(1, status);
             stmt.setInt(2, managerId);
             stmt.executeUpdate();
@@ -85,13 +86,12 @@ public class AccountDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
-        public List<MentorWithStatus> getAllMentorsWithStatus() {
+
+    public List<MentorWithStatus> getAllMentorsWithStatus() {
         List<MentorWithStatus> mentorsWithStatus = new ArrayList<>();
         String sql = "SELECT m.mentor_id, m.full_name, m.email, m.birth_date, m.phone_number, a.status "
                 + "FROM Mentor m JOIN Account a ON m.mentor_id = a.mentor_id";
-        try ( PreparedStatement ps = connection.prepareStatement(sql); 
-                ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Mentor mentor = new Mentor();
                 mentor.setMentorId(rs.getInt("mentor_id"));
@@ -109,13 +109,12 @@ public class AccountDAO extends MyDAO {
         }
         return mentorsWithStatus;
     }
-    
-                public List<ManagerWithStatus> getAllManagersWithStatus() {
+
+    public List<ManagerWithStatus> getAllManagersWithStatus() {
         List<ManagerWithStatus> managersWithStatus = new ArrayList<>();
         String sql = "SELECT m.manager_id, m.full_name, m.email, m.birth_date, m.phone_number, a.status "
                 + "FROM Manager m JOIN Account a ON m.manager_id = a.manager_id";
-        try ( PreparedStatement ps = connection.prepareStatement(sql); 
-                ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Manager manager = new Manager();
                 manager.setManagerId(rs.getInt("manager_id"));
@@ -133,7 +132,7 @@ public class AccountDAO extends MyDAO {
         }
         return managersWithStatus;
     }
-        
+
     public Account getAccountByEmail(String email) {
         xSql = "SELECT * FROM Account where email =?";
         try {
@@ -153,18 +152,7 @@ public class AccountDAO extends MyDAO {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        
-        Account account = new Account();
-
-        AccountDAO accDAO = new AccountDAO();
-
-        account.setEmail("anhdthe176337@fpt.edu.vn");
-        account.setInternId(1);
-        accDAO.insertInternAccount(account);
-    }
-
+    
     public void insertManagerAccount(Account account) {
         xSql = "INSERT INTO Account (email, manager_id, role_id)\n"
                 + "VALUES (?, ?, 2)";
@@ -253,7 +241,7 @@ public class AccountDAO extends MyDAO {
                     int mentorid = rs.getInt("mentor_id");
                     int internId = rs.getInt("intern_id");
                     int role = rs.getInt("role_id");
-                    
+
                     account = new Account(internId, email, status, managerId, mentorid, internId, role);
                 }
             }
@@ -262,29 +250,29 @@ public class AccountDAO extends MyDAO {
         }
         return account;
     }
-    
-    public void updateEmailAccountMentor(String email, int mentorId){
-        try(PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET email = ? WHERE mentor_id = ?")){
+
+    public void updateEmailAccountMentor(String email, int mentorId) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET email = ? WHERE mentor_id = ?")) {
             stmt.setString(1, email);
             stmt.setInt(2, mentorId);
-            
+
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-        public void updateEmailAccountManager(String email, int managerId){
-        try(PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET email = ? WHERE manager_id = ?")){
+
+    public void updateEmailAccountManager(String email, int managerId) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET email = ? WHERE manager_id = ?")) {
             stmt.setString(1, email);
             stmt.setInt(2, managerId);
-            
+
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
 //    public static void main(String[] args) {
 //        AccountDAO accountDAO = new AccountDAO();
 //        accountDAO.updateAccountMentorStatus(3);
