@@ -111,8 +111,16 @@
                 <i class="bi bi-door-open-fill me-2"></i> Other
             </a>
             <ul class="dropdown-menu" aria-labelledby="otherDropdown">
-                <li><a class="dropdown-item" style="color: black" href="addCertificate">Create Certificate</a></li>
-                <li><a class="dropdown-item" style="color: black" href="">Certificate</a></li>
+                <c:if test="${sessionScope.acc.roleId == 2}">
+                    <li><a class="dropdown-item" style="color: black" href="addCertificate">Create Certificate</a></li>
+                    </c:if>
+                    <c:if test="${sessionScope.acc.roleId != 4}">
+                    <li><a class="dropdown-item" style="color: black" href="certificateList">All Certificate</a></li>
+                    </c:if>
+
+                <c:if test="${sessionScope.acc.roleId == 4}">
+                    <li><a class="dropdown-item" style="color: black" href="downloadCertificate">Take Your Certificate</a></li>
+                    </c:if>
             </ul>
         </li>
     </ul>

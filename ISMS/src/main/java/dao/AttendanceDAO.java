@@ -275,6 +275,9 @@ public class AttendanceDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, internId);
             rs = ps.executeQuery();
+            if (rs.next()) {
+                notYetCount = rs.getInt(1);
+            }
         } catch (Exception e) {
         }
         return notYetCount;

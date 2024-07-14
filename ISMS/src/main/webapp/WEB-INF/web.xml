@@ -318,6 +318,22 @@
         <servlet-name>DownFileMisson1</servlet-name>
         <servlet-class>controller.mission.DownFileMisson1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModifiedCertificateServlet</servlet-name>
+        <servlet-class>controller.certificate.ModifiedCertificateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CertificateListServlet</servlet-name>
+        <servlet-class>controller.certificate.CertificateListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadCertificateServlet</servlet-name>
+        <servlet-class>controller.certificate.DownloadCertificateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCertificateServlet</servlet-name>
+        <servlet-class>controller.certificate.DeleteCertificateServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -622,13 +638,29 @@
         <servlet-name>AddCertificateServlet</servlet-name>
         <url-pattern>/addCertificate</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>SubmitMission</servlet-name>
         <url-pattern>/SubmitMission</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DownFileMisson1</servlet-name>
         <url-pattern>/DownFileMisson1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModifiedCertificateServlet</servlet-name>
+        <url-pattern>/modifiedCertificate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CertificateListServlet</servlet-name>
+        <url-pattern>/certificateList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadCertificateServlet</servlet-name>
+        <url-pattern>/downloadCertificate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCertificateServlet</servlet-name>
+        <url-pattern>/deleteCertificate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

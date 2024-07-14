@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -15,17 +16,17 @@ public class Certificate {
     private int id;
     private int internId;
     private String internName;
-    private String link;
-    private Date dateOfIssue;
+    private byte[] pdfData;
+    private Timestamp dateOfIssue;
 
     public Certificate() {
     }
 
-    public Certificate(int id, int internId, String internName, String link, Date dateOfIssue) {
+    public Certificate(int id, int internId, String internName, byte[] pdfData, Timestamp dateOfIssue) {
         this.id = id;
         this.internId = internId;
         this.internName = internName;
-        this.link = link;
+        this.pdfData = pdfData;
         this.dateOfIssue = dateOfIssue;
     }
 
@@ -53,26 +54,25 @@ public class Certificate {
         this.internName = internName;
     }
 
-    public String getLink() {
-        return link;
+    public byte[] getPdfData() {
+        return pdfData;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setPdfData(byte[] pdfData) {
+        this.pdfData = pdfData;
     }
 
-    public Date getDateOfIssue() {
+    public Timestamp getDateOfIssue() {
         return dateOfIssue;
     }
 
-    public void setDateOfIssue(Date dateOfIssue) {
+    public void setDateOfIssue(Timestamp dateOfIssue) {
         this.dateOfIssue = dateOfIssue;
     }
 
     @Override
     public String toString() {
-        return "Certificate{" + "id=" + id + ", internId=" + internId + ", internName=" + internName + ", link=" + link + ", dateOfIssue=" + dateOfIssue + '}';
+        return "Certificate{" + "id=" + id + ", internId=" + internId + ", internName=" + internName + ", pdfData=" + pdfData + ", dateOfIssue=" + dateOfIssue + '}';
     }
 
-    
 }
