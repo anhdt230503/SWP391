@@ -16,82 +16,125 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/mentorreport.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
 
+    <style>
+        .container {
+            max-width: 800px;
+            background-color: #aaa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+        .table td, .table th {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .action-buttons form {
+            margin-bottom: 5px;
+        }
+    </style>
+    <body>
         <jsp:include page="Sidebar.jsp"></jsp:include>
             <div class="main-content">
             <jsp:include page="Topbar.jsp"></jsp:include>
-
-                <div id="uploadModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <div class="container">
-                            <h2>Create Report</h2>
-                            <form action="UploadFinal" method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label>Report Title:</label>
-                                    <select id="reportTitleModal" value="reportTitle" name="reportTitle" required>
-                                        <option value="Final Report">Final Report</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="reportDescription">Description:</label>
-                                    <textarea id="reportDescription" name="reportDescription" placeholder="Enter description..." cols="50" rows="5" required></textarea>
-                                </div>
-                                <a href="DownloadExampleFN">Example File</a>
-                            <div class="form-group">
-                                <label for="reportFile">Upload Report File:</label>
-                                <input type="file" id="reportFile" name="reportFile" accept=".xlsx, .xls" required>
-                            </div>
-                            <button class="btn btn-primary" type="submit">Upload File</button>
-                        </form>
-                    </div>
+                <div  class="report-options mt-3">
+                <% if (request.getAttribute("errorMessage") != null) { %>
+                <p style="color: red;text-align: center;font-size: 20px;"><%= request.getAttribute("errorMessage") %></p>
+                <p><a class="btn btn-primary" href="<%= request.getContextPath() %>/FinalReportList"> Back </a></p>
+                <% } 
+                %>
+                <% String deleteMessage = (String) session.getAttribute("deleteMessage");
+               if (deleteMessage != null) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= deleteMessage %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div>
+                <% session.removeAttribute("deleteMessage"); } %>
 
-            <button class="btn btn-primary" onclick="openModal()">Create Report</button>
-
-            <div id="finalReport" class="report-options mt-3">
-                <!-- Display Final Report List -->
-                <h2>Final Report List</h2>
+                <h2>Final Report</h2>
+                <form style="" action="ExportExcel" method="get">
+                    <input type="submit" class="btn btn-outline-dark" value="Export to Excel" />
+                </form>
                 <table id="reportTable" class="table caption-top table-bordered">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>                      
-                            <th scope="col">Description</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">File</th>
-                            <th scope="col">Mentor ID</th>
+                            <th scope="col">Intern ID</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">Staff ID</th>
+                            <th scope="col">Name</th> 
+                            <th scope="col">Status Mission</th>
+                            <th scope="col">Hours For Work</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listOfFinalReport}" var="rpf">
+                        <c:forEach items="${listOfFinalReport}" var="rp" varStatus="loop1" >
                             <tr>
-                                <td>${rpf.reportId}</td>
-                                <td>${rpf.reportName}</td>
-                                <td>${rpf.reportDescription}</td>
-                                <td>${rpf.reportDate}</td>                            
-                                <td><a href="downloadFile?reportFile=${rpf.filedata}">Download</a></td>
-                                <td>${rpf.mentorId}</td>
-                                <td class="action-buttons">
-                                    <a href="editfnreport?reportId=${rpf.reportId}" class="btn btn-sm text-primary">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="deletefnreport?reportId=${rpf.reportId}" class="btn btn-sm text-primary">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-
+                                <td>${rp.internId}</td>
+                                <td>${rp.studentId}</td>
+                                <td>${rp.staffId}</td>
+                                <td>${rp.fullName}</td>
+                                <td>${totalfinished[loop1.index]}/${totalmission[loop1.index]}</td>
+                                <td>${rp.finalWorkTime}/560</td>
+                                <td>
+                                    <form action="SubmitReport" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button type="submit" class="btn btn-primary">Report</button>
+                                    </form>                                  
+                                </td>
+                                <td>
+                                    <form action="DetailReport" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button type="submit" class="btn btn-primary">View</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="UpdateFinalReport" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="DeleteReport" method="post">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button class="btn btn-danger" onclick="confirmDelete(${report.internId})">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+
             </div>
         </div>
     </body>
 
+    <script>
+
+        function confirmDelete(internId) {
+            var confirmation = confirm("Are you sure you want to delete this report?");
+            if (confirmation) {
+                var form = document.createElement("form");
+                form.method = "post";
+                form.action = "DeleteReport"; // Servlet URL
+
+                var hiddenField = document.createElement("input");
+                hiddenField.type = "hidden";
+                hiddenField.name = "internId";
+                hiddenField.value = internId;
+
+                form.appendChild(hiddenField);
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+            }
+        }
+    </script>
     <script src="js/sidebar.js"></script>
     <script src="js/mentorreport.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

@@ -147,10 +147,6 @@
         <servlet-class>controller.report.ActionReport</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteReport</servlet-name>
-        <servlet-class>controller.report.DeleteReport</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditReport</servlet-name>
         <servlet-class>controller.report.EditReport</servlet-class>
     </servlet>
@@ -185,10 +181,6 @@
     <servlet>
         <servlet-name>MidtermReportList</servlet-name>
         <servlet-class>controller.report.MidtermReportList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>FinalReportList</servlet-name>
-        <servlet-class>controller.report.FinalReportList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UploadMidterm</servlet-name>
@@ -334,7 +326,7 @@
         <servlet-name>DeleteCertificateServlet</servlet-name>
         <servlet-class>controller.certificate.DeleteCertificateServlet</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>FeedbackServlet</servlet-name>
         <servlet-class>controller.feedback.FeedbackServlet</servlet-class>
     </servlet>
@@ -349,6 +341,30 @@
     <servlet>
         <servlet-name>ViewFeedbackServlet</servlet-name>
         <servlet-class>controller.feedback.ViewFeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FinalReportList</servlet-name>
+        <servlet-class>controller.report.FinalReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteReport</servlet-name>
+        <servlet-class>controller.report.DeleteReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailReport</servlet-name>
+        <servlet-class>controller.report.DetailReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportExcel</servlet-name>
+        <servlet-class>controller.report.ExportExcel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitReport</servlet-name>
+        <servlet-class>controller.report.SubmitReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateFinalReport</servlet-name>
+        <servlet-class>controller.report.UpdateFinalReport</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
@@ -491,10 +507,6 @@
         <url-pattern>/actionreport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteReport</servlet-name>
-        <url-pattern>/deletereport</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditReport</servlet-name>
         <url-pattern>/editreport</url-pattern>
     </servlet-mapping>
@@ -529,10 +541,6 @@
     <servlet-mapping>
         <servlet-name>MidtermReportList</servlet-name>
         <url-pattern>/MidtermReportList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FinalReportList</servlet-name>
-        <url-pattern>/FinalReportList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UploadMidterm</servlet-name>
@@ -678,7 +686,7 @@
         <servlet-name>DeleteCertificateServlet</servlet-name>
         <url-pattern>/deleteCertificate</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>FeedbackServlet</servlet-name>
         <url-pattern>/Feedback</url-pattern>
     </servlet-mapping>
@@ -693,6 +701,30 @@
     <servlet-mapping>
         <servlet-name>ViewFeedbackServlet</servlet-name>
         <url-pattern>/ViewFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinalReportList</servlet-name>
+        <url-pattern>/FinalReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteReport</servlet-name>
+        <url-pattern>/DeleteReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailReport</servlet-name>
+        <url-pattern>/DetailReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportExcel</servlet-name>
+        <url-pattern>/ExportExcel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitReport</servlet-name>
+        <url-pattern>/SubmitReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFinalReport</servlet-name>
+        <url-pattern>/UpdateFinalReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

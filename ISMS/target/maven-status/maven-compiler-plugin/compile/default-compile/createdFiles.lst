@@ -11,6 +11,7 @@ controller\account\AddManager.class
 controller\DeleteMentorController.class
 controller\intern\SelectInternServlet.class
 dao\MyDAO.class
+controller\report\UpdateFinalReport.class
 dao\MissionReportDAO.class
 controller\EditMentorProfileByHR.class
 filter\SessionCheckFilter.class
@@ -40,6 +41,7 @@ controller\schedule\LoadScheduleServlet.class
 model\Role.class
 service\SessionTimeoutListener.class
 controller\intern\EditInternServlet.class
+controller\report\DetailReport.class
 com\group1\isms\resources\JakartaEE10Resource.class
 dao\CertificateDAO.class
 model\WeeklyReport.class
@@ -78,7 +80,9 @@ dao\MissionDAO.class
 model\Intern$InternStatus.class
 controller\UserProfileController.class
 controller\labroom\ViewInternListServlet.class
+controller\report\FinalReportList.class
 controller\mission\UpdateMissionServlet.class
+controller\report\DeleteReport.class
 dao\ScheduleMissionDAO.class
 dao\WorkOverTimeDAO.class
 controller\loginandlogout\LoginServlet.class
@@ -109,6 +113,7 @@ controller\attendance\EditAttendanceStatusSerlvet.class
 model\Mission$MissionStatus.class
 controller\account\Addmentor.class
 controller\news\AddNewsServlet.class
+controller\report\SubmitReport.class
 controller\labroom\ListLabRoomsServlet.class
 model\MentorWithStatus.class
 controller\EditManagerProfileByHR.class
@@ -123,6 +128,7 @@ dao\ManagerDAO.class
 service\AccountService.class
 dao\WeeklyReportDAO.class
 dao\InternDAO.class
+controller\report\ExportExcel.class
 controller\labroom\DeleteLabRoomServlet.class
 controller\EditProfileController.class
 service\SemesterService.class

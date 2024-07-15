@@ -97,7 +97,9 @@ public class AttendanceEndOfDay extends HttpServlet {
                         long minutes = TimeUnit.SECONDS.toMinutes(midtermDuration) - TimeUnit.HOURS.toMinutes(hours);
                         String timeString = hours + "." + minutes;
                         double midtermWorkTime = Double.parseDouble(timeString);
+                        double finalWorkTime = midtermWorkTime;
                         intern.setMidtermWorkTime(midtermWorkTime);
+                        intern.setFinalWorkTime(finalWorkTime);
                         intern.setInternId(intern.getInternId());
                         internDao.updateMidtermWorkTime(intern);
                         if (currentIndex1 == stopIndex1) {

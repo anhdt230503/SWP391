@@ -189,12 +189,14 @@ public class InternDAO extends MyDAO {
 
     public void updateMidtermWorkTime(Intern intern) {
         xSql = "UPDATE Intern\n"
-                + "SET midterm_work_time = ?\n"
+                + "SET midterm_work_time = ?,\n"
+                + "final_work_time = ?\n"
                 + "WHERE intern_id = ?;";
         try {
             ps = con.prepareStatement(xSql);
             ps.setDouble(1, intern.getMidtermWorkTime());
-            ps.setInt(2, intern.getInternId());
+            ps.setDouble(2, intern.getFinalWorkTime());
+            ps.setInt(3, intern.getInternId());
             ps.executeUpdate();
 
         } catch (Exception e) {

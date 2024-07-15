@@ -83,7 +83,6 @@
                 <i class="bi bi-flag-fill me-2"></i> Report
             </a>
             <ul class="dropdown-menu" aria-labelledby="reportDropdown">
-                <li><a class="dropdown-item" style="color: black" href="WeeklyReportList">Weekly Report</a></li>
                 <li><a class="dropdown-item" style="color: black" href="MidtermReportList">Midterm Report</a></li>
                 <li><a class="dropdown-item" style="color: black" href="FinalReportList">Final Report</a></li>
             </ul>
