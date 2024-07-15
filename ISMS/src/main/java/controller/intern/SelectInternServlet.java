@@ -47,7 +47,6 @@ public class SelectInternServlet extends HttpServlet {
         // get mentorId from Account
         Account account = accountDAO.getAccountByEmail(email);
         int mentorId = account.getMentorId();
-        System.out.println(mentorId);
 
         if (selectedInterns != null && mentorId != 0) {
             int currentInternCount = internAssignDAO.getInternCountByMentor(mentorId);

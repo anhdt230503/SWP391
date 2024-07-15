@@ -13,9 +13,7 @@
     <style>
         .center-button {
             text-align: center;
-            margin-bottom: 20px; 
-        }
-        .center-button button {
+            margin-bottom: 20px;
         }
     </style>
     <body>
@@ -26,9 +24,8 @@
                     <div class="row">
                         <div class="col-8 h3">List of Missions</div>
                         <div class="center-button">
-                            <a href="addMission.jsp"><button class="btn btn-primary">Add Mission</button></a>
+                            <a href="AddMissionServlet"><button class="btn btn-primary">Add Mission</button></a>
                         </div>
-                        <!-- Display error or success messages if any -->
                     <c:if test="${not empty errorMessage}">
                         <div class="alert alert-danger">${errorMessage}</div>
                     </c:if>
@@ -43,11 +40,12 @@
                             <th>Name</th>
                             <th>Status</th>
                             <th>Description</th>
-                            <th>Link</th>
+                            <th>Task</th>
                             <th>Start Date</th>
                             <th>Deadline</th>
-                            <th>Mentor ID</th>
-                            <th>Intern ID</th>
+                            <th>Mentor Name</th>
+                            <th>Intern Name</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,16 +53,23 @@
                             <tr>
                                 <td>${mission.misId}</td>
                                 <td>${mission.misName}</td>
-                                <td>${mission.misStatus}</td> <!-- Trạng thái sẽ được hiển thị tự động -->
+                                <td>${mission.misStatus}</td>
                                 <td>${mission.misDescription}</td>
-                                <td><a href="${mission.link}" target="_blank">${mission.link}</a></td>
+                                <td><a href="DownFileMisson?link=${mission.link}">${mission.link}</a></td>                        
                                 <td>${mission.startDate}</td>
                                 <td>${mission.deadline}</td>
-                                <td>${mission.mentorId}</td>
-                                <td>${mission.internId}</td>
+                                <td>${mission.mentorFullName}</td> 
+                                <td>${mission.internFullName}</td>
+                                <td>
+                                    <a href="UpdateMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary ">
+                                        <i class="bi bi-pencil"></i> <!-- Icon Pencil -->
+                                    </a>
+                                    <a href="DeleteMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary " onclick="return confirm('Are you sure you want to delete this mission?');">
+                                        <i class="bi bi-trash"></i> <!-- Icon Trash -->
+                                    </a>
+                                </td>
                             </tr>
                         </c:forEach>
-
                     </tbody>
                 </table>
             </div>

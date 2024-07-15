@@ -67,12 +67,84 @@
         <servlet-class>controller.mission.AddMissionServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ActionReport</servlet-name>
-        <servlet-class>controller.report.ActionReport</servlet-class>
+        <servlet-name>CheckInTime</servlet-name>
+        <servlet-class>controller.attendance.CheckInTime</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteReport</servlet-name>
-        <servlet-class>controller.report.DeleteReport</servlet-class>
+        <servlet-name>AttendanceHistoryServlet</servlet-name>
+        <servlet-class>controller.attendance.AttendanceHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAttendanceStatusSerlvet</servlet-name>
+        <servlet-class>controller.attendance.EditAttendanceStatusSerlvet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadAttendanceServlet</servlet-name>
+        <servlet-class>controller.attendance.LoadAttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InternAttendanceHistoryServlet</servlet-name>
+        <servlet-class>controller.attendance.InternAttendanceHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteLabRoomServlet</servlet-name>
+        <servlet-class>controller.labroom.DeleteLabRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateLabRoomServlet</servlet-name>
+        <servlet-class>controller.labroom.UpdateLabRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewInternListServlet</servlet-name>
+        <servlet-class>controller.labroom.ViewInternListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>controller.EditProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteMentorController</servlet-name>
+        <servlet-class>controller.DeleteMentorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteManagerController</servlet-name>
+        <servlet-class>controller.DeleteManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlockUserController</servlet-name>
+        <servlet-class>controller.BlockUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditMentorProfileByHR</servlet-name>
+        <servlet-class>controller.EditMentorProfileByHR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditManagerProfileByHR</servlet-name>
+        <servlet-class>controller.EditManagerProfileByHR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteMissionServlet</servlet-name>
+        <servlet-class>controller.mission.DeleteMissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateMissionServlet</servlet-name>
+        <servlet-class>controller.mission.UpdateMissionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownFileMisson</servlet-name>
+        <servlet-class>controller.mission.DownFileMisson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetInternServlet</servlet-name>
+        <servlet-class>controller.mission.GetInternServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActionReport</servlet-name>
+        <servlet-class>controller.report.ActionReport</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditReport</servlet-name>
@@ -147,8 +219,28 @@
         <servlet-class>controller.schedule.GetName</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetIDMission</servlet-name>
-        <servlet-class>controller.schedule.GetIDMission</servlet-class>
+        <servlet-name>SubmitReport</servlet-name>
+        <servlet-class>controller.report.SubmitReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportExcel</servlet-name>
+        <servlet-class>controller.report.ExportExcel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailReport</servlet-name>
+        <servlet-class>controller.report.DetailReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateReport</servlet-name>
+        <servlet-class>controller.report.UpdateReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateFinalReport</servlet-name>
+        <servlet-class>controller.report.UpdateFinalReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteReport</servlet-name>
+        <servlet-class>controller.report.DeleteReport</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
@@ -211,12 +303,84 @@
         <url-pattern>/AddMissionServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ActionReport</servlet-name>
-        <url-pattern>/actionreport</url-pattern>
+        <servlet-name>CheckInTime</servlet-name>
+        <url-pattern>/checkInTime</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteReport</servlet-name>
-        <url-pattern>/deletereport</url-pattern>
+        <servlet-name>AttendanceHistoryServlet</servlet-name>
+        <url-pattern>/attendanceHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAttendanceStatusSerlvet</servlet-name>
+        <url-pattern>/editAttendanceStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAttendanceServlet</servlet-name>
+        <url-pattern>/loadAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InternAttendanceHistoryServlet</servlet-name>
+        <url-pattern>/internAttendanceHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteLabRoomServlet</servlet-name>
+        <url-pattern>/DeleteLabRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateLabRoomServlet</servlet-name>
+        <url-pattern>/UpdateLabRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewInternListServlet</servlet-name>
+        <url-pattern>/ViewInternListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/UserProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/EditProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteMentorController</servlet-name>
+        <url-pattern>/DeleteMentorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteManagerController</servlet-name>
+        <url-pattern>/DeleteManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlockUserController</servlet-name>
+        <url-pattern>/BlockUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditMentorProfileByHR</servlet-name>
+        <url-pattern>/EditMentorProfileByHR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditManagerProfileByHR</servlet-name>
+        <url-pattern>/EditManagerProfileByHR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteMissionServlet</servlet-name>
+        <url-pattern>/DeleteMissionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateMissionServlet</servlet-name>
+        <url-pattern>/UpdateMissionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownFileMisson</servlet-name>
+        <url-pattern>/DownFileMisson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetInternServlet</servlet-name>
+        <url-pattern>/GetInternServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActionReport</servlet-name>
+        <url-pattern>/actionreport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditReport</servlet-name>
@@ -291,10 +455,41 @@
         <url-pattern>/GetName</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetIDMission</servlet-name>
-        <url-pattern>/GetIDMission</url-pattern>
+        <servlet-name>SubmitReport</servlet-name>
+        <url-pattern>/SubmitReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportExcel</servlet-name>
+        <url-pattern>/ExportExcel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailReport</servlet-name>
+        <url-pattern>/DetailReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateReport</servlet-name>
+        <url-pattern>/UpdateReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFinalReport</servlet-name>
+        <url-pattern>/UpdateFinalReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteReport</servlet-name>
+        <url-pattern>/DeleteReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
     </session-config>
+    <filter>
+        <filter-name>SessionCheckFilter</filter-name>
+        <filter-class>filter.SessionCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionCheckFilter</filter-name>
+        <url-pattern>/Home.jsp</url-pattern>
+    </filter-mapping>
+    <listener>
+        <listener-class>service.SessionTimeoutListener</listener-class>
+    </listener>
 </web-app>

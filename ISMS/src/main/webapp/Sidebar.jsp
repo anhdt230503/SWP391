@@ -72,15 +72,20 @@
                 <i class="bi bi-door-open-fill me-2"></i> Report
             </a>
             <ul class="dropdown-menu" aria-labelledby="reportDropdown">
-                <li><a class="dropdown-item" style="color: black" href="WeeklyReportList">Weekly Report</a></li>
                 <li><a class="dropdown-item" style="color: black" href="MidtermReportList">Midterm Report</a></li>
                 <li><a class="dropdown-item" style="color: black" href="FinalReportList">Final Report</a></li>
             </ul>
         </li>
-<li>
+        <li>
             <a href="ScheduleList" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
                 <i class="bi bi-door-open-fill me-2"></i> Schedule
+            </a>
+        </li>
+        <li>
+            <a href="attendanceHistory" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-alarm-fill me-2"></i> Attendance
             </a>
         </li>
     </ul>

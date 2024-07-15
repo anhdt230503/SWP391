@@ -18,75 +18,51 @@
 
     </head>
     <body>
-
         <jsp:include page="Sidebar.jsp"></jsp:include>
             <div class="main-content">
             <jsp:include page="Topbar.jsp"></jsp:include>
-
-                <div id="uploadModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <div class="container">
-                            <h2>Create Report</h2>
-                            <form action="UploadMidterm" method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label>Report Title:</label>
-                                    <select id="reportTitleModal" value="reportTitle" name="reportTitle" required>
-                                        <option value="Midterm Report">Midterm Report</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="reportDescription">Description:</label>
-                                    <textarea id="reportDescription" name="reportDescription" placeholder="Enter description..." cols="50" rows="5" required></textarea>
-                                </div>
-                                <a href="DownloadExampleMT">Example File</a>
-                            <div class="form-group">
-                                <label for="reportFile">Upload Report File:</label>
-                                <input type="file" id="reportFile" name="reportFile" accept=".xlsx, .xls" required>
-                            </div>
-                            <button class="btn btn-primary" type="submit">Upload File</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn btn-primary" onclick="openModal()">Create Report</button>
-            
-            <div  class="report-options mt-3">
-                <h2>Midterm Report List</h2>
+                <div  class="report-options mt-3">
+                <% if (request.getAttribute("errorMessage") != null) { %>
+                <p style="color: red;text-align: center;font-size: 20px;"><%= request.getAttribute("errorMessage") %></p>
+                <p><a class="btn btn-primary" href="<%= request.getContextPath() %>/FinalReportList">Quay lại</a></p>
+                <% } 
+                %>
+                <h2>Midterm Report</h2>
+                <form style="" action="ExportExcel" method="get">
+                    <input type="hidden" name="mentorId" value="${param.mentorId}" />
+                    <input type="submit" value="Export to Excel" />
+                </form>
                 <table id="reportTable" class="table caption-top table-bordered">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>                      
-                            <th scope="col">Description</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">File</th>
-                            <th scope="col">Mentor ID</th>
+                            <th scope="col">Intern ID</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">Staff ID</th>
+                            <th scope="col">Name</th> 
+                            <th scope="col">Status Mission</th>
+                            <th scope="col">Hours For Work</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listOfMidtermReport}" var="rpm">
+                        <c:forEach items="${listOfFinalReport}" var="rp" varStatus="loop1" >
                             <tr>
-                                <td>${rpm.reportId}</td>
-                                <td>${rpm.reportName}</td>
-                                <td>${rpm.reportDescription}</td>
-                                <td>${rpm.reportDate}</td>                            
-                                <td><a href="downloadFile?reportFile=${rpm.filedata}">Download</a></td>
-                                <td>${rpm.mentorId}</td>
-                                <td class="action-buttons">
-                                    <a href="editmtreport?reportId=${rpm.reportId}" class="btn btn-sm text-primary">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="mtreportdelete?reportId=${rpm.reportId}" class="btn btn-sm text-primary">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
+                                <td>${rp.internId}</td>
+                                <td>${rp.studentId}</td>
+                                <td>${rp.staffId}</td>
+                                <td>${rp.fullName}</td>
+                                <td>${totalfinished[loop1.index]}/${totalmission[loop1.index]}</td>
+                                <td></td>
+                                <td>
+                                    <form action="SubmitReport" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button type="submit" class="btn btn-primary">Report</button>
+                                    </form>                   </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+
             </div>
         </div>
     </body>

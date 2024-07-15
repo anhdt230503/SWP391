@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Manager {
     
     private int managerId;
-    private String fullName;
+    private String fullname;
     private String email;
     private Date birthDate;
     private String phoneNumber;
@@ -21,9 +21,9 @@ public class Manager {
     public Manager() {
     }
 
-    public Manager(int managerId, String fullName, String email, Date birthDate, String phoneNumber) {
+    public Manager(int managerId, String fullname, String email, Date birthDate, String phoneNumber) {
         this.managerId = managerId;
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.email = email;
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
@@ -37,12 +37,13 @@ public class Manager {
         this.managerId = managerId;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -71,7 +72,7 @@ public class Manager {
 
     @Override
     public String toString() {
-        return "Manager{" + "managerId=" + managerId + ", fullName=" + fullName + ", email=" + email + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + '}';
+        return "Manager{" + "managerId=" + managerId + ", fullname=" + fullname + ", email=" + email + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + '}';
     }
     
     

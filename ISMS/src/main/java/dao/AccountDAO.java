@@ -1,4 +1,4 @@
-                /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -6,6 +6,7 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.Account;
 
 /**
@@ -42,10 +43,10 @@ public class AccountDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, account.getEmail());
             ps.setInt(2, account.getInternId());
-            } catch (Exception e) {
+            ps.executeUpdate();
+        } catch (Exception e) {
         }
     }
-
 
     public void insertMentorAccount(Account account) {
         xSql = "INSERT INTO Account (email, mentor_id, role_id)\n"
@@ -60,7 +61,6 @@ public class AccountDAO extends MyDAO {
         }
     }
 
-    
     public Account getAccountByEmail(String email) {
         xSql = "SELECT * FROM Account where email =?";
         try {
@@ -83,12 +83,14 @@ public class AccountDAO extends MyDAO {
 
     public static void main(String[] args) {
         
-        AccountDAO accDAO = new AccountDAO();
-        
-        Account acc = accDAO.getAccountByEmail("daoa230503@gmail.com");
-        System.out.println(acc);
-    }
+        Account account = new Account();
 
+        AccountDAO accDAO = new AccountDAO();
+
+        account.setEmail("anhdthe176337@fpt.edu.vn");
+        account.setInternId(1);
+        accDAO.insertInternAccount(account);
+    }
 
     public void insertManagerAccount(Account account) {
         xSql = "INSERT INTO Account (email, manager_id, role_id)\n"
@@ -119,7 +121,6 @@ public class AccountDAO extends MyDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Xử lý exception tại đây (ném ngoại lệ hoặc ghi log)
         } finally {
             try {
                 if (resultSet != null) {
@@ -136,4 +137,83 @@ public class AccountDAO extends MyDAO {
         return exists;
     }
 
+    public void updateAccountMentorStatus(int mentorId) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET status = (CASE WHEN status = 1 THEN 0 ELSE 1 END) WHERE mentor_id = ?")) {
+            stmt.setInt(1, mentorId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Account getAccountByID(int acccountId) {
+        Account account = null;
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Account WHERE account_id = ?")) {
+            stmt.setInt(1, acccountId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    int status = rs.getInt("status");
+                    int managerId = rs.getInt("manager_id");
+                    int mentorId = rs.getInt("mentor_id");
+                    int internId = rs.getInt("intern_id");
+                    int role = rs.getInt("role_id");
+
+                    account = new Account(acccountId, email, status, managerId, mentorId, internId, role);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
+
+    public Account getAccountMentor(int mentorId) {
+        Account account = null;
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Account WHERE mentor_id = ?")) {
+            stmt.setInt(1, mentorId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    int status = rs.getInt("status");
+                    int managerId = rs.getInt("manager_id");
+                    int mentorid = rs.getInt("mentor_id");
+                    int internId = rs.getInt("intern_id");
+                    int role = rs.getInt("role_id");
+                    
+                    account = new Account(internId, email, status, managerId, mentorid, internId, role);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
+    
+    public void updateEmailAccountMentor(String email, int mentorId){
+        try(PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET email = ? WHERE mentor_id = ?")){
+            stmt.setString(1, email);
+            stmt.setInt(2, mentorId);
+            
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+        public void updateEmailAccountManager(String email, int managerId){
+        try(PreparedStatement stmt = connection.prepareStatement("UPDATE Account SET email = ? WHERE manager_id = ?")){
+            stmt.setString(1, email);
+            stmt.setInt(2, managerId);
+            
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+//    public static void main(String[] args) {
+//        AccountDAO accountDAO = new AccountDAO();
+//        accountDAO.updateAccountMentorStatus(3);
+//    }
 }

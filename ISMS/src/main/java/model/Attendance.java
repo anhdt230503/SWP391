@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -11,24 +12,36 @@ import java.sql.Timestamp;
  * @author haidu
  */
 public class Attendance {
-    
+
+    public enum AttendanceStatus {
+        NOT_YET,
+        PRESENT,
+        ABSENT
+    }
+
     private int attendanceId;
     private int internId;
     private int scheduleId;
+    private Date attendDate;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
-    private String ipAddress;
+    private String totalWorkTime;
+    private AttendanceStatus status;
+    private long duration;
 
     public Attendance() {
     }
 
-    public Attendance(int attendanceId, int internId, int scheduleId, Timestamp checkInTime, Timestamp checkOutTime, String ipAddress) {
+    public Attendance(int attendanceId, int internId, int scheduleId, Date attendDate, Timestamp checkInTime, Timestamp checkOutTime, String totalWorkTime, AttendanceStatus status, long duration) {
         this.attendanceId = attendanceId;
         this.internId = internId;
         this.scheduleId = scheduleId;
+        this.attendDate = attendDate;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
-        this.ipAddress = ipAddress;
+        this.totalWorkTime = totalWorkTime;
+        this.status = status;
+        this.duration = duration;
     }
 
     public int getAttendanceId() {
@@ -55,6 +68,14 @@ public class Attendance {
         this.scheduleId = scheduleId;
     }
 
+    public Date getAttendDate() {
+        return attendDate;
+    }
+
+    public void setAttendDate(Date attendDate) {
+        this.attendDate = attendDate;
+    }
+
     public Timestamp getCheckInTime() {
         return checkInTime;
     }
@@ -71,13 +92,34 @@ public class Attendance {
         this.checkOutTime = checkOutTime;
     }
 
-    public String getIpAddress() {
-        return ipAddress;
+    public String getTotalWorkTime() {
+        return totalWorkTime;
     }
 
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
+    public void setTotalWorkTime(String totalWorkTime) {
+        this.totalWorkTime = totalWorkTime;
     }
-    
+
+    public AttendanceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AttendanceStatus status) {
+        this.status = status;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "Attendance{" + "attendanceId=" + attendanceId + ", internId=" + internId + ", scheduleId=" + scheduleId + ", attendDate=" + attendDate + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", totalWorkTime=" + totalWorkTime + ", status=" + status + ", duration=" + duration + '}';
+    }
+
     
 }

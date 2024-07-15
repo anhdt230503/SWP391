@@ -12,78 +12,116 @@ import java.sql.Timestamp;
  */
 public class FinalReport {
 
-    private int reportId;
-    private String reportName;
-    private String reportDescription;
-    private Timestamp reportDate;
-    private String filedata;
-    private int mentorId;
+    private int mission_rp_id;
+    private int mentor_id;
+    private int intern_id;
+    private String intern_name;
+    private String staff_id;
+    private double soft_score;
+    private double skills_score;
+    private double attitue_score;
+    private double final_score;
+    private Timestamp submission_date;
 
     public FinalReport() {
     }
 
-    public FinalReport(int reportId, String reportName, String reportDescription, Timestamp reportDate, String filedata, int mentorId) {
-        this.reportId = reportId;
-        this.reportName = reportName;
-        this.reportDescription = reportDescription;
-        this.reportDate = reportDate;
-        this.filedata = filedata;
-        this.mentorId = mentorId;
+    public FinalReport(int mission_rp_id, int mentor_id, int intern_id, String intern_name, String staff_id, double soft_score, double skills_score, double attitue_score, double final_score, Timestamp submission_date) {
+        this.mission_rp_id = mission_rp_id;
+        this.mentor_id = mentor_id;
+        this.intern_id = intern_id;
+        this.intern_name = intern_name;
+        this.staff_id = staff_id;
+        this.soft_score = soft_score;
+        this.skills_score = skills_score;
+        this.attitue_score = attitue_score;
+        this.final_score = final_score;
+        this.submission_date = submission_date;
     }
 
-    public int getReportId() {
-        return reportId;
+    public int getMission_rp_id() {
+        return mission_rp_id;
     }
 
-    public void setReportId(int reportId) {
-        this.reportId = reportId;
+    public void setMission_rp_id(int mission_rp_id) {
+        this.mission_rp_id = mission_rp_id;
     }
 
-    public String getReportName() {
-        return reportName;
+    public int getMentor_id() {
+        return mentor_id;
     }
 
-    public void setReportName(String reportName) {
-        this.reportName = reportName;
+    public void setMentor_id(int mentor_id) {
+        this.mentor_id = mentor_id;
     }
 
-    public String getReportDescription() {
-        return reportDescription;
+    public int getIntern_id() {
+        return intern_id;
     }
 
-    public void setReportDescription(String reportDescription) {
-        this.reportDescription = reportDescription;
+    public void setIntern_id(int intern_id) {
+        this.intern_id = intern_id;
     }
 
-    public Timestamp getReportDate() {
-        return reportDate;
+    public String getIntern_name() {
+        return intern_name;
     }
 
-    public void setReportDate(Timestamp reportDate) {
-        this.reportDate = reportDate;
+    public void setIntern_name(String intern_name) {
+        this.intern_name = intern_name;
     }
 
-    public String getFiledata() {
-        return filedata;
+    public String getStaff_id() {
+        return staff_id;
     }
 
-    public void setFiledata(String filedata) {
-        this.filedata = filedata;
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
     }
 
-    public int getMentorId() {
-        return mentorId;
+    public double getSoft_score() {
+        return soft_score;
     }
 
-    public void setMentorId(int mentorId) {
-        this.mentorId = mentorId;
+    public void setSoft_score(double soft_score) {
+        this.soft_score = soft_score;
+    }
+
+    public double getSkills_score() {
+        return skills_score;
+    }
+
+    public void setSkills_score(double skills_score) {
+        this.skills_score = skills_score;
+    }
+
+    public double getAttitue_score() {
+        return attitue_score;
+    }
+
+    public void setAttitue_score(double attitue_score) {
+        this.attitue_score = attitue_score;
+    }
+
+    public double getFinal_score() {
+        return final_score;
+    }
+
+    public void setFinal_score(double final_score) {
+        this.final_score = final_score;
+    }
+
+    public Timestamp getSubmission_date() {
+        return submission_date;
+    }
+
+    public void setSubmission_date(Timestamp submission_date) {
+        this.submission_date = submission_date;
     }
 
     @Override
     public String toString() {
-        return "FinalReport{" + "reportId=" + reportId + ", reportName=" + reportName + ", reportDescription=" + reportDescription + ", reportDate=" + reportDate + ", filedata=" + filedata + ", mentorId=" + mentorId + '}';
+        return "FinalReport{" + "mission_rp_id=" + mission_rp_id + ", mentor_id=" + mentor_id + ", intern_id=" + intern_id + ", intern_name=" + intern_name + ", staff_id=" + staff_id + ", soft_score=" + soft_score + ", skills_score=" + skills_score + ", attitue_score=" + attitue_score + ", final_score=" + final_score + ", submission_date=" + submission_date + '}';
     }
-    
-    
-    
+
 }

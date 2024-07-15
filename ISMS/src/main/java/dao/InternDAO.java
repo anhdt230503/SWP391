@@ -17,7 +17,7 @@ public class InternDAO extends MyDAO {
 
     public void insertIntern(Intern intern) {
 
-        String xSql = "INSERT INTO Intern (intern_id, student_id, email, full_name, phone_number, major, company, job_title, link_cv, staff_id, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String xSql = "INSERT INTO Intern (intern_id, student_id, email, full_name, phone_number, major, company, job_title, link_cv, staff_id, status, upload_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, intern.getInternId());
@@ -31,6 +31,7 @@ public class InternDAO extends MyDAO {
             ps.setString(9, intern.getLinkCv());
             ps.setString(10, intern.getStaffId());
             ps.setString(11, intern.getStatus().toString());
+            ps.setTimestamp(12, intern.getUploadDate());
             ps.executeUpdate();
 //            con.commit(); // Thêm commit transaction
         } catch (SQLException e) {
@@ -65,15 +66,18 @@ public class InternDAO extends MyDAO {
                         rs.getString(10),
                         status,
                         rs.getInt(12),
-                        rs.getTimestamp(13)));
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
 
             }
         } catch (Exception e) {
         }
         return list;
     }
-    
-    public int getLastInternId () {
+
+
+    public int getLastInternId() {
         xSql = "SELECT MAX(intern_id) FROM Intern";
         try {
             ps = con.prepareStatement(xSql);
@@ -86,7 +90,7 @@ public class InternDAO extends MyDAO {
         return 0;
     }
 
-    public Intern getInternByStudentId(String studentId) {
+  public Intern getInternByStudentId(String studentId) {
         xSql = "select * from Intern \n"
                 + "where student_id = ?";
 
@@ -109,12 +113,15 @@ public class InternDAO extends MyDAO {
                         rs.getString(10),
                         status,
                         rs.getInt(12),
-                        rs.getTimestamp(13));
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15));
             }
         } catch (Exception e) {
         }
         return null;
     }
+
 
     public void updateIntern(Intern intern) {
         xSql = "UPDATE Intern\n"
@@ -125,6 +132,7 @@ public class InternDAO extends MyDAO {
                 + "    company = ?,\n"
                 + "    job_title = ?,\n"
                 + "    link_cv = ?\n"
+                + "    upload_date = ?\n"
                 + "WHERE student_id = ?;";
         try {
             ps = con.prepareStatement(xSql);
@@ -135,12 +143,52 @@ public class InternDAO extends MyDAO {
             ps.setString(5, intern.getCompany());
             ps.setString(6, intern.getJobTitle());
             ps.setString(7, intern.getLinkCv());
-            ps.setString(8, intern.getStudentId());
+            ps.setTimestamp(8, intern.getUploadDate());
+            ps.setString(9, intern.getStudentId());
             ps.executeUpdate();
-                
+
         } catch (Exception e) {
         }
     }
+    
+
+    // hàm dành cho chức năng xem lịch sử điểm danh cho Mentor
+   public List<Intern> getAllInternForMentor(int mentorId) {
+        List<Intern> list = new ArrayList<>();
+
+        xSql = "select * FROM Intern i\n"
+                + "join InternAssign ia\n"
+                + "on i.intern_id = ia.intern_id \n"
+                + "where ia.mentor_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString(11);
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                list.add(new Intern(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
 
@@ -148,7 +196,6 @@ public class InternDAO extends MyDAO {
         System.out.println(internDAO.getInternByStudentId("HE170364"));
         System.out.println(internDAO.getLastInternId());
 
-        
     }
 
 }

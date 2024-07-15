@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
 import model.FinalReport;
+import model.Intern;
 
 /**
  *
@@ -49,7 +50,6 @@ public class FinalReportList extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -61,26 +61,25 @@ public class FinalReportList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<FinalReport> listOfFinalReport;
+        List<Intern> listOfFinalReport;
+        List<Integer> totalmission;
+        List<Integer> totalfinished;
+        
         FinalReportDAO finalReportDAO = new FinalReportDAO();
-        listOfFinalReport = finalReportDAO.getAllFinalReport();
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         AccountDAO accountDAO = new AccountDAO();
         Account account = accountDAO.getAccountByEmail(email);
-        int role = account.getRoleId();
-         if (role == 2) {
-            listOfFinalReport = finalReportDAO.getAllFinalReport();
-            request.setAttribute("listOfFinalReport", listOfFinalReport);
-        } else if (role == 3) {
-            int mentorId= account.getMentorId();
-            listOfFinalReport = finalReportDAO.getAllFinalReportbyID(mentorId);
-            request.setAttribute("listOfFinalReport", listOfFinalReport);
-        }else{
-            request.getRequestDispatcher("FinalReport.jsp").forward(request, response);
-        }
-
+        int mentorId = account.getMentorId();
+        int internId = account.getInternId();
+        listOfFinalReport = finalReportDAO.getStudent(mentorId);
+        totalmission = finalReportDAO.getTotalMissions();
+        totalfinished = finalReportDAO.getTotalFinished();
+        
+     
         request.setAttribute("listOfFinalReport", listOfFinalReport);
+        request.setAttribute("totalmission", totalmission);
+        request.setAttribute("totalfinished", totalfinished);
         request.getRequestDispatcher("/FinalReport.jsp").forward(request, response);
     }
 

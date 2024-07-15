@@ -11,7 +11,6 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
-        /* Center the form on the page */
         #createForm {
             display: flex;
             flex-direction: column;
@@ -27,7 +26,6 @@
             margin-top: 50px;
         }
 
-        /* Style form elements */
         .form-group {
             width: 100%;
             margin-bottom: 15px;
@@ -50,7 +48,6 @@
             transition: border-color 0.3s;
         }
 
-        /* Add focus effect to input fields */
         input[type="text"]:focus,
         input[type="number"]:focus {
             border-color: #007bff;
@@ -73,6 +70,11 @@
             background-color: #0056b3;
         }
 
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+
     </style>
     <body>
         <jsp:include page="Sidebar.jsp"></jsp:include>
@@ -82,7 +84,8 @@
                     <div class="container mt-5">
                         <h2>Lab Room Management</h2>
                         <button class="btn btn-primary mb-3" id="toggleFormButton">Create Lab Room</button>
-                        <form id="createForm" action="ListLabRoomsServlet" method="POST">
+                        <form id="createForm" action="ListLabRoomsServlet" method="POST" style="display: none;">
+
                             <div class="form-group">
                                 <label for="roomName">Room Name:</label>
                                 <input type="text" class="form-control" id="roomName" name="roomName" required>
@@ -100,6 +103,9 @@
                         <button type="submit" class="btn btn-primary">Create Lab Room</button>
                     </form>
                 </div>
+                <c:if test="${not empty errorMessage}">
+                    <div class="error-message">${errorMessage}</div>
+                </c:if>
                 <table class="table caption-top table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -107,6 +113,7 @@
                             <th scope="col">Room Name</th>
                             <th scope="col">is Assigned</th>
                             <th scope="col">Mentor Name</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,6 +123,17 @@
                                 <td>${o.roomName}</td>
                                 <td>${o.assigned}</td>
                                 <td>${o.mentorFullName}</td>
+                                <td>
+                                    <a href="UpdateLabRoomServlet?roomId=${o.roomId}" class="btn btn-sm text-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="DeleteLabRoomServlet?roomId=${o.roomId}" class="btn btn-sm text-primary">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                    <a href="ViewInternListServlet?mentorId=${o.mentorId}" class="btn btn-sm btn-info">
+                                        <i class="bi bi-person-lines-fill"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>

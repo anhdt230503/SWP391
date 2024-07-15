@@ -66,9 +66,6 @@ public class Addmentor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Mentor mentor = (Mentor) session.getAttribute("mentor");
-
         MentorDAO mentorDAO = new MentorDAO();
         AccountDAO accountDAO = new AccountDAO();
         MentorService mentorservice = new MentorService();
@@ -95,10 +92,8 @@ public class Addmentor extends HttpServlet {
         
         accountDAO.insertMentorAccount(newAccount);
 
-//            response.sendRedirect("MentorManageController");
-     request.getRequestDispatcher("MentorManageController").forward(request, response);
     }
-           
+        request.getRequestDispatcher("MentorManageController").forward(request, response);
     }
 
     /**
