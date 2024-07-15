@@ -49,7 +49,8 @@
                         <form method="get" action="mission">
                             <div class="input-group">
                                 <select class="form-select" name="status" onchange="this.form.submit()">
-                                    <option value="">All Statuses</option>                                <option value="NOT_START" <c:if test="${param.status == 'NOT_START'}">selected</c:if>>NOT_START</option>
+                                    <option value="">All Statuses</option>                                
+                                    <option value="NOT_START" <c:if test="${param.status == 'NOT_START'}">selected</c:if>>NOT_START</option>
                                 <option value="ON_GOING" <c:if test="${param.status == 'ON_GOING'}">selected</c:if>>ON_GOING</option>
                                 <option value="MISSING" <c:if test="${param.status == 'MISSING'}">selected</c:if>>MISSING</option>
                                 <option value="FINISHED" <c:if test="${param.status == 'FINISHED'}">selected</c:if>>FINISHED</option>

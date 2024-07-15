@@ -60,17 +60,11 @@ public class DownFileMisson1 extends HttpServlet {
     throws ServletException, IOException {
         System.out.println("doGet");
         String file_path = request.getParameter("file_path");
-        
         System.out.println("File Name: " + file_path);
-
         Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
-
         System.out.println("Upload Directory: " + uploadDirectory);
-
         Path filePath = uploadDirectory.resolve(file_path);
-        
         System.out.println("File Path: " + filePath);
-
         File downloadFile = filePath.toFile();
         System.out.println("Download File: " + downloadFile);
         if (!downloadFile.exists()) {
@@ -78,7 +72,6 @@ public class DownFileMisson1 extends HttpServlet {
             response.getWriter().flush();
             return;
         }
-
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;filename=" + file_path);
 
