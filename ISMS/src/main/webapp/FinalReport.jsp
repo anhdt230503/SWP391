@@ -57,9 +57,12 @@
                 <% session.removeAttribute("deleteMessage"); } %>
 
                 <h2>Final Report</h2>
-                <form style="" action="ExportExcel" method="get">
-                    <input type="submit" class="btn btn-outline-dark" value="Export to Excel" />
-                </form>
+                <c:if test="${sessionScope.acc.roleId == 3}">
+                    <form style="" action="ExportExcel" method="get">
+                        <input type="submit" class="btn btn-outline-dark" value="Export to Excel" />
+                    </form>
+                </c:if>
+
                 <table id="reportTable" class="table caption-top table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -81,30 +84,33 @@
                                 <td>${rp.fullName}</td>
                                 <td>${totalfinished[loop1.index]}/${totalmission[loop1.index]}</td>
                                 <td>${rp.finalWorkTime}/560</td>
-                                <td>
-                                    <form action="SubmitReport" method="get">
-                                        <input type="hidden" name="internId" value="${rp.internId}" />
-                                        <button type="submit" class="btn btn-primary">Report</button>
-                                    </form>                                  
-                                </td>
+
                                 <td>
                                     <form action="DetailReport" method="get">
                                         <input type="hidden" name="internId" value="${rp.internId}" />
                                         <button type="submit" class="btn btn-primary">View</button>
                                     </form>
                                 </td>
-                                <td>
-                                    <form action="UpdateFinalReport" method="get">
-                                        <input type="hidden" name="internId" value="${rp.internId}" />
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="DeleteReport" method="post">
-                                        <input type="hidden" name="internId" value="${rp.internId}" />
-                                        <button class="btn btn-danger" onclick="confirmDelete(${report.internId})">Delete</button>
-                                    </form>
-                                </td>
+                                <c:if test="${sessionScope.acc.roleId == 2}">
+                                    <td>
+                                        <form action="SubmitReport" method="get">
+                                            <input type="hidden" name="internId" value="${rp.internId}" />
+                                            <button type="submit" class="btn btn-primary">Report</button>
+                                        </form>                                  
+                                    </td>
+                                    <td>
+                                        <form action="UpdateFinalReport" method="get">
+                                            <input type="hidden" name="internId" value="${rp.internId}" />
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="DeleteReport" method="post">
+                                            <input type="hidden" name="internId" value="${rp.internId}" />
+                                            <button class="btn btn-danger" onclick="confirmDelete(${report.internId})">Delete</button>
+                                        </form>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </tbody>

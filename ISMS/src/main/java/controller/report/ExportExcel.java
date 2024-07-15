@@ -64,7 +64,9 @@ public class ExportExcel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String filePath = "C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\main\\webapp\\file_example\\Example_Final.xlsx";
+//       String filePath = "C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\main\\webapp\\file_example\\Example_Final.xlsx";
+            String filePath = getServletContext().getRealPath("/file_example/Example_Final.xlsx");
+
         FileInputStream fileInputStream = new FileInputStream(filePath);
         Workbook workbook = new XSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);

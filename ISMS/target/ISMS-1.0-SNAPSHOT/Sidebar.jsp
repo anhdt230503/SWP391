@@ -77,16 +77,18 @@
                 <i class="bi bi-door-open-fill me-2"></i> Lab Room
             </a>
         </li>
-        <li>
-            <a href="mentorreportlist" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-flag-fill me-2"></i> Report
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="reportDropdown">
-                <li><a class="dropdown-item" style="color: black" href="MidtermReportList">Midterm Report</a></li>
-                <li><a class="dropdown-item" style="color: black" href="FinalReportList">Final Report</a></li>
-            </ul>
-        </li>
+        <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
+            <li>
+                <a href="mentorreportlist" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-flag-fill me-2"></i> Report
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="reportDropdown">
+                    <li><a class="dropdown-item" style="color: black" href="MidtermReportList">Midterm Report</a></li>
+                    <li><a class="dropdown-item" style="color: black" href="FinalReportList">Final Report</a></li>
+                </ul>
+            </li>
+        </c:if>
         <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
 
             <li>

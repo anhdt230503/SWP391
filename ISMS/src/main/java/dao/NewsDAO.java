@@ -128,7 +128,8 @@ public class NewsDAO extends MyDAO {
         xSql = "SELECT  n.news_id, n.title, n.content, m.manager_id, m.full_name, n.created_date, n.published_date, n.is_published, n.featured_image\n"
                 + "FROM News n \n"
                 + "JOIN Manager m\n"
-                + "ON n.manager_id = m.manager_id\n";
+                + "ON n.manager_id = m.manager_id\n"
+                + "WHERE is_published = 1;";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
