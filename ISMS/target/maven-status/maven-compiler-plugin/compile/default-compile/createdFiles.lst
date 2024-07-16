@@ -50,6 +50,7 @@ controller\mission\DetailMission.class
 dao\AccountDAO.class
 service\InternAssignService.class
 controller\labroom\GetMentorsServlet.class
+controller\internnote\NoteServlet.class
 model\Mission$MissionStatus.class
 com\group1\isms\JakartaRestConfiguration.class
 model\Semester.class
@@ -76,10 +77,12 @@ dao\MentorDAO.class
 model\QandA$QandAStatus.class
 dao\InternDAO.class
 dao\QandADAO.class
+model\Note.class
 controller\mission\DeleteMissionServlet.class
 model\Feedback.class
 dao\DBContext.class
 controller\intern\ImportInternServlet.class
+dao\NoteDAO.class
 service\SemesterService.class
 service\Constants.class
 controller\feedback\SubmitFeedback.class

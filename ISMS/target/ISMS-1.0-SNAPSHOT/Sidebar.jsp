@@ -72,6 +72,16 @@
                 <i class="bi bi-door-open-fill me-2"></i> Mentor Report
             </a>
         </li>
+        <c:if test="${sessionScope.acc.roleId == 4}">
+
+            <li>
+                <a href="note" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-door-open-fill me-2"></i> Your Note
+                </a>
+
+            </li>
+        </c:if>
         <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
 
             <li>
@@ -81,15 +91,15 @@
                 </a>
 
             </li>
-    </c:if>
-    <c:if test="${sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 4}">
-        <li>
-            <a href="Feedback" class="nav-link mb-2">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-door-open-fill me-2"></i> FeedBack
-            </a>
-        </li>
-    </c:if>
-</ul>
+        </c:if>
+        <c:if test="${sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 4}">
+            <li>
+                <a href="Feedback" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-door-open-fill me-2"></i> FeedBack
+                </a>
+            </li>
+        </c:if>
+    </ul>
 </div>
 

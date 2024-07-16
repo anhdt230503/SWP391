@@ -11,7 +11,9 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\Message
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\labroom\ListLabRoomsServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\QandADAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\SemesterService.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\NoteDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\labroom\GetMentorsServlet.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\internnote\NoteServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\AddQuestionServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\report\DownloadFile.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\LabRoomService.java
@@ -39,6 +41,7 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\GoogleHandlerSer
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\ManagerDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Semester.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\com\group1\isms\resources\JakartaEE10Resource.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Note.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\AddMissionServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\account\Addmentor.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Mission.java
@@ -59,6 +62,7 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Account.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\DeleteQuestion.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Feedback.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\ManagerService.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\internnote\AddNote.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\DownFileMisson1.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\DBContext.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\Constants.java

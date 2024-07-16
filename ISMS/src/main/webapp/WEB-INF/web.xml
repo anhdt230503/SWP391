@@ -130,6 +130,22 @@
         <servlet-name>Message</servlet-name>
         <servlet-class>controller.qanda.Message</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NoteServlet</servlet-name>
+        <servlet-class>controller.internnote.NoteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNote</servlet-name>
+        <servlet-class>controller.internnote.AddNote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateNote</servlet-name>
+        <servlet-class>controller.internnote.UpdateNote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteNote</servlet-name>
+        <servlet-class>controller.internnote.DeleteNote</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -253,6 +269,22 @@
     <servlet-mapping>
         <servlet-name>Message</servlet-name>
         <url-pattern>/Message</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NoteServlet</servlet-name>
+        <url-pattern>/note</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNote</servlet-name>
+        <url-pattern>/AddNote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateNote</servlet-name>
+        <url-pattern>/UpdateNote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteNote</servlet-name>
+        <url-pattern>/DeleteNote</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
