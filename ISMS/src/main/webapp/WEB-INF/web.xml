@@ -106,6 +106,30 @@
         <servlet-name>ViewFeedbackServlet</servlet-name>
         <servlet-class>controller.feedback.ViewFeedbackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QandAServlet</servlet-name>
+        <servlet-class>controller.qanda.QandAServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuestionServlet</servlet-name>
+        <servlet-class>controller.qanda.AddQuestionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateQuestionServlet</servlet-name>
+        <servlet-class>controller.qanda.UpdateQuestionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteQuestion</servlet-name>
+        <servlet-class>controller.qanda.DeleteQuestion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendAnswer</servlet-name>
+        <servlet-class>controller.qanda.SendAnswer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Message</servlet-name>
+        <servlet-class>controller.qanda.Message</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -205,6 +229,30 @@
     <servlet-mapping>
         <servlet-name>ViewFeedbackServlet</servlet-name>
         <url-pattern>/ViewFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QandAServlet</servlet-name>
+        <url-pattern>/QandAServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionServlet</servlet-name>
+        <url-pattern>/AddQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateQuestionServlet</servlet-name>
+        <url-pattern>/UpdateQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteQuestion</servlet-name>
+        <url-pattern>/DeleteQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendAnswer</servlet-name>
+        <url-pattern>/SendAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Message</servlet-name>
+        <url-pattern>/Message</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

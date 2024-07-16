@@ -1,3 +1,4 @@
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\feedback\ViewFeedbackServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\intern\InternListServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Mentor.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\RoleDAO.java
@@ -6,14 +7,19 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Intern.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\feedback\FeedbackServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\MentorDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\RoleService.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\Message.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\labroom\ListLabRoomsServlet.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\QandADAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\SemesterService.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\labroom\GetMentorsServlet.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\AddQuestionServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\report\DownloadFile.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\LabRoomService.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\DetailMission.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\MissionServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\MentorService.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\SendAnswer.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\QandA.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\MentorReportDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\MentorReport.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\SubmitMission.java
@@ -40,6 +46,7 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\GetIn
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\InternAssignDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\ScheduleService.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\MyDAO.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\UpdateQuestionServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\loginandlogout\LogoutServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\AccountDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\intern\ImportInternServlet.java
@@ -47,7 +54,9 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\InternAssign.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\intern\SelectInternServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\AttendanceService.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\AttendanceDAO.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\feedback\EditFeedbackServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Account.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\DeleteQuestion.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Feedback.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\ManagerService.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\DownFileMisson1.java
@@ -70,6 +79,7 @@ C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\dao\FeedbackDAO.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\MissionReport.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\account\AddManager.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\account\ManagerManageController.java
+C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\qanda\QandAServlet.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\controller\mission\DownFileMisson.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\service\InternAssignService.java
 C:\Users\admin\Desktop\proswp\swp391\ISMS\src\main\java\model\Manager.java

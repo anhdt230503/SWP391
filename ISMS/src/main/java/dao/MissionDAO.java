@@ -330,6 +330,39 @@ public class MissionDAO extends MyDAO {
         }
         return internList;
     }
+    public List<Integer> getInternIdByMentorId(int mentorId) {
+    List<Integer> internIds = new ArrayList<>();
+    String sql = "SELECT i.intern_id "
+               + "FROM Intern i "
+               + "INNER JOIN InternAssign ia ON i.intern_id = ia.intern_id "
+               + "WHERE ia.mentor_id = ? AND ia.is_selected = 1";
+
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, mentorId);
+        rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            int internId = rs.getInt("intern_id");
+            internIds.add(internId);
+        }
+    } catch (SQLException e) {
+        System.err.println("Error retrieving intern IDs: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error closing resources: " + ex.getMessage());
+        }
+    }
+
+    return internIds;
+}
 
     public void upMissionFilePath(int misId, String file_path) {
     String sql = "UPDATE Mission SET file_path = ?, submitted_at = ? WHERE mis_id = ?";

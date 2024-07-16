@@ -25,6 +25,9 @@ public class QandA {
     private String mentorFullName;
     private String internFullName;
 
+    public QandA() {
+    }
+
     public QandA(int qandaId, String questionTitle, QandAStatus questionStatus, String questionText, int mentorId, int internId, String answerText, Timestamp createdAt, Timestamp updatedAt, Timestamp submittedAt, String mentorFullName, String internFullName) {
         this.qandaId = qandaId;
         this.questionTitle = questionTitle;
