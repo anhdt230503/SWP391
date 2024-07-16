@@ -91,7 +91,7 @@
                                         <button type="submit" class="btn btn-primary">View</button>
                                     </form>
                                 </td>
-                                <c:if test="${sessionScope.acc.roleId == 2}">
+                                <c:if test="${sessionScope.acc.roleId == 3}">
                                     <td>
                                         <form action="SubmitReport" method="get">
                                             <input type="hidden" name="internId" value="${rp.internId}" />

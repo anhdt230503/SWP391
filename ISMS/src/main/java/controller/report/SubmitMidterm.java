@@ -4,6 +4,7 @@
  */
 package controller.report;
 
+import dao.AccountDAO;
 import dao.FinalReportDAO;
 import dao.MidtermReportDAO;
 import java.io.IOException;
@@ -13,12 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Account;
+import model.Intern;
 
 /**
  *
  * @author duong
  */
-public class DeleteReport extends HttpServlet {
+public class SubmitMidterm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +40,10 @@ public class DeleteReport extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteReport</title>");
+            out.println("<title>Servlet SubmitMidterm</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteReport at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubmitMidterm at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,16 +61,11 @@ public class DeleteReport extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int internId = Integer.parseInt(request.getParameter("internId"));
-        MidtermReportDAO midtermReportDAO = new MidtermReportDAO();
-        boolean deleted = midtermReportDAO.deleteReport(internId);
-        HttpSession session = request.getSession();
-        if (deleted) {
-            session.setAttribute("deleteMessage", "Report deleted successfully.");
-        } else {
-            session.setAttribute("error", "Failed to delete report.");
-        }
-        response.sendRedirect(request.getContextPath() + "/MidtermReportList");
+        String internId = request.getParameter("internId");
+        FinalReportDAO fn = new FinalReportDAO();
+        Intern student = fn.getStudentById(Integer.parseInt(internId));
+        request.setAttribute("student", student);
+        request.getRequestDispatcher("CheckMidterm.jsp").forward(request, response);
     }
 
     /**
@@ -82,19 +80,25 @@ public class DeleteReport extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int internId = Integer.parseInt(request.getParameter("internId"));
-
-        // Delete from database (example using DAO pattern)
-        FinalReportDAO finalReportDAO = new FinalReportDAO();
-        boolean deleted = finalReportDAO.deleteReport(internId);
-
-        // Set message in session
+        boolean excellent = request.getParameter("Excellent") != null;
+        boolean veryGood = request.getParameter("VeryGood") != null;
+        boolean good = request.getParameter("Good") != null;
+        boolean average = request.getParameter("Average") != null;
+        boolean poor = request.getParameter("Poor") != null;
+        MidtermReportDAO midtermReportDAO = new MidtermReportDAO();
+        if (midtermReportDAO.isInternIdExists(internId)) {
+            request.setAttribute("errorMessage", "InternId already exists. Please update instead.");
+           request.getRequestDispatcher("/FinalReport.jsp").forward(request, response);
+        }else {
         HttpSession session = request.getSession();
-        if (deleted) {
-            session.setAttribute("deleteMessage", "Report deleted successfully.");
-        } else {
-            session.setAttribute("deleteMessage", "Failed to delete report.");
+        String email = (String) session.getAttribute("email");
+        AccountDAO accountDAO = new AccountDAO();
+        Account account = accountDAO.getAccountByEmail(email);
+        int mentorId = account.getMentorId();
+        
+        midtermReportDAO.insertMidtermReport(mentorId, internId, excellent, veryGood, good, average, poor);
+        response.sendRedirect(request.getContextPath() + "/MidtermReportList");
         }
-        response.sendRedirect(request.getContextPath() + "/FinalReportList");
     }
 
     /**

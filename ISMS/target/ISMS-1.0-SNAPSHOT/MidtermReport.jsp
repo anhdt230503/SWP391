@@ -45,24 +45,21 @@
                 <div  class="report-options mt-3">
                 <% if (request.getAttribute("errorMessage") != null) { %>
                 <p style="color: red;text-align: center;font-size: 20px;"><%= request.getAttribute("errorMessage") %></p>
-                <p><a class="btn btn-primary" href="<%= request.getContextPath() %>/FinalReportList"> Back </a></p>
+                <p><a class="btn btn-primary" href="<%= request.getContextPath() %>/MidtermReportList"> Back </a></p>
                 <% } 
-                %>
-                <% String deleteMessage = (String) session.getAttribute("deleteMessage");
+                %>                       
+                <%  String deleteMessage = (String) session.getAttribute("error");
                if (deleteMessage != null) { %>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+               <div  style="color: red;" class="alert alert-success alert-dismissible fade show" role="alert">
                     <%= deleteMessage %>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <% session.removeAttribute("deleteMessage"); } %>
 
-                <h2>Final Report</h2>
-                <c:if test="${sessionScope.acc.roleId == 3}">
-                    <form style="" action="ExportExcel" method="get">
-                        <input type="submit" class="btn btn-outline-dark" value="Export to Excel" />
-                    </form>
-                </c:if>
-
+                <h2>Midterm Report</h2>
+                <form style="" action="ExportMidtermExcel" method="get">
+                    <input type="submit" class="btn btn-outline-dark" value="Export to Excel" />
+                </form>
                 <table id="reportTable" class="table caption-top table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -83,34 +80,31 @@
                                 <td>${rp.staffId}</td>
                                 <td>${rp.fullName}</td>
                                 <td>${totalfinished[loop1.index]}/${totalmission[loop1.index]}</td>
-                                <td>${rp.finalWorkTime}/560</td>
-
+                                <td>${rp.finalWorkTime}/280</td>
+                                <td> 
+                                    <form action="SubmitMidterm" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button type="submit" class="btn btn-primary">Report</button>
+                                    </form>                                  
+                                </td>
                                 <td>
-                                    <form action="DetailReport" method="get">
+                                    <form action="DetailMidterm" method="get">
                                         <input type="hidden" name="internId" value="${rp.internId}" />
                                         <button type="submit" class="btn btn-primary">View</button>
                                     </form>
                                 </td>
-                                <c:if test="${sessionScope.acc.roleId == 3}">
-                                    <td>
-                                        <form action="SubmitReport" method="get">
-                                            <input type="hidden" name="internId" value="${rp.internId}" />
-                                            <button type="submit" class="btn btn-primary">Report</button>
-                                        </form>                                  
-                                    </td>
-                                    <td>
-                                        <form action="UpdateFinalReport" method="get">
-                                            <input type="hidden" name="internId" value="${rp.internId}" />
-                                            <button type="submit" class="btn btn-primary">Update</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="DeleteReport" method="post">
-                                            <input type="hidden" name="internId" value="${rp.internId}" />
-                                            <button class="btn btn-danger" onclick="confirmDelete(${report.internId})">Delete</button>
-                                        </form>
-                                    </td>
-                                </c:if>
+                                <td>
+                                    <form action="UpdateMidterm" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="DeleteReport" method="get">
+                                        <input type="hidden" name="internId" value="${rp.internId}" />
+                                        <button class="btn btn-danger" onclick="confirmDelete(${report.internId})">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -12,13 +12,20 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.util.List;
+import model.MidtermReport;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author duong
  */
-public class DeleteReport extends HttpServlet {
+public class ExportMidtermExcel extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +44,10 @@ public class DeleteReport extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteReport</title>");
+            out.println("<title>Servlet ExportMidtermExcel</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteReport at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ExportMidtermExcel at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,16 +65,39 @@ public class DeleteReport extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int internId = Integer.parseInt(request.getParameter("internId"));
-        MidtermReportDAO midtermReportDAO = new MidtermReportDAO();
-        boolean deleted = midtermReportDAO.deleteReport(internId);
-        HttpSession session = request.getSession();
-        if (deleted) {
-            session.setAttribute("deleteMessage", "Report deleted successfully.");
-        } else {
-            session.setAttribute("error", "Failed to delete report.");
+//       String filePath = "C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391-iter3\\swp391-iter3\\ISMS\\src\\main\\webapp\\file_example\\Example_Midterm.xlsx";
+        String filePath = getServletContext().getRealPath("/file_example/Example_Midterm.xlsx");
+
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        Workbook workbook = new XSSFWorkbook(fileInputStream);
+        Sheet sheet = workbook.getSheetAt(0);
+        MidtermReportDAO midtermreportDao = new MidtermReportDAO();
+        List<MidtermReport> reports = midtermreportDao.getAllMidtermReports();
+        int rowNum = 7;
+        for (MidtermReport report : reports) {
+            Row row = sheet.getRow(rowNum);
+            if (row == null) {
+                row = sheet.createRow(rowNum);
+            }
+            row.createCell(1).setCellValue(report.getIntern_id());
+            row.createCell(2).setCellValue(report.getStaff_id());
+            row.createCell(3).setCellValue(report.getIntern_name());
+
+            row.createCell(6).setCellValue(report.isExcellent() ? "X" : "");
+            row.createCell(7).setCellValue(report.isVeryGood() ? "X" : "");
+            row.createCell(8).setCellValue(report.isGood() ? "X" : "");
+            row.createCell(9).setCellValue(report.isAverage() ? "X" : "");
+            row.createCell(10).setCellValue(report.isPoor() ? "X" : "");
+
+            rowNum++;
         }
-        response.sendRedirect(request.getContextPath() + "/MidtermReportList");
+        fileInputStream.close();
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=midterm_reports.xlsx");
+        OutputStream out = response.getOutputStream();
+        workbook.write(out);
+        workbook.close();
+        out.close();
     }
 
     /**
@@ -81,20 +111,7 @@ public class DeleteReport extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int internId = Integer.parseInt(request.getParameter("internId"));
-
-        // Delete from database (example using DAO pattern)
-        FinalReportDAO finalReportDAO = new FinalReportDAO();
-        boolean deleted = finalReportDAO.deleteReport(internId);
-
-        // Set message in session
-        HttpSession session = request.getSession();
-        if (deleted) {
-            session.setAttribute("deleteMessage", "Report deleted successfully.");
-        } else {
-            session.setAttribute("deleteMessage", "Failed to delete report.");
-        }
-        response.sendRedirect(request.getContextPath() + "/FinalReportList");
+        processRequest(request, response);
     }
 
     /**

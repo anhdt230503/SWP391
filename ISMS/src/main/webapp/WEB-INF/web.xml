@@ -179,10 +179,6 @@
         <servlet-class>controller.report.WeeklyReportList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MidtermReportList</servlet-name>
-        <servlet-class>controller.report.MidtermReportList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UploadMidterm</servlet-name>
         <servlet-class>controller.report.UploadMidterm</servlet-class>
     </servlet>
@@ -366,6 +362,22 @@
         <servlet-name>UpdateFinalReport</servlet-name>
         <servlet-class>controller.report.UpdateFinalReport</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailMidterm</servlet-name>
+        <servlet-class>controller.report.DetailMidterm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MidtermReportList</servlet-name>
+        <servlet-class>controller.report.MidtermReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitMidterm</servlet-name>
+        <servlet-class>controller.report.SubmitMidterm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExportMidtermExcel</servlet-name>
+        <servlet-class>controller.report.ExportMidtermExcel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -537,10 +549,6 @@
     <servlet-mapping>
         <servlet-name>WeeklyReportList</servlet-name>
         <url-pattern>/WeeklyReportList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MidtermReportList</servlet-name>
-        <url-pattern>/MidtermReportList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UploadMidterm</servlet-name>
@@ -725,6 +733,22 @@
     <servlet-mapping>
         <servlet-name>UpdateFinalReport</servlet-name>
         <url-pattern>/UpdateFinalReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailMidterm</servlet-name>
+        <url-pattern>/DetailMidterm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MidtermReportList</servlet-name>
+        <url-pattern>/MidtermReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitMidterm</servlet-name>
+        <url-pattern>/SubmitMidterm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportMidtermExcel</servlet-name>
+        <url-pattern>/ExportMidtermExcel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>
