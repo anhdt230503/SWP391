@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Intern;
 import model.Mentor;
 import model.Mission;
 
@@ -36,7 +37,19 @@ public class MissionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         MissionDAO missionDAO = new MissionDAO();
-        List<Mission> missions = missionDAO.getAllMissions();
+        String statusParam = request.getParameter("status");
+        List<Mission> missions;
+
+        if (statusParam != null && !statusParam.isEmpty()) {
+            try {
+                Mission.MissionStatus status = Mission.MissionStatus.valueOf(statusParam);
+                missions = missionDAO.getMissionsByStatus(status);
+            } catch (IllegalArgumentException e) {
+                missions = missionDAO.getAllMissions(); // Handle invalid status
+            }
+        } else {
+            missions = missionDAO.getAllMissions();
+        }
         MentorDAO mentorDAO = new MentorDAO();
         List<Mentor> listOfMentor = mentorDAO.getAllMentors();
         missionDAO.updateMissionStatusContinuously();
@@ -44,7 +57,6 @@ public class MissionServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jsonMissions);
-
         request.setAttribute("missions", missions);
         request.setAttribute("listOfMentor", listOfMentor);
         request.getRequestDispatcher("Mission.jsp").forward(request, response);

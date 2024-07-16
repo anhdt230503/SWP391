@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 import model.Account;
 import model.Attendance;
@@ -31,40 +32,52 @@ public class SessionTimeoutListener implements HttpSessionListener {
         Account account = accountDAO.getAccountByEmail(email);
         int internId = account.getInternId();
 
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-//        System.out.println(currentTimestamp);
-
-        Date date = new Date(currentTimestamp.getTime());
-        Attendance attendance = attendanceDAO.getAttendanceByDate(date, internId);
-        Timestamp checkInTime = attendance.getCheckInTime();
-//        System.out.println(checkInTime);
-
+        Timestamp checkoutTime = null;
+        LocalDate attendDate = null;
         // Lấy thời gian tồn tại của session
-        long startTime = (long) session.getAttribute("startTime");
-
+        long startTime = 0;
         // Tính toán thời gian tồn tại của session
-        long endTime = System.currentTimeMillis();
+        long endTime = 0;
+
+        String testMode = (String) session.getAttribute("testMode");
+//        System.out.println("Test Mode in check out time: " + testMode);
+        if (testMode.equals("on")) {
+            checkoutTime = (Timestamp) session.getAttribute("checkoutTime");
+//            System.out.println("Mode 'ON': " + checkoutTime);
+            Date date = (Date) session.getAttribute("attendDate");
+            Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(date.toLocalDate()), internId);
+            Timestamp checkInTime = attendance.getCheckInTime();
+            startTime = checkInTime.getTime();
+            endTime = checkoutTime.getTime();
+//            System.out.println("Mode 'ON': " + endTime);
+        } else {
+            checkoutTime = new Timestamp(System.currentTimeMillis());
+//            System.out.println("Mode 'OFF': " + checkoutTime);
+            startTime = (long) session.getAttribute("startTime");
+            endTime = System.currentTimeMillis();
+//            System.out.println("Mode 'OFF': " + endTime);
+        }
+        attendDate = checkoutTime.toLocalDateTime().toLocalDate();
+        Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(attendDate), internId);
 
         long duration = attendance.getDuration();
         long newDuration = duration + (endTime - startTime) / 1000;
         long hours = TimeUnit.SECONDS.toHours(newDuration);
         long minutes = TimeUnit.SECONDS.toMinutes(newDuration) - TimeUnit.HOURS.toMinutes(hours);
         long seconds = newDuration % 60;
-        long min1 = TimeUnit.HOURS.toMinutes(hours);
-        System.out.println(min1);
 
         String totalWorkTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-//        System.out.println(totalWorkTime);
 
         // nếu đã có bản ghi trong DB thì sẽ update checkout time, total work time, duration
-        if (attendance != null) {
+        if (attendance != null && attendance.getStatus() == Attendance.AttendanceStatus.PRESENT) {
             Attendance attendance1 = new Attendance();
-            attendance1.setCheckOutTime(currentTimestamp);
+            attendance1.setCheckOutTime(checkoutTime);
             attendance1.setTotalWorkTime(totalWorkTime);
             attendance1.setDuration(newDuration);
-            attendance1.setCheckInTime(checkInTime);
+            attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
             attendance1.setInternId(internId);
-            attendanceDAO.updateAllAttendance(attendance1);
+            attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
+            attendanceDAO.updateCheckOutTime(attendance1);
         }
 
     }

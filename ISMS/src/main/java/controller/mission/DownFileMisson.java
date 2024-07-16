@@ -60,6 +60,7 @@ public class DownFileMisson extends HttpServlet {
     throws ServletException, IOException {
         System.out.println("doGet");
         String link = request.getParameter("link");
+        
         System.out.println("File Name: " + link);
 
         Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
@@ -67,6 +68,7 @@ public class DownFileMisson extends HttpServlet {
         System.out.println("Upload Directory: " + uploadDirectory);
 
         Path filePath = uploadDirectory.resolve(link);
+        
         System.out.println("File Path: " + filePath);
 
         File downloadFile = filePath.toFile();

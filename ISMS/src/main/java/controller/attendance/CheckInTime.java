@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpSessionEvent;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -40,61 +41,64 @@ public class CheckInTime extends HttpServlet {
         Account account = accountDAO.getAccountByEmail(email);
 
         int internId = account.getInternId();
+        System.out.println(internId);
         int roleId = account.getRoleId();
 
         if (roleId == 4) {
 //            String ipAddress = request.getRemoteAddr();
-//            
-//            System.out.println(ipAddress);
             String ipAddress = "10.33.37.211";
             // Sử dụng dải IP của trường
             String ipRange = "10.33.0.0/17"; // Dải IP từ 10.33.0.0 đến 10.33.127.255
             SubnetUtils utils = new SubnetUtils(ipRange);
             boolean isAllowed = utils.getInfo().isInRange(ipAddress);
 
+            LocalDate attendDate = null;
+            Timestamp currentTimestamp = null;
+            LocalDateTime checkInTimeAfter = null;
+
             if (isAllowed) {
-                // lấy ngày giờ hiện tại
-                Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
-                // lấy ngày tháng năm từ đối tượng timestamp
-                LocalDate importDate = uploadDate.toLocalDateTime().toLocalDate();
-//                LocalDate attendDate = importDate.plusDays(2);
-                LocalDate attendDate = importDate;
-//                System.out.println(java.sql.Date.valueOf(attendDate));
-                // dùng date của ngày hôm đó và internId để kiểm tra xem hôm đó đã có bản ghi nào trong DB hay chưa
-                Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(attendDate), 1);
+                // xử lý nếu test mode là "on" thì sẽ lấy date từ cái mà người dùng chọn để test
+                String testMode = (String) session.getAttribute("testMode");
+//                System.out.println("Test Mode in check in time: " + testMode);
+                if (testMode.equals("on")) {
+                    Date date = (Date) session.getAttribute("attendDate");
+                    attendDate = date.toLocalDate();
+                    currentTimestamp = new Timestamp(System.currentTimeMillis());
+                    LocalTime localTime = currentTimestamp.toLocalDateTime().toLocalTime();
+                    LocalDateTime checkInTime = LocalDateTime.of(attendDate, localTime);
+//                    System.out.println("Check in time 'ON': " + checkInTime);
+                    checkInTimeAfter = checkInTime;
+                    session.setAttribute("checkInTime", checkInTimeAfter);
+                // xử lý bth nếu k ở chế độ test - lấy ngày giờ hiện tại
+                } else {
+                    // lấy ngày giờ hiện tại
+                    currentTimestamp = new Timestamp(System.currentTimeMillis());
+                    // lấy ngày tháng năm từ đối tượng timestamp
+                    LocalDate importDate = currentTimestamp.toLocalDateTime().toLocalDate();
+//                    attendDate = importDate.plusDays(2);
+                    attendDate = importDate;
+                    // dùng date của ngày hôm đó và internId để kiểm tra xem hôm đó đã có bản ghi nào trong DB hay chưa
+                    // cần đổi sang localdatetime cho thuộc tính "checkInTime" để xử lý cộng thêm 2 ngày giống với attendDate
+                    LocalDateTime checkInTime = currentTimestamp.toLocalDateTime();
+//                    checkInTimeAfter = checkInTime.plusDays(2);
+                    System.out.println("Check in time 'OFF': " + checkInTime);
+                    checkInTimeAfter = checkInTime;
+                }
+                Attendance attendance = attendanceDAO.getAttendanceByDate(java.sql.Date.valueOf(attendDate), internId);
 
-                // cần đổi sang localdatetime cho thuộc tính "checkInTime" để xử lý cộng thêm 2 ngày giống với attendDate
-                LocalDateTime checkInTime = uploadDate.toLocalDateTime();
-//                LocalDateTime checkInTimeAfter = checkInTime.plusDays(2);
-                LocalDateTime checkInTimeAfter = checkInTime;
-                LocalTime checkInLocalTime = checkInTimeAfter.toLocalTime();
-
-                LocalTime startTime = LocalTime.of(7, 30);
-                LocalTime endTime = LocalTime.of(8, 30);
-
-//                System.out.println(java.sql.Timestamp.valueOf(checkInTimeAfter));
-                if (attendance != null && attendance.getCheckInTime() == null) {
+                if (attendance != null && attendance.getCheckInTime() == null && attendance.getStatus() == Attendance.AttendanceStatus.NOT_YET) {
                     // bắt đầu thời gian tồn tại của session
                     attendanceService.sessionCreated(new HttpSessionEvent(session));
-                    // và insert vào DB 1 bản ghi mới
+                    // và update check in time và status cho bản ghi điểm danh cho ngày hôm đó
                     Attendance attendance1 = new Attendance();
-//                    attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
                     attendance1.setCheckInTime(java.sql.Timestamp.valueOf(checkInTimeAfter));
+                    attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
                     attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
                     attendance1.setInternId(internId);
                     attendanceDAO.updateCheckInTime(attendance1);
-                    if (checkInLocalTime.isAfter(startTime) && checkInLocalTime.isBefore(endTime)) {
-                        attendance1.setStatus(Attendance.AttendanceStatus.PRESENT);
-                        attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
-                        attendance1.setInternId(internId);
-                        attendanceDAO.updateStatus(attendance);
-                    } else {
-                        attendance1.setStatus(Attendance.AttendanceStatus.ABSENT);
-                        attendance1.setAttendDate(java.sql.Date.valueOf(attendDate));
-                        attendance1.setInternId(internId);
-                        attendanceDAO.updateStatus(attendance);
-                    }
-
+//                    System.out.println(attendance1);
+                } else if (attendance.getStatus() == Attendance.AttendanceStatus.ABSENT) {
+                    request.setAttribute("message", "You have been recorded as absent for today !");
                 } else {
                     request.setAttribute("message", "You have attandance already for today !");
                 }

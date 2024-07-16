@@ -74,7 +74,7 @@
             </div>
             <div class="mb-3">
                 <label for="link" class="form-label">Link:</label>
-                <input type="file" class="form-control" id="link" name="link" accept=".doc, .pdf" required>
+                <input type="file" class="form-control" id="link" name="link"  required>
             </div>
             <div class="mb-3">
                 <label for="internId" class="form-label">Intern:</label>

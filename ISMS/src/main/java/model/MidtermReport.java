@@ -11,77 +11,126 @@ import java.sql.Timestamp;
  * @author duong
  */
 public class MidtermReport {
-     private int reportId;
-    private String reportName;
-    private String reportDescription;
-    private Timestamp reportDate;
-    private String filedata;
-    private int mentorId;
+
+    private int mission_rp_id;
+    private int mentor_id;
+    private int intern_id;
+    private String intern_name;
+    private String staff_id;
+    private boolean excellent;
+    private boolean veryGood;
+    private boolean good;
+    private boolean average;
+    private boolean poor;
+    private Timestamp submissionDate;
 
     public MidtermReport() {
     }
 
-    public MidtermReport(int reportId, String reportName, String reportDescription, Timestamp reportDate, String filedata, int mentorId) {
-        this.reportId = reportId;
-        this.reportName = reportName;
-        this.reportDescription = reportDescription;
-        this.reportDate = reportDate;
-        this.filedata = filedata;
-        this.mentorId = mentorId;
+    public MidtermReport(int mission_rp_id, int mentor_id, int intern_id, String intern_name, String staff_id, boolean excellent, boolean veryGood, boolean good, boolean average, boolean poor, Timestamp submissionDate) {
+        this.mission_rp_id = mission_rp_id;
+        this.mentor_id = mentor_id;
+        this.intern_id = intern_id;
+        this.intern_name = intern_name;
+        this.staff_id = staff_id;
+        this.excellent = excellent;
+        this.veryGood = veryGood;
+        this.good = good;
+        this.average = average;
+        this.poor = poor;
+        this.submissionDate = submissionDate;
     }
 
-    public int getReportId() {
-        return reportId;
+    public int getMission_rp_id() {
+        return mission_rp_id;
     }
 
-    public void setReportId(int reportId) {
-        this.reportId = reportId;
+    public void setMission_rp_id(int mission_rp_id) {
+        this.mission_rp_id = mission_rp_id;
     }
 
-    public String getReportName() {
-        return reportName;
+    public int getMentor_id() {
+        return mentor_id;
     }
 
-    public void setReportName(String reportName) {
-        this.reportName = reportName;
+    public void setMentor_id(int mentor_id) {
+        this.mentor_id = mentor_id;
     }
 
-    public String getReportDescription() {
-        return reportDescription;
+    public int getIntern_id() {
+        return intern_id;
     }
 
-    public void setReportDescription(String reportDescription) {
-        this.reportDescription = reportDescription;
+    public void setIntern_id(int intern_id) {
+        this.intern_id = intern_id;
     }
 
-    public Timestamp getReportDate() {
-        return reportDate;
+    public String getIntern_name() {
+        return intern_name;
     }
 
-    public void setReportDate(Timestamp reportDate) {
-        this.reportDate = reportDate;
+    public void setIntern_name(String intern_name) {
+        this.intern_name = intern_name;
     }
 
-    public String getFiledata() {
-        return filedata;
+    public String getStaff_id() {
+        return staff_id;
     }
 
-    public void setFiledata(String filedata) {
-        this.filedata = filedata;
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
     }
 
-    public int getMentorId() {
-        return mentorId;
+    public boolean isExcellent() {
+        return excellent;
     }
 
-    public void setMentorId(int mentorId) {
-        this.mentorId = mentorId;
+    public void setExcellent(boolean excellent) {
+        this.excellent = excellent;
+    }
+
+    public boolean isVeryGood() {
+        return veryGood;
+    }
+
+    public void setVeryGood(boolean veryGood) {
+        this.veryGood = veryGood;
+    }
+
+    public boolean isGood() {
+        return good;
+    }
+
+    public void setGood(boolean good) {
+        this.good = good;
+    }
+
+    public boolean isAverage() {
+        return average;
+    }
+
+    public void setAverage(boolean average) {
+        this.average = average;
+    }
+
+    public boolean isPoor() {
+        return poor;
+    }
+
+    public void setPoor(boolean poor) {
+        this.poor = poor;
+    }
+
+    public Timestamp getSubmissionDate() {
+        return submissionDate;
+    }
+
+    public void setSubmissionDate(Timestamp submissionDate) {
+        this.submissionDate = submissionDate;
     }
 
     @Override
     public String toString() {
-        return "MidtermReport{" + "reportId=" + reportId + ", reportName=" + reportName + ", reportDescription=" + reportDescription + ", reportDate=" + reportDate + ", filedata=" + filedata + ", mentorId=" + mentorId + '}';
+        return "MidtermReport{" + "mission_rp_id=" + mission_rp_id + ", mentor_id=" + mentor_id + ", intern_id=" + intern_id + ", intern_name=" + intern_name + ", staff_id=" + staff_id + ", excellent=" + excellent + ", veryGood=" + veryGood + ", good=" + good + ", average=" + average + ", poor=" + poor + ", submissionDate=" + submissionDate + '}';
     }
-    
-    
 }

@@ -87,7 +87,7 @@ public class SubmitReport extends HttpServlet {
         FinalReportDAO fn = new FinalReportDAO();
         if (fn.isInternIdExists(internId)) {
             request.setAttribute("errorMessage", "InternId already exists. Please update instead.");
-           request.getRequestDispatcher("/FinalReport.jsp").forward(request, response);
+           request.getRequestDispatcher("/MidtermReport.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
             String email = (String) session.getAttribute("email");
@@ -112,3 +112,4 @@ public class SubmitReport extends HttpServlet {
     }// </editor-fold>
 
 }
+

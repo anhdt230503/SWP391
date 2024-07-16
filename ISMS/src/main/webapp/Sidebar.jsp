@@ -34,32 +34,43 @@
                 <i class="bi bi-house me-2"></i> Home
             </a>
         </li>
+        <li>
+            <a href="newsList" class="nav-link mb-2">
+                <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                <i class="bi bi-newspaper me-2"></i> News
+            </a>
+        </li>
+        <c:if test="${sessionScope.acc.roleId == 1}">
+            <li>
+                <a href="MentorManageController" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-file-person me-2"></i> Manage Mentor
+                </a>
+            </li>
+            <li>
+                <a href="ManagerManageController" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-file-person me-2"></i> Manage Manager
+                </a>
+            </li>
+        </c:if>
+        <c:if test="${sessionScope.acc.roleId == 1 || sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 3}">
 
-        <li>
-            <a href="MentorManageController" class="nav-link mb-2">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-file-person me-2"></i> Manage Mentor
-            </a>
-        </li>
-
-        <li>
-            <a href="ManagerManageController" class="nav-link mb-2">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-file-person me-2"></i> Manage Manager
-            </a>
-        </li>
-        <li>
-            <a href="internList" class="nav-link mb-2">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-file-person me-2"></i> Manage Intern
-            </a>
-        </li>
-        <li>
-            <a href="mission" class="nav-link mb-2">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-bullseye me-2"></i> Mission
-            </a>
-        </li>
+            <li>
+                <a href="internList" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-file-person me-2"></i> Manage Intern
+                </a>
+            </li>
+        </c:if>
+        <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
+            <li>
+                <a href="mission" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-bullseye me-2"></i> Mission
+                </a>
+            </li>
+        </c:if>
         <li>
             <a href="ListLabRoomsServlet" class="nav-link mb-2">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
@@ -69,25 +80,55 @@
         <li>
             <a href="mentorreportlist" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-door-open-fill me-2"></i> Report
+                <i class="bi bi-flag-fill me-2"></i> Report
             </a>
             <ul class="dropdown-menu" aria-labelledby="reportDropdown">
                 <li><a class="dropdown-item" style="color: black" href="MidtermReportList">Midterm Report</a></li>
                 <li><a class="dropdown-item" style="color: black" href="FinalReportList">Final Report</a></li>
             </ul>
         </li>
+        <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
+
+            <li>
+                <a href="scheduleList" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-calendar-check-fill me-2"></i> Schedule
+                </a>
+            </li>
+        </c:if>
+        <c:if test="${sessionScope.acc.roleId != 2}">
+            <li>
+                <a href="attendanceHistory" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-alarm-fill me-2"></i> Attendance
+                </a>
+            </li>
+        </c:if>
         <li>
-            <a href="ScheduleList" class="nav-link mb-2">
+            <a href="" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-door-open-fill me-2"></i> Schedule
+                <i class="bi bi-motherboard me-2"></i> Other
             </a>
+            <ul class="dropdown-menu" aria-labelledby="otherDropdown">
+                <c:if test="${sessionScope.acc.roleId == 2}">
+                    <li><a class="dropdown-item" style="color: black" href="addCertificate">Create Certificate</a></li>
+                    </c:if>
+                    <c:if test="${sessionScope.acc.roleId != 4}">
+                    <li><a class="dropdown-item" style="color: black" href="certificateList">All Certificate</a></li>
+                    </c:if>
+
+                <c:if test="${sessionScope.acc.roleId == 4}">
+                    <li><a class="dropdown-item" style="color: black" href="downloadCertificate">Take Your Certificate</a></li>
+                    </c:if>
+            </ul>
         </li>
-        <li>
-            <a href="attendanceHistory" class="nav-link mb-2">
-                <svg class="bi pe-none me-2" width="16" height="16"></svg>
-                <i class="bi bi-alarm-fill me-2"></i> Attendance
-            </a>
-        </li>
+        <c:if test="${sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 4}">
+            <li>
+                <a href="Feedback" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-chat-left-dots-fill me-2"></i> FeedBack
+                </a>
+            </li>
+        </c:if>
     </ul>
 </div>
-

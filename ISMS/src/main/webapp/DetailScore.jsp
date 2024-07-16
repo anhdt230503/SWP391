@@ -39,59 +39,61 @@
     </head>
     <body>
         <jsp:include page="Sidebar.jsp"></jsp:include>
-        
+
             <div class="main-content">
                 <button onclick="window.location.href = 'FinalReportList';">Back</button>
             <jsp:include page="Topbar.jsp"></jsp:include>
                 <div class="container mt-3">
                     <h2 class="text-center">Student Report</h2>
-                    <div class="info-box">
-                        <table>
-                            <thead>
+                    <div class="row">
+                        <div class="info-box">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID:</th>
+                                        <td>${student.studentId}</td>
+                                </tr>
                                 <tr>
-                                   <th>Student ID:</th>
-                                    <td>${student.studentId}</td>
-                            </tr>
+                                    <th>Name:</th>
+                                    <td>${student.fullName}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Skills:</th>
+                                    <td>
+                                        <c:forEach items="${reports}" var="report">
+                                            ${report.skills_score}
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Soft Skills:</th>
+                                    <td>
+                                        <c:forEach items="${reports}" var="report">
+                                            ${report.soft_score}
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Attitude:</th>
+                                    <td>
+                                        <c:forEach items="${reports}" var="report">
+                                            ${report.attitue_score}
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </tbody>
                             <tr>
-                                <th>Name:</th>
-                                <td>${student.fullName}</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Skills:</th>
+                                <th>Final Score:</th>
                                 <td>
                                     <c:forEach items="${reports}" var="report">
-                                        ${report.skills_score}
+                                        ${report.final_score}
                                     </c:forEach>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>Soft Skills:</th>
-                                <td>
-                                    <c:forEach items="${reports}" var="report">
-                                        ${report.soft_score}
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Attitude:</th>
-                                <td>
-                                    <c:forEach items="${reports}" var="report">
-                                        ${report.attitue_score}
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tr>
-                            <th>Final Score:</th>
-                            <td>
-                                <c:forEach items="${reports}" var="report">
-                                    ${report.final_score}
-                                </c:forEach>
-                            </td>
-                        </tr>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

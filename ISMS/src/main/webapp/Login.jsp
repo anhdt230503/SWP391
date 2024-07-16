@@ -46,6 +46,11 @@
                                                     </div>
                                                     <div>
                                                         <p class="text-danger text-center">${message}</p>
+                                                        <c:if test="${not empty message2}">
+                                                            <div class="alert alert-danger" role="alert">
+                                                                ${message2}
+                                                            </div>
+                                                        </c:if>
                                                     </div>
                                                 </div>
                                             </div>

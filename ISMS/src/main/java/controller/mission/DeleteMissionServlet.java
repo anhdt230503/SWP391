@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Mission;
 
 /**
  *
@@ -52,20 +53,30 @@ public class DeleteMissionServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+throws ServletException, IOException {
     int missionId = Integer.parseInt(request.getParameter("misId"));
     MissionDAO missionDAO = new MissionDAO();
-    missionDAO.deleteMission(missionId);
+    
+    // Lấy thông tin nhiệm vụ để kiểm tra trạng thái
+    Mission mission = missionDAO.getMissionById(missionId);
+    
+    if (mission != null) {
+        // Kiểm tra trạng thái của nhiệm vụ
+        if (mission.getMisStatus() == Mission.MissionStatus.MISSING || 
+            mission.getMisStatus() == Mission.MissionStatus.FINISHED) {
+            // Nếu trạng thái là MISSING hoặc FINISHED, không cho phép xóa
+            request.setAttribute("errorMessage", "Cannot delete the task that has expired");
+            request.getRequestDispatcher("mission").forward(request, response);
+            return;
+        }
+    }
 
+    // Nếu không có vấn đề, thực hiện xóa
+    missionDAO.deleteMission(missionId);
     response.sendRedirect("mission");
-    }    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+}
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

@@ -39,6 +39,10 @@ public class FinalReport {
         this.submission_date = submission_date;
     }
 
+    
+    
+    
+
     public int getMission_rp_id() {
         return mission_rp_id;
     }
@@ -69,14 +73,6 @@ public class FinalReport {
 
     public void setIntern_name(String intern_name) {
         this.intern_name = intern_name;
-    }
-
-    public String getStaff_id() {
-        return staff_id;
-    }
-
-    public void setStaff_id(String staff_id) {
-        this.staff_id = staff_id;
     }
 
     public double getSoft_score() {
@@ -117,6 +113,14 @@ public class FinalReport {
 
     public void setSubmission_date(Timestamp submission_date) {
         this.submission_date = submission_date;
+    }
+
+    public String getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
     }
 
     @Override

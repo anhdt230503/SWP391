@@ -51,13 +51,19 @@ public class AttendanceHistoryServlet extends HttpServlet {
             List<Intern> list = internDAO.getAllInternForMentor(mentorId);
             request.setAttribute("internList", list);
             request.getRequestDispatcher("AllInternAttendance.jsp").forward(request, response);
-            
+
             // nếu là intern thì xem history của họ
         } else if (roleId == 4) {
             int internId = account.getInternId();
+            InternDAO internDAO = new InternDAO();
+            Intern intern = internDAO.getInternByInternId(internId);
+            String midtermWorkTime = String.format("%.2f", intern.getMidtermWorkTime());
+            String finalWorkTime = String.format("%.2f", intern.getFinalWorkTime());
 
             List<Attendance> attendance = attendanceDAO.getAllAttendance(internId);
 
+            request.setAttribute("midtermWorkTime", midtermWorkTime);
+            request.setAttribute("finalWorkTime", finalWorkTime);
             request.setAttribute("listOfAttendance", attendance);
             request.getRequestDispatcher("AttendanceReport.jsp").forward(request, response);
         }
