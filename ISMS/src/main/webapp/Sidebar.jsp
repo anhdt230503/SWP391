@@ -77,7 +77,7 @@
                 <i class="bi bi-door-open-fill me-2"></i> Lab Room
             </a>
         </li>
-        <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
+        <c:if test="${sessionScope.acc.roleId != 1}">
             <li>
                 <a href="mentorreportlist" class="nav-link mb-2 dropdown-toggle" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg class="bi pe-none me-2" width="16" height="16"></svg>
@@ -124,6 +124,26 @@
                     </c:if>
             </ul>
         </li>
+        <c:if test="${sessionScope.acc.roleId == 4}">
+
+            <li>
+                <a href="note" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-door-open-fill me-2"></i> Your Note
+                </a>
+
+            </li>
+        </c:if>
+        <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 4}">
+
+            <li>
+                <a href="QandAServlet" class="nav-link mb-2">
+                    <svg class="bi pe-none me-2" width="16" height="16"></svg>
+                    <i class="bi bi-door-open-fill me-2"></i> Q&A
+                </a>
+
+            </li>
+        </c:if>
         <c:if test="${sessionScope.acc.roleId == 2 || sessionScope.acc.roleId == 4}">
             <li>
                 <a href="Feedback" class="nav-link mb-2">

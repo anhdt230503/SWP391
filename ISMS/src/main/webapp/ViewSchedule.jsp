@@ -110,6 +110,10 @@
                 <div class="btn-container">
                     <button type="submit">Update Tasks</button>
                 </div>
+
+            </form>
+            <form action="backToSchedule" method="POST">
+                <button type="submit" class="btn btn-primary mt-2">Back</button>
             </form>
         </div>
     </body>

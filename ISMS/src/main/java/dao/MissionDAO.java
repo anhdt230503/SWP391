@@ -288,11 +288,6 @@ public class MissionDAO extends MyDAO {
         }
     }
 
-    public static void main(String[] args) {
-        MissionDAO cc = new MissionDAO();
-        System.out.println(cc.getAllMissions());
-    }
-
     public List<Intern> getInternsByMentorId(int mentorId) {
         List<Intern> internList = new ArrayList<>();
         String sql = "SELECT i.intern_id, i.student_id, i.email, i.full_name, i.phone_number, i.major, "
@@ -331,6 +326,40 @@ public class MissionDAO extends MyDAO {
         return internList;
     }
 
+    public List<Integer> getInternIdByMentorId(int mentorId) {
+        List<Integer> internIds = new ArrayList<>();
+        String sql = "SELECT i.intern_id "
+                + "FROM Intern i "
+                + "INNER JOIN InternAssign ia ON i.intern_id = ia.intern_id "
+                + "WHERE ia.mentor_id = ? AND ia.is_selected = 1";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int internId = rs.getInt("intern_id");
+                internIds.add(internId);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving intern IDs: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error closing resources: " + ex.getMessage());
+            }
+        }
+
+        return internIds;
+    }
+
     public void upMissionFilePath(int misId, String file_path) {
         String sql = "UPDATE Mission SET file_path = ?, submitted_at = ? WHERE mis_id = ?";
         try {
@@ -344,7 +373,7 @@ public class MissionDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-    
+
     public List<Mission> getMissionByInternId(int internId) {
         List<Mission> list = new ArrayList<>();
         xSql = "SELECT mis_id, mis_name FROM Mission \n"
@@ -364,4 +393,93 @@ public class MissionDAO extends MyDAO {
         return list;
     }
 
+    public List<Mission> getMissionsByMentorId(int mentorId) {
+        List<Mission> missions = new ArrayList<>();
+        String sql = "SELECT m.mis_id, m.mis_name, m.mis_status, m.mis_description, m.link, m.start_date, m.deadline, "
+                + "m.mentor_id, m.intern_id, m.file_path, m.created_at, m.updated_at, m.submitted_at, "
+                + "mt.full_name AS mentorFullName, i.full_name AS internFullName "
+                + "FROM mission m "
+                + "LEFT JOIN mentor mt ON m.mentor_id = mt.mentor_id "
+                + "LEFT JOIN intern i ON m.intern_id = i.intern_id "
+                + "WHERE m.mentor_id = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, mentorId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int misId = rs.getInt("mis_id");
+                    String misName = rs.getString("mis_name");
+                    Mission.MissionStatus misStatus = Mission.MissionStatus.valueOf(rs.getString("mis_status"));
+                    String misDescription = rs.getString("mis_description");
+                    String link = rs.getString("link");
+                    Timestamp startDate = rs.getTimestamp("start_date");
+                    Timestamp deadline = rs.getTimestamp("deadline");
+                    int mentorIdResult = rs.getInt("mentor_id");
+                    int internId = rs.getInt("intern_id");
+                    String mentorFullName = rs.getString("mentorFullName");
+                    String internFullName = rs.getString("internFullName");
+                    String filePath = rs.getString("file_path");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    Timestamp updatedAt = rs.getTimestamp("updated_at");
+                    Timestamp submittedAt = rs.getTimestamp("submitted_at");
+
+                    Mission mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline,
+                            mentorIdResult, internId, mentorFullName, internFullName, filePath, createdAt, updatedAt, submittedAt);
+                    missions.add(mission);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving missions by mentor ID: " + e.getMessage());
+        }
+        return missions;
+    }
+
+    public List<Mission> getMissionsByInternId(int internId) {
+        List<Mission> missions = new ArrayList<>();
+        String sql = "SELECT m.mis_id, m.mis_name, m.mis_status, m.mis_description, m.link, m.start_date, m.deadline, "
+                + "m.mentor_id, m.intern_id, m.file_path, m.created_at, m.updated_at, m.submitted_at, "
+                + "mt.full_name AS mentorFullName, i.full_name AS internFullName "
+                + "FROM mission m "
+                + "LEFT JOIN mentor mt ON m.mentor_id = mt.mentor_id "
+                + "LEFT JOIN intern i ON m.intern_id = i.intern_id "
+                + "WHERE m.intern_id = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, internId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int misId = rs.getInt("mis_id");
+                    String misName = rs.getString("mis_name");
+                    Mission.MissionStatus misStatus = Mission.MissionStatus.valueOf(rs.getString("mis_status"));
+                    String misDescription = rs.getString("mis_description");
+                    String link = rs.getString("link");
+                    Timestamp startDate = rs.getTimestamp("start_date");
+                    Timestamp deadline = rs.getTimestamp("deadline");
+                    int mentorId = rs.getInt("mentor_id");
+                    int internIdResult = rs.getInt("intern_id");
+                    String mentorFullName = rs.getString("mentorFullName");
+                    String internFullNameResult = rs.getString("internFullName");
+                    String filePath = rs.getString("file_path");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    Timestamp updatedAt = rs.getTimestamp("updated_at");
+                    Timestamp submittedAt = rs.getTimestamp("submitted_at");
+
+                    Mission mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline,
+                            mentorId, internIdResult, mentorFullName, internFullNameResult, filePath, createdAt, updatedAt, submittedAt);
+                    missions.add(mission);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving missions by intern ID: " + e.getMessage());
+        }
+        return missions;
+    }
+
+    public static void main(String[] args) {
+        MissionDAO cc = new MissionDAO();
+//        System.out.println(cc.getAllMissions());
+        
+        System.out.println(cc.getMissionsByInternId(1));
+
+    }
 }

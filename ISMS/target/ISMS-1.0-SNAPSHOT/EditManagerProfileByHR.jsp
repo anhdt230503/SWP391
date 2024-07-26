@@ -62,7 +62,7 @@
                                             </li>
                                             <li class="list-group-item">
                                                 <strong>Email:</strong>
-                                                <input type="text" name="email" value="${manager.email}" class="form-control" >
+                                                <input type="email" name="email" value="${manager.email}" class="form-control" >
                                             </li>
                                             <li class="list-group-item">
                                                 <strong>Phone Number:</strong> 

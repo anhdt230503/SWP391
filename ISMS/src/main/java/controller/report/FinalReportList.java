@@ -64,22 +64,36 @@ public class FinalReportList extends HttpServlet {
         List<Intern> listOfFinalReport;
         List<Integer> totalmission;
         List<Integer> totalfinished;
-        
         FinalReportDAO finalReportDAO = new FinalReportDAO();
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         AccountDAO accountDAO = new AccountDAO();
         Account account = accountDAO.getAccountByEmail(email);
-        int mentorId = account.getMentorId();
-        int internId = account.getInternId();
-        listOfFinalReport = finalReportDAO.getStudent(mentorId);
-        totalmission = finalReportDAO.getTotalMissions();
-        totalfinished = finalReportDAO.getTotalFinished();
-        
-     
-        request.setAttribute("listOfFinalReport", listOfFinalReport);
-        request.setAttribute("totalmission", totalmission);
-        request.setAttribute("totalfinished", totalfinished);
+        int role = account.getRoleId();
+        if (role == 4) {
+            int internId = account.getInternId();
+            listOfFinalReport = finalReportDAO.getStudentById1(internId);
+            totalmission = finalReportDAO.getTotalMissions();
+            totalfinished = finalReportDAO.getTotalFinished();
+            request.setAttribute("listOfFinalReport", listOfFinalReport);
+            request.setAttribute("totalmission", totalmission);
+            request.setAttribute("totalfinished", totalfinished);
+        } else if (role == 3) {
+            int mentorId = account.getMentorId();
+            listOfFinalReport = finalReportDAO.getStudent(mentorId);
+            totalmission = finalReportDAO.getTotalMissions();
+            totalfinished = finalReportDAO.getTotalFinished();
+            request.setAttribute("listOfFinalReport", listOfFinalReport);
+            request.setAttribute("totalmission", totalmission);
+            request.setAttribute("totalfinished", totalfinished);
+        }else if (role == 2) {
+            listOfFinalReport = finalReportDAO.getStudentAll();
+            totalmission = finalReportDAO.getTotalMissions();
+            totalfinished = finalReportDAO.getTotalFinished();
+            request.setAttribute("listOfFinalReport", listOfFinalReport);
+            request.setAttribute("totalmission", totalmission);
+            request.setAttribute("totalfinished", totalfinished);
+        }
         request.getRequestDispatcher("/FinalReport.jsp").forward(request, response);
     }
 

@@ -27,26 +27,16 @@ public class SubmitMission extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
         MissionDAO missionDAO = new MissionDAO();
-
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
-
-        // Lấy thông tin tài khoản của người dùng từ email
         Account account = accountDAO.getAccountByEmail(email);
         int mentorId = account.getMentorId();
-
-        // Lấy misId từ parameter
         String id = request.getParameter("misId");
         int misId = Integer.parseInt(id);
-
-        // Lấy thông tin chi tiết của nhiệm vụ dựa trên misId
         Mission mission = missionDAO.getMissionById(misId);
         request.setAttribute("mission", mission);
-
-        // Chuyển hướng request đến SubmitFile.jsp
         request.getRequestDispatcher("SubmitFile.jsp").forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MissionDAO missionDAO = new MissionDAO();
@@ -61,7 +51,6 @@ public class SubmitMission extends HttpServlet {
             request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
             return;
         }
-
         if ("FINISHED".equals(mission.getMisStatus().name())) {
             request.setAttribute("errorMessage", "Mission đã hết hạn.");
             request.setAttribute("mission", mission); // Send back the mission information
@@ -78,7 +67,6 @@ public class SubmitMission extends HttpServlet {
             request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
             return;
         }
-
         String file_path = null;
         Part filePart = request.getPart("file_path");
         if (filePart != null && filePart.getSize() > 0) {

@@ -298,8 +298,71 @@ public class FinalReportDAO extends MyDAO {
         return internName;
     }
     
-    
+    public List<Intern> getStudentAll() {
+        String GET_STUDENT_SQL = "SELECT * FROM Intern";
+        List<Intern> student = new ArrayList<>();
 
+        try (PreparedStatement ps = con.prepareStatement(GET_STUDENT_SQL)) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString("status");
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                student.add(new Intern(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+    public List<Intern> getStudentById1(int internId) {
+        String GET_STUDENT_SQL = "SELECT * FROM Intern WHERE intern_id = ?";
+        List<Intern> student = new ArrayList<>();
+
+        try (PreparedStatement ps = con.prepareStatement(GET_STUDENT_SQL)) {
+            ps.setInt(1, internId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString("status");
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                student.add(new Intern(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+    
     public static void main(String[] args) {
         FinalReportDAO finalReportDAO = new FinalReportDAO();
         List<FinalReport> list = finalReportDAO.getAllInternCompletionOfInternship();

@@ -378,6 +378,50 @@
         <servlet-name>ExportMidtermExcel</servlet-name>
         <servlet-class>controller.report.ExportMidtermExcel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QandAServlet</servlet-name>
+        <servlet-class>controller.qanda.QandAServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddQuestionServlet</servlet-name>
+        <servlet-class>controller.qanda.AddQuestionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateQuestionServlet</servlet-name>
+        <servlet-class>controller.qanda.UpdateQuestionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteQuestion</servlet-name>
+        <servlet-class>controller.qanda.DeleteQuestion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendAnswer</servlet-name>
+        <servlet-class>controller.qanda.SendAnswer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Message</servlet-name>
+        <servlet-class>controller.qanda.Message</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NoteServlet</servlet-name>
+        <servlet-class>controller.internnote.NoteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNote</servlet-name>
+        <servlet-class>controller.internnote.AddNote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateNote</servlet-name>
+        <servlet-class>controller.internnote.UpdateNote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteNote</servlet-name>
+        <servlet-class>controller.internnote.DeleteNote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BackToSchedule</servlet-name>
+        <servlet-class>controller.schedule.BackToSchedule</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -749,6 +793,50 @@
     <servlet-mapping>
         <servlet-name>ExportMidtermExcel</servlet-name>
         <url-pattern>/ExportMidtermExcel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QandAServlet</servlet-name>
+        <url-pattern>/QandAServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionServlet</servlet-name>
+        <url-pattern>/AddQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateQuestionServlet</servlet-name>
+        <url-pattern>/UpdateQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteQuestion</servlet-name>
+        <url-pattern>/DeleteQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendAnswer</servlet-name>
+        <url-pattern>/SendAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Message</servlet-name>
+        <url-pattern>/Message</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NoteServlet</servlet-name>
+        <url-pattern>/note</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNote</servlet-name>
+        <url-pattern>/AddNote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateNote</servlet-name>
+        <url-pattern>/UpdateNote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteNote</servlet-name>
+        <url-pattern>/DeleteNote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BackToSchedule</servlet-name>
+        <url-pattern>/backToSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

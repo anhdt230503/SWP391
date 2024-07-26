@@ -57,7 +57,7 @@
                 <% session.removeAttribute("deleteMessage"); } %>
 
                 <h2>Final Report</h2>
-                <c:if test="${sessionScope.acc.roleId == 3}">
+                <c:if test="${sessionScope.acc.roleId == 3 || sessionScope.acc.roleId == 2}">
                     <form style="" action="ExportExcel" method="get">
                         <input type="submit" class="btn btn-outline-dark" value="Export to Excel" />
                     </form>

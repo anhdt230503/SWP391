@@ -116,7 +116,7 @@
                                         function confirmDelete(button) {
                                             Swal.fire({
                                                 title: 'Confirmation',
-                                                text: 'Are you sure you want to delete this product?',
+                                                text: 'Are you sure you want to delete this mentor?',
                                                 icon: 'warning',
                                                 showCancelButton: true,
                                                 confirmButtonColor: '#3085d6',

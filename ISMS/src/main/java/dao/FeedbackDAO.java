@@ -224,7 +224,7 @@ public class FeedbackDAO extends MyDAO {
     
     public static void main(String[] args) {
         FeedbackDAO feedbackDAO = new FeedbackDAO();
-        System.out.println(feedbackDAO.getFeedbackByInternId(1));
+        System.out.println(feedbackDAO.getMentorByInternId(19));
         
     }
 }

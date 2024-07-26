@@ -127,18 +127,13 @@
                 <p><a href="DownFileMisson?link=${mission.link}">${mission.link}</a></p>
             </div>
             <div class="due-date">
-                <%-- Check if updateTime is not null --%>
-                <%-- Kiểm tra nếu updateTime không null --%>
                 <c:if test="${not empty mission.updateTime}">
                     <h4>Updated: ${mission.updateTime}</h4> <!-- updated -->
                 </c:if>
-
-
                 <h4>CREATED : ${mission.created_at}</h4> <!-- updated -->
                 <h4>START DATE : ${mission.startDate}</h4>
                 <h4>DUE DATE   : ${mission.deadline}</h4>
             </div>
-
             <div class="submission-details">
                 <div class="submission-detail">
                     <h2>SUBMISSION STATUS</h2>

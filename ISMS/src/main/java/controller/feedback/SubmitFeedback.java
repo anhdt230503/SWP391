@@ -30,8 +30,10 @@ public class SubmitFeedback extends HttpServlet {
         String email = (String) session.getAttribute("email");
         Account account = accountDAO.getAccountByEmail(email);
         int internId = account.getInternId();
+        System.out.println(internId);
         FeedbackDAO feedbackDAO = new FeedbackDAO();
         Mentor mentor = feedbackDAO.getMentorByInternId(internId);
+        System.out.println(mentor);
         if (mentor == null) {
             throw new ServletException("Mentor not found for internId: " + internId);
         }

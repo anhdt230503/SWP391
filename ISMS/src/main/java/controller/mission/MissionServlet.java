@@ -1,6 +1,7 @@
 package controller.mission;
 
 import com.google.gson.Gson;
+import dao.AccountDAO;
 import dao.MentorDAO;
 import dao.MissionDAO;
 import java.io.IOException;
@@ -9,7 +10,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.Intern;
 import model.Mentor;
 import model.Mission;
@@ -38,18 +41,40 @@ public class MissionServlet extends HttpServlet {
             throws ServletException, IOException {
         MissionDAO missionDAO = new MissionDAO();
         String statusParam = request.getParameter("status");
-        List<Mission> missions;
-
+        List<Mission> missions = null;
+        AccountDAO accountDAO = new AccountDAO();
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        Account account = accountDAO.getAccountByEmail(email);
+        int roleId = account.getRoleId();
+        if (roleId == 3) { // Mentor
+             int mentorId = account.getMentorId();
         if (statusParam != null && !statusParam.isEmpty()) {
+           
             try {
+              
                 Mission.MissionStatus status = Mission.MissionStatus.valueOf(statusParam);
-                missions = missionDAO.getMissionsByStatus(status);
+                missions = missionDAO.getMissionsByMentorId(mentorId); // Add filtering by status if needed
             } catch (IllegalArgumentException e) {
-                missions = missionDAO.getAllMissions(); // Handle invalid status
+                missions = missionDAO.getMissionsByMentorId(mentorId);
             }
         } else {
-            missions = missionDAO.getAllMissions();
+            missions = missionDAO.getMissionsByMentorId(mentorId);
         }
+    } else if (roleId == 4) { // Intern
+        int internId = account.getInternId();
+        if (statusParam != null && !statusParam.isEmpty()) {
+            try {
+               
+                Mission.MissionStatus status = Mission.MissionStatus.valueOf(statusParam);
+                missions = missionDAO.getMissionsByInternId(internId); // Add filtering by status if needed
+            } catch (IllegalArgumentException e) {
+                missions = missionDAO.getMissionsByInternId(internId);
+            }
+        } else {
+            missions = missionDAO.getMissionsByInternId(internId);
+        }
+    }
         MentorDAO mentorDAO = new MentorDAO();
         List<Mentor> listOfMentor = mentorDAO.getAllMentors();
         missionDAO.updateMissionStatusContinuously();

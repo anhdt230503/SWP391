@@ -96,7 +96,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="hour" class="form-label">Hours:</label>
-                    <input type="number" class="form-control" id="hour" name="hour" required>
+                    <input type="number" min="1" max="8" class="form-control" id="hour" name="hour" required>
                 </div>
                 <div class="mb-3">
                     <label for="note" class="form-label">Note:</label>
@@ -104,6 +104,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Add Task</button>
             </form>
+            
         </div>     
     </body>
 </html>
