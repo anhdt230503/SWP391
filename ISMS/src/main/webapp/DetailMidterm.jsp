@@ -90,6 +90,12 @@
                                             <input type="checkbox" id="Excellent" name="Excellent" ${report.poor ? 'checked' : ''} required disabled>
                                         </c:forEach>
                                     </div>
+                                    <div>
+                                        <label for="Poor">Comment</label>
+                                        <c:forEach items="${reports}" var="report">
+                                            <input placeholder=" ${report.comment} "required disabled> 
+                                        </c:forEach>
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-3"> Go Back</button>
                                 </form>
                             </div>

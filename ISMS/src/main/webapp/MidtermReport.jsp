@@ -73,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listOfFinalReport}" var="rp" varStatus="loop1" >
+                        <c:forEach items="${listOfMidtermReport}" var="rp" varStatus="loop1" >
                             <tr>
                                 <td>${rp.internId}</td>
                                 <td>${rp.studentId}</td>

@@ -5,6 +5,7 @@
 
 package controller.report;
 
+import dao.AccountDAO;
 import dao.FinalReportDAO;
 import dao.MidtermReportDAO;
 import java.io.IOException;
@@ -13,9 +14,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.List;
+import model.Account;
 import model.MidtermReport;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -68,30 +71,63 @@ public class ExportMidtermExcel extends HttpServlet {
         Workbook workbook = new XSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);
         MidtermReportDAO midtermreportDao = new MidtermReportDAO();
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        AccountDAO accountDAO = new AccountDAO();
+        Account account = accountDAO.getAccountByEmail(email);
+        int role = account.getRoleId();
+        int mentorid= account.getMentorId();
+        if(role == 3){
+         List<MidtermReport> reports = midtermreportDao.getAllMidtermReportsbyMentorId(mentorid);
+        int rowNum = 7; 
+        for (MidtermReport report : reports) {
+            Row row = sheet.getRow(rowNum);
+            if (row == null) {
+                row = sheet.createRow(rowNum);}
+            row.createCell(1).setCellValue(report.getStudent_id());
+            row.createCell(2).setCellValue(report.getStaff_id());
+            row.createCell(3).setCellValue(report.getIntern_name());
+            row.createCell(4).setCellValue("DX Lab");
+            row.createCell(5).setCellValue(report.getMentor_name());
+            row.createCell(6).setCellValue(report.isExcellent() ? "X" : "");
+            row.createCell(7).setCellValue(report.isVeryGood() ? "X" : "");
+            row.createCell(8).setCellValue(report.isGood() ? "X" : "");
+            row.createCell(9).setCellValue(report.isAverage() ? "X" : "");
+            row.createCell(10).setCellValue(report.isPoor() ? "X" : "");
+            row.createCell(11).setCellValue(report.getComment());
+            rowNum++;}
+        fileInputStream.close();
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=midterm_reports.xlsx");
+        OutputStream out = response.getOutputStream();
+        workbook.write(out);
+        workbook.close();
+        out.close();
+        } else if(role == 2){
         List<MidtermReport> reports = midtermreportDao.getAllMidtermReports();
         int rowNum = 7; 
         for (MidtermReport report : reports) {
             Row row = sheet.getRow(rowNum);
             if (row == null) {
                 row = sheet.createRow(rowNum);}
-            row.createCell(1).setCellValue(report.getIntern_id());
+            row.createCell(1).setCellValue(report.getStudent_id());
             row.createCell(2).setCellValue(report.getStaff_id());
             row.createCell(3).setCellValue(report.getIntern_name());
-            
+            row.createCell(4).setCellValue("DX Lab");
             row.createCell(6).setCellValue(report.isExcellent() ? "X" : "");
             row.createCell(7).setCellValue(report.isVeryGood() ? "X" : "");
             row.createCell(8).setCellValue(report.isGood() ? "X" : "");
             row.createCell(9).setCellValue(report.isAverage() ? "X" : "");
             row.createCell(10).setCellValue(report.isPoor() ? "X" : "");
-            
             rowNum++;}
         fileInputStream.close();
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=final_reports.xlsx");
+        response.setHeader("Content-Disposition", "attachment; filename=midterm_reports.xlsx");
         OutputStream out = response.getOutputStream();
         workbook.write(out);
         workbook.close();
         out.close();
+    }
     } 
 
     /** 

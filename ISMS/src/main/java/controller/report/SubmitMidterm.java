@@ -80,6 +80,7 @@ public class SubmitMidterm extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int internId = Integer.parseInt(request.getParameter("internId"));
+        String comment = request.getParameter("comment");
         boolean excellent = request.getParameter("Excellent") != null;
         boolean veryGood = request.getParameter("VeryGood") != null;
         boolean good = request.getParameter("Good") != null;
@@ -96,7 +97,7 @@ public class SubmitMidterm extends HttpServlet {
         Account account = accountDAO.getAccountByEmail(email);
         int mentorId = account.getMentorId();
         
-        midtermReportDAO.insertMidtermReport(mentorId, internId, excellent, veryGood, good, average, poor);
+        midtermReportDAO.insertMidtermReport(mentorId, internId, excellent, veryGood, good, average, poor,comment);
         response.sendRedirect(request.getContextPath() + "/MidtermReportList");
         }
     }

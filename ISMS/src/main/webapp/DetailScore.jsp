@@ -91,6 +91,15 @@
                                         ${report.final_score}
                                     </c:forEach>
                                 </td>
+
+                            </tr>
+                            <tr>
+                                <th>Comment:</th>
+                                <td>
+                                    <c:forEach items="${reports}" var="report">
+                                        ${report.comment}
+                                    </c:forEach>
+                                </td>
                             </tr>
                         </table>
                     </div>

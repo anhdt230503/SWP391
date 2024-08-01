@@ -35,6 +35,10 @@
                     <label for="attitude">Attitude:</label>
                     <input type="number" min="0" max="10" step="0.1" class="form-control" id="attitude" name="attitude" required>
                 </div>
+                <div class="form-group">
+                    <label for="attitude">Comment:</label>
+                    <input type="textarea" class="form-control" id="comment" name="comment" required>
+                </div>
                 <button type="submit" class="btn btn-primary mt-3">Submit Report</button>
             </form>
         </div>

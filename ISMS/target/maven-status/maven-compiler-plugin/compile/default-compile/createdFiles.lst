@@ -1,4 +1,5 @@
 controller\attendance\InternAttendanceHistoryServlet.class
+controller\report\UpdateMidterm.class
 model\News.class
 service\MissionReportService.class
 controller\mission\DownFileMisson.class

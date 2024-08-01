@@ -11,15 +11,16 @@ import java.util.List;
 import model.FinalReport;
 import model.Intern;
 import java.sql.Timestamp;
+import model.Mission;
 
 /**
  *
  * @author duong
  */
 public class FinalReportDAO extends MyDAO {
-    
-    public void SubmitReport(int mentorId, int internId, double softScore, double skillsScore, double attitudeScore, double finalScore) {
-        String sql = "INSERT INTO FinalReport (mentor_id, intern_id, soft_score, skills_score, attitue_score, final_score) VALUES (?, ?, ?, ?, ?, ?)";
+
+    public void SubmitReport(int mentorId, int internId, double softScore, double skillsScore, double attitudeScore, double finalScore,String comment) {
+        String sql = "INSERT INTO FinalReport (mentor_id, intern_id, soft_score, skills_score, attitue_score, final_score,comment) VALUES (?, ?, ?, ?, ?, ?,?)";
         try (
                 PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, mentorId);
@@ -28,6 +29,7 @@ public class FinalReportDAO extends MyDAO {
             ps.setDouble(4, skillsScore);
             ps.setDouble(5, attitudeScore);
             ps.setDouble(6, finalScore);
+            ps.setString(7,comment);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +50,7 @@ public class FinalReportDAO extends MyDAO {
         }
         return false;
     }
-    
+
     public Intern getStudentById(int internId) {
         String GET_STUDENT_SQL = "SELECT * FROM Intern WHERE intern_id = ?";
         Intern student = null;
@@ -76,12 +78,10 @@ public class FinalReportDAO extends MyDAO {
                         rs.getTimestamp(13),
                         rs.getDouble(14),
                         rs.getDouble(15));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return student;
     }
 
@@ -92,7 +92,6 @@ public class FinalReportDAO extends MyDAO {
         try (PreparedStatement ps = con.prepareStatement(GET_STUDENT_SQL)) {
             ps.setInt(1, internId);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 String statusString = rs.getString("status");
                 Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
@@ -112,25 +111,23 @@ public class FinalReportDAO extends MyDAO {
                         rs.getTimestamp(13),
                         rs.getDouble(14),
                         rs.getDouble(15)));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return student;
     }
 
-
-    public List<Integer> getTotalMissions() {
+    public List<Integer> getTotalMissions(int internid) {
         List<Integer> totalMissions = new ArrayList<>();
         String sql = "SELECT COUNT(mis_id) AS total_missions\n"
                 + "FROM Mission\n"
+                + "WHERE intern_id = ?\n"
                 + "GROUP BY intern_id;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
+            ps.setInt(1, internid);
             rs = ps.executeQuery();
             while (rs.next()) {
                 totalMissions.add(rs.getInt(1));
@@ -141,16 +138,16 @@ public class FinalReportDAO extends MyDAO {
         return totalMissions;
     }
 
-    public List<Integer> getTotalFinished() {
+    public List<Integer> getTotalFinished(int internid) {
         List<Integer> totalfinished = new ArrayList<>();
         String sql = "SELECT COUNT(mis_id) AS total_finishsed\n"
                 + "FROM Mission\n"
                 + "WHERE mis_status = 'FINISHED'\n"
+                + "WHERE intern_id = ?\n"
                 + "GROUP BY intern_id;";
-
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
+            ps.setInt(1, internid);
             rs = ps.executeQuery();
             while (rs.next()) {
                 totalfinished.add(rs.getInt(1));
@@ -160,14 +157,15 @@ public class FinalReportDAO extends MyDAO {
         }
         return totalfinished;
     }
-    
+
     public List<FinalReport> getAllFinalReports() {
         List<FinalReport> reports = new ArrayList<>();
         String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id, \n"
-                + "        (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
-                + "        (SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
-                + "        soft_score, skills_score, attitue_score, final_score, submission_date FROM FinalReport";
-
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS st_id,\n"
+                + " (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
+                + " (SELECT full_name FROM Mentor WHERE mentor.mentor_id = FinalReport.mentor_id) AS full_name,\n"
+                + "(SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
+                + " soft_score, skills_score, attitue_score, final_score,comment, submission_date FROM FinalReport";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
             rs = ps.executeQuery();
@@ -175,45 +173,85 @@ public class FinalReportDAO extends MyDAO {
                 int missionRpId = rs.getInt(1);
                 int mentorId = rs.getInt(2);
                 int internId = rs.getInt(3);
-                String internName = rs.getString(4);
-                String staffId = rs.getString(5);
-                double softScore = rs.getDouble(6);
-                double skillsScore = rs.getDouble(7);
-                double attitueScore = rs.getDouble(8);
-                double finalScore = rs.getDouble(9);
-                Timestamp submissionDate = rs.getTimestamp(10);
-                reports.add(new FinalReport(missionRpId, mentorId, internId, internName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                double softScore = rs.getDouble(8);
+                double skillsScore = rs.getDouble(9);
+                double attitueScore = rs.getDouble(10);
+                double finalScore = rs.getDouble(11);
+                String comment = rs.getString(12);
+                Timestamp submissionDate = rs.getTimestamp(13);
+                reports.add(new FinalReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, softScore, skillsScore, attitueScore, finalScore,comment ,submissionDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return reports;
     }
-    
+
     public List<FinalReport> getAllFinalReportsbyId(int internId) {
         List<FinalReport> reports = new ArrayList<>();
         String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id, \n"
-                + "        (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
-                + "        (SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
-                + "        ROUND(soft_score, 2), ROUND(skills_score, 2), ROUND(attitue_score, 2) , ROUND(final_score, 3), submission_date FROM FinalReport where intern_id=?";
-
+                + "(SELECT student_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS st_id,\n"
+                + "(SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
+                + "(SELECT full_name FROM Mentor WHERE mentor.mentor_id = FinalReport.mentor_id) AS full_name,\n"
+                + "(SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
+                + "soft_score, skills_score, attitue_score, final_score,comment, submission_date FROM FinalReport where intern_id=?;";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
             ps.setInt(1, internId);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 int missionRpId = rs.getInt(1);
                 int mentorId = rs.getInt(2);
                 internId = rs.getInt(3);
-                String internName = rs.getString(4);
-                String staffId = rs.getString(5);
-                double softScore = rs.getDouble(6);
-                double skillsScore = rs.getDouble(7);
-                double attitueScore = rs.getDouble(8);
-                double finalScore = rs.getDouble(9);
-                Timestamp submissionDate = rs.getTimestamp(10);
-                reports.add(new FinalReport(missionRpId, mentorId, internId, internName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                double softScore = rs.getDouble(8);
+                double skillsScore = rs.getDouble(9);
+                double attitueScore = rs.getDouble(10);
+                double finalScore = rs.getDouble(11);
+                String comment = rs.getString(12);
+                Timestamp submissionDate = rs.getTimestamp(13);
+                reports.add(new FinalReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, softScore, skillsScore, attitueScore, finalScore,comment ,submissionDate));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reports;
+    }
+
+    public List<FinalReport> getAllFinalReportsbyMentorId(int mentor_Id) {
+        List<FinalReport> reports = new ArrayList<>();
+        String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id, \n"
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS st_id,\n"
+                + " (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
+                + "  (SELECT full_name FROM Mentor WHERE mentor.mentor_id = FinalReport.mentor_id) AS full_name,\n"
+                + "  (SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
+                + "   soft_score, skills_score, attitue_score, final_score,comment ,submission_date FROM FinalReport where mentor_id=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
+            ps.setInt(1, mentor_Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int missionRpId = rs.getInt(1);
+                int mentorId = rs.getInt(2);
+                int internId = rs.getInt(3);
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                double softScore = rs.getDouble(8);
+                double skillsScore = rs.getDouble(9);
+                double attitueScore = rs.getDouble(10);
+                double finalScore = rs.getDouble(11);
+                String comment = rs.getString(12);
+                Timestamp submissionDate = rs.getTimestamp(13);
+                reports.add(new FinalReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, softScore, skillsScore, attitueScore, finalScore, comment,submissionDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -230,7 +268,6 @@ public class FinalReportDAO extends MyDAO {
             ps.setDouble(3, attitude);
             ps.setDouble(4, finalScore);
             ps.setInt(5, internId);
-
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -240,11 +277,9 @@ public class FinalReportDAO extends MyDAO {
     public boolean deleteReport(int internId) {
         String DELETE_REPORT_SQL = "DELETE FROM FinalReport WHERE intern_id=?";
         boolean deleted = false;
-
         try {
             PreparedStatement ps = con.prepareStatement(DELETE_REPORT_SQL);
             ps.setInt(1, internId);
-
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
                 deleted = true;
@@ -252,7 +287,6 @@ public class FinalReportDAO extends MyDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return deleted;
     }
 
@@ -325,27 +359,126 @@ public class FinalReportDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, internId);
             rs = ps.executeQuery();
-            if (rs.next()) { 
+            if (rs.next()) {
                 internName = rs.getString(1);
             }
         } catch (Exception e) {
         }
         return internName;
     }
-    
-    
 
-    public static void main(String[] args) {
-        FinalReportDAO finalReportDAO = new FinalReportDAO();
-        List<FinalReport> list = finalReportDAO.getAllInternCompletionOfInternship();
-        for (FinalReport fr : list) {
-            System.out.println(fr);
+    // Manager
+    public List<Intern> getStudentAll() {
+        String GET_STUDENT_SQL = "SELECT * FROM Intern";
+        List<Intern> student = new ArrayList<>();
 
+        try (PreparedStatement ps = con.prepareStatement(GET_STUDENT_SQL)) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString("status");
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                student.add(new Intern(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        
-        String internName = finalReportDAO.getNameByInternId(1);
-        System.out.println("Name: " + internName);
-
+        return student;
     }
 
+    public Intern getStudentAll2() {
+        String GET_STUDENT_SQL = "SELECT * FROM Intern";
+        Intern student = new Intern();
+
+        try (PreparedStatement ps = con.prepareStatement(GET_STUDENT_SQL)) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String statusString = rs.getString("status");
+                Intern.InternStatus status = Intern.InternStatus.valueOf(statusString.toUpperCase());
+                student = (new Intern(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        status,
+                        rs.getInt(12),
+                        rs.getTimestamp(13),
+                        rs.getDouble(14),
+                        rs.getDouble(15)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+//     public List<Mission> getAllMissions() {
+//        List<Mission> missions = new ArrayList<>();
+//        String xSql = "Select * from mission";
+//
+//        try {
+//            ps = con.prepareStatement(xSql);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                int misId = rs.getInt("mis_id");
+//                String misName = rs.getString("mis_name");
+//                Mission.MissionStatus misStatus = Mission.MissionStatus.valueOf(rs.getString("mis_status"));
+//                String misDescription = rs.getString("mis_description");
+//                String link = rs.getString("link");
+//                Timestamp startDate = rs.getTimestamp("start_date");
+//                Timestamp deadline = rs.getTimestamp("deadline");
+//                int mentorId = rs.getInt("mentor_id");
+//                int internId = rs.getInt("intern_id");
+//                String mentorFullName = rs.getString("mentorFullName");
+//                String internFullName = rs.getString("internFullName");
+//                String filePath = rs.getString("file_path");
+//                Timestamp createdAt = rs.getTimestamp("created_at");
+//                Timestamp updatedAt = rs.getTimestamp("updated_at");
+//                Timestamp submittedAt = rs.getTimestamp("submitted_at");
+//                Mission mission = new Mission(misId, misName, misStatus, misDescription, link, startDate, deadline, mentorId, internId, mentorFullName, internFullName, filePath, createdAt, updatedAt, submittedAt);
+//                missions.add(mission);
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("Error retrieving mission list: " + e.getMessage());
+//        }
+//
+//        return missions;
+//    }
+    public static void main(String[] args) {
+        FinalReportDAO finalReportDAO = new FinalReportDAO();
+//        List<FinalReport> list = finalReportDAO.getAllInternCompletionOfInternship();
+//        for (FinalReport fr : list) {
+//            System.out.println(fr);
+//        }
+//        String internName = finalReportDAO.getNameByInternId(1);
+//        System.out.println("Name: " + internName);
+//            List <Intern> list = finalReportDAO.getStudentAll();
+//            for (Intern intern : list ){
+//                int internid = intern.getInternId();
+//                System.out.println(internid);
+//
+//            }
+
+    }
 }

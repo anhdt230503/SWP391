@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
-import model.FinalReport;
 import model.Intern;
 
 /**
@@ -84,6 +83,7 @@ public class SubmitReport extends HttpServlet {
         double skills = Double.parseDouble(request.getParameter("skills"));
         double attitude = Double.parseDouble(request.getParameter("attitude"));
         double finalScore = softSkills * 0.4 + skills * 0.3 + attitude * 0.3;
+        String comment = request.getParameter("comment");
         FinalReportDAO fn = new FinalReportDAO();
         if (fn.isInternIdExists(internId)) {
             request.setAttribute("errorMessage", "InternId already exists. Please update instead.");
@@ -94,7 +94,7 @@ public class SubmitReport extends HttpServlet {
             AccountDAO accountDAO = new AccountDAO();
             Account account = accountDAO.getAccountByEmail(email);
             int mentorId = account.getMentorId();
-            fn.SubmitReport(mentorId, internId, softSkills, skills, attitude, finalScore);
+            fn.SubmitReport(mentorId, internId, softSkills, skills, attitude, finalScore,comment);
             request.setAttribute("finalScore", finalScore);
             response.sendRedirect(request.getContextPath() + "/FinalReportList");
         }
