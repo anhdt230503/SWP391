@@ -70,6 +70,7 @@ public class SessionTimeoutListener implements HttpSessionListener {
 
         // nếu đã có bản ghi trong DB thì sẽ update checkout time, total work time, duration
         if (attendance != null && attendance.getStatus() == Attendance.AttendanceStatus.PRESENT) {
+            System.out.println("AHAHAHAHAH");
             Attendance attendance1 = new Attendance();
             attendance1.setCheckOutTime(checkoutTime);
             attendance1.setTotalWorkTime(totalWorkTime);

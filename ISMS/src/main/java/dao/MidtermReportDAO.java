@@ -87,12 +87,15 @@ public class MidtermReportDAO extends MyDAO {
         return false;
     }
 
-    public List<MidtermReport> getAllMidtermReportsbyId(int internId) {
+   public List<MidtermReport> getAllMidtermReportsbyId(int internId) {
         List<MidtermReport> reports = new ArrayList<>();
         String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id,\n"
-                + "                 (SELECT full_name FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS intern_name,\n"
-                + "               (SELECT staff_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS staff_id,excellent,verygood,good,average,poor,\n"
-                + "    submission_date FROM midtermreport where intern_id=?";
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS st_id,\n"
+                + "	(SELECT full_name FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS intern_name,\n"
+                 + "    (SELECT full_name FROM Mentor WHERE mentor.mentor_id = midtermreport.mentor_id) AS full_name,\n"
+                + "	(SELECT staff_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS staff_id,\n"
+                + "    excellent,verygood,good,average,poor,\n"
+                + "	submission_date FROM midtermreport where intern_id=?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
@@ -103,15 +106,17 @@ public class MidtermReportDAO extends MyDAO {
                 int missionRpId = rs.getInt(1);
                 int mentorId = rs.getInt(2);
                 internId = rs.getInt(3);
-                String internName = rs.getString(4);
-                String staffId = rs.getString(5);
-                boolean excellent = rs.getBoolean(6);
-                boolean veryGood = rs.getBoolean(7);
-                boolean good = rs.getBoolean(8);
-                boolean average = rs.getBoolean(9);
-                boolean poor = rs.getBoolean(10);
-                Timestamp submissionDate = rs.getTimestamp(11);
-                reports.add(new MidtermReport(missionRpId, mentorId, internId, internName, staffId, excellent, veryGood, good, average, poor, submissionDate));
+                  String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                boolean excellent = rs.getBoolean(8);
+                boolean veryGood = rs.getBoolean(9);
+                boolean good = rs.getBoolean(10);
+                boolean average = rs.getBoolean(11);
+                boolean poor = rs.getBoolean(12);
+                Timestamp submissionDate = rs.getTimestamp(13);
+                reports.add(new MidtermReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, excellent, veryGood, good, average, poor, submissionDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,10 +127,12 @@ public class MidtermReportDAO extends MyDAO {
     public List<MidtermReport> getAllMidtermReports() {
         List<MidtermReport> reports = new ArrayList<>();
         String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id,\n"
-                + "                 (SELECT full_name FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS intern_name,\n"
-                + "               (SELECT staff_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS staff_id,excellent,verygood,good,average,poor,\n"
-                + "    submission_date FROM midtermreport";
-
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS st_id,\n"
+                + "	(SELECT full_name FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS intern_name,\n"
+                 + "    (SELECT full_name FROM Mentor WHERE mentor.mentor_id = midtermreport.mentor_id) AS full_name,\n"
+                + "	(SELECT staff_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS staff_id,\n"
+                + "    excellent,verygood,good,average,poor,\n"
+                + "	submission_date FROM midtermreport;";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
             rs = ps.executeQuery();
@@ -133,15 +140,52 @@ public class MidtermReportDAO extends MyDAO {
                 int missionRpId = rs.getInt(1);
                 int mentorId = rs.getInt(2);
                 int internId = rs.getInt(3);
-                String internName = rs.getString(4);
-                String staffId = rs.getString(5);
-                boolean excellent = rs.getBoolean(6);
-                boolean veryGood = rs.getBoolean(7);
-                boolean good = rs.getBoolean(8);
-                boolean average = rs.getBoolean(9);
-                boolean poor = rs.getBoolean(10);
-                Timestamp submissionDate = rs.getTimestamp(11);
-                reports.add(new MidtermReport(missionRpId, mentorId, internId, internName, staffId, excellent, veryGood, good, average, poor, submissionDate));
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                boolean excellent = rs.getBoolean(8);
+                boolean veryGood = rs.getBoolean(9);
+                boolean good = rs.getBoolean(10);
+                boolean average = rs.getBoolean(11);
+                boolean poor = rs.getBoolean(12);
+                Timestamp submissionDate = rs.getTimestamp(13);
+                reports.add(new MidtermReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, excellent, veryGood, good, average, poor, submissionDate));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reports;
+    }
+
+    public List<MidtermReport> getAllMidtermReportsbyMentorId(int mentorid) {
+        List<MidtermReport> reports = new ArrayList<>();
+        String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id,\n"
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS st_id,\n"
+                + "	(SELECT full_name FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS intern_name,\n"
+                  + "    (SELECT full_name FROM Mentor WHERE mentor.mentor_id = midtermreport.mentor_id) AS full_name,\n"
+                + "	(SELECT staff_id FROM Intern WHERE Intern.intern_id = midtermreport.intern_id) AS staff_id,\n"         
+                + "    excellent,verygood,good,average,poor,\n"
+                + "	submission_date FROM midtermreport where mentor_id=?;";
+        try {
+            PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
+            ps.setInt(1, mentorid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int missionRpId = rs.getInt(1);
+                int mentorId = rs.getInt(2);
+                int internId = rs.getInt(3);
+                  String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                boolean excellent = rs.getBoolean(8);
+                boolean veryGood = rs.getBoolean(9);
+                boolean good = rs.getBoolean(10);
+                boolean average = rs.getBoolean(11);
+                boolean poor = rs.getBoolean(12);
+                Timestamp submissionDate = rs.getTimestamp(13);
+                reports.add(new MidtermReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, excellent, veryGood, good, average, poor, submissionDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();

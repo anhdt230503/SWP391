@@ -422,6 +422,22 @@
         <servlet-name>BackToSchedule</servlet-name>
         <servlet-class>controller.schedule.BackToSchedule</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AcceptMisssion</servlet-name>
+        <servlet-class>controller.mission.AcceptMisssion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReSubmitMission</servlet-name>
+        <servlet-class>controller.mission.ReSubmitMission</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectMission</servlet-name>
+        <servlet-class>controller.mission.RejectMission</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AcceptMission</servlet-name>
+        <servlet-class>controller.mission.AcceptMission</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImportInternServlet</servlet-name>
         <url-pattern>/importIntern</url-pattern>
@@ -837,6 +853,22 @@
     <servlet-mapping>
         <servlet-name>BackToSchedule</servlet-name>
         <url-pattern>/backToSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptMisssion</servlet-name>
+        <url-pattern>/AcceptMisssion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReSubmitMission</servlet-name>
+        <url-pattern>/ReSubmitMission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectMission</servlet-name>
+        <url-pattern>/RejectMission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptMission</servlet-name>
+        <url-pattern>/AcceptMission</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>300</session-timeout>

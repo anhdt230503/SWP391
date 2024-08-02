@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.certificate;
 
 import dao.AccountDAO;
@@ -23,8 +19,7 @@ import model.Account;
 public class DownloadCertificateServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -60,27 +55,40 @@ public class DownloadCertificateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Khởi tạo đối tượng AccountDAO và CertificateDAO để truy xuất dữ liệu từ cơ sở dữ liệu
         AccountDAO accountDAO = new AccountDAO();
         CertificateDAO certificateDAO = new CertificateDAO();
 
+        // Lấy session từ request
         HttpSession session = request.getSession();
+        // Lấy email của người dùng từ session
         String email = (String) session.getAttribute("email");
+        // Lấy thông tin tài khoản của người dùng từ cơ sở dữ liệu dựa trên email
         Account account = accountDAO.getAccountByEmail(email);
 
+        // Lấy roleId của người dùng từ tài khoản
         int roleId = account.getRoleId();
         byte[] pdfData = null;
 
-        if (roleId == 4) {
+        // Kiểm tra vai trò của người dùng để xác định cách lấy chứng chỉ
+        if (roleId == 4) { // Nếu người dùng có roleId là 4 (thực tập sinh)
             int internId = account.getInternId();
+            // Lấy dữ liệu chứng chỉ của thực tập sinh dựa trên internId
             pdfData = certificateDAO.getCertificateDataByIntern(internId);
-        } else {
+        } else { // Nếu không phải thực tập sinh
+            // Lấy id của chứng chỉ từ request parameter
             int certificateId = Integer.parseInt(request.getParameter("id"));
+            // Lấy dữ liệu chứng chỉ dựa trên certificateId
             pdfData = certificateDAO.getCertificateData(certificateId);
         }
 
+        // Kiểm tra xem dữ liệu chứng chỉ có tồn tại hay không
         if (pdfData != null) {
+            // Thiết lập type của response là PDF
             response.setContentType("application/pdf");
+            // Thiết lập header để trình duyệt nhận diện đây là file đính kèm và đặt tên cho file
             response.setHeader("Content-Disposition", "attachment; filename=\"certificate.pdf\"");
+            // Ghi dữ liệu PDF vào response
             try (OutputStream os = response.getOutputStream()) {
                 os.write(pdfData);
                 os.flush();
@@ -90,7 +98,6 @@ public class DownloadCertificateServlet extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write("Certificate not found.");
         }
-
     }
 
     /**
@@ -104,7 +111,7 @@ public class DownloadCertificateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Phương thức POST không được sử dụng trong servlet này, nên không cần triển khai
     }
 
     /**

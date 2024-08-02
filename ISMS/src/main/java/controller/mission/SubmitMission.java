@@ -37,6 +37,7 @@ public class SubmitMission extends HttpServlet {
         request.setAttribute("mission", mission);
         request.getRequestDispatcher("SubmitFile.jsp").forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MissionDAO missionDAO = new MissionDAO();
@@ -50,19 +51,18 @@ public class SubmitMission extends HttpServlet {
             request.setAttribute("mission", mission); // Send back the mission information
             request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
             return;
-        }
-        if ("FINISHED".equals(mission.getMisStatus().name())) {
-            request.setAttribute("errorMessage", "Mission đã hết hạn.");
-            request.setAttribute("mission", mission); // Send back the mission information
-            request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
-            return;
         } else if ("NOT_START".equals(mission.getMisStatus().name())) {
             request.setAttribute("errorMessage", "Mission chưa bắt đầu.");
             request.setAttribute("mission", mission); // Send back the mission information
             request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
             return;
-        } else if ("MISSING".equals(mission.getMisStatus().name())) {
-            request.setAttribute("errorMessage", "Mission đã hết hạn.");
+        } else if ("REJECTED".equals(mission.getMisStatus().name())) {
+            request.setAttribute("errorMessage", "Your assignment has been rejected by the mentor. You cannot submit your work!");
+            request.setAttribute("mission", mission); // Send back the mission information
+            request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
+            return;
+        } else if ("COMPLETED".equals(mission.getMisStatus().name())) {
+            request.setAttribute("errorMessage", "Your mission has been completed. You can no longer submit your work!");
             request.setAttribute("mission", mission); // Send back the mission information
             request.getRequestDispatcher("DetailMission.jsp").forward(request, response);
             return;

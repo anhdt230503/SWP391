@@ -15,7 +15,9 @@ public class FinalReport {
     private int mission_rp_id;
     private int mentor_id;
     private int intern_id;
+     private String student_id;
     private String intern_name;
+     private String mentor_name;
     private String staff_id;
     private double soft_score;
     private double skills_score;
@@ -26,11 +28,13 @@ public class FinalReport {
     public FinalReport() {
     }
 
-    public FinalReport(int mission_rp_id, int mentor_id, int intern_id, String intern_name, String staff_id, double soft_score, double skills_score, double attitue_score, double final_score, Timestamp submission_date) {
+    public FinalReport(int mission_rp_id, int mentor_id, int intern_id, String student_id, String intern_name, String mentor_name, String staff_id, double soft_score, double skills_score, double attitue_score, double final_score, Timestamp submission_date) {
         this.mission_rp_id = mission_rp_id;
         this.mentor_id = mentor_id;
         this.intern_id = intern_id;
+        this.student_id = student_id;
         this.intern_name = intern_name;
+        this.mentor_name = mentor_name;
         this.staff_id = staff_id;
         this.soft_score = soft_score;
         this.skills_score = skills_score;
@@ -38,10 +42,6 @@ public class FinalReport {
         this.final_score = final_score;
         this.submission_date = submission_date;
     }
-
-    
-    
-    
 
     public int getMission_rp_id() {
         return mission_rp_id;
@@ -67,12 +67,36 @@ public class FinalReport {
         this.intern_id = intern_id;
     }
 
+    public String getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
+    }
+
     public String getIntern_name() {
         return intern_name;
     }
 
     public void setIntern_name(String intern_name) {
         this.intern_name = intern_name;
+    }
+
+    public String getMentor_name() {
+        return mentor_name;
+    }
+
+    public void setMentor_name(String mentor_name) {
+        this.mentor_name = mentor_name;
+    }
+
+    public String getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
     }
 
     public double getSoft_score() {
@@ -115,17 +139,11 @@ public class FinalReport {
         this.submission_date = submission_date;
     }
 
-    public String getStaff_id() {
-        return staff_id;
-    }
-
-    public void setStaff_id(String staff_id) {
-        this.staff_id = staff_id;
-    }
-
     @Override
     public String toString() {
-        return "FinalReport{" + "mission_rp_id=" + mission_rp_id + ", mentor_id=" + mentor_id + ", intern_id=" + intern_id + ", intern_name=" + intern_name + ", staff_id=" + staff_id + ", soft_score=" + soft_score + ", skills_score=" + skills_score + ", attitue_score=" + attitue_score + ", final_score=" + final_score + ", submission_date=" + submission_date + '}';
+        return "FinalReport{" + "mission_rp_id=" + mission_rp_id + ", mentor_id=" + mentor_id + ", intern_id=" + intern_id + ", student_id=" + student_id + ", intern_name=" + intern_name + ", mentor_name=" + mentor_name + ", staff_id=" + staff_id + ", soft_score=" + soft_score + ", skills_score=" + skills_score + ", attitue_score=" + attitue_score + ", final_score=" + final_score + ", submission_date=" + submission_date + '}';
     }
+
+   
 
 }

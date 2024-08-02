@@ -25,7 +25,6 @@ import model.Account;
 import model.Intern;
 
 @MultipartConfig
-
 public class UpdateMissionServlet extends HttpServlet {
 
     @Override
@@ -44,11 +43,12 @@ public class UpdateMissionServlet extends HttpServlet {
             String deadlineStr = request.getParameter("deadline");
             String internIdStr = request.getParameter("internId");
             String link = null;
+
             Part filePart = request.getPart("link");
             if (filePart != null && filePart.getSize() > 0) {
                 String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")).toLowerCase();
-                Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
+                Path uploadDirectory = Paths.get("file_upload"); // Đường dẫn thư mục tải lên đã được chỉnh sửa
                 if (!Files.exists(uploadDirectory)) {
                     Files.createDirectories(uploadDirectory);
                 }
@@ -58,12 +58,6 @@ public class UpdateMissionServlet extends HttpServlet {
                 }
                 link = originalFileName; // Set link to the uploaded file name
             }
-            System.out.println("missionIdStr: " + missionIdStr);
-            System.out.println("misName: " + misName);
-            System.out.println("misDescription: " + misDescription);
-            System.out.println("startDateStr: " + startDateStr);
-            System.out.println("deadlineStr: " + deadlineStr);
-            System.out.println("internIdStr: " + internIdStr);
 
             if (missionIdStr == null || missionIdStr.isEmpty()
                     || misName == null || misName.isEmpty()
@@ -73,6 +67,7 @@ public class UpdateMissionServlet extends HttpServlet {
                     || internIdStr == null || internIdStr.isEmpty()) {
                 throw new IllegalArgumentException("One or more required parameters are missing or empty.");
             }
+
             int missionId = Integer.parseInt(missionIdStr);
             int internId = Integer.parseInt(internIdStr);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -81,7 +76,7 @@ public class UpdateMissionServlet extends HttpServlet {
 
             Timestamp startDate = new Timestamp(parsedStartDate.getTime());
             Timestamp deadline = new Timestamp(parsedDeadline.getTime());
-            
+
             if (deadline.before(startDate)) {
                 request.setAttribute("errorMessage", "Deadline must be after Start Date");
                 request.setAttribute("name", misName);
@@ -92,15 +87,17 @@ public class UpdateMissionServlet extends HttpServlet {
                 request.getRequestDispatcher("updateMission.jsp").forward(request, response);
                 return;
             }
+
             Timestamp currentTimestamp = new Timestamp(new Date().getTime());
-            Mission.MissionStatus status;
+            MissionStatus status;
             if (currentTimestamp.before(startDate)) {
-                status = Mission.MissionStatus.NOT_START;
+                status = MissionStatus.NOT_START;
             } else if (currentTimestamp.after(deadline)) {
-                status = Mission.MissionStatus.FINISHED;
+                status = MissionStatus.FINISHED;
             } else {
-                status = Mission.MissionStatus.ON_GOING;
+                status = MissionStatus.ON_GOING;
             }
+
             Mission mission = new Mission();
             mission.setMisId(missionId);
             mission.setMisName(misName);
@@ -112,6 +109,7 @@ public class UpdateMissionServlet extends HttpServlet {
             mission.setMentorId(mentorId);
             mission.setInternId(internId);
             mission.setUpdateTime(currentTimestamp);
+
             MissionDAO missionDAO = new MissionDAO();
             missionDAO.updateMission(mission);
             response.sendRedirect(request.getContextPath() + "/mission");
@@ -126,7 +124,6 @@ public class UpdateMissionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountDAO accountDAO = new AccountDAO();
         MissionDAO missionDAO = new MissionDAO();
-
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
 
@@ -144,10 +141,17 @@ public class UpdateMissionServlet extends HttpServlet {
 
         // Lấy thông tin chi tiết của nhiệm vụ dựa trên misId
         Mission mission = missionDAO.getMissionById(misId);
-        request.setAttribute("mission", mission);
+        if ("COMPLETED".equals(mission.getMisStatus().name())
+                || "REJECTED".equals(mission.getMisStatus().name())
+                || "RESUBMITTED".equals(mission.getMisStatus().name())) {
+            request.setAttribute("errorMessage", "The mission has been rejected or accepted by the mentor so Can not edit!");
+            request.getRequestDispatcher("mission").forward(request, response);  // Ensure the path is correct
+        } else {
+            request.setAttribute("mission", mission);
 
-        // Chuyển hướng request đến updateMission.jsp
-        request.getRequestDispatcher("updateMission.jsp").forward(request, response);
+            // Chuyển hướng request đến updateMission.jsp
+            request.getRequestDispatcher("updateMission.jsp").forward(request, response);
+        }
+
     }
-
 }

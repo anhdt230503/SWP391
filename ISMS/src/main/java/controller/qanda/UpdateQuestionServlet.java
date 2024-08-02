@@ -65,15 +65,15 @@ public class UpdateQuestionServlet extends HttpServlet {
             String id = request.getParameter("qandaId");
             int qandaId = Integer.parseInt(id);
             QandA qanda = qandaDAO.getQuestionByQuestionId(qandaId);
-            
+
             // Check the question status
             if (qanda.getQuestionStatus() == QandA.QandAStatus.ANSWERED) {
                 // Set an error message and redirect to the QandAServlet
-                request.getSession().setAttribute("errorMessage", "You cannot edit this question because it has already been answered by the mentor!");
+                request.getSession().setAttribute("errorMessage", "Không thể thay đổi câu hỏi vì mentor đã trả lời câu hỏi này.");
                 response.sendRedirect(request.getContextPath() + "/QandAServlet");
                 return; // Stop further processing
             }
-            
+
             request.setAttribute("qanda", qanda);
             request.setAttribute("mentor", mentor);
             request.getRequestDispatcher("updateQuestion.jsp").forward(request, response);
@@ -107,11 +107,13 @@ public class UpdateQuestionServlet extends HttpServlet {
             if (qandaIdstr == null) {
                 throw new ServletException("qandaId parameter is missing");
             }
+            String question_title = request.getParameter("question_title");
             String question_text = request.getParameter("question_text");
             Timestamp currentTimestamp = new Timestamp(new Date().getTime());
             int qandaId = Integer.parseInt(qandaIdstr);
             QandA qanda = new QandA();
             qanda.setQandaId(qandaId);
+            qanda.setQuestionTitle(question_title);
             qanda.setQuestionStatus(QandA.QandAStatus.PENDING);
             qanda.setQuestionText(question_text);
             qanda.setMentorId(mentorId);

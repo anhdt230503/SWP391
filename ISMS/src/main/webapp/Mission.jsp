@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,11 +83,16 @@
                             <th>Task</th>
                             <th>Start Date</th>
                             <th>Deadline</th>
-                            <th>Mentor Name</th>
-                            <th>Intern Name</th>
+                                <c:if test="${sessionScope.acc.roleId == 1}">
+                                <th>Mentor Name</th>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.roleId == 3}">
+                                <th>Intern Name</th>
+                                </c:if>
                             <th>Submit Task</th>
                                 <c:if test="${sessionScope.acc.roleId == 3}">
                                 <th>Actions</th>
+                                <th>Review</th>
                                 </c:if>
                         </tr>
                     </thead>
@@ -97,13 +103,39 @@
                                 <td>${mission.misName}</td>
                                 <td>${mission.misStatus}</td>
                                 <td>${mission.misDescription}</td>
-                                <td><a href="DownFileMisson?link=${mission.link}">${mission.link}</a></td>
+                                <td>
+                                    <a href="DownFileMisson?link=${mission.link}">
+                                        <c:choose>
+                                            <c:when test="${fn:length(mission.link) > 20}">
+                                                ${fn:substring(mission.link, fn:length(mission.link) - 20, fn:length(mission.file_path))}
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${mission.link}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                </td>
                                 <td>${mission.startDate}</td>
                                 <td>${mission.deadline}</td>
-                                <td>${mission.mentorFullName}</td>
-                                <td>${mission.internFullName}</td>
-                                <td><a href="DownFileMisson1?file_path=${mission.file_path}">${mission.file_path}</a></td>
-                                    <c:if test="${sessionScope.acc.roleId == 3}">
+                                <c:if test="${sessionScope.acc.roleId == 1}">
+                                    <td>${mission.mentorFullName}</td>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.roleId == 3}">
+                                    <td>${mission.internFullName}</td>
+                                </c:if>
+                                <td>
+                                    <a href="DownFileMisson1?file_path=${mission.file_path}">
+                                        <c:choose>
+                                            <c:when test="${fn:length(mission.file_path) > 20}">
+                                                ${fn:substring(mission.file_path, fn:length(mission.file_path) - 20, fn:length(mission.file_path))}
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${mission.file_path}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                </td>
+                                <c:if test="${sessionScope.acc.roleId == 3}">
 
                                     <td>
                                         <a href="UpdateMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary">
@@ -112,6 +144,11 @@
                                         <a href="DeleteMissionServlet?misId=${mission.misId}" class="btn btn-sm text-primary" onclick="return confirm('Are you sure you want to delete this mission?');">
                                             <i class="bi bi-trash"></i>
                                         </a>
+                                    </td>
+                                    <td>
+                                        <a href="AcceptMission?misId=${mission.misId}" onclick="return confirm('Are you sure you want to accept this mission?')">Chấp nhận</a><br>
+                                        <a href="RejectMission?misId=${mission.misId}" onclick="return confirm('Are you sure you want to reject this mission?')">Reject</a><br>
+                                        <a href="ReSubmitMission?misId=${mission.misId}" onclick="return confirm('Are you sure you want to accept intern resubmit this mission?')">Nộp Lại</a><br>
                                     </td>
                                 </c:if>
 

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.SQLException;
@@ -81,8 +77,7 @@ public class QandADAO extends MyDAO {
                 + "WHERE ia.intern_id = ? AND ia.is_selected = 1";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(+
-                    1, internId);
+            ps.setInt(1, internId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 mentor = new Mentor();
@@ -240,6 +235,82 @@ public class QandADAO extends MyDAO {
         }
 
         return intern; // Trả về null nếu không tìm thấy
+    }
+
+    public List<QandA> getQuestionsByInternId(int internId) {
+        List<QandA> qanas = new ArrayList<>();
+        String xSQL = "SELECT q.qanda_id, q.question_title, q.question_status, q.question_text, q.mentor_id, q.intern_id, q.answer_text, q.created_at, q.updated_at, q.submitted_at, "
+                + "m.full_name AS mentorFullName, i.full_name AS internFullName "
+                + "FROM qanda q "
+                + "LEFT JOIN mentor m ON q.mentor_id = m.mentor_id "
+                + "LEFT JOIN intern i ON q.intern_id = i.intern_id "
+                + "WHERE q.intern_id = ?";
+        try {
+            ps = con.prepareStatement(xSQL);
+            ps.setInt(1, internId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int qanda_id = rs.getInt("qanda_id");
+                String question_title = rs.getString("question_title");
+                QandA.QandAStatus question_status = QandA.QandAStatus.valueOf(rs.getString("question_status"));
+                String question_text = rs.getString("question_text");
+                int mentor_id = rs.getInt("mentor_id");
+                int intern_id = rs.getInt("intern_id");
+                String answer_text = rs.getString("answer_text");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+                Timestamp updatedAt = rs.getTimestamp("updated_at");
+                Timestamp submittedAt = rs.getTimestamp("submitted_at");
+                String mentorFullName = rs.getString("mentorFullName");
+                String internFullName = rs.getString("internFullName");
+                QandA qana = new QandA(qanda_id, question_title, question_status, question_text, mentor_id, intern_id, answer_text, createdAt, updatedAt, submittedAt, mentorFullName, internFullName);
+                qanas.add(qana);
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.err.println("Error retrieving questions by intern ID: " + e.getMessage());
+        }
+        return qanas;
+    }
+
+    public List<QandA> getQuestionsByMentorId(int mentorId) {
+        List<QandA> qanas = new ArrayList<>();
+        String xSQL = "SELECT q.qanda_id, q.question_title, q.question_status, q.question_text, q.mentor_id, q.intern_id, q.answer_text, q.created_at, q.updated_at, q.submitted_at, "
+                + "m.full_name AS mentorFullName, i.full_name AS internFullName "
+                + "FROM qanda q "
+                + "LEFT JOIN mentor m ON q.mentor_id = m.mentor_id "
+                + "LEFT JOIN intern i ON q.intern_id = i.intern_id "
+                + "WHERE q.mentor_id = ?";
+        try {
+            ps = con.prepareStatement(xSQL);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int qanda_id = rs.getInt("qanda_id");
+                String question_title = rs.getString("question_title");
+                QandA.QandAStatus question_status = QandA.QandAStatus.valueOf(rs.getString("question_status"));
+                String question_text = rs.getString("question_text");
+                int mentor_id = rs.getInt("mentor_id");
+                int intern_id = rs.getInt("intern_id");
+                String answer_text = rs.getString("answer_text");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+                Timestamp updatedAt = rs.getTimestamp("updated_at");
+                Timestamp submittedAt = rs.getTimestamp("submitted_at");
+                String mentorFullName = rs.getString("mentorFullName");
+                String internFullName = rs.getString("internFullName");
+                QandA qana = new QandA(qanda_id, question_title, question_status, question_text, mentor_id, intern_id, answer_text, createdAt, updatedAt, submittedAt, mentorFullName, internFullName);
+                qanas.add(qana);
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.err.println("Error retrieving questions by mentor ID: " + e.getMessage());
+        }
+        return qanas;
     }
 
     public static void main(String[] args) {

@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         h2 {
             padding-top: 50px;
             text-align: center;
@@ -97,10 +97,14 @@
                     <label for="misDescription" class="form-label">Description</label>
                     <textarea class="form-control" id="misDescription" name="misDescription" required>${mission.misDescription}</textarea>
                 </div>
+                <br>
                 <div>
-                    <label for="link" class="form-label">Link</label>
-                    <input type="file" id="link" name="link"value="${mission.link}">
+
+                    <label for="link" class="form-label">Previous file :${mission.link}</label>
+                    <p>New file <input type="file" id="link" name="link"></p>
+
                 </div>
+
                 <div class="form-group">
                     <label for="internId">Intern:</label>
                     <select class="form-control" id="internId" name="internId" required>
@@ -126,4 +130,39 @@
             </div>
         </div>
     </body>
+    <script>
+        function validateForm() {
+            var now = new Date();
+            var startDate = new Date(document.getElementById("startDate").value);
+            var deadline = new Date(document.getElementById("deadline").value);
+            var dateError = document.getElementById("dateError");
+
+            dateError.textContent = '';
+
+            if (startDate <= now) {
+                alert("The Start Date must be after the task creation time.");
+                return false;
+            }
+
+            if (deadline < startDate) {
+                alert("Deadline must be after Start Date");
+                return false;
+            }
+
+            var diffTime = Math.abs(deadline - startDate);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+
+
+            return true;
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById("myForm").reset();
+        });
+    </script>
 </html>

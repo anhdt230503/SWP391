@@ -8,7 +8,11 @@ public class Mission {
         NOT_START,
         ON_GOING,
         FINISHED,
-        MISSING
+        MISSING,
+        SUBMITTED_LATE,
+        COMPLETED,
+        REJECTED,
+        RESUBMITTED
     }
     private int misId;
     private String misName;
@@ -173,4 +177,3 @@ public class Mission {
     }
     
 }
-

@@ -4,6 +4,7 @@
  */
 package controller.qanda;
 
+import dao.AccountDAO;
 import dao.QandADAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.QandA;
 
 /**
@@ -58,9 +61,22 @@ public class QandAServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        AccountDAO accountDAO = new AccountDAO();
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        Account account = accountDAO.getAccountByEmail(email);
+        int roleId = account.getRoleId();
         QandADAO qandaDAO = new QandADAO();
-        List<QandA> qandas = qandaDAO.getQandA();
-        request.setAttribute("qandas", qandas);
+        if (roleId == 3) {
+            int mentorId = account.getMentorId();
+            List<QandA> qandas = qandaDAO.getQuestionsByMentorId(mentorId);
+            request.setAttribute("qandas", qandas);
+        }
+        if (roleId == 4) {
+            int internId = account.getInternId();
+            List<QandA> qandas = qandaDAO.getQuestionsByInternId(internId);
+            request.setAttribute("qandas", qandas);
+        }
 
         // Check for error message in session
         String errorMessage = (String) request.getSession().getAttribute("errorMessage");

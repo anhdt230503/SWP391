@@ -98,7 +98,7 @@
                     <table class="table table-secondary">
                         <thead>
                             <tr>
-                                <th scope="col">Mission</th>
+                                <th scope="col">Schedule</th>
                                 <th scope="col">Created Date</th>
                                 <th scope="col">Start Date</th>
                                 <th scope="col">Hours</th>

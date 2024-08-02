@@ -110,7 +110,7 @@ public class FinalReportDAO extends MyDAO {
         List<Integer> totalfinished = new ArrayList<>();
         String sql = "SELECT COUNT(mis_id) AS total_finishsed\n"
                 + "FROM Mission\n"
-                + "WHERE mis_status = 'FINISHED'\n"
+                + "WHERE mis_status = 'COMPLETED'\n"
                 + "GROUP BY intern_id;";
 
         try {
@@ -126,13 +126,14 @@ public class FinalReportDAO extends MyDAO {
         return totalfinished;
     }
     
-    public List<FinalReport> getAllFinalReports() {
+   public List<FinalReport> getAllFinalReports() {
         List<FinalReport> reports = new ArrayList<>();
         String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id, \n"
-                + "        (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
-                + "        (SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
-                + "        soft_score, skills_score, attitue_score, final_score, submission_date FROM FinalReport";
-
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS st_id,\n"
+                + " (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
+                + " (SELECT full_name FROM Mentor WHERE mentor.mentor_id = FinalReport.mentor_id) AS full_name,\n"
+                + "(SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
+                + " soft_score, skills_score, attitue_score, final_score, submission_date FROM FinalReport";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
             rs = ps.executeQuery();
@@ -140,51 +141,89 @@ public class FinalReportDAO extends MyDAO {
                 int missionRpId = rs.getInt(1);
                 int mentorId = rs.getInt(2);
                 int internId = rs.getInt(3);
-                String internName = rs.getString(4);
-                String staffId = rs.getString(5);
-                double softScore = rs.getDouble(6);
-                double skillsScore = rs.getDouble(7);
-                double attitueScore = rs.getDouble(8);
-                double finalScore = rs.getDouble(9);
-                Timestamp submissionDate = rs.getTimestamp(10);
-                reports.add(new FinalReport(missionRpId, mentorId, internId, internName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                double softScore = rs.getDouble(8);
+                double skillsScore = rs.getDouble(9);
+                double attitueScore = rs.getDouble(10);
+                double finalScore = rs.getDouble(11);
+                Timestamp submissionDate = rs.getTimestamp(12);
+                reports.add(new FinalReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return reports;
     }
-    
+
     public List<FinalReport> getAllFinalReportsbyId(int internId) {
         List<FinalReport> reports = new ArrayList<>();
         String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id, \n"
-                + "        (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
-                + "        (SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
-                + "        ROUND(soft_score, 2), ROUND(skills_score, 2), ROUND(attitue_score, 2) , ROUND(final_score, 3), submission_date FROM FinalReport where intern_id=?";
-
+                + "(SELECT student_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS st_id,\n"
+                + "(SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
+                + "(SELECT full_name FROM Mentor WHERE mentor.mentor_id = FinalReport.mentor_id) AS full_name,\n"
+                + "(SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
+                + "soft_score, skills_score, attitue_score, final_score, submission_date FROM FinalReport where intern_id=?;";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
             ps.setInt(1, internId);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 int missionRpId = rs.getInt(1);
                 int mentorId = rs.getInt(2);
                 internId = rs.getInt(3);
-                String internName = rs.getString(4);
-                String staffId = rs.getString(5);
-                double softScore = rs.getDouble(6);
-                double skillsScore = rs.getDouble(7);
-                double attitueScore = rs.getDouble(8);
-                double finalScore = rs.getDouble(9);
-                Timestamp submissionDate = rs.getTimestamp(10);
-                reports.add(new FinalReport(missionRpId, mentorId, internId, internName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                double softScore = rs.getDouble(8);
+                double skillsScore = rs.getDouble(9);
+                double attitueScore = rs.getDouble(10);
+                double finalScore = rs.getDouble(11);
+                Timestamp submissionDate = rs.getTimestamp(12);
+                reports.add(new FinalReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return reports;
     }
+
+    public List<FinalReport> getAllFinalReportsbyMentorId(int mentor_Id) {
+        List<FinalReport> reports = new ArrayList<>();
+        String SELECT_ALL_REPORTS = "SELECT mission_rp_id, mentor_id, intern_id, \n"
+                + " (SELECT student_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS st_id,\n"
+                + " (SELECT full_name FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS intern_name, \n"
+                + "  (SELECT full_name FROM Mentor WHERE mentor.mentor_id = FinalReport.mentor_id) AS full_name,\n"
+                + "  (SELECT staff_id FROM Intern WHERE Intern.intern_id = FinalReport.intern_id) AS staff_id, \n"
+                + "   soft_score, skills_score, attitue_score, final_score, submission_date FROM FinalReport where mentor_id=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(SELECT_ALL_REPORTS);
+            ps.setInt(1, mentor_Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int missionRpId = rs.getInt(1);
+                int mentorId = rs.getInt(2);
+                int internId = rs.getInt(3);
+                String studentid = rs.getString(4);
+                String internName = rs.getString(5);
+                String mentorName = rs.getString(6);
+                String staffId = rs.getString(7);
+                double softScore = rs.getDouble(8);
+                double skillsScore = rs.getDouble(9);
+                double attitueScore = rs.getDouble(10);
+                double finalScore = rs.getDouble(11);
+                Timestamp submissionDate = rs.getTimestamp(12);
+                reports.add(new FinalReport(missionRpId, mentorId, internId, studentid, internName, mentorName, staffId, softScore, skillsScore, attitueScore, finalScore, submissionDate));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reports;
+    }
+
 
     public void updateScores(int internId, double skills, double softSkills, double attitude, double finalScore) {
         String UPDATE_SCORES_SQL = "UPDATE FinalReport SET soft_score=?, skills_score=?, attitue_score=?, final_score=? WHERE intern_id=?";

@@ -257,29 +257,42 @@ public class MissionDAO extends MyDAO {
     }
 
     public void updateMissionStatusContinuously() {
-        String sql = "SELECT mis_id, start_date, deadline, file_path FROM Mission";
+        String sql = "SELECT mis_id, start_date, deadline, file_path, submitted_at, mis_status FROM Mission";
         try (Connection con = connection; PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 int misId = rs.getInt("mis_id");
                 Timestamp startDate = rs.getTimestamp("start_date");
                 Timestamp deadline = rs.getTimestamp("deadline");
                 String filePath = rs.getString("file_path");
-                MissionStatus newStatus = calculateMissionStatus(startDate, deadline, filePath);
+                Timestamp submittedAt = rs.getTimestamp("submitted_at");
+                MissionStatus currentStatus = MissionStatus.valueOf(rs.getString("mis_status"));
+
+                // Skip updating status if it's already COMPLETED
+                if (currentStatus == MissionStatus.COMPLETED || currentStatus == MissionStatus.REJECTED
+                        || currentStatus == MissionStatus.RESUBMITTED) {
+                    continue;
+                }
+
+                MissionStatus newStatus = calculateMissionStatus(startDate, deadline, filePath, submittedAt);
                 updateMissionStatus(misId, newStatus);
             }
         } catch (SQLException e) {
-            System.err.println("Lỗi khi cập nhật trạng thái của các nhiệm vụ: " + e.getMessage());
+            System.err.println("Error updating mission statuses: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private MissionStatus calculateMissionStatus(Timestamp startDate, Timestamp deadline, String filePath) {
+    private MissionStatus calculateMissionStatus(Timestamp startDate, Timestamp deadline, String filePath, Timestamp submittedAt) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         if (now.before(startDate)) {
             return MissionStatus.NOT_START;
         } else if (now.after(deadline)) {
             if (filePath != null && !filePath.isEmpty()) {
-                return MissionStatus.FINISHED;
+                if (submittedAt != null && submittedAt.after(deadline)) {
+                    return MissionStatus.SUBMITTED_LATE;
+                } else {
+                    return MissionStatus.FINISHED;
+                }
             } else {
                 return MissionStatus.MISSING;
             }
@@ -475,10 +488,71 @@ public class MissionDAO extends MyDAO {
         return missions;
     }
 
+    public void acceptMission(int missionId) {
+        String sql = "UPDATE Mission SET mis_status = ? WHERE mis_id = ? AND mis_status NOT IN (?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "COMPLETED");
+            ps.setInt(2, missionId);
+            ps.setString(3, "COMPLETED");
+            ps.setString(4, "REJECTED");
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Mission already completed or rejected.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating mission status to COMPLETED: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectMission(int missionId) {
+        String sql = "UPDATE Mission SET mis_status = ? WHERE mis_id = ? AND mis_status NOT IN (?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, Mission.MissionStatus.REJECTED.name());
+            ps.setInt(2, missionId);
+            ps.setString(3, Mission.MissionStatus.COMPLETED.name());
+            ps.setString(4, Mission.MissionStatus.REJECTED.name());
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Mission already completed or rejected.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating mission status to REJECTED: " + e.getMessage());
+            e.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void reSubmitMission(int missionId) {
+        String sql = "UPDATE Mission SET file_path = NULL, mis_status = ? WHERE mis_id = ? AND mis_status NOT IN (?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, Mission.MissionStatus.RESUBMITTED.name());
+            ps.setInt(2, missionId);
+            ps.setString(3, Mission.MissionStatus.COMPLETED.name());
+            ps.setString(4, Mission.MissionStatus.REJECTED.name());
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Mission already completed or rejected.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating mission status to RESUBMITTED: " + e.getMessage());
+            e.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         MissionDAO cc = new MissionDAO();
 //        System.out.println(cc.getAllMissions());
-        
+
         System.out.println(cc.getMissionsByInternId(1));
 
     }

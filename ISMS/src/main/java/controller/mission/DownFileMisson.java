@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller.mission;
 
 import java.io.IOException;
@@ -22,7 +17,7 @@ import java.nio.file.Paths;
  * @author admin
  */
 public class DownFileMisson extends HttpServlet {
-   
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -59,36 +54,52 @@ public class DownFileMisson extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         System.out.println("doGet");
+        // Lấy tham số 'link' từ request
         String link = request.getParameter("link");
         
+        // In ra tên file từ tham số 'link'
         System.out.println("File Name: " + link);
 
+        // Định nghĩa thư mục chứa các file tải lên
         Path uploadDirectory = Paths.get("\\swp391\\ISMS\\src\\file_upload");
 
+        // In ra đường dẫn thư mục tải lên
         System.out.println("Upload Directory: " + uploadDirectory);
 
+        // Xác định đường dẫn đầy đủ của file cần tải xuống
         Path filePath = uploadDirectory.resolve(link);
         
+        // In ra đường dẫn đầy đủ của file
         System.out.println("File Path: " + filePath);
 
+        // Chuyển đường dẫn file thành đối tượng File
         File downloadFile = filePath.toFile();
+        // In ra đối tượng file
         System.out.println("Download File: " + downloadFile);
+        // Kiểm tra xem file có tồn tại không
         if (!downloadFile.exists()) {
+            // Nếu không tồn tại, trả về thông báo lỗi
             response.getWriter().write("File not found");
             response.getWriter().flush();
             return;
         }
 
+        // Thiết lập type của response là binary stream cho file tải xuống
         response.setContentType("application/octet-stream");
+        // Thiết lập header để trình duyệt nhận diện file tải xuống và đặt tên cho file
         response.setHeader("Content-Disposition", "attachment;filename=" + link);
 
-        try (FileInputStream fileInputStream = new FileInputStream(downloadFile); OutputStream out = response.getOutputStream()) {
+        // Đọc file từ hệ thống và ghi vào response output stream
+        try (FileInputStream fileInputStream = new FileInputStream(downloadFile); 
+             OutputStream out = response.getOutputStream()) {
             byte[] buffer = new byte[4096];
             int bytesRead;
+            // Đọc file theo khối (buffer) và ghi vào response output stream
             while ((bytesRead = fileInputStream.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesRead);
             }
         } catch (IOException e) {
+            // Xử lý ngoại lệ nếu có lỗi khi đọc file hoặc ghi vào output stream
             e.printStackTrace();
         }
     } 

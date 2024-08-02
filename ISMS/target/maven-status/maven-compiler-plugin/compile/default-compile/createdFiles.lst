@@ -12,6 +12,7 @@ controller\mission\SubmitMission.class
 controller\account\AddManager.class
 controller\DeleteMentorController.class
 controller\intern\SelectInternServlet.class
+controller\mission\RejectMission.class
 dao\MyDAO.class
 controller\report\UpdateFinalReport.class
 dao\MissionReportDAO.class
@@ -19,6 +20,7 @@ controller\EditMentorProfileByHR.class
 controller\report\ExportMidtermExcel.class
 filter\SessionCheckFilter.class
 service\GoogleHandlerService.class
+controller\mission\AcceptMission.class
 controller\mission\GetInternServlet.class
 controller\schedule\LoadTaskServlet.class
 controller\report\MidtermReportList.class
@@ -134,6 +136,7 @@ controller\internnote\AddNote.class
 controller\mission\DownFileMisson1.class
 model\MidtermReport.class
 controller\schedule\BackToSchedule.class
+controller\mission\ReSubmitMission.class
 controller\news\NewsDetailServlet.class
 model\WorkOverTime.class
 dao\InternAssignDAO.class

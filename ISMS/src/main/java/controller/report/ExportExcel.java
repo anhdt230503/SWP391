@@ -4,6 +4,7 @@
  */
 package controller.report;
 
+import dao.AccountDAO;
 import dao.FinalReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,9 +12,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.List;
+import model.Account;
 import model.FinalReport;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -64,34 +67,71 @@ public class ExportExcel extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//       String filePath = "C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391\\ISMS\\src\\main\\webapp\\file_example\\Example_Final.xlsx";
-            String filePath = getServletContext().getRealPath("/file_example/Example_Final.xlsx");
-
+//        String filePath = "C:\\Users\\duong\\OneDrive\\Desktop\\SWP391\\swp391-iter3\\swp391-iter3\\ISMS\\src\\main\\webapp\\file_example\\Example_Final.xlsx";
+        String filePath = getServletContext().getRealPath("/file_example/Example_Final.xlsx");
         FileInputStream fileInputStream = new FileInputStream(filePath);
         Workbook workbook = new XSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);
         FinalReportDAO finalReportDAO = new FinalReportDAO();
-        List<FinalReport> reports = finalReportDAO.getAllFinalReports();
-        int rowNum = 13; 
-        for (FinalReport report : reports) {
-            Row row = sheet.getRow(rowNum);
-            if (row == null) {
-                row = sheet.createRow(rowNum);}
-            row.createCell(1).setCellValue(report.getIntern_id());
-            row.createCell(2).setCellValue(report.getStaff_id());
-            row.createCell(3).setCellValue(report.getIntern_name());
-            row.createCell(8).setCellValue(report.getSkills_score()); 
-            row.createCell(9).setCellValue(report.getSoft_score());
-            row.createCell(10).setCellValue(report.getAttitue_score()); 
-            row.createCell(11).setCellValue(report.getFinal_score());
-            rowNum++;}
-        fileInputStream.close();
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=final_reports.xlsx");
-        OutputStream out = response.getOutputStream();
-        workbook.write(out);
-        workbook.close();
-        out.close();
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        AccountDAO accountDAO = new AccountDAO();
+        Account account = accountDAO.getAccountByEmail(email);
+        int role = account.getRoleId();
+        int mentorid = account.getMentorId();
+        if (role == 3) {
+            List<FinalReport> reports = finalReportDAO.getAllFinalReportsbyMentorId(mentorid);
+            int rowNum = 13;
+            for (FinalReport report : reports) {
+                Row row = sheet.getRow(rowNum);
+                if (row == null) {
+                    row = sheet.createRow(rowNum);
+                }
+                row.createCell(1).setCellValue(report.getStudent_id());
+                row.createCell(2).setCellValue(report.getStaff_id());
+                row.createCell(3).setCellValue(report.getIntern_name());
+                row.createCell(4).setCellValue("DX Lab");
+                row.createCell(5).setCellValue(report.getMentor_name());
+                row.createCell(8).setCellValue(report.getSkills_score());
+                row.createCell(9).setCellValue(report.getSoft_score());
+                row.createCell(10).setCellValue(report.getAttitue_score());
+                row.createCell(11).setCellValue(report.getFinal_score());
+                rowNum++;
+            }
+            fileInputStream.close();
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=final_reports.xlsx");
+            OutputStream out = response.getOutputStream();
+            workbook.write(out);
+            workbook.close();
+            out.close();
+        } else if (role == 2) {
+            List<FinalReport> reports = finalReportDAO.getAllFinalReports();
+            int rowNum = 13;
+            for (FinalReport report : reports) {
+                Row row = sheet.getRow(rowNum);
+                if (row == null) {
+                    row = sheet.createRow(rowNum);
+                }
+                row.createCell(1).setCellValue(report.getStudent_id());
+                row.createCell(2).setCellValue(report.getStaff_id());
+                row.createCell(3).setCellValue(report.getIntern_name());
+                row.createCell(4).setCellValue("DX Lab");
+                row.createCell(5).setCellValue(report.getMentor_name());
+                row.createCell(8).setCellValue(report.getSkills_score());
+                row.createCell(9).setCellValue(report.getSoft_score());
+                row.createCell(10).setCellValue(report.getAttitue_score());
+                row.createCell(11).setCellValue(report.getFinal_score());
+                rowNum++;
+            }
+            fileInputStream.close();
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=final_reports.xlsx");
+            OutputStream out = response.getOutputStream();
+            workbook.write(out);
+            workbook.close();
+            out.close();
+        }
     }
 
     /**
